@@ -18,7 +18,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using System.Configuration;
 using System.Configuration.Provider;
 
 /// <summary>
