@@ -22,7 +22,7 @@
         <div>
 
             <script type="text/javascript">
-            var openChatStr = '<%# Resources.StringsRes.openChat %>';
+            var openChatStr = '<%= Resources.StringsRes.openChat %>';
 			document.write('<a href="javascript://" onclick="openChat();"><img id="_imgLC" src="ProcessImage.ashx?referrer=' + document.referrer + '" border="0" alt="'+openChatStr+'" /></a>');
             </script>
 
