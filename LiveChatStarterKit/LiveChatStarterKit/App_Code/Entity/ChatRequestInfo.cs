@@ -17,15 +17,15 @@ using System.Xml.Serialization;
 /// <summary>
 /// Summary description for ChatRequestInfo
 /// </summary>
-[Serializable()]
+[Serializable]
 public class ChatRequestInfo
 {
-	private string chatID;
+	private string chatId;
 	[XmlElement]
-	public string ChatID
+	public string ChatId
 	{
-		get { return chatID; }
-		set { chatID = value; }
+		get { return chatId; }
+		set { chatId = value; }
 	}
 
 	private DateTime requestDate;
@@ -76,6 +76,24 @@ public class ChatRequestInfo
 		get { return wasAccept; }
 		set { wasAccept = value; }
 	}
+
+	private DateTime acceptDate;
+	[XmlElement]
+	public DateTime AcceptDate
+	{
+		get { return acceptDate; }
+		set { acceptDate = value; }
+	}
+
+	private int acceptByOperatorId;
+	[XmlElement]
+	public int AcceptByOpereratorId
+	{
+		get { return acceptByOperatorId; }
+		set { acceptByOperatorId = value; }
+	}
+	
+	
 
 	public ChatRequestInfo()
 	{

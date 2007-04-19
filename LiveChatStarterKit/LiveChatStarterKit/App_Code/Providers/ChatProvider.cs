@@ -10,24 +10,17 @@
  */
 #endregion
 using System;
-using System.Data;
 using System.Configuration;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
+using System.Configuration.Provider;
+using System.Collections.Generic;
 
 /// <summary>
 /// Summary description for ChatRequestProvider
 /// </summary>
-public class ChatProvider
+public abstract class ChatProvider  : ProviderBase
 {
-	public ChatProvider()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+	public abstract void RequestChat(ChatRequestInfo request);
+	public abstract void AddChatMessage(ChatMessageInfo msg);
+	public abstract List<ChatMessageInfo> GetMessages(string chatId, int lastId);
+	public abstract int GetLastMessageId(string chatId);
 }

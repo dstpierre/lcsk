@@ -20,6 +20,14 @@ using System.Xml.Serialization;
 [Serializable()]
 public class OperatorInfo
 {
+	private int opId;
+	[XmlElement]
+	public int OperatorId
+	{
+		get { return opId; }
+		set { opId = value; }
+	}
+	
 	private string opName;
 	[XmlElement]
 	public string OperatorName
@@ -46,6 +54,14 @@ public class OperatorInfo
 
 	public OperatorInfo()
 	{
+	}
+
+	public OperatorInfo(int id, string name, string email, bool online)
+	{
+		opId = id;
+		opName = name;
+		opEmail = email;
+		isOnline = online;
 	}
 
 	public override string ToString()
