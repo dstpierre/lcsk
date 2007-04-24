@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\website\", "website", "{3152B72B-6D3C-489E-9790-27C4E917402A}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		Debug.AspNetCompiler.VirtualPath = "/website"
+		Debug.AspNetCompiler.PhysicalPath = "website\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\website\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/website"
+		Release.AspNetCompiler.PhysicalPath = "website\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\website\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1096"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperatorConsole", "OperatorConsole\OperatorConsole.csproj", "{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs01.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = OperatorConsole\\OperatorConsole.csproj
+		SccProjectName1 = OperatorConsole
+		SccLocalPath1 = OperatorConsole
+		SccWebProject2 = true
+		SccProjectUniqueName2 = website
+		SccLocalPath2 = .
+		SccProjectFilePathRelativizedFromConnection2 = website\\
+		SccProjectEnlistmentChoice2 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|.NET = Release|.NET
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Debug|.NET.ActiveCfg = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Debug|.NET.Build.0 = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Debug|Any CPU.ActiveCfg = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Debug|Mixed Platforms.ActiveCfg = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Debug|Mixed Platforms.Build.0 = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Release|.NET.ActiveCfg = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Release|.NET.Build.0 = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Release|Any CPU.ActiveCfg = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
+		{3152B72B-6D3C-489E-9790-27C4E917402A}.Release|Mixed Platforms.Build.0 = Debug|.NET
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Release|.NET.ActiveCfg = Release|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
