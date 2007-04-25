@@ -10,16 +10,11 @@
  */
 #endregion
 using System;
-using System.Data;
 using System.Configuration;
 using System.Configuration.Provider;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using System.Web.Configuration;
+using System.Collections.Generic;
+
 
 /// <summary>
 /// Summary description for RequestService
@@ -40,6 +35,14 @@ public class RequestService
 		LoadProvider();
 
 		return _provider.LogRequest(req);
+	}
+
+	public static List<RequestInfo> GetRequest(DateTime lastRequest)
+	{
+		// Load the provider
+		LoadProvider();
+
+		return _provider.GetRequest(lastRequest);
 	}
 
 	private static void LoadProvider()

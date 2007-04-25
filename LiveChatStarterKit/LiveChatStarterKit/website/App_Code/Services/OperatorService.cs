@@ -42,6 +42,14 @@ public class OperatorService
 		return _provider.GetOperatorStatus();
 	}
 
+	public static OperatorInfo LogIn(string userName, string password)
+	{
+		// Load the provider
+		LoadProvider();
+
+		return _provider.LogIn(userName, password);
+	}
+
 	private static void LoadProvider()
 	{
 		// if we do not have initiated the provider

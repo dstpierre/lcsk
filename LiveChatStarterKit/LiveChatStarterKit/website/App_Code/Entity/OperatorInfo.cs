@@ -36,6 +36,15 @@ public class OperatorInfo
 		set { opName = value; }
 	}
 
+	private string opPassword;
+	[XmlElement]
+	public string OperatorPassword
+	{
+		get { return opPassword; }
+		set { opPassword = value; }
+	}
+	
+
 	private string opEmail;
 	[XmlElement]
 	public string OperatorEmail
@@ -56,10 +65,11 @@ public class OperatorInfo
 	{
 	}
 
-	public OperatorInfo(int id, string name, string email, bool online)
+	public OperatorInfo(int id, string name, string password, string email, bool online)
 	{
 		opId = id;
 		opName = name;
+		opPassword = password;
 		opEmail = email;
 		isOnline = online;
 	}

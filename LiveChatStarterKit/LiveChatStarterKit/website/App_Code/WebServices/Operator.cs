@@ -11,7 +11,7 @@
 #endregion
 using System;
 using System.Web;
-using System.Collections;
+using System.Collections.Generic;
 using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.Data;
@@ -34,5 +34,15 @@ public class Operator : System.Web.Services.WebService
 		//InitializeComponent(); 
 	}
 
-	
+	[WebMethod]
+	public OperatorInfo LogIn(string userName, string password)
+	{
+		return OperatorService.LogIn(userName, password);
+	}
+
+	[WebMethod]
+	public List<RequestInfo> GetWebSiteRequests(DateTime lastRequestTime)
+	{
+		return RequestService.GetRequest(lastRequestTime);
+	}
 }

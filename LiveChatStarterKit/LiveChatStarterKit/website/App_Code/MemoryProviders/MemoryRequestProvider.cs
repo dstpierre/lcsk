@@ -41,18 +41,8 @@ public class MemoryRequestProvider : RequestProvider
 
 	public override bool LogRequest(RequestInfo req)
 	{
-		// get the current in-memory list
-		List<RequestInfo> requests;
-		bool cacheExists = false;
-		if (HttpContext.Current.Cache["_lcst_req"] != null)
-		{
-			requests = (List<RequestInfo>)HttpContext.Current.Cache["_lcst_req"];
-			cacheExists = true;
-		}
-		else
-		{
-			requests = new List<RequestInfo>();
-		}
+		bool cacheExists;
+		List<RequestInfo> requests = GetInMemoryList(out cacheExists);
 
 		// Add the new requests
 		requests.Add(req);
@@ -67,5 +57,44 @@ public class MemoryRequestProvider : RequestProvider
 		}
 
 		return true;
+	}
+
+	private static List<RequestInfo> GetInMemoryList(out bool cacheExists)
+	{
+		// get the current in-memory list
+		List<RequestInfo> requests = new List<RequestInfo>();
+		cacheExists = false;
+		if (HttpContext.Current.Cache["_lcst_req"] != null)
+		{
+			requests = (List<RequestInfo>)HttpContext.Current.Cache["_lcst_req"];
+			cacheExists = true;
+		}
+
+		return requests;
+	}
+
+	public override List<RequestInfo> GetRequest(DateTime lastRequestDate)
+	{
+		bool cacheExists;
+		List<RequestInfo> requests = GetInMemoryList(out cacheExists);
+
+		// Sort the requests descing by RequestTime
+		requests.Sort(SortByDate);
+
+		List<RequestInfo> newRequest = new List<RequestInfo>();
+		foreach (RequestInfo req in requests)
+		{
+			if (req.RequestTime > lastRequestDate)
+				newRequest.Add(req);
+			else
+				break;
+		}
+
+		return newRequest;
+	}
+
+	private int SortByDate(RequestInfo x, RequestInfo y)
+	{
+		return DateTime.Compare(y.RequestTime, x.RequestTime);
 	}
 }

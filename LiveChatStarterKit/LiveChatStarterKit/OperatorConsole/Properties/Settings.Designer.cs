@@ -22,5 +22,15 @@ namespace LiveChatStarterKit.OperatorConsole.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:1096/website/Operator.asmx")]
+        public string OperatorConsole_LiveChatWS_Operator {
+            get {
+                return ((string)(this["OperatorConsole_LiveChatWS_Operator"]));
+            }
+        }
     }
 }

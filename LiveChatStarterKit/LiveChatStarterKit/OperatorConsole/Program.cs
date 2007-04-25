@@ -6,6 +6,14 @@ namespace LiveChatStarterKit.OperatorConsole
 {
 	static class Program
 	{
+		private static OperatorConsole.LiveChatWS.OperatorInfo myOperator;
+
+		public static OperatorConsole.LiveChatWS.OperatorInfo CurrentOperator
+		{
+			get { return myOperator; }
+			set { myOperator = value; }
+		}
+	
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
