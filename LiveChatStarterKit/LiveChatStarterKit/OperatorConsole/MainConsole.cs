@@ -40,8 +40,48 @@ namespace LiveChatStarterKit.OperatorConsole
 					item.SubItems.Add(new ListViewItem.ListViewSubItem(item, requests[i].VisitorUserAgent));
 
 					lstActiveRequests.Items.Insert(0, item);
+
+					// Add the visitor to the visitor hashtable
+					if (!currentVisitors.ContainsKey(requests[i].VisitorIP))
+						currentVisitors.Add(requests[i].VisitorIP, requests[i].Referrer);
 				}
+
+				DisplayStatus();
 			}
+		}
+
+		private void DisplayStatus()
+		{
+			toolStripStatuslblVisitors.Text = string.Format("{0} visitor(s) currently on your website", currentVisitors.Count);
+		}
+
+		private void onlineToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (!Program.CurrentOperator.IsOnline)
+			{
+				ws.SetOperatorStatus(Program.CurrentOperator.OperatorId, true);
+				onlineToolStripMenuItem.Checked = true;
+				offlineToolStripMenuItem.Checked = false;
+
+				Program.CurrentOperator.IsOnline = true;
+			}
+		}
+
+		private void offlineToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (Program.CurrentOperator.IsOnline)
+			{
+				ws.SetOperatorStatus(Program.CurrentOperator.OperatorId, false);
+				onlineToolStripMenuItem.Checked = false;
+				offlineToolStripMenuItem.Checked = true;
+
+				Program.CurrentOperator.IsOnline = false;
+			}
+		}
+
+		private void MainConsole_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			Application.Exit();
 		}
 	}
 }
