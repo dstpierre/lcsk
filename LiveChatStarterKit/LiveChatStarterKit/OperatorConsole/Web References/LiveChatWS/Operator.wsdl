@@ -55,6 +55,17 @@
           <s:element minOccurs="0" maxOccurs="1" name="VisitorIP" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="SetOperatorStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="isOnline" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetOperatorStatusResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LogInSoapIn">
@@ -69,6 +80,12 @@
   <wsdl:message name="GetWebSiteRequestsSoapOut">
     <wsdl:part name="parameters" element="tns:GetWebSiteRequestsResponse" />
   </wsdl:message>
+  <wsdl:message name="SetOperatorStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:SetOperatorStatus" />
+  </wsdl:message>
+  <wsdl:message name="SetOperatorStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:SetOperatorStatusResponse" />
+  </wsdl:message>
   <wsdl:portType name="OperatorSoap">
     <wsdl:operation name="LogIn">
       <wsdl:input message="tns:LogInSoapIn" />
@@ -77,6 +94,10 @@
     <wsdl:operation name="GetWebSiteRequests">
       <wsdl:input message="tns:GetWebSiteRequestsSoapIn" />
       <wsdl:output message="tns:GetWebSiteRequestsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetOperatorStatus">
+      <wsdl:input message="tns:SetOperatorStatusSoapIn" />
+      <wsdl:output message="tns:SetOperatorStatusSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OperatorSoap" type="tns:OperatorSoap">
@@ -99,6 +120,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetOperatorStatus">
+      <soap:operation soapAction="http://tempuri.org/SetOperatorStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="OperatorSoap12" type="tns:OperatorSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -113,6 +143,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetWebSiteRequests">
       <soap12:operation soapAction="http://tempuri.org/GetWebSiteRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOperatorStatus">
+      <soap12:operation soapAction="http://tempuri.org/SetOperatorStatus" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\website\", "website", "{3152B72B-6D3C-489E-9790-27C4E917402A}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "c:\...\website\", "website", "{3152B72B-6D3C-489E-9790-27C4E917402A}"
 	ProjectSection(WebsiteProperties) = preProject
-		SccProjectName = "SAK"
-		SccAuxPath = "SAK"
-		SccLocalPath = "SAK"
-		SccProvider = "SAK"
+		SccProjectName = ""
+		SccAuxPath = ""
+		SccLocalPath = ""
+		SccProvider = ""
 		Debug.AspNetCompiler.VirtualPath = "/website"
 		Debug.AspNetCompiler.PhysicalPath = "website\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\website\"
@@ -31,20 +31,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperatorConsole", "Operator
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs01.codeplex.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = OperatorConsole\\OperatorConsole.csproj
-		SccProjectName1 = OperatorConsole
-		SccLocalPath1 = OperatorConsole
-		SccWebProject2 = true
-		SccProjectUniqueName2 = website
-		SccLocalPath2 = .
-		SccProjectFilePathRelativizedFromConnection2 = website\\
-		SccProjectEnlistmentChoice2 = 2
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
 		Debug|Any CPU = Debug|Any CPU

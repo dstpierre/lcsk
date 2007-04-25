@@ -74,12 +74,14 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.onlineToolStripMenuItem.Name = "onlineToolStripMenuItem";
 			this.onlineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.onlineToolStripMenuItem.Text = "Online";
+			this.onlineToolStripMenuItem.Click += new System.EventHandler(this.onlineToolStripMenuItem_Click);
 			// 
 			// offlineToolStripMenuItem
 			// 
 			this.offlineToolStripMenuItem.Name = "offlineToolStripMenuItem";
 			this.offlineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.offlineToolStripMenuItem.Text = "Offline";
+			this.offlineToolStripMenuItem.Click += new System.EventHandler(this.offlineToolStripMenuItem_Click);
 			// 
 			// statusBar
 			// 
@@ -174,6 +176,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Operator Console for LiveChat Starter Kit";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainConsole_FormClosed);
 			this.mainMenu.ResumeLayout(false);
 			this.mainMenu.PerformLayout();
 			this.statusBar.ResumeLayout(false);

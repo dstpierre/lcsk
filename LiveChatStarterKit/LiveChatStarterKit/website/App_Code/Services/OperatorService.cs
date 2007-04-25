@@ -34,6 +34,14 @@ public class OperatorService
 		get { return _provider; }
 	}
 
+	public static void UpdateStatus(int operatorId, bool isOnline)
+	{
+		// Load the provider
+		LoadProvider();
+
+		_provider.UpdateStatus(operatorId, isOnline);
+	}
+
 	public static bool GetOperatorStatus()
 	{
 		// Load the provider

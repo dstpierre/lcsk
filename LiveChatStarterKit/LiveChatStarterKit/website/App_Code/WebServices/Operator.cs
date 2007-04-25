@@ -45,4 +45,10 @@ public class Operator : System.Web.Services.WebService
 	{
 		return RequestService.GetRequest(lastRequestTime);
 	}
+
+	[WebMethod]
+	public void SetOperatorStatus(int operatorId, bool isOnline)
+	{
+		OperatorService.UpdateStatus(operatorId, isOnline);
+	}
 }

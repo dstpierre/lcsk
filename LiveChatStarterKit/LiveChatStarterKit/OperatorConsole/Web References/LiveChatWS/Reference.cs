@@ -33,6 +33,8 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         private System.Threading.SendOrPostCallback GetWebSiteRequestsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback SetOperatorStatusOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -76,6 +78,9 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         /// <remarks/>
         public event GetWebSiteRequestsCompletedEventHandler GetWebSiteRequestsCompleted;
+        
+        /// <remarks/>
+        public event SetOperatorStatusCompletedEventHandler SetOperatorStatusCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LogIn", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -134,6 +139,36 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             if ((this.GetWebSiteRequestsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetWebSiteRequestsCompleted(this, new GetWebSiteRequestsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SetOperatorStatus", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SetOperatorStatus(int operatorId, bool isOnline) {
+            this.Invoke("SetOperatorStatus", new object[] {
+                        operatorId,
+                        isOnline});
+        }
+        
+        /// <remarks/>
+        public void SetOperatorStatusAsync(int operatorId, bool isOnline) {
+            this.SetOperatorStatusAsync(operatorId, isOnline, null);
+        }
+        
+        /// <remarks/>
+        public void SetOperatorStatusAsync(int operatorId, bool isOnline, object userState) {
+            if ((this.SetOperatorStatusOperationCompleted == null)) {
+                this.SetOperatorStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetOperatorStatusOperationCompleted);
+            }
+            this.InvokeAsync("SetOperatorStatus", new object[] {
+                        operatorId,
+                        isOnline}, this.SetOperatorStatusOperationCompleted, userState);
+        }
+        
+        private void OnSetOperatorStatusOperationCompleted(object arg) {
+            if ((this.SetOperatorStatusCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SetOperatorStatusCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -357,6 +392,10 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void SetOperatorStatusCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591
