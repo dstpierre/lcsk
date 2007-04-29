@@ -36,12 +36,35 @@ public class MemoryChatProvider : ChatProvider
 
 	public override void RequestChat(ChatRequestInfo request)
 	{
-		// get the current in-memory list
-		List<ChatRequestInfo> requests;
-		bool cacheExists = false;
-		if (HttpContext.Current.Cache["_lcst_chatReq"] != null)
+		bool cacheExists;
+		List<ChatRequestInfo> requests = GetCurrentRequest(out cacheExists);
+
+		// Add the new requests
+		requests.Add(request);
+
+		SaveRequests(cacheExists, requests);
+	}
+
+	private static void SaveRequests(bool cacheExists, List<ChatRequestInfo> requests)
+	{
+		if (cacheExists)
 		{
-			requests = (List<ChatRequestInfo>)HttpContext.Current.Cache["_lcst_chatReq"];
+			HttpContext.Current.Cache["_lcsk_requests"] = requests;
+		}
+		else
+		{
+			HttpContext.Current.Cache.Add("_lcsk_requests", requests, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(5), CacheItemPriority.Normal, null);
+		}
+	}
+
+	private static List<ChatRequestInfo> GetCurrentRequest(out bool cacheExists)
+	{
+		// get the current in-memory list
+		cacheExists = false;
+		List<ChatRequestInfo> requests;
+		if( HttpContext.Current.Cache["_lcsk_requests"] != null )
+		{
+			requests = (List<ChatRequestInfo>)HttpContext.Current.Cache["_lcsk_requests"];
 			cacheExists = true;
 		}
 		else
@@ -49,17 +72,7 @@ public class MemoryChatProvider : ChatProvider
 			requests = new List<ChatRequestInfo>();
 		}
 
-		// Add the new requests
-		requests.Add(request);
-
-		if (cacheExists)
-		{
-			HttpContext.Current.Cache["_lcst_chatReq"] = requests;
-		}
-		else
-		{
-			HttpContext.Current.Cache.Add("_lcst_chatReq", requests, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(30), CacheItemPriority.Normal, null);
-		}
+		return requests;
 	}
 
 	public override void AddChatMessage(ChatMessageInfo msg)
@@ -77,11 +90,11 @@ public class MemoryChatProvider : ChatProvider
 	{
 		if (cacheExists)
 		{
-			HttpContext.Current.Cache["_lcst_" + chatId] = messages;
+			HttpContext.Current.Cache["_lcsk_" + chatId] = messages;
 		}
 		else
 		{
-			HttpContext.Current.Cache.Add("_lcst_" + chatId, messages, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(5), CacheItemPriority.Normal, null);
+			HttpContext.Current.Cache.Add("_lcsk_" + chatId, messages, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(2), CacheItemPriority.Normal, null);
 		}
 	}
 
@@ -90,9 +103,9 @@ public class MemoryChatProvider : ChatProvider
 		// get the current in-memory list
 		List<ChatMessageInfo> messages;
 		cacheExists = false;
-		if (HttpContext.Current.Cache["_lcst_" + chatId] != null)
+		if (HttpContext.Current.Cache["_lcsk_" + chatId] != null)
 		{
-			messages = (List<ChatMessageInfo>)HttpContext.Current.Cache["_lcst_" + chatId];
+			messages = (List<ChatMessageInfo>)HttpContext.Current.Cache["_lcsk_" + chatId];
 			cacheExists = true;
 		}
 		else
@@ -136,5 +149,35 @@ public class MemoryChatProvider : ChatProvider
 			return messages[0].MessageId;
 		else
 			return 0;
+	}
+
+	public override List<ChatRequestInfo> GetChatRequests(bool active)
+	{
+		bool cacheExists;
+		List<ChatRequestInfo> results = new List<ChatRequestInfo>();
+		foreach (ChatRequestInfo req in GetCurrentRequest(out cacheExists))
+		{
+			if (req.WasAccept == active)
+				results.Add(req);
+		}
+
+		return results;
+	}
+
+	public override void RemoveChatRequest(ChatRequestInfo req)
+	{
+		bool cacheExists;
+		List<ChatRequestInfo> requests = GetCurrentRequest(out cacheExists);
+
+		for (int i = 0; i < requests.Count; i++)
+		{
+			if (requests[i].ChatId == req.ChatId)
+			{
+				requests.RemoveAt(i);
+				break;
+			}
+		}
+
+		SaveRequests(cacheExists, requests);
 	}
 }

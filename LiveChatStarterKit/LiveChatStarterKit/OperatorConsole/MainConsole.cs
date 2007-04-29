@@ -1,3 +1,14 @@
+#region Header Comment
+/*
+ * Project			: LiveChat Starter Kit
+ * Created By		: Dominic St-Pierre
+ * Created Date	: 2007/04/24
+ * Comment		: Main console
+ * 
+ * History:
+ * 
+ */
+#endregion
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +26,8 @@ namespace LiveChatStarterKit.OperatorConsole
 		Operator ws = new Operator();
 		private DateTime lastRequestTime = DateTime.Now.AddMinutes(-30);
 		private Hashtable currentVisitors = new Hashtable();
+		private bool hasCheckedChatRequests = false;
+		private int numberOfChatWaiting = 0;
 
 		public MainConsole()
 		{
@@ -23,6 +36,9 @@ namespace LiveChatStarterKit.OperatorConsole
 
 		private void tmrGetWebSiteRequests_Tick(object sender, EventArgs e)
 		{
+			// Disable the timer
+			tmrGetWebSiteRequests.Enabled = false;
+
 			// we get the latest website requests
 			RequestInfo[] requests = ws.GetWebSiteRequests(lastRequestTime);
 			if (requests != null && requests.Length > 0)
@@ -30,9 +46,10 @@ namespace LiveChatStarterKit.OperatorConsole
 				// set the last request time
 				lastRequestTime = requests[0].RequestTime;
 
-				ListViewItem item = new ListViewItem();
+				ListViewItem item;
 				for (int i = requests.Length - 1; i >= 0; i--)
 				{
+					item = new ListViewItem();
 					item.Text = requests[i].RequestTime.ToShortTimeString();
 					item.SubItems.Add(new ListViewItem.ListViewSubItem(item, requests[i].VisitorIP));
 					item.SubItems.Add(new ListViewItem.ListViewSubItem(item, requests[i].PageRequested));
@@ -46,8 +63,31 @@ namespace LiveChatStarterKit.OperatorConsole
 						currentVisitors.Add(requests[i].VisitorIP, requests[i].Referrer);
 				}
 
-				DisplayStatus();
 			}
+
+			// Should we get the chat requests
+			if (!hasCheckedChatRequests)
+			{
+				hasCheckedChatRequests = true;
+
+				foreach (ChatRequestInfo req in ws.GetChatRequests(Program.CurrentOperator))
+				{
+					numberOfChatWaiting++;
+
+					ChatSession chat = new ChatSession(req);
+					chat.Show();
+				}
+
+			}
+			else
+			{
+				hasCheckedChatRequests = false;
+			}
+
+			DisplayStatus();
+
+			// Enable the timer
+			tmrGetWebSiteRequests.Enabled = true;
 		}
 
 		private void DisplayStatus()

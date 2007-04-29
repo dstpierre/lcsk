@@ -51,4 +51,22 @@ public class Operator : System.Web.Services.WebService
 	{
 		OperatorService.UpdateStatus(operatorId, isOnline);
 	}
+
+	[WebMethod]
+	public List<ChatRequestInfo> GetChatRequests(OperatorInfo op)
+	{
+		return OperatorService.GetChatRequests(op.OperatorId);
+	}
+
+	[WebMethod]
+	public void AddMessage(ChatMessageInfo msg)
+	{
+		ChatService.AddMessage(msg);
+	}
+
+	[WebMethod]
+	public void RemoveChatRequest(ChatRequestInfo req)
+	{
+		ChatService.RemoveChatRequest(req);
+	}
 }

@@ -60,6 +60,22 @@ public class ChatService
 		return _provider.GetLastMessageId(chatId);
 	}
 
+	public static List<ChatRequestInfo> GetRequests(bool active)
+	{
+		// Load the provider
+		LoadProvider();
+
+		return _provider.GetChatRequests(active);
+	}
+
+	public static void RemoveChatRequest(ChatRequestInfo req)
+	{
+		// Load the provider
+		LoadProvider();
+
+		_provider.RemoveChatRequest(req);
+	}
+
 	private static void LoadProvider()
 	{
 		// if we do not have initiated the provider

@@ -23,4 +23,6 @@ public abstract class ChatProvider  : ProviderBase
 	public abstract void AddChatMessage(ChatMessageInfo msg);
 	public abstract List<ChatMessageInfo> GetMessages(string chatId, int lastId);
 	public abstract int GetLastMessageId(string chatId);
+	public abstract List<ChatRequestInfo> GetChatRequests(bool active);
+	public abstract void RemoveChatRequest(ChatRequestInfo req);
 }

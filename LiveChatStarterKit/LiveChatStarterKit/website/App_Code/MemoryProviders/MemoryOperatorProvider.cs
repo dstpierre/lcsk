@@ -13,6 +13,7 @@ using System;
 using System.Configuration;
 using System.Web;
 using System.Web.Caching;
+using System.Collections.Generic;
 
 /// <summary>
 /// Summary description for MemoryOperatorProvider
@@ -84,5 +85,17 @@ public class MemoryOperatorProvider : OperatorProvider
 			status = (bool)HttpContext.Current.Cache["_lcst_opstatus"];
 
 		return status;
+	}
+
+	public override List<ChatRequestInfo> GetChatRequest(int operatorId)
+	{
+		List<ChatRequestInfo> results = new List<ChatRequestInfo>();
+		foreach (ChatRequestInfo req in ChatService.GetRequests(false))
+		{
+			if (req.AcceptByOpereratorId == operatorId)
+				results.Add(req);
+		}
+
+		return results;
 	}
 }

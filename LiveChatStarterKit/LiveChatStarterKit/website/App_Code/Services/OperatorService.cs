@@ -10,16 +10,10 @@
  */
 #endregion
 using System;
-using System.Data;
 using System.Configuration;
 using System.Configuration.Provider;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using System.Web.Configuration;
+using System.Collections.Generic;
 
 /// <summary>
 /// Summary description for OperatorService
@@ -56,6 +50,14 @@ public class OperatorService
 		LoadProvider();
 
 		return _provider.LogIn(userName, password);
+	}
+
+	public static List<ChatRequestInfo> GetChatRequests(int operatorId)
+	{
+		// Load the provider
+		LoadProvider();
+
+		return _provider.GetChatRequest(operatorId);
 	}
 
 	private static void LoadProvider()

@@ -66,6 +66,67 @@
       <s:element name="SetOperatorStatusResponse">
         <s:complexType />
       </s:element>
+      <s:element name="GetChatRequests">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="op" type="tns:OperatorInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetChatRequestsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetChatRequestsResult" type="tns:ArrayOfChatRequestInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfChatRequestInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ChatRequestInfo" nillable="true" type="tns:ChatRequestInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ChatRequestInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ChatId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RequestDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="VisitorIP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VisitorName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VisitorEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VisitorUserAgent" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WasAccept" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AcceptDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="AcceptByOpereratorId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="tns:ChatMessageInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ChatMessageInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChatId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddMessageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveChatRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="req" type="tns:ChatRequestInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveChatRequestResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LogInSoapIn">
@@ -86,6 +147,24 @@
   <wsdl:message name="SetOperatorStatusSoapOut">
     <wsdl:part name="parameters" element="tns:SetOperatorStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="GetChatRequestsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetChatRequests" />
+  </wsdl:message>
+  <wsdl:message name="GetChatRequestsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetChatRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:AddMessage" />
+  </wsdl:message>
+  <wsdl:message name="AddMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:AddMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveChatRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveChatRequest" />
+  </wsdl:message>
+  <wsdl:message name="RemoveChatRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveChatRequestResponse" />
+  </wsdl:message>
   <wsdl:portType name="OperatorSoap">
     <wsdl:operation name="LogIn">
       <wsdl:input message="tns:LogInSoapIn" />
@@ -98,6 +177,18 @@
     <wsdl:operation name="SetOperatorStatus">
       <wsdl:input message="tns:SetOperatorStatusSoapIn" />
       <wsdl:output message="tns:SetOperatorStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChatRequests">
+      <wsdl:input message="tns:GetChatRequestsSoapIn" />
+      <wsdl:output message="tns:GetChatRequestsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMessage">
+      <wsdl:input message="tns:AddMessageSoapIn" />
+      <wsdl:output message="tns:AddMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveChatRequest">
+      <wsdl:input message="tns:RemoveChatRequestSoapIn" />
+      <wsdl:output message="tns:RemoveChatRequestSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OperatorSoap" type="tns:OperatorSoap">
@@ -129,6 +220,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetChatRequests">
+      <soap:operation soapAction="http://tempuri.org/GetChatRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMessage">
+      <soap:operation soapAction="http://tempuri.org/AddMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveChatRequest">
+      <soap:operation soapAction="http://tempuri.org/RemoveChatRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="OperatorSoap12" type="tns:OperatorSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -152,6 +270,33 @@
     </wsdl:operation>
     <wsdl:operation name="SetOperatorStatus">
       <soap12:operation soapAction="http://tempuri.org/SetOperatorStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChatRequests">
+      <soap12:operation soapAction="http://tempuri.org/GetChatRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMessage">
+      <soap12:operation soapAction="http://tempuri.org/AddMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveChatRequest">
+      <soap12:operation soapAction="http://tempuri.org/RemoveChatRequest" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

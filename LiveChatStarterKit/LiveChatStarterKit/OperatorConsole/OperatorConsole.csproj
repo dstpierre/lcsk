@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatSession.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChatSession.Designer.cs">
+      <DependentUpon>ChatSession.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChatSession.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChatSession.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -114,6 +124,9 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Web References\LiveChatWS\ChatRequestInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\LiveChatWS\Operator.disco" />
     <None Include="Web References\LiveChatWS\OperatorInfo.datasource">
       <DependentUpon>Reference.map</DependentUpon>

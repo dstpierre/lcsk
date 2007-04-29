@@ -10,15 +10,9 @@
  */
 #endregion
 using System;
-using System.Data;
 using System.Configuration;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using System.Configuration.Provider;
+using System.Collections.Generic;
 
 /// <summary>
 /// Manage all action regarding an operator
@@ -28,4 +22,5 @@ public abstract class OperatorProvider : ProviderBase
 	public abstract OperatorInfo LogIn(string userName, string password);
 	public abstract void UpdateStatus(int operatorId, bool isOnline);
 	public abstract bool GetOperatorStatus();
+	public abstract List<ChatRequestInfo> GetChatRequest(int operatorId);
 }

@@ -67,6 +67,7 @@ public partial class Chat : System.Web.UI.Page
 		}
 
 		ChatRequestInfo request = new ChatRequestInfo();
+		request.AcceptByOpereratorId = 1;
 		request.ChatId = chatId;
 		request.RequestDate = DateTime.Now;
 		request.VisitorEmail = txtEmail.Text;

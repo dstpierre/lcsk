@@ -35,6 +35,12 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         private System.Threading.SendOrPostCallback SetOperatorStatusOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetChatRequestsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AddMessageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RemoveChatRequestOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -81,6 +87,15 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         /// <remarks/>
         public event SetOperatorStatusCompletedEventHandler SetOperatorStatusCompleted;
+        
+        /// <remarks/>
+        public event GetChatRequestsCompletedEventHandler GetChatRequestsCompleted;
+        
+        /// <remarks/>
+        public event AddMessageCompletedEventHandler AddMessageCompleted;
+        
+        /// <remarks/>
+        public event RemoveChatRequestCompletedEventHandler RemoveChatRequestCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LogIn", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -173,6 +188,91 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetChatRequests", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ChatRequestInfo[] GetChatRequests(OperatorInfo op) {
+            object[] results = this.Invoke("GetChatRequests", new object[] {
+                        op});
+            return ((ChatRequestInfo[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetChatRequestsAsync(OperatorInfo op) {
+            this.GetChatRequestsAsync(op, null);
+        }
+        
+        /// <remarks/>
+        public void GetChatRequestsAsync(OperatorInfo op, object userState) {
+            if ((this.GetChatRequestsOperationCompleted == null)) {
+                this.GetChatRequestsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetChatRequestsOperationCompleted);
+            }
+            this.InvokeAsync("GetChatRequests", new object[] {
+                        op}, this.GetChatRequestsOperationCompleted, userState);
+        }
+        
+        private void OnGetChatRequestsOperationCompleted(object arg) {
+            if ((this.GetChatRequestsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetChatRequestsCompleted(this, new GetChatRequestsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddMessage", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AddMessage(ChatMessageInfo msg) {
+            this.Invoke("AddMessage", new object[] {
+                        msg});
+        }
+        
+        /// <remarks/>
+        public void AddMessageAsync(ChatMessageInfo msg) {
+            this.AddMessageAsync(msg, null);
+        }
+        
+        /// <remarks/>
+        public void AddMessageAsync(ChatMessageInfo msg, object userState) {
+            if ((this.AddMessageOperationCompleted == null)) {
+                this.AddMessageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddMessageOperationCompleted);
+            }
+            this.InvokeAsync("AddMessage", new object[] {
+                        msg}, this.AddMessageOperationCompleted, userState);
+        }
+        
+        private void OnAddMessageOperationCompleted(object arg) {
+            if ((this.AddMessageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddMessageCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/RemoveChatRequest", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RemoveChatRequest(ChatRequestInfo req) {
+            this.Invoke("RemoveChatRequest", new object[] {
+                        req});
+        }
+        
+        /// <remarks/>
+        public void RemoveChatRequestAsync(ChatRequestInfo req) {
+            this.RemoveChatRequestAsync(req, null);
+        }
+        
+        /// <remarks/>
+        public void RemoveChatRequestAsync(ChatRequestInfo req, object userState) {
+            if ((this.RemoveChatRequestOperationCompleted == null)) {
+                this.RemoveChatRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveChatRequestOperationCompleted);
+            }
+            this.InvokeAsync("RemoveChatRequest", new object[] {
+                        req}, this.RemoveChatRequestOperationCompleted, userState);
+        }
+        
+        private void OnRemoveChatRequestOperationCompleted(object arg) {
+            if ((this.RemoveChatRequestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoveChatRequestCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -256,6 +356,192 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             }
             set {
                 this.isOnlineField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ChatMessageInfo {
+        
+        private int messageIdField;
+        
+        private string chatIdField;
+        
+        private string nameField;
+        
+        private System.DateTime sentDateField;
+        
+        private string messageField;
+        
+        /// <remarks/>
+        public int MessageId {
+            get {
+                return this.messageIdField;
+            }
+            set {
+                this.messageIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ChatId {
+            get {
+                return this.chatIdField;
+            }
+            set {
+                this.chatIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime SentDate {
+            get {
+                return this.sentDateField;
+            }
+            set {
+                this.sentDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ChatRequestInfo {
+        
+        private string chatIdField;
+        
+        private System.DateTime requestDateField;
+        
+        private string visitorIPField;
+        
+        private string visitorNameField;
+        
+        private string visitorEmailField;
+        
+        private string visitorUserAgentField;
+        
+        private bool wasAcceptField;
+        
+        private System.DateTime acceptDateField;
+        
+        private int acceptByOpereratorIdField;
+        
+        /// <remarks/>
+        public string ChatId {
+            get {
+                return this.chatIdField;
+            }
+            set {
+                this.chatIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime RequestDate {
+            get {
+                return this.requestDateField;
+            }
+            set {
+                this.requestDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string VisitorIP {
+            get {
+                return this.visitorIPField;
+            }
+            set {
+                this.visitorIPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string VisitorName {
+            get {
+                return this.visitorNameField;
+            }
+            set {
+                this.visitorNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string VisitorEmail {
+            get {
+                return this.visitorEmailField;
+            }
+            set {
+                this.visitorEmailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string VisitorUserAgent {
+            get {
+                return this.visitorUserAgentField;
+            }
+            set {
+                this.visitorUserAgentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool WasAccept {
+            get {
+                return this.wasAcceptField;
+            }
+            set {
+                this.wasAcceptField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime AcceptDate {
+            get {
+                return this.acceptDateField;
+            }
+            set {
+                this.acceptDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int AcceptByOpereratorId {
+            get {
+                return this.acceptByOpereratorIdField;
+            }
+            set {
+                this.acceptByOpereratorIdField = value;
             }
         }
     }
@@ -396,6 +682,40 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
     public delegate void SetOperatorStatusCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void GetChatRequestsCompletedEventHandler(object sender, GetChatRequestsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetChatRequestsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetChatRequestsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ChatRequestInfo[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ChatRequestInfo[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void AddMessageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void RemoveChatRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591
