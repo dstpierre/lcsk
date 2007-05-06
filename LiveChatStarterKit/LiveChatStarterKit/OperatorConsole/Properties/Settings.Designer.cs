@@ -32,5 +32,27 @@ namespace LiveChatStarterKit.OperatorConsole.Properties {
                 return ((string)(this["OperatorConsole_LiveChatWS_Operator"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection CannedMsg {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CannedMsg"]));
+            }
+            set {
+                this["CannedMsg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection PresetLinks {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["PresetLinks"]));
+            }
+            set {
+                this["PresetLinks"] = value;
+            }
+        }
     }
 }

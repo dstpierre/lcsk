@@ -33,6 +33,9 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.setMyStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.onlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.offlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.cannedMessagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.presetLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusBar = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatuslblVisitors = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatuslblChatWaiting = new System.Windows.Forms.ToolStripStatusLabel();
@@ -51,7 +54,8 @@ namespace LiveChatStarterKit.OperatorConsole
 			// mainMenu
 			// 
 			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setMyStatusToolStripMenuItem});
+            this.setMyStatusToolStripMenuItem,
+            this.configurationToolStripMenuItem});
 			this.mainMenu.Location = new System.Drawing.Point(0, 0);
 			this.mainMenu.Name = "mainMenu";
 			this.mainMenu.Size = new System.Drawing.Size(756, 24);
@@ -72,16 +76,39 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.onlineToolStripMenuItem.Checked = true;
 			this.onlineToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.onlineToolStripMenuItem.Name = "onlineToolStripMenuItem";
-			this.onlineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.onlineToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
 			this.onlineToolStripMenuItem.Text = "Online";
 			this.onlineToolStripMenuItem.Click += new System.EventHandler(this.onlineToolStripMenuItem_Click);
 			// 
 			// offlineToolStripMenuItem
 			// 
 			this.offlineToolStripMenuItem.Name = "offlineToolStripMenuItem";
-			this.offlineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.offlineToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
 			this.offlineToolStripMenuItem.Text = "Offline";
 			this.offlineToolStripMenuItem.Click += new System.EventHandler(this.offlineToolStripMenuItem_Click);
+			// 
+			// configurationToolStripMenuItem
+			// 
+			this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cannedMessagesToolStripMenuItem,
+            this.presetLinksToolStripMenuItem});
+			this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
+			this.configurationToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+			this.configurationToolStripMenuItem.Text = "Configuration";
+			// 
+			// cannedMessagesToolStripMenuItem
+			// 
+			this.cannedMessagesToolStripMenuItem.Name = "cannedMessagesToolStripMenuItem";
+			this.cannedMessagesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+			this.cannedMessagesToolStripMenuItem.Text = "Canned Messages";
+			this.cannedMessagesToolStripMenuItem.Click += new System.EventHandler(this.cannedMessagesToolStripMenuItem_Click);
+			// 
+			// presetLinksToolStripMenuItem
+			// 
+			this.presetLinksToolStripMenuItem.Name = "presetLinksToolStripMenuItem";
+			this.presetLinksToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+			this.presetLinksToolStripMenuItem.Text = "Preset Links";
+			this.presetLinksToolStripMenuItem.Click += new System.EventHandler(this.presetLinksToolStripMenuItem_Click);
 			// 
 			// statusBar
 			// 
@@ -203,5 +230,8 @@ namespace LiveChatStarterKit.OperatorConsole
 		private System.Windows.Forms.ColumnHeader colReferrer;
 		private System.Windows.Forms.ColumnHeader colUA;
 		private System.Windows.Forms.Timer tmrGetWebSiteRequests;
+		private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem cannedMessagesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem presetLinksToolStripMenuItem;
 	}
 }

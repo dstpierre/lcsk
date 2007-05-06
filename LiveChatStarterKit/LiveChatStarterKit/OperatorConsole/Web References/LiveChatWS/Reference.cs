@@ -41,6 +41,10 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         private System.Threading.SendOrPostCallback RemoveChatRequestOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetLastMessageIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetChatMessagesOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -96,6 +100,12 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         /// <remarks/>
         public event RemoveChatRequestCompletedEventHandler RemoveChatRequestCompleted;
+        
+        /// <remarks/>
+        public event GetLastMessageIdCompletedEventHandler GetLastMessageIdCompleted;
+        
+        /// <remarks/>
+        public event GetChatMessagesCompletedEventHandler GetChatMessagesCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LogIn", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -269,6 +279,66 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             if ((this.RemoveChatRequestCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.RemoveChatRequestCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetLastMessageId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int GetLastMessageId(string chatId) {
+            object[] results = this.Invoke("GetLastMessageId", new object[] {
+                        chatId});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetLastMessageIdAsync(string chatId) {
+            this.GetLastMessageIdAsync(chatId, null);
+        }
+        
+        /// <remarks/>
+        public void GetLastMessageIdAsync(string chatId, object userState) {
+            if ((this.GetLastMessageIdOperationCompleted == null)) {
+                this.GetLastMessageIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetLastMessageIdOperationCompleted);
+            }
+            this.InvokeAsync("GetLastMessageId", new object[] {
+                        chatId}, this.GetLastMessageIdOperationCompleted, userState);
+        }
+        
+        private void OnGetLastMessageIdOperationCompleted(object arg) {
+            if ((this.GetLastMessageIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetLastMessageIdCompleted(this, new GetLastMessageIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetChatMessages", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ChatMessageInfo[] GetChatMessages(string chatId, int lastId) {
+            object[] results = this.Invoke("GetChatMessages", new object[] {
+                        chatId,
+                        lastId});
+            return ((ChatMessageInfo[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetChatMessagesAsync(string chatId, int lastId) {
+            this.GetChatMessagesAsync(chatId, lastId, null);
+        }
+        
+        /// <remarks/>
+        public void GetChatMessagesAsync(string chatId, int lastId, object userState) {
+            if ((this.GetChatMessagesOperationCompleted == null)) {
+                this.GetChatMessagesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetChatMessagesOperationCompleted);
+            }
+            this.InvokeAsync("GetChatMessages", new object[] {
+                        chatId,
+                        lastId}, this.GetChatMessagesOperationCompleted, userState);
+        }
+        
+        private void OnGetChatMessagesOperationCompleted(object arg) {
+            if ((this.GetChatMessagesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetChatMessagesCompleted(this, new GetChatMessagesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -716,6 +786,58 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
     public delegate void RemoveChatRequestCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void GetLastMessageIdCompletedEventHandler(object sender, GetLastMessageIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetLastMessageIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetLastMessageIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void GetChatMessagesCompletedEventHandler(object sender, GetChatMessagesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetChatMessagesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetChatMessagesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ChatMessageInfo[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ChatMessageInfo[])(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

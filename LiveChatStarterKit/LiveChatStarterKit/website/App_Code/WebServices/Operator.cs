@@ -69,4 +69,16 @@ public class Operator : System.Web.Services.WebService
 	{
 		ChatService.RemoveChatRequest(req);
 	}
+
+	[WebMethod]
+	public int GetLastMessageId(string chatId)
+	{
+		return ChatService.GetLastMessageId(chatId);
+	}
+
+	[WebMethod]
+	public List<ChatMessageInfo> GetChatMessages(string chatId, int lastId)
+	{
+		return ChatService.GetMessages(chatId, lastId);
+	}
 }

@@ -127,6 +127,40 @@
       <s:element name="RemoveChatRequestResponse">
         <s:complexType />
       </s:element>
+      <s:element name="GetLastMessageId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="chatId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastMessageIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetLastMessageIdResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetChatMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="chatId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lastId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetChatMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetChatMessagesResult" type="tns:ArrayOfChatMessageInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfChatMessageInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ChatMessageInfo" nillable="true" type="tns:ChatMessageInfo" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LogInSoapIn">
@@ -165,6 +199,18 @@
   <wsdl:message name="RemoveChatRequestSoapOut">
     <wsdl:part name="parameters" element="tns:RemoveChatRequestResponse" />
   </wsdl:message>
+  <wsdl:message name="GetLastMessageIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLastMessageId" />
+  </wsdl:message>
+  <wsdl:message name="GetLastMessageIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLastMessageIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetChatMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetChatMessages" />
+  </wsdl:message>
+  <wsdl:message name="GetChatMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetChatMessagesResponse" />
+  </wsdl:message>
   <wsdl:portType name="OperatorSoap">
     <wsdl:operation name="LogIn">
       <wsdl:input message="tns:LogInSoapIn" />
@@ -189,6 +235,14 @@
     <wsdl:operation name="RemoveChatRequest">
       <wsdl:input message="tns:RemoveChatRequestSoapIn" />
       <wsdl:output message="tns:RemoveChatRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLastMessageId">
+      <wsdl:input message="tns:GetLastMessageIdSoapIn" />
+      <wsdl:output message="tns:GetLastMessageIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChatMessages">
+      <wsdl:input message="tns:GetChatMessagesSoapIn" />
+      <wsdl:output message="tns:GetChatMessagesSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OperatorSoap" type="tns:OperatorSoap">
@@ -247,6 +301,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetLastMessageId">
+      <soap:operation soapAction="http://tempuri.org/GetLastMessageId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChatMessages">
+      <soap:operation soapAction="http://tempuri.org/GetChatMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="OperatorSoap12" type="tns:OperatorSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -297,6 +369,24 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveChatRequest">
       <soap12:operation soapAction="http://tempuri.org/RemoveChatRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastMessageId">
+      <soap12:operation soapAction="http://tempuri.org/GetLastMessageId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChatMessages">
+      <soap12:operation soapAction="http://tempuri.org/GetChatMessages" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

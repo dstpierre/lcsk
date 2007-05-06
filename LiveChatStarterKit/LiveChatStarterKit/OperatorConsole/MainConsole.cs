@@ -72,7 +72,13 @@ namespace LiveChatStarterKit.OperatorConsole
 
 				foreach (ChatRequestInfo req in ws.GetChatRequests(Program.CurrentOperator))
 				{
+					// Flash the window
+					API.FlashWindowEx(this.Handle);
+
 					numberOfChatWaiting++;
+
+					// we remove the chat request to cancel repetitive call
+					ws.RemoveChatRequest(req);
 
 					ChatSession chat = new ChatSession(req);
 					chat.Show();
@@ -122,6 +128,22 @@ namespace LiveChatStarterKit.OperatorConsole
 		private void MainConsole_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			Application.Exit();
+		}
+
+		private void cannedMessagesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (CannedMessages f = new CannedMessages())
+			{
+				f.ShowDialog();
+			}
+		}
+
+		private void presetLinksToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (PresetLinks f = new PresetLinks())
+			{
+				f.ShowDialog();
+			}
 		}
 	}
 }

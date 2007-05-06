@@ -38,9 +38,11 @@
 			var d;
 			if ((d = document.getElementById('chat')) && ('undefined' != typeof d.scrollTop))
 			{
-				d.scrollTop = 0;
+				//d.scrollTop = 0;
 				d.scrollTop = 5000;
 			}
+			
+			window.setTimeout("scrollDiv()", 950);
 		}
 		
 		window.onload = scrollDiv;
