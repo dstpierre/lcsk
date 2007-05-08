@@ -33,6 +33,7 @@
 	.chatName { color: blue; }
     </style>
     <script language="javascript">
+
 		function scrollDiv()
 		{
 			var d;
@@ -76,16 +77,16 @@
     </div>
     </asp:panel>
     <asp:panel id="pnlChat" visible="false" runat="server">
+		<div id="chat">
 		<asp:updatepanel id="upChat" runat="server">
 		<triggers>
 			<asp:asyncpostbacktrigger controlid="timerRefresh" />
 		</triggers>
 		<contenttemplate>
-			<div id="chat">
 				<asp:literal id="litChat" runat="server"></asp:literal>
-			</div>
 		</contenttemplate>
 		</asp:updatepanel>
+		</div>
     <br />
     &nbsp;&nbsp;
     <asp:textbox id="txtMsg" width="500" runat="server"></asp:textbox>
