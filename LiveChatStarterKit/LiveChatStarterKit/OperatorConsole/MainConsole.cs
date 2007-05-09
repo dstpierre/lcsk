@@ -127,6 +127,7 @@ namespace LiveChatStarterKit.OperatorConsole
 
 		private void MainConsole_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			ws.SetOperatorStatus(Program.CurrentOperator.OperatorId, false);
 			Application.Exit();
 		}
 
