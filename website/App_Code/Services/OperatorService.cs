@@ -73,9 +73,9 @@ public class OperatorService
 					// Get a reference to the <requestService> section
 					OperatorServiceSection section = (OperatorServiceSection)WebConfigurationManager.GetSection("system.web/operatorService");
 
-					// Load the provider
-					if (section.Providers.Count > 0)
-						_provider = (OperatorProvider)ProvidersHelper.InstantiateProvider(section.Providers[0], typeof(OperatorProvider));
+					// Load the default provider
+					if (section.Providers.Count > 0 && !string.IsNullOrEmpty(section.DefaultProvider) && section.Providers[section.DefaultProvider] != null)
+						_provider = (OperatorProvider)ProvidersHelper.InstantiateProvider(section.Providers[section.DefaultProvider], typeof(OperatorProvider));
 
 					if (_provider == null)
 						throw new ProviderException("Unable to load the OperatorProvider");

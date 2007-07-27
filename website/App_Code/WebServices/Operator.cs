@@ -55,7 +55,7 @@ public class Operator : System.Web.Services.WebService
 	[WebMethod]
 	public List<ChatRequestInfo> GetChatRequests(OperatorInfo op)
 	{
-		return OperatorService.GetChatRequests(op.OperatorId);
+        return OperatorService.GetChatRequests(op.OperatorId);
 	}
 
 	[WebMethod]
@@ -71,14 +71,8 @@ public class Operator : System.Web.Services.WebService
 	}
 
 	[WebMethod]
-	public int GetLastMessageId(string chatId)
+	public List<ChatMessageInfo> GetChatMessages(string chatId, long lastCheck)
 	{
-		return ChatService.GetLastMessageId(chatId);
-	}
-
-	[WebMethod]
-	public List<ChatMessageInfo> GetChatMessages(string chatId, int lastId)
-	{
-		return ChatService.GetMessages(chatId, lastId);
+		return ChatService.GetMessages(chatId, lastCheck);
 	}
 }

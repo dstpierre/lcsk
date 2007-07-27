@@ -44,7 +44,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			if (requests != null && requests.Length > 0)
 			{
 				// set the last request time
-				lastRequestTime = requests[0].RequestTime;
+				lastRequestTime = requests[0].RequestTime.AddSeconds(1);
 
 				ListViewItem item;
 				for (int i = requests.Length - 1; i >= 0; i--)

@@ -26,7 +26,7 @@ namespace LiveChatStarterKit.OperatorConsole
 
 		private ChatRequestInfo myChatRequest;
 
-		private int lastId = 0;
+		private long lastCheck = DateTime.Now.AddMinutes(-2).Ticks;
 
 		public ChatRequestInfo ChatRequest
 		{
@@ -52,7 +52,7 @@ namespace LiveChatStarterKit.OperatorConsole
 					msg.MessageId = 100;
 					msg.ChatId = req.ChatId;
 					msg.Name = "System";
-					msg.SentDate = DateTime.Now;
+					msg.SentDate = DateTime.Now.Ticks;
 					msg.Message = "Sorry, your chat request has not been accepted.<br /><br />Please try again later.";
 					ws.AddMessage(msg);
 				}
@@ -75,7 +75,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			tmrGetMsg.Enabled = false;
 
 			// We get the last messages
-			ChatMessageInfo[] messages = ws.GetChatMessages(myChatRequest.ChatId, lastId);
+			ChatMessageInfo[] messages = ws.GetChatMessages(myChatRequest.ChatId, lastCheck);
 			if (messages.Length > 0)
 			{
 				for (int i = messages.Length - 1; i >= 0; i--)
@@ -83,7 +83,7 @@ namespace LiveChatStarterKit.OperatorConsole
 					webBrowser.Document.Write(string.Format("<span style=\"font-family: Arial;color: blue;font-weight: bold;font-size: 12px;\">{0} :</span><span style=\"font-family: Arial;font-size: 12px;\">{1}</span><br />", messages[i].Name, messages[i].Message));
 				}
 
-				lastId = messages[0].MessageId;
+				lastCheck = DateTime.Now.Ticks;
 
 				//TODO: Make this more flexible
 				webBrowser.Document.Window.ScrollTo(new Point(0, 5000));
@@ -112,11 +112,11 @@ namespace LiveChatStarterKit.OperatorConsole
 				tmrGetMsg.Enabled = false;
 
 				ChatMessageInfo msg = new ChatMessageInfo();
-				msg.MessageId = lastId + 1;
+				msg.MessageId = -1;
 				msg.ChatId = myChatRequest.ChatId;
 				msg.Message = "The operator has left the chat session...";
 				msg.Name = "System";
-				msg.SentDate = DateTime.Now;
+				msg.SentDate = DateTime.Now.Ticks;
 
 				ws.AddMessage(msg);
 			}
@@ -138,11 +138,11 @@ namespace LiveChatStarterKit.OperatorConsole
 			//TODO: Need to change that part (MessageId), for a DateTime...
 
 			ChatMessageInfo msg = new ChatMessageInfo();
-			msg.MessageId = lastId + 1;
+			msg.MessageId = -1;
 			msg.ChatId = myChatRequest.ChatId;
 			msg.Message = message;
 			msg.Name = Program.CurrentOperator.OperatorName;
-			msg.SentDate = DateTime.Now;
+			msg.SentDate = DateTime.Now.Ticks;
 
 			ws.AddMessage(msg);
 		}

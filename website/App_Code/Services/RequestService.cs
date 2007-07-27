@@ -58,9 +58,9 @@ public class RequestService
 					// Get a reference to the <requestService> section
 					RequestServiceSection section = (RequestServiceSection)WebConfigurationManager.GetSection("system.web/requestService");
 
-					// Load the provider
-					if (section.Providers.Count > 0)
-						_provider = (RequestProvider)ProvidersHelper.InstantiateProvider(section.Providers[0], typeof(RequestProvider));
+					// Load the default provider
+					if (section.Providers.Count > 0 && !string.IsNullOrEmpty(section.DefaultProvider) && section.Providers[section.DefaultProvider] != null)
+						_provider = (RequestProvider)ProvidersHelper.InstantiateProvider(section.Providers[section.DefaultProvider], typeof(RequestProvider));
 
 					if (_provider == null)
 						throw new ProviderException("Unable to load the RequestProvider");

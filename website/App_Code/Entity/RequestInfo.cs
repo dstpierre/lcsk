@@ -12,6 +12,8 @@
 using System;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Data;
+using System.Data.SqlClient;
 
 
 /// <summary>
@@ -20,6 +22,14 @@ using System.Xml.Serialization;
 [Serializable()]
 public class RequestInfo
 {
+    private int requestId;
+    [XmlElement]
+    public int RequestId
+    {
+        get { return requestId; }
+        set { requestId = value; }
+    }
+	
 	private string pageRequested;
 	[XmlElement]
 	public string PageRequested
@@ -71,4 +81,15 @@ public class RequestInfo
 	public RequestInfo()
 	{
 	}
+
+    public RequestInfo(SqlDataReader data)
+    {
+        if(!Convert.IsDBNull(data["LogAccessID"])) requestId = (int)data["LogAccessID"];
+        if(!Convert.IsDBNull(data["PageRequested"])) pageRequested = (string)data["PageRequested"];
+        if(!Convert.IsDBNull(data["DomainRequested"])) domainRequested = (string)data["DomainRequested"];
+        if (!Convert.IsDBNull(data["RequestedTime"])) requestTime = (DateTime)data["RequestedTime"];
+        if (!Convert.IsDBNull(data["Referrer"])) referrer = (string)data["Referrer"];
+        if (!Convert.IsDBNull(data["VisitorUserAgent"])) visitorUA= (string)data["VisitorUserAgent"];
+        if (!Convert.IsDBNull(data["VisitorIP"])) visitorIP = (string)data["VisitorIP"];
+    }
 }

@@ -12,6 +12,8 @@
 using System;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Data;
+using System.Data.SqlClient;
 
 /// <summary>
 /// Entity representing a chat message
@@ -19,9 +21,9 @@ using System.Xml.Serialization;
 [Serializable()]
 public class ChatMessageInfo
 {
-	private int myMsgId = 0;
+	private long myMsgId = 0;
 	[XmlElement]
-	public int MessageId
+	public long MessageId
 	{
 		get { return myMsgId; }
 		set { myMsgId = value; }
@@ -43,9 +45,9 @@ public class ChatMessageInfo
 		set { myName = value; }
 	}
 
-	private DateTime mySentDate;
+	private long mySentDate;
 	[XmlElement]
-	public DateTime SentDate
+	public long SentDate
 	{
 		get { return mySentDate; }
 		set { mySentDate = value; }
@@ -64,27 +66,35 @@ public class ChatMessageInfo
 		myMsgId++;
 		myChatId = string.Empty;
 		myName = string.Empty;
-		mySentDate = DateTime.MinValue;
+		mySentDate = DateTime.MinValue.Ticks;
 		myMessage = string.Empty;
 	}
 
-	public ChatMessageInfo(int id, string chatId, string name,  DateTime sentDate, string message)
+	public ChatMessageInfo(string chatId, string name,  string message)
 	{
-		myMsgId = id;
+		myMsgId = -1;
 		myChatId = chatId;
 		myName = name;
-		mySentDate = sentDate;
+		mySentDate = DateTime.Now.Ticks;
 		myMessage = message;
 	}
 
-	public static int SortByMessageId(ChatMessageInfo x, ChatMessageInfo y)
+    public ChatMessageInfo(SqlDataReader data)
+    {
+        if (!Convert.IsDBNull(data["MessageID"])) myMsgId = (long)data["MessageID"];
+        if (!Convert.IsDBNull(data["ChatID"])) myChatId = (string)data["ChatID"];
+        if (!Convert.IsDBNull(data["FromName"])) myName = (string)data["FromName"];
+        if (!Convert.IsDBNull(data["Message"])) myMessage = (string)data["Message"];
+        if (!Convert.IsDBNull(data["SentDate"])) mySentDate = (long)data["SentDate"];
+    }
+
+	public static int SortByDate(ChatMessageInfo x, ChatMessageInfo y)
 	{
-		// We sort the List descending by the MessageId field
-		if (x.MessageId < y.MessageId)
-			return 1;
-		else if (x.MessageId > y.MessageId)
-			return -1;
-		else
-			return 0;
+        if (x.SentDate < y.SentDate)
+            return 1;
+        else if (x.SentDate > y.SentDate)
+            return -1;
+        else
+            return 0;
 	}
 }

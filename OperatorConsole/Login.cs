@@ -54,5 +54,38 @@ namespace LiveChatStarterKit.OperatorConsole
 			// Exit the application
 			Application.Exit();
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.OperatorConsole_LiveChatWS_Operator.Length == 0)
+            {
+                gbConfig.Visible = true;
+                this.Height = 354;
+                txtWSUrl.Text = "http://localhost/operator.asmx";
+                txtWSUrl.SelectAll();
+                txtWSUrl.Focus();
+            }
+            else
+            {
+                gbConfig.Visible = false;
+                this.Height = 214;
+                txtOpName.Focus();
+                txtWSUrl.Text = Properties.Settings.Default.OperatorConsole_LiveChatWS_Operator;
+            }
+        }
+
+        private void lnkShowConfig_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (gbConfig.Visible)
+            {
+                gbConfig.Visible = false;
+                this.Height = 214;
+            }
+            else
+            {
+                gbConfig.Visible = true;
+                this.Height = 354;
+            }
+        }
     }
 }

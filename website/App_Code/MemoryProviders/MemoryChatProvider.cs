@@ -34,7 +34,7 @@ public class MemoryChatProvider : ChatProvider
 		base.Initialize(name, config);
 	}
 
-	public override void RequestChat(ChatRequestInfo request)
+	public override string RequestChat(ChatRequestInfo request)
 	{
 		bool cacheExists;
 		List<ChatRequestInfo> requests = GetCurrentRequest(out cacheExists);
@@ -43,6 +43,8 @@ public class MemoryChatProvider : ChatProvider
 		requests.Add(request);
 
 		SaveRequests(cacheExists, requests);
+
+        return request.ChatId;
 	}
 
 	private static void SaveRequests(bool cacheExists, List<ChatRequestInfo> requests)
@@ -115,7 +117,7 @@ public class MemoryChatProvider : ChatProvider
 		return messages;
 	}
 
-	public override List<ChatMessageInfo> GetMessages(string chatId, int lastId)
+	public override List<ChatMessageInfo> GetMessages(string chatId, long lastCheck)
 	{
 		bool cacheExists = false;
 		List<ChatMessageInfo> messages = GetChatMessages(chatId, out cacheExists);
@@ -124,11 +126,11 @@ public class MemoryChatProvider : ChatProvider
 		if (messages.Count > 0)
 		{
 			// We sort by MessageId and get only those messages that are not read
-			messages.Sort(ChatMessageInfo.SortByMessageId);
+			messages.Sort(ChatMessageInfo.SortByDate);
 
 			foreach (ChatMessageInfo msg in messages)
 			{
-				if (msg.MessageId > lastId)
+				if (msg.SentDate > lastCheck)
 					notViewed.Add(msg);
 				else
 					break;
@@ -137,27 +139,13 @@ public class MemoryChatProvider : ChatProvider
 		return notViewed;
 	}
 
-	public override int GetLastMessageId(string chatId)
-	{
-		bool cacheExists = false;
-		List<ChatMessageInfo> messages = GetChatMessages(chatId, out cacheExists);
-
-		messages.Sort(ChatMessageInfo.SortByMessageId);
-
-		// we return the last messageId
-		if (messages.Count > 0)
-			return messages[0].MessageId;
-		else
-			return 0;
-	}
-
-	public override List<ChatRequestInfo> GetChatRequests(bool active)
+	public override List<ChatRequestInfo> GetChatRequests(int operatorId)
 	{
 		bool cacheExists;
 		List<ChatRequestInfo> results = new List<ChatRequestInfo>();
 		foreach (ChatRequestInfo req in GetCurrentRequest(out cacheExists))
 		{
-			if (req.WasAccept == active)
+			if (req.AcceptByOpereratorId == operatorId)
 				results.Add(req);
 		}
 

@@ -89,13 +89,14 @@ public class MemoryOperatorProvider : OperatorProvider
 
 	public override List<ChatRequestInfo> GetChatRequest(int operatorId)
 	{
-		List<ChatRequestInfo> results = new List<ChatRequestInfo>();
-		foreach (ChatRequestInfo req in ChatService.GetRequests(false))
+		/*List<ChatRequestInfo> results = new List<ChatRequestInfo>();
+		foreach (ChatRequestInfo req in ChatService.GetRequests(-1))
 		{
 			if (req.AcceptByOpereratorId == operatorId)
 				results.Add(req);
 		}
 
-		return results;
+		return results;*/
+        return ChatService.GetRequests(-1);
 	}
 }

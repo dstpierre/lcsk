@@ -19,10 +19,9 @@ using System.Collections.Generic;
 /// </summary>
 public abstract class ChatProvider  : ProviderBase
 {
-	public abstract void RequestChat(ChatRequestInfo request);
+	public abstract string RequestChat(ChatRequestInfo request);
 	public abstract void AddChatMessage(ChatMessageInfo msg);
-	public abstract List<ChatMessageInfo> GetMessages(string chatId, int lastId);
-	public abstract int GetLastMessageId(string chatId);
-	public abstract List<ChatRequestInfo> GetChatRequests(bool active);
+	public abstract List<ChatMessageInfo> GetMessages(string chatId, long lastCheck);
+	public abstract List<ChatRequestInfo> GetChatRequests(int operatorId);
 	public abstract void RemoveChatRequest(ChatRequestInfo req);
 }

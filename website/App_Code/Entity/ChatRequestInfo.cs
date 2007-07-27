@@ -12,6 +12,8 @@
 using System;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Data;
+using System.Data.SqlClient;
 
 
 /// <summary>
@@ -92,10 +94,31 @@ public class ChatRequestInfo
 		get { return acceptByOperatorId; }
 		set { acceptByOperatorId = value; }
 	}
+
+    private DateTime closedDate;
+
+    public DateTime ClosedDate
+    {
+        get { return closedDate; }
+        set { closedDate = value; }
+    }
 	
 	
 
 	public ChatRequestInfo()
 	{
 	}
+
+    public ChatRequestInfo(SqlDataReader data)
+    {
+        if (!Convert.IsDBNull(data["ChatID"])) chatId = (string)data["ChatID"];
+        if (!Convert.IsDBNull(data["VisitorIP"])) visitorIP = (string)data["VisitorIP"];
+        if (!Convert.IsDBNull(data["VisitorName"])) visitorName = (string)data["VisitorName"];
+        if (!Convert.IsDBNull(data["VisitorEmail"])) visitorEmail = (string)data["VisitorEmail"];
+        if (!Convert.IsDBNull(data["VisitorUserAgent"])) visitorUA = (string)data["VisitorUserAgent"];
+        if (!Convert.IsDBNull(data["OperatorID"])) acceptByOperatorId = (int)data["OperatorID"];
+        if (!Convert.IsDBNull(data["RequestDate"])) requestDate = (DateTime)data["RequestDate"];
+        if (!Convert.IsDBNull(data["AcceptDate"])) acceptDate = (DateTime)data["AcceptDate"];
+        if (!Convert.IsDBNull(data["ClosedDate"])) closedDate = (DateTime)data["ClosedDate"];
+    }
 }

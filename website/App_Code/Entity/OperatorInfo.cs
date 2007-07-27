@@ -12,6 +12,8 @@
 using System;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Data;
+using System.Data.SqlClient;
 
 
 /// <summary>
@@ -73,6 +75,15 @@ public class OperatorInfo
 		opEmail = email;
 		isOnline = online;
 	}
+
+    public OperatorInfo(SqlDataReader data)
+    {
+        if (!Convert.IsDBNull(data["OperatorID"])) opId = (int)data["OperatorID"];
+        if (!Convert.IsDBNull(data["OperatorName"])) opName = (string)data["OperatorName"];
+        if (!Convert.IsDBNull(data["OperatorPassword"])) opPassword = (string)data["OperatorPassword"];
+        if (!Convert.IsDBNull(data["OperatorEmail"])) opEmail = (string)data["OperatorEmail"];
+        if (!Convert.IsDBNull(data["IsOnline"])) isOnline = (bool)data["IsOnline"];
+    }
 
 	public override string ToString()
 	{

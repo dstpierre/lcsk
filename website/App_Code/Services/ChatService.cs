@@ -44,28 +44,20 @@ public class ChatService
 		_provider.AddChatMessage(msg);
 	}
 
-	public static List<ChatMessageInfo> GetMessages(string chatId, int lastId)
+	public static List<ChatMessageInfo> GetMessages(string chatId, long lastCheck)
 	{
 		// Load the provider
 		LoadProvider();
 
-		return _provider.GetMessages(chatId, lastId);
+		return _provider.GetMessages(chatId, lastCheck);
 	}
 
-	public static int GetLastMessageId(string chatId)
+	public static List<ChatRequestInfo> GetRequests(int operatorId)
 	{
 		// Load the provider
 		LoadProvider();
 
-		return _provider.GetLastMessageId(chatId);
-	}
-
-	public static List<ChatRequestInfo> GetRequests(bool active)
-	{
-		// Load the provider
-		LoadProvider();
-
-		return _provider.GetChatRequests(active);
+		return _provider.GetChatRequests(operatorId);
 	}
 
 	public static void RemoveChatRequest(ChatRequestInfo req)
@@ -89,9 +81,9 @@ public class ChatService
 					// Get a reference to the <requestService> section
 					ChatServiceSection section = (ChatServiceSection)WebConfigurationManager.GetSection("system.web/chatService");
 
-					// Load the provider
-					if (section.Providers.Count > 0)
-						_provider = (ChatProvider)ProvidersHelper.InstantiateProvider(section.Providers[0], typeof(ChatProvider));
+					// Load the default provider
+					if (section.Providers.Count > 0 && !string.IsNullOrEmpty(section.DefaultProvider) && section.Providers[section.DefaultProvider] != null)
+						_provider = (ChatProvider)ProvidersHelper.InstantiateProvider(section.Providers[section.DefaultProvider], typeof(ChatProvider));
 
 					if (_provider == null)
 						throw new ProviderException("Unable to load the ChatProvider");

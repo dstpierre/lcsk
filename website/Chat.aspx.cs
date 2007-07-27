@@ -78,18 +78,18 @@ public partial class Chat : System.Web.UI.Page
             Response.Cookies.Add(cookie);
         }
 
-        if (Request.Cookies[chatId + "_lastId"] != null)
+        if (Request.Cookies[chatId + "_lastCheck"] != null)
         {
-            Response.Cookies[chatId + "_lastId"].Value = "0";
+            Response.Cookies[chatId + "_lastCheck"].Value = DateTime.Now.AddMinutes(-2).Ticks.ToString();
         }
         else
         {
-            HttpCookie cookie = new HttpCookie(chatId + "_lastId", "0");
+            HttpCookie cookie = new HttpCookie(chatId + "_lastCheck", DateTime.Now.AddMinutes(-2).Ticks.ToString());
             Response.Cookies.Add(cookie);
         }
 
         ChatRequestInfo request = new ChatRequestInfo();
-        request.AcceptByOpereratorId = 1;
+        request.AcceptByOpereratorId = -1;
         request.ChatId = chatId;
         request.RequestDate = DateTime.Now;
         request.VisitorEmail = txtEmail.Text;
@@ -102,7 +102,7 @@ public partial class Chat : System.Web.UI.Page
 
         ChatService.RequestChat(request);
 
-        ChatMessageInfo msg = new ChatMessageInfo(1, request.ChatId, string.Empty, DateTime.Now, "Waiting for an operator to accept your request.");
+        ChatMessageInfo msg = new ChatMessageInfo(request.ChatId, string.Empty, "Waiting for an operator to accept your request.");
         ChatService.AddMessage(msg);
 
         // we set the visitor name in the ViewState
@@ -118,10 +118,10 @@ public partial class Chat : System.Web.UI.Page
         if (Request.Cookies["chatId"] != null)
         {
             string chatId = Request.Cookies["chatId"].Value.ToString();
-            if (Request.Cookies[chatId + "_lastId"] != null)
+            if (Request.Cookies[chatId + "_lastCheck"] != null)
             {
-                int lastId = int.Parse(Request.Cookies[chatId + "_lastId"].Value.ToString());
-                List<ChatMessageInfo> messages = ChatService.GetMessages(chatId, lastId);
+                long lastCheck = long.Parse(Request.Cookies[chatId + "_lastCheck"].Value.ToString());
+                List<ChatMessageInfo> messages = ChatService.GetMessages(chatId, lastCheck);
                 if (messages.Count > 0)
                 {
                     for (int i = messages.Count - 1; i >= 0; i--)
@@ -129,10 +129,10 @@ public partial class Chat : System.Web.UI.Page
                         litChat.Text += string.Format("<span class=\"chatName\">{0} :</span>{1}<br />", messages[i].Name, messages[i].Message);
                     }
 
-                    lastId = messages[0].MessageId;
+                    lastCheck = DateTime.Now.Ticks;
 
                     // set the lastId
-                    Response.Cookies[chatId + "_lastId"].Value = lastId.ToString();
+                    Response.Cookies[chatId + "_lastCheck"].Value = lastCheck.ToString();
 
                 }
             }
@@ -148,10 +148,7 @@ public partial class Chat : System.Web.UI.Page
             // Add a new message to the discussion
             string chatId = chtID;
 
-            // we get the last MessageId
-            int id = ChatService.GetLastMessageId(chatId) + 1;
-
-            ChatMessageInfo mesg = new ChatMessageInfo(id, chatId, VName, DateTime.Now, msg);
+            ChatMessageInfo mesg = new ChatMessageInfo(chatId, VName, msg);
             ChatService.AddMessage(mesg);
         }
         return "";
