@@ -1,5 +1,7 @@
-﻿		function checkEnter(e){ //e is event object passed from function invocation
-           
+﻿		var lastNotify = new Date();
+			
+		function checkEnter(e){ //e is event object passed from function invocation
+          
             var characterCode// literal character code will be stored in this variable
 
             if(e && e.which){ //if which property of event object is supported (NN4)
@@ -16,9 +18,33 @@
                 return false 
             }
             else{
+				var now = new Date();
+				var elapse = now.getSeconds() - lastNotify.getSeconds();
+				var sameMinute = now.getMinutes() - lastNotify.getMinutes();
+				if( sameMinute != 0 || elapse >= 3 )
+				{
+					// Set typing notification
+					SetTypingNotification(); 
+					
+					lastNotify = new Date();
+				}
+				
                 return true 
             }                              
         }   
+       
+	function SetTypingNotification() 
+    {
+		//Get text control
+        var txt1 = $get("txtMsg");
+       
+        //Call server side method
+        PageMethods.SetTypingNotification(getCookie('chatId'), txt1.value, OnSetTypingNotificationComplete);
+    }
+    
+    function OnSetTypingNotificationComplete(result,methodName)
+    {
+    } 
 
     function CallSendMsg() 
     {

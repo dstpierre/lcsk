@@ -82,7 +82,7 @@ public class ChatMessageInfo
     public ChatMessageInfo(SqlDataReader data)
     {
         if (!Convert.IsDBNull(data["MessageID"])) myMsgId = (long)data["MessageID"];
-        if (!Convert.IsDBNull(data["ChatID"])) myChatId = (string)data["ChatID"];
+        if (!Convert.IsDBNull(data["ChatID"])) myChatId = data["ChatID"].ToString().TrimEnd();
         if (!Convert.IsDBNull(data["FromName"])) myName = (string)data["FromName"];
         if (!Convert.IsDBNull(data["Message"])) myMessage = (string)data["Message"];
         if (!Convert.IsDBNull(data["SentDate"])) mySentDate = (long)data["SentDate"];

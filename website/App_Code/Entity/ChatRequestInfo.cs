@@ -111,7 +111,7 @@ public class ChatRequestInfo
 
     public ChatRequestInfo(SqlDataReader data)
     {
-        if (!Convert.IsDBNull(data["ChatID"])) chatId = (string)data["ChatID"];
+        if (!Convert.IsDBNull(data["ChatID"])) chatId = data["ChatID"].ToString().TrimEnd();
         if (!Convert.IsDBNull(data["VisitorIP"])) visitorIP = (string)data["VisitorIP"];
         if (!Convert.IsDBNull(data["VisitorName"])) visitorName = (string)data["VisitorName"];
         if (!Convert.IsDBNull(data["VisitorEmail"])) visitorEmail = (string)data["VisitorEmail"];

@@ -75,4 +75,57 @@ public class Operator : System.Web.Services.WebService
 	{
 		return ChatService.GetMessages(chatId, lastCheck);
 	}
+
+    [WebMethod]
+    public bool IsTyping(string chatId, bool isOperator)
+    {
+        bool retVal = false;
+        HttpContext ctx = HttpContext.Current;
+        if (ctx != null)
+        {
+            string who = isOperator ? "op" : "visitor";
+            if (ctx.Application[chatId + "_" + who + "_typing"] != null)
+                retVal = (bool)ctx.Application[chatId + "_" + who + "_typing"];
+            
+            // Clean up application variables
+            DateTime lastCleanUp = DateTime.Now;
+            DateTime now = DateTime.Now;
+            if (ctx.Application["lastCleanUp"] != null)
+                lastCleanUp = (DateTime)ctx.Application["lastCleanUp"];
+            else
+                ctx.Application.Add("lastCleanUp", DateTime.Now);
+
+            TimeSpan duration = now - lastCleanUp;
+
+            if ( duration.Seconds > 45 )
+            {
+                List<string> keyNames = new List<string>();
+                foreach (string key in ctx.Application.Keys)
+                    keyNames.Add(key);
+
+                foreach (string key in keyNames)
+                {
+                    if (key.EndsWith("_typing"))
+                        ctx.Application.Remove(key);
+                }
+                ctx.Application["lastCleanUp"] = DateTime.Now;
+            }
+            
+        }
+        return retVal;
+    }
+
+    [WebMethod]
+    public void SetTyping(string chatId, bool isOperator, bool typing)
+    {
+        HttpContext ctx = HttpContext.Current;
+        if (ctx != null)
+        {
+            string who = isOperator ? "op" : "visitor";
+            if (ctx.Application[chatId + "_" + who + "_typing"] != null)
+                ctx.Application[chatId + "_" + who + "_typing"] = typing;
+            else
+                ctx.Application.Add(chatId + "_" + who + "_typing", typing);
+        }
+     }
 }

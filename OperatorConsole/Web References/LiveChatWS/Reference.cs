@@ -43,6 +43,10 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         private System.Threading.SendOrPostCallback GetChatMessagesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback IsTypingOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SetTypingOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -101,6 +105,12 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         /// <remarks/>
         public event GetChatMessagesCompletedEventHandler GetChatMessagesCompleted;
+        
+        /// <remarks/>
+        public event IsTypingCompletedEventHandler IsTypingCompleted;
+        
+        /// <remarks/>
+        public event SetTypingCompletedEventHandler SetTypingCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LogIn", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -305,6 +315,69 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             if ((this.GetChatMessagesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetChatMessagesCompleted(this, new GetChatMessagesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IsTyping", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool IsTyping(string chatId, bool isOperator) {
+            object[] results = this.Invoke("IsTyping", new object[] {
+                        chatId,
+                        isOperator});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void IsTypingAsync(string chatId, bool isOperator) {
+            this.IsTypingAsync(chatId, isOperator, null);
+        }
+        
+        /// <remarks/>
+        public void IsTypingAsync(string chatId, bool isOperator, object userState) {
+            if ((this.IsTypingOperationCompleted == null)) {
+                this.IsTypingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsTypingOperationCompleted);
+            }
+            this.InvokeAsync("IsTyping", new object[] {
+                        chatId,
+                        isOperator}, this.IsTypingOperationCompleted, userState);
+        }
+        
+        private void OnIsTypingOperationCompleted(object arg) {
+            if ((this.IsTypingCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.IsTypingCompleted(this, new IsTypingCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SetTyping", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SetTyping(string chatId, bool isOperator, bool typing) {
+            this.Invoke("SetTyping", new object[] {
+                        chatId,
+                        isOperator,
+                        typing});
+        }
+        
+        /// <remarks/>
+        public void SetTypingAsync(string chatId, bool isOperator, bool typing) {
+            this.SetTypingAsync(chatId, isOperator, typing, null);
+        }
+        
+        /// <remarks/>
+        public void SetTypingAsync(string chatId, bool isOperator, bool typing, object userState) {
+            if ((this.SetTypingOperationCompleted == null)) {
+                this.SetTypingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetTypingOperationCompleted);
+            }
+            this.InvokeAsync("SetTyping", new object[] {
+                        chatId,
+                        isOperator,
+                        typing}, this.SetTypingOperationCompleted, userState);
+        }
+        
+        private void OnSetTypingOperationCompleted(object arg) {
+            if ((this.SetTypingCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SetTypingCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -802,6 +875,36 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void IsTypingCompletedEventHandler(object sender, IsTypingCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class IsTypingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal IsTypingCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void SetTypingCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

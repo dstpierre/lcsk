@@ -138,6 +138,29 @@ public partial class Chat : System.Web.UI.Page
             }
         }
     }
+    [System.Web.Services.WebMethod]
+    [ScriptMethod(UseHttpGet = true)]
+    public static string CheckTypingNotification(string chatId)
+    {
+        if (!string.IsNullOrEmpty(chatId))
+        {
+            Operator ws = new Operator();
+            if (ws.IsTyping(chatId, true))
+                return "The operator is typing a message... ";
+            else
+                return "no one typing...";
+        }
+        else return string.Empty;
+    }
+
+    [System.Web.Services.WebMethod]
+    [ScriptMethod(UseHttpGet = true)]
+    public static string SetTypingNotification(string chatId, string msg)
+    {
+        Operator ws = new Operator();
+        ws.SetTyping(chatId, false, msg.Length > 0);
+        return string.Empty;
+    }
 
     [System.Web.Services.WebMethod]
     [ScriptMethod(UseHttpGet = true)]
@@ -150,6 +173,9 @@ public partial class Chat : System.Web.UI.Page
 
             ChatMessageInfo mesg = new ChatMessageInfo(chatId, VName, msg);
             ChatService.AddMessage(mesg);
+
+            Operator ws = new Operator();
+            ws.SetTyping(chatId, false, false);
         }
         return "";
     }

@@ -149,6 +149,33 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="ChatMessageInfo" nillable="true" type="tns:ChatMessageInfo" />
         </s:sequence>
       </s:complexType>
+      <s:element name="IsTyping">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="chatId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isOperator" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsTypingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsTypingResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetTyping">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="chatId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isOperator" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="typing" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetTypingResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LogInSoapIn">
@@ -193,6 +220,18 @@
   <wsdl:message name="GetChatMessagesSoapOut">
     <wsdl:part name="parameters" element="tns:GetChatMessagesResponse" />
   </wsdl:message>
+  <wsdl:message name="IsTypingSoapIn">
+    <wsdl:part name="parameters" element="tns:IsTyping" />
+  </wsdl:message>
+  <wsdl:message name="IsTypingSoapOut">
+    <wsdl:part name="parameters" element="tns:IsTypingResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetTypingSoapIn">
+    <wsdl:part name="parameters" element="tns:SetTyping" />
+  </wsdl:message>
+  <wsdl:message name="SetTypingSoapOut">
+    <wsdl:part name="parameters" element="tns:SetTypingResponse" />
+  </wsdl:message>
   <wsdl:portType name="OperatorSoap">
     <wsdl:operation name="LogIn">
       <wsdl:input message="tns:LogInSoapIn" />
@@ -221,6 +260,14 @@
     <wsdl:operation name="GetChatMessages">
       <wsdl:input message="tns:GetChatMessagesSoapIn" />
       <wsdl:output message="tns:GetChatMessagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsTyping">
+      <wsdl:input message="tns:IsTypingSoapIn" />
+      <wsdl:output message="tns:IsTypingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTyping">
+      <wsdl:input message="tns:SetTypingSoapIn" />
+      <wsdl:output message="tns:SetTypingSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OperatorSoap" type="tns:OperatorSoap">
@@ -288,6 +335,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsTyping">
+      <soap:operation soapAction="http://tempuri.org/IsTyping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTyping">
+      <soap:operation soapAction="http://tempuri.org/SetTyping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="OperatorSoap12" type="tns:OperatorSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -347,6 +412,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetChatMessages">
       <soap12:operation soapAction="http://tempuri.org/GetChatMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsTyping">
+      <soap12:operation soapAction="http://tempuri.org/IsTyping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTyping">
+      <soap12:operation soapAction="http://tempuri.org/SetTyping" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

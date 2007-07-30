@@ -32,7 +32,8 @@
 	.chatName { color: gray; }
     </style>  
         <script language="javascript" type="text/javascript">
-
+		var lastCheck = new Date();
+		 
 		function scrollDiv()
 		{
 			var d;
@@ -43,6 +44,27 @@
 			}
 			
 			window.setTimeout("scrollDiv()", 950);
+			
+			var now = new Date();
+			var elapse = now.getSeconds() - lastCheck.getSeconds();
+			var sameMinute = now.getMinutes - lastCheck.getMinutes();
+			if( sameMinute != 0 || elapse >= 2 )
+			{
+				// Check for typing notification
+				PageMethods.CheckTypingNotification(getCookie('chatId'), OnCheckTypingNotificationComplete);
+				
+				lastCheck = new Date();
+			}
+		}
+		
+		function OnCheckTypingNotificationComplete(result, methodName)
+		{
+			if( result != '' )
+			{
+				var v = document.getElementById('typingNotification');
+				if( v != 'undefined' ) 
+					v.innerText = result; 
+			}
 		}
 		
 		window.onload = scrollDiv;
@@ -103,9 +125,9 @@
              </div>
              <br /> 
             <br />
-            <br />   
             <input type="text" id="txtMsg" runat="server" style="width:500px;"  onkeypress="checkEnter(event)" />
-            <input type="button" id="btnSend" value="Send" onclick="CallSendMsg()" />
+            <input type="button" id="btnSend" value="Send" onclick="CallSendMsg()" /><br />
+           <span id="typingNotification">Status: </span>
             </asp:Panel>
     </form>    
 </body>

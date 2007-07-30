@@ -43,6 +43,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			if (req != null)
 			{
 				this.Text = "Chat with: " + req.VisitorName + " (" + req.VisitorIP + ")";
+                toollblIsTyping.Text = this.Text;
 
 				// Ask for acceptance of the chat request
 				if (MessageBox.Show("Do you accept the following chat request?\r\n\r\nFrom: " + req.VisitorName + "\r\nIP Address: " + req.VisitorIP + "\r\nRequest Date: " + req.RequestDate.ToString("yyyy/MM/dd hh:mm"), "LiveChat Starter Kit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -91,6 +92,15 @@ namespace LiveChatStarterKit.OperatorConsole
 				// Flash the window
 				API.FlashWindowEx(this.Handle);
 			}
+
+            // Check for typing notification
+            if (ws.IsTyping(myChatRequest.ChatId, false))
+                toollblIsTyping.Text = "The visitor is typing a message...";
+            else
+                toollblIsTyping.Text = this.Text;
+            
+            // Set if the operator is typing
+            ws.SetTyping(myChatRequest.ChatId, true, txtMsg.Text.Length > 0);
 
 			tmrGetMsg.Enabled = true;
 		}
