@@ -1,0 +1,14 @@
+bin\Debug\OperatorConsole.exe.config
+bin\Debug\OperatorConsole.exe
+bin\Debug\OperatorConsole.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\LiveChatStarterKit.OperatorConsole.CannedMessages.resources
+obj\Debug\LiveChatStarterKit.OperatorConsole.PresetLinks.resources
+obj\Debug\LiveChatStarterKit.OperatorConsole.Login.resources
+obj\Debug\LiveChatStarterKit.OperatorConsole.Properties.Resources.resources
+obj\Debug\OperatorConsole.csproj.GenerateResource.Cache
+obj\Debug\OperatorConsole.exe
+obj\Debug\OperatorConsole.pdb
+obj\Debug\LiveChatStarterKit.OperatorConsole.ControlPanel.resources
+obj\Debug\LiveChatStarterKit.OperatorConsole.LiveChat.resources
+obj\Debug\LiveChatStarterKit.OperatorConsole.TabInfo.resources
