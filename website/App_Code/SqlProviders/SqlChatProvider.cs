@@ -235,4 +235,41 @@ public class SqlChatProvider : ChatProvider
             }
         }
 	}
+
+    public override bool HasNewMessage(string chatId, long lastMessageId)
+    {
+        SqlConnection sqlC = new SqlConnection(connectionString);
+        SqlCommand cmd = new SqlCommand("LiveChat_CheckNewMessage", sqlC);
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        bool retVal = false;
+
+        try
+        {
+            cmd.Parameters.Add("@ChatID", SqlDbType.Char, 39).Value = chatId;
+            cmd.Parameters.Add("@LastID", SqlDbType.BigInt).Value = lastMessageId;
+
+            sqlC.Open();
+            retVal = (int)cmd.ExecuteScalar() > 0;
+            cmd.Dispose();
+            sqlC.Close();
+
+            return retVal;
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+            if (sqlC != null)
+            {
+                if (sqlC.State == ConnectionState.Open)
+                    sqlC.Close();
+
+                sqlC.Dispose();
+                sqlC = null;
+            }
+        }
+    }
 }

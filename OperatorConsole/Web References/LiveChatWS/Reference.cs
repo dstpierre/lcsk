@@ -53,6 +53,8 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         private System.Threading.SendOrPostCallback TransferChatOperationCompleted;
         
+        private System.Threading.SendOrPostCallback HasNewMessageOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -132,6 +134,9 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         /// <remarks/>
         public event TransferChatCompletedEventHandler TransferChatCompleted;
+        
+        /// <remarks/>
+        public event HasNewMessageCompletedEventHandler HasNewMessageCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapHeaderAttribute("AuthenticationHeaderValue")]
@@ -465,6 +470,38 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             if ((this.TransferChatCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.TransferChatCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("AuthenticationHeaderValue")]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.dominicstpierre.net/LiveChatStarterKit/2007/09/HasNewMessage", RequestNamespace="http://www.dominicstpierre.net/LiveChatStarterKit/2007/09", ResponseNamespace="http://www.dominicstpierre.net/LiveChatStarterKit/2007/09", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool HasNewMessage(string chatId, long lastMessageId) {
+            object[] results = this.Invoke("HasNewMessage", new object[] {
+                        chatId,
+                        lastMessageId});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void HasNewMessageAsync(string chatId, long lastMessageId) {
+            this.HasNewMessageAsync(chatId, lastMessageId, null);
+        }
+        
+        /// <remarks/>
+        public void HasNewMessageAsync(string chatId, long lastMessageId, object userState) {
+            if ((this.HasNewMessageOperationCompleted == null)) {
+                this.HasNewMessageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnHasNewMessageOperationCompleted);
+            }
+            this.InvokeAsync("HasNewMessage", new object[] {
+                        chatId,
+                        lastMessageId}, this.HasNewMessageOperationCompleted, userState);
+        }
+        
+        private void OnHasNewMessageOperationCompleted(object arg) {
+            if ((this.HasNewMessageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.HasNewMessageCompleted(this, new HasNewMessageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1057,6 +1094,32 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
     public delegate void TransferChatCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    public delegate void HasNewMessageCompletedEventHandler(object sender, HasNewMessageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.42")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HasNewMessageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HasNewMessageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

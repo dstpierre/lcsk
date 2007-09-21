@@ -75,7 +75,7 @@ public class ChatMessageInfo
 		myMsgId = -1;
 		myChatId = chatId;
 		myName = name;
-		mySentDate = DateTime.Now.Ticks;
+		mySentDate = DateTime.Now.ToUniversalTime().Ticks;
 		myMessage = message;
 	}
 

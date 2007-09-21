@@ -31,19 +31,44 @@ public partial class Chat : System.Web.UI.Page
             else
                 return string.Empty;
         }
-        set { ViewState["__visitorName"] = value; }
+        set
+        {
+            if (ViewState["__visitorName"] != null)
+                ViewState["__visitorName"] = value;
+            else
+                ViewState.Add("__visitorName", value);
+        }
     }
 
-    static public string VName
+    public static string VName
     {
 
         get
         {
-            return HttpContext.Current.Session["VisitorName"].ToString();
+            HttpContext ctx = HttpContext.Current;
+            if (ctx != null)
+            {
+                if (ctx.Request.Cookies["VisitorName"] != null)
+                    return ctx.Request.Cookies["VisitorName"].Value.ToString();
+                else
+                    return string.Empty;
+            }
+            else
+                return "nocontext";
         }
         set
         {
-            HttpContext.Current.Session["VisitorName"] = value;
+            HttpContext ctx = HttpContext.Current;
+            if (ctx != null)
+            {
+                if (ctx.Request.Cookies["VisitorName"] != null)
+                    ctx.Response.Cookies["VisitorName"].Value = value;
+                else
+                {
+                    HttpCookie c = new HttpCookie("VisitorName", value);
+                    ctx.Response.Cookies.Add(c);
+                }
+            }
         }
     }
 
@@ -80,11 +105,11 @@ public partial class Chat : System.Web.UI.Page
 
         if (Request.Cookies[chatId + "_lastCheck"] != null)
         {
-            Response.Cookies[chatId + "_lastCheck"].Value = DateTime.Now.AddMinutes(-2).Ticks.ToString();
+            Response.Cookies[chatId + "_lastCheck"].Value = "0";
         }
         else
         {
-            HttpCookie cookie = new HttpCookie(chatId + "_lastCheck", DateTime.Now.AddMinutes(-2).Ticks.ToString());
+            HttpCookie cookie = new HttpCookie(chatId + "_lastCheck", "0");
             Response.Cookies.Add(cookie);
         }
 
@@ -102,6 +127,7 @@ public partial class Chat : System.Web.UI.Page
 
         ChatService.RequestChat(request);
 
+        
         ChatMessageInfo msg = new ChatMessageInfo(request.ChatId, string.Empty, "Waiting for an operator to accept your request.");
         ChatService.AddMessage(msg);
 
@@ -121,19 +147,21 @@ public partial class Chat : System.Web.UI.Page
             if (Request.Cookies[chatId + "_lastCheck"] != null)
             {
                 long lastCheck = long.Parse(Request.Cookies[chatId + "_lastCheck"].Value.ToString());
-                List<ChatMessageInfo> messages = ChatService.GetMessages(chatId, lastCheck);
-                if (messages.Count > 0)
+                if (ChatService.HasNewMessage(chatId, lastCheck))
                 {
-                    for (int i = messages.Count - 1; i >= 0; i--)
+                    List<ChatMessageInfo> messages = ChatService.GetMessages(chatId, lastCheck);
+                    if (messages.Count > 0)
                     {
-                        litChat.Text += string.Format("<span class=\"chatName\">{0} :</span>{1}<br />", messages[i].Name, messages[i].Message);
+                        for (int i = messages.Count - 1; i >= 0; i--)
+                        {
+                            litChat.Text += string.Format("<span class=\"chatName\">{0} :</span>{1}<br />", messages[i].Name, messages[i].Message);
+                            lastCheck = messages[i].MessageId;
+                        }
+
+                        // set the lastId
+                        Response.Cookies[chatId + "_lastCheck"].Value = lastCheck.ToString();
+
                     }
-
-                    lastCheck = DateTime.Now.Ticks;
-
-                    // set the lastId
-                    Response.Cookies[chatId + "_lastCheck"].Value = lastCheck.ToString();
-
                 }
             }
         }

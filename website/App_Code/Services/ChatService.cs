@@ -68,6 +68,14 @@ public class ChatService
 		_provider.RemoveChatRequest(req);
 	}
 
+    public static bool HasNewMessage(string chatId, long lastMessageId)
+    {
+        // Load the provider
+        LoadProvider();
+
+        return _provider.HasNewMessage(chatId, lastMessageId);
+    }
+
 	private static void LoadProvider()
 	{
 		// if we do not have initiated the provider

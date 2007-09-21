@@ -87,7 +87,7 @@ namespace LiveChatStarterKit.OperatorConsole
                     msg.ChatId = ChatId;
                     msg.Message = "Your chat session has been transfered to : " + cboOperators.Text;
                     msg.Name = "System";
-                    msg.SentDate = DateTime.Now.Ticks;
+                    msg.SentDate = DateTime.Now.ToUniversalTime().Ticks;
 
                     ws.AddMessage(msg);
                 }

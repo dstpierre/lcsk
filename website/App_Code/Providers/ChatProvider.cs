@@ -24,4 +24,5 @@ public abstract class ChatProvider  : ProviderBase
 	public abstract List<ChatMessageInfo> GetMessages(string chatId, long lastCheck);
 	public abstract List<ChatRequestInfo> GetChatRequests(int operatorId);
 	public abstract void RemoveChatRequest(ChatRequestInfo req);
+    public abstract bool HasNewMessage(string chatId, long lastMessageId);
 }

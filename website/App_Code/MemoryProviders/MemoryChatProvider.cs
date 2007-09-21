@@ -82,6 +82,14 @@ public class MemoryChatProvider : ChatProvider
 		bool cacheExists = false;
 		List<ChatMessageInfo> messages = GetChatMessages(msg.ChatId, out cacheExists);
 
+        // Get the last ID
+        messages.Sort(SortByIDDescending);
+
+        if (messages.Count > 0)
+            msg.MessageId = messages[0].MessageId + 1;
+        else
+            msg.MessageId = 0;
+
 		// Add the new requests
 		messages.Add(msg);
 
@@ -168,4 +176,29 @@ public class MemoryChatProvider : ChatProvider
 
 		SaveRequests(cacheExists, requests);
 	}
+
+    public override bool HasNewMessage(string chatId, long lastMessageId)
+    {
+        bool cacheExists = false;
+        List<ChatMessageInfo> messages = GetChatMessages(chatId, out cacheExists);
+
+        if (messages != null && messages.Count > 0)
+        {
+            messages.Sort(SortByIDDescending);
+
+            return messages[0].MessageId > lastMessageId;
+        }
+        else
+            return false;
+
+        
+    }
+
+    private int SortByIDDescending(ChatMessageInfo x, ChatMessageInfo y)
+    {
+        if (x != null && y != null)
+            return x.MessageId < y.MessageId ? 1 : -1;
+        else
+            return 1;
+    }
 }

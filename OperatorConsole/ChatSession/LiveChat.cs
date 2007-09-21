@@ -21,7 +21,7 @@ namespace LiveChatStarterKit.OperatorConsole
             set { myChatRequest = value; }
         }
 
-        private long lastCheck = DateTime.Now.AddMinutes(-2).Ticks;
+        private long lastCheck = 0;
 
         public LiveChat()
         {
@@ -47,27 +47,29 @@ namespace LiveChatStarterKit.OperatorConsole
             tmrGetMsg.Enabled = false;
 
             // We get the last messages
-            ChatMessageInfo[] messages = ws.GetChatMessages(myChatRequest.ChatId, lastCheck);
-            if (messages.Length > 0)
+            if (ws.HasNewMessage(myChatRequest.ChatId, lastCheck))
             {
-                for (int i = messages.Length - 1; i >= 0; i--)
+                ChatMessageInfo[] messages = ws.GetChatMessages(myChatRequest.ChatId, lastCheck);
+                if (messages.Length > 0)
                 {
-                    wb.Document.Write(string.Format("<span style=\"font-family: Arial;color: blue;font-weight: bold;font-size: 12px;\">{0} :</span><span style=\"font-family: Arial;font-size: 12px;\">{1}</span><br />", messages[i].Name, messages[i].Message));
+                    for (int i = messages.Length - 1; i >= 0; i--)
+                    {
+                        wb.Document.Write(string.Format("<span style=\"font-family: Arial;color: blue;font-weight: bold;font-size: 12px;\">{0} :</span><span style=\"font-family: Arial;font-size: 12px;\">{1}</span><br />", messages[i].Name, messages[i].Message));
+                        lastCheck = messages[i].MessageId;
+                    }
+
+                    // Should we play a sound
+                    if (Properties.Settings.Default.PlaySoundOnChatMsg)
+                    {
+                        ((ControlPanel)this.ParentForm).PlayMsgSound();
+                    }
+
+                    //TODO: Make this more flexible
+                    wb.Document.Window.ScrollTo(new Point(0, 5000));
+
+                    // Flash the window
+                    API.FlashWindowEx(((ControlPanel)this.ParentForm).Handle);
                 }
-
-                // Should we play a sound
-                if (Properties.Settings.Default.PlaySoundOnChatMsg)
-                {
-                    ((ControlPanel)this.ParentForm).PlayMsgSound();
-                }
-
-                lastCheck = DateTime.Now.Ticks;
-
-                //TODO: Make this more flexible
-                wb.Document.Window.ScrollTo(new Point(0, 5000));
-
-                // Flash the window
-                API.FlashWindowEx(((ControlPanel)this.ParentForm).Handle);
             }
 
             // Check for typing notification
@@ -93,7 +95,7 @@ namespace LiveChatStarterKit.OperatorConsole
                 msg.ChatId = myChatRequest.ChatId;
                 msg.Message = "The operator has left the chat session...";
                 msg.Name = "System";
-                msg.SentDate = DateTime.Now.Ticks;
+                msg.SentDate = DateTime.Now.ToUniversalTime().Ticks;
 
                 ws.AddMessage(msg);
 
@@ -114,12 +116,17 @@ namespace LiveChatStarterKit.OperatorConsole
 
         private void WriteMessage(string message)
         {
+            WriteMessage(message, Program.CurrentOperator.OperatorName);
+        }
+
+        private void WriteMessage(string message, string From)
+        {
             ChatMessageInfo msg = new ChatMessageInfo();
             msg.MessageId = -1;
             msg.ChatId = myChatRequest.ChatId;
             msg.Message = message;
-            msg.Name = Program.CurrentOperator.OperatorName;
-            msg.SentDate = DateTime.Now.Ticks;
+            msg.Name = From;
+            msg.SentDate = DateTime.Now.ToUniversalTime().Ticks;
 
             ws.AddMessage(msg);
         }
@@ -146,6 +153,9 @@ namespace LiveChatStarterKit.OperatorConsole
                 foreach (string link in Properties.Settings.Default.PresetLinks)
                     ctxMenu.Items.Add(link, null, new EventHandler(contextLink_Click));
             }
+
+            // Send accept message
+            WriteMessage("You are now chatting with: " + Program.CurrentOperator.OperatorName);
         }
 
         private void contextMenu_Click(object sender, EventArgs e)

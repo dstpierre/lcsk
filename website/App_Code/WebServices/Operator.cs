@@ -79,6 +79,7 @@ public class Operator : System.Web.Services.WebService
 	{
         if (Authentication.userName != System.Configuration.ConfigurationManager.AppSettings["WSUser"].ToString())
             throw new AccessViolationException("invalid user");
+        msg.SentDate = DateTime.Now.ToUniversalTime().Ticks;
 		ChatService.AddMessage(msg);
 	}
 
@@ -146,8 +147,8 @@ public class Operator : System.Web.Services.WebService
     [WebMethod]
     public void SetTyping(string chatId, bool isOperator, bool typing)
     {
-        if (Authentication.userName != System.Configuration.ConfigurationManager.AppSettings["WSUser"].ToString())
-            throw new AccessViolationException("invalid user");
+        //if (Authentication.userName != System.Configuration.ConfigurationManager.AppSettings["WSUser"].ToString())
+        //    throw new AccessViolationException("invalid user");
         HttpContext ctx = HttpContext.Current;
         if (ctx != null)
         {
@@ -175,5 +176,14 @@ public class Operator : System.Web.Services.WebService
         if (Authentication.userName != System.Configuration.ConfigurationManager.AppSettings["WSUser"].ToString())
             throw new AccessViolationException("invalid user");
         ChatService.RequestChat(chatRequest);
+    }
+
+    [SoapHeader("Authentication", Required = true)]
+    [WebMethod]
+    public bool HasNewMessage(string chatId, long lastMessageId)
+    {
+        if (Authentication.userName != System.Configuration.ConfigurationManager.AppSettings["WSUser"].ToString())
+            throw new AccessViolationException("invalid user");
+        return ChatService.HasNewMessage(chatId, lastMessageId);
     }
 }
