@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.125, 8.5" name="LiveChat">
+  <DataContextMoniker Name="/LiveChatDataContext" />
+  <nestedChildShapes>
+    <classShape Id="26d3667e-d79a-46e6-b7bc-c2f6b71bd239" absoluteBounds="0.5, 3.75, 2, 1.75354248046875">
+      <DataClassMoniker Name="/LiveChatDataContext/Operator" />
+      <nestedChildShapes>
+        <elementListCompartment Id="35d91ff1-4693-471b-b77e-7f524ae18bc6" absoluteBounds="0.51500000000000012, 4.21, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b2c7b349-cbfd-4d5f-902a-471d9c92b816" absoluteBounds="0.75, 5.625, 2, 1.0961531575520844">
+      <DataClassMoniker Name="/LiveChatDataContext/DepartmentOperator" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ef6a685-788f-46a9-8e4b-2c7872c7d1b3" absoluteBounds="0.76499999999999968, 6.085, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5ede17fa-1529-40a6-a8a6-a6ed6a36205a" absoluteBounds="0.75, 7, 2, 1.2605004882812496">
+      <DataClassMoniker Name="/LiveChatDataContext/Department" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7eb4927a-e27d-45b2-943b-cccca47664b4" absoluteBounds="0.76500000000000012, 7.46, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ac667ede-2543-4cbf-b560-8db5421cd2a1" absoluteBounds="3.25, 3.75, 2, 1.7535424804687505">
+      <DataClassMoniker Name="/LiveChatDataContext/ChatInvitation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="241ca398-f4b9-4065-a7db-6683feb7a591" absoluteBounds="3.2649999999999997, 4.21, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3a971384-5635-4fe5-a8c2-df9e9dcb3d90" absoluteBounds="3.125, 5.75, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/LiveChatDataContext/ChatRequest" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8009ae2a-5cb4-43ce-b1cf-30fb11fac089" absoluteBounds="3.14, 6.2100000000000009, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6d0b889b-3208-4859-b794-9b9e5471d673" absoluteBounds="6.125, 6.375, 2, 1.7535424804687487">
+      <DataClassMoniker Name="/LiveChatDataContext/Channel" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fe86776e-98d2-4a3e-a11d-503b4b1c6a31" absoluteBounds="6.14, 6.8350000000000009, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.625 : 5.50354248046875); (1.625 : 5.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LiveChatDataContext/Operator/Operator_DepartmentOperator" />
+      <nodes>
+        <classShapeMoniker Id="26d3667e-d79a-46e6-b7bc-c2f6b71bd239" />
+        <classShapeMoniker Id="b2c7b349-cbfd-4d5f-902a-471d9c92b816" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 7); (1.75 : 6.72115315755208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LiveChatDataContext/Department/Department_DepartmentOperator" />
+      <nodes>
+        <classShapeMoniker Id="5ede17fa-1529-40a6-a8a6-a6ed6a36205a" />
+        <classShapeMoniker Id="b2c7b349-cbfd-4d5f-902a-471d9c92b816" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 4.62677124023438); (3.25 : 4.62677124023438)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LiveChatDataContext/Operator/Operator_ChatInvitation" />
+      <nodes>
+        <classShapeMoniker Id="26d3667e-d79a-46e6-b7bc-c2f6b71bd239" />
+        <classShapeMoniker Id="ac667ede-2543-4cbf-b560-8db5421cd2a1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.33394490559896); (3.125 : 7.33394490559896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LiveChatDataContext/Department/Department_ChatRequest" />
+      <nodes>
+        <classShapeMoniker Id="5ede17fa-1529-40a6-a8a6-a6ed6a36205a" />
+        <classShapeMoniker Id="3a971384-5635-4fe5-a8c2-df9e9dcb3d90" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 7.02144490559896); (6.125 : 7.02144490559896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LiveChatDataContext/ChatRequest/ChatRequest_Channel" />
+      <nodes>
+        <classShapeMoniker Id="3a971384-5635-4fe5-a8c2-df9e9dcb3d90" />
+        <classShapeMoniker Id="6d0b889b-3208-4859-b794-9b9e5471d673" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 4.62677124023438); (3.1875 : 4.62677124023438); (3.1875 : 5.56604248046875); (7.125 : 5.56604248046875); (7.125 : 6.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LiveChatDataContext/Operator/Operator_Channel" />
+      <nodes>
+        <classShapeMoniker Id="26d3667e-d79a-46e6-b7bc-c2f6b71bd239" />
+        <classShapeMoniker Id="6d0b889b-3208-4859-b794-9b9e5471d673" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="63270756-9708-42bd-89e6-1db9a71bb8e2" absoluteBounds="8.875, 6.5, 2, 1.5891951497395835">
+      <DataClassMoniker Name="/LiveChatDataContext/ChatMessage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b084cdaf-9876-492c-96c2-353f29622816" absoluteBounds="8.89, 6.96, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.125 : 7.29459757486979); (8.875 : 7.29459757486979)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LiveChatDataContext/Channel/Channel_ChatMessage" />
+      <nodes>
+        <classShapeMoniker Id="6d0b889b-3208-4859-b794-9b9e5471d673" />
+        <classShapeMoniker Id="63270756-9708-42bd-89e6-1db9a71bb8e2" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="0d4ace9b-117a-4bd2-8cb2-e8da8f2b7527" absoluteBounds="5.5, 2.625, 2, 1.75354248046875">
+      <DataClassMoniker Name="/LiveChatDataContext/VisitorHistory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c0a3c484-ef6e-4f4b-ba08-ea4f852177a1" absoluteBounds="5.515, 3.085, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

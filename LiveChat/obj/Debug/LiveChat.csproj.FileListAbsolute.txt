@@ -1,0 +1,13 @@
+F:\Projects\LiveChatStarterKit\LiveChat\obj\Debug\ResolveAssemblyReference.cache
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.WebSite.dll
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.WebSite.pdb
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.DAL.dll
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.DAL.pdb
+F:\Projects\LiveChatStarterKit\LiveChat\obj\Debug\LiveChat.WebSite.dll
+F:\Projects\LiveChatStarterKit\LiveChat\obj\Debug\LiveChat.WebSite.pdb
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.Entities.dll
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.Providers.dll
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.SQLProvider.dll
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.Entities.pdb
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.Providers.pdb
+F:\Projects\LiveChatStarterKit\LiveChat\bin\LiveChat.SQLProvider.pdb

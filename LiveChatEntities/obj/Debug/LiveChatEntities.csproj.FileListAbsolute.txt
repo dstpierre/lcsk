@@ -1,0 +1,5 @@
+F:\Projects\LiveChatStarterKit\LiveChatEntities\bin\Debug\LiveChat.Entities.dll
+F:\Projects\LiveChatStarterKit\LiveChatEntities\bin\Debug\LiveChat.Entities.pdb
+F:\Projects\LiveChatStarterKit\LiveChatEntities\obj\Debug\ResolveAssemblyReference.cache
+F:\Projects\LiveChatStarterKit\LiveChatEntities\obj\Debug\LiveChat.Entities.dll
+F:\Projects\LiveChatStarterKit\LiveChatEntities\obj\Debug\LiveChat.Entities.pdb
