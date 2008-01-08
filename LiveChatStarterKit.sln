@@ -12,6 +12,27 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChatSQLProviders", "LiveChatSQLProviders\LiveChatSQLProviders.csproj", "{68E77375-C134-42C8-B40B-D8CA083CA616}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs01.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DAL\\DAL.csproj
+		SccProjectName1 = DAL
+		SccLocalPath1 = DAL
+		SccProjectUniqueName2 = LiveChat\\LiveChat.csproj
+		SccProjectName2 = LiveChat
+		SccLocalPath2 = LiveChat
+		SccProjectUniqueName3 = LiveChatProviders\\LiveChatProviders.csproj
+		SccProjectName3 = LiveChatProviders
+		SccLocalPath3 = LiveChatProviders
+		SccProjectUniqueName4 = LiveChatEntities\\LiveChatEntities.csproj
+		SccProjectName4 = LiveChatEntities
+		SccLocalPath4 = LiveChatEntities
+		SccProjectUniqueName5 = LiveChatSQLProviders\\LiveChatSQLProviders.csproj
+		SccProjectName5 = LiveChatSQLProviders
+		SccLocalPath5 = LiveChatSQLProviders
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
