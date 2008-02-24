@@ -4,13 +4,13 @@ using System.Configuration.Provider;
 using System.Web.Configuration;
 using System.Collections.Generic;
 using LiveChat.Entities;
-using LiveChat.Providers;
+using LiveChat.Providers.Manager;
 
 namespace LiveChat.WebSite
 {
     public class OperatorService
     {
-        private static OperatorProvider _provider = LiveChat.Providers.Manager.Operator.Provider;
+        private static OperatorProvider _provider = Operator.Provider;
         //private static object _lock = new object();
 
         //public OperatorProvider Provider

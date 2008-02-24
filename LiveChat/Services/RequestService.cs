@@ -4,14 +4,14 @@ using System.Configuration.Provider;
 using System.Web.Configuration;
 using System.Collections.Generic;
 using LiveChat.Entities;
-using LiveChat.Providers;
+using LiveChat.Providers.Manager;
 
 
 namespace LiveChat.WebSite
 {
     public class RequestService
     {
-        private static RequestProvider _provider = LiveChat.Providers.Manager.Request.Provider;
+        private static RequestProvider _provider = Request.Provider;
         //private static object _lock = new object();
 
         //public RequestProvider Provider
