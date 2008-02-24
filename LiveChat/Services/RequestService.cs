@@ -11,18 +11,18 @@ namespace LiveChat.WebSite
 {
     public class RequestService
     {
-        private static RequestProvider _provider = null;
-        private static object _lock = new object();
+        private static RequestProvider _provider = LiveChat.Providers.Manager.Request.Provider;
+        //private static object _lock = new object();
 
-        public RequestProvider Provider
-        {
-            get { return _provider; }
-        }
+        //public RequestProvider Provider
+        //{
+        //    get { return _provider; }
+        //}
 
         public static void LogRequest(PageRequestEntity req)
         {
             // Load the provider
-            LoadProvider();
+            //LoadProvider();
 
             _provider.LogRequest(req);
         }
@@ -30,33 +30,33 @@ namespace LiveChat.WebSite
         public static List<PageRequestEntity> GetRequests(DateTime since)
         {
             // Load the provider
-            LoadProvider();
+            //LoadProvider();
 
             return _provider.GetRequests(since);
         }
 
-        private static void LoadProvider()
-        {
-            // if we do not have initiated the provider
-            if (_provider == null)
-            {
-                lock (_lock)
-                {
-                    // Do this again to make sure _provider is still null
-                    if (_provider == null)
-                    {
-                        // Get a reference to the <requestService> section
-                        RequestServiceSection section = (RequestServiceSection)WebConfigurationManager.GetSection("system.web/requestService");
+        //private static void LoadProvider()
+        //{
+        //    // if we do not have initiated the provider
+        //    if (_provider == null)
+        //    {
+        //        lock (_lock)
+        //        {
+        //            // Do this again to make sure _provider is still null
+        //            if (_provider == null)
+        //            {
+        //                // Get a reference to the <requestService> section
+        //                RequestServiceSection section = (RequestServiceSection)WebConfigurationManager.GetSection("system.web/requestService");
 
-                        // Load the default provider
-                        if (section.Providers.Count > 0 && !string.IsNullOrEmpty(section.DefaultProvider) && section.Providers[section.DefaultProvider] != null)
-                            _provider = (RequestProvider)ProvidersHelper.InstantiateProvider(section.Providers[section.DefaultProvider], typeof(RequestProvider));
+        //                // Load the default provider
+        //                if (section.Providers.Count > 0 && !string.IsNullOrEmpty(section.DefaultProvider) && section.Providers[section.DefaultProvider] != null)
+        //                    _provider = (RequestProvider)ProvidersHelper.InstantiateProvider(section.Providers[section.DefaultProvider], typeof(RequestProvider));
 
-                        if (_provider == null)
-                            throw new ProviderException("Unable to load the RequestProvider");
-                    }
-                }
-            }
-        }
+        //                if (_provider == null)
+        //                    throw new ProviderException("Unable to load the RequestProvider");
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

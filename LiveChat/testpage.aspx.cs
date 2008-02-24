@@ -17,7 +17,7 @@ namespace LiveChat.WebSite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write(LiveChat.Providers.Manager.Operator.Provider.Name);
+            Response.Write(LiveChat.Providers.Manager.Request.Provider.Name);
             //LiveChat.Entities.MessageEntity msg = new LiveChat.Entities.MessageEntity();
             //msg.Message = "x";
             //ChatService.WriteMessage(msg);
