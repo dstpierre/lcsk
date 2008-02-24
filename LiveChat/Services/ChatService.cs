@@ -10,8 +10,8 @@ namespace LiveChat.WebSite
 {
     public class ChatService
     {
-        private static ChatProvider _provider = null;
-        private static object _lock = new object();
+        private static ChatProvider _provider = LiveChat.Providers.Manager.Chat.Provider;
+        //private static object _lock = new object();
 
         public ChatProvider Provider
         {
@@ -21,7 +21,7 @@ namespace LiveChat.WebSite
         public static void RequestChat(ChatRequestEntity request)
         {
             // Load the provider
-            LoadProvider();
+            //LoadProvider();
 
             _provider.RequestChat(request);
         }
@@ -29,7 +29,7 @@ namespace LiveChat.WebSite
         public static void WriteMessage(MessageEntity msg)
         {
             // Load the provider
-            LoadProvider();
+            //LoadProvider();
 
             _provider.WriteMessage(msg);
         }
@@ -37,7 +37,7 @@ namespace LiveChat.WebSite
         public static List<MessageEntity> GetMessages(string channelId, long lastId)
         {
             // Load the provider
-            LoadProvider();
+            //LoadProvider();
 
             return _provider.GetMessages(channelId, lastId);
         }
@@ -45,7 +45,7 @@ namespace LiveChat.WebSite
         public static void RemoveChatRequest(int requestId)
         {
             // Load the provider
-            LoadProvider();
+            //LoadProvider();
 
             _provider.RemoveChatRequest(requestId);
         }
@@ -53,33 +53,33 @@ namespace LiveChat.WebSite
         public static bool HasNewMessage(string channelId, long lastId)
         {
             // Load the provider
-            LoadProvider();
+            //LoadProvider();
 
             return _provider.HasNewMessage(channelId, lastId);
         }
 
-        private static void LoadProvider()
-        {
-            // if we do not have initiated the provider
-            if (_provider == null)
-            {
-                lock (_lock)
-                {
-                    // Do this again to make sure _provider is still null
-                    if (_provider == null)
-                    {
-                        // Get a reference to the <requestService> section
-                        ChatServiceSection section = (ChatServiceSection)WebConfigurationManager.GetSection("system.web/chatService");
+        //private static void LoadProvider()
+        //{
+        //    // if we do not have initiated the provider
+        //    if (_provider == null)
+        //    {
+        //        lock (_lock)
+        //        {
+        //            // Do this again to make sure _provider is still null
+        //            if (_provider == null)
+        //            {
+        //                // Get a reference to the <requestService> section
+        //                ChatServiceSection section = (ChatServiceSection)WebConfigurationManager.GetSection("system.web/chatService");
 
-                        // Load the default provider
-                        if (section.Providers.Count > 0 && !string.IsNullOrEmpty(section.DefaultProvider) && section.Providers[section.DefaultProvider] != null)
-                            _provider = (ChatProvider)ProvidersHelper.InstantiateProvider(section.Providers[section.DefaultProvider], typeof(ChatProvider));
+        //                // Load the default provider
+        //                if (section.Providers.Count > 0 && !string.IsNullOrEmpty(section.DefaultProvider) && section.Providers[section.DefaultProvider] != null)
+        //                    _provider = (ChatProvider)ProvidersHelper.InstantiateProvider(section.Providers[section.DefaultProvider], typeof(ChatProvider));
 
-                        if (_provider == null)
-                            throw new ProviderException("Unable to load the ChatProvider");
-                    }
-                }
-            }
-        }
+        //                if (_provider == null)
+        //                    throw new ProviderException("Unable to load the ChatProvider");
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

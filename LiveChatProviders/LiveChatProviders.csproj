@@ -40,6 +40,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -50,8 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatProvider.cs" />
-    <Compile Include="ChatServiceSection.cs" />
+    <Compile Include="Chat\ChatProvider.cs" />
+    <Compile Include="Chat\ChatProviderCollection.cs" />
+    <Compile Include="Chat\ChatServiceSection.cs" />
+    <Compile Include="Chat\ChatManager.cs" />
     <Compile Include="OperatorProvider.cs" />
     <Compile Include="OperatorServiceSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

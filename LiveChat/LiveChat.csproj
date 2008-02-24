@@ -72,6 +72,13 @@
     <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\OperatorService.cs" />
     <Compile Include="Services\RequestService.cs" />
+    <Compile Include="testpage.aspx.cs">
+      <DependentUpon>testpage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testpage.aspx.designer.cs">
+      <DependentUpon>testpage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebServices\AuthHeader.cs" />
     <Compile Include="WebServices\Operators.asmx.cs">
       <DependentUpon>Operators.asmx</DependentUpon>
@@ -81,6 +88,7 @@
   <ItemGroup>
     <Content Include="default.aspx" />
     <Content Include="ProcessImage.ashx" />
+    <Content Include="testpage.aspx" />
     <Content Include="WebServices\Operators.asmx" />
   </ItemGroup>
   <ItemGroup>
