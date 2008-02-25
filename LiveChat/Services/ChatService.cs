@@ -5,6 +5,7 @@ using System.Web.Configuration;
 using System.Collections.Generic;
 using LiveChat.Entities;
 using LiveChat.Providers.Manager;
+using LiveChat.Providers;
 
 namespace LiveChat.WebSite
 {
