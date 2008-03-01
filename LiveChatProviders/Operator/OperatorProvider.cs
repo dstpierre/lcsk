@@ -18,6 +18,8 @@ namespace LiveChat.Providers
         public abstract bool Remove(int operatorId);
         
         public abstract List<ChannelEntity> GetChatChannel(int operatorId);
+
+        public abstract List<DepartmentEntity> GetOnlineDepartment();
         
     }
 }

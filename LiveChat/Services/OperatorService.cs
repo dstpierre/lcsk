@@ -76,6 +76,11 @@ namespace LiveChat.WebSite
             return _provider.GetChatChannel(operatorId);
         }
 
+        public static List<DepartmentEntity> GetOnlineDepartment()
+        {
+            return _provider.GetOnlineDepartment();
+        }
+
         //private static void LoadProvider()
         //{
         //    // if we do not have initiated the provider

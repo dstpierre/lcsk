@@ -19,12 +19,12 @@ namespace LiveChat.WebSite
             get { return _provider; }
         }
 
-        public static void RequestChat(ChatRequestEntity request)
+        public static string RequestChat(ChatRequestEntity request)
         {
             // Load the provider
             //LoadProvider();
 
-            _provider.RequestChat(request);
+            return _provider.RequestChat(request);
         }
 
         public static void WriteMessage(MessageEntity msg)

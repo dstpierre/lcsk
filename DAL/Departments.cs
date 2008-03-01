@@ -7,6 +7,17 @@ namespace LiveChat.DAL
 {
     public partial class Departments : Manager
     {
+        public static IList<Department> FetchOnline()
+        {
+            return ExecuteQuery((dc) =>
+                {
+                    var dep = from d in dc.Departments
+                              where d.DepartmentOperators.Count(o => o.Operator.IsOnline) > 0
+                              select d;
+
+                    return dep.OrderBy(d => d.DepartmentName).ToList();
+                }, "Unable to fetch for online department");
+        }
         public static IList<Department> Fetch()
         {
             return ExecuteQuery((dc) =>

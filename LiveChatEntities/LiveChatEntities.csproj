@@ -52,6 +52,7 @@
     <Compile Include="ChannelEntity.cs" />
     <Compile Include="ChatInvitationEntity.cs" />
     <Compile Include="ChatRequestEntity.cs" />
+    <Compile Include="DepartmentEntity.cs" />
     <Compile Include="MessageEntity.cs" />
     <Compile Include="OperatorEntity.cs" />
     <Compile Include="PageRequestEntity.cs" />

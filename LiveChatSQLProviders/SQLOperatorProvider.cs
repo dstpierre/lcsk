@@ -20,6 +20,13 @@ namespace LiveChat.SQLProvider
             newEntity.IsAdmin = existingEntity.IsAdmin;
         }
 
+        private static void FillDepartmentEntity(DepartmentEntity newEntity, Department existingEntity)
+        {
+            newEntity.EntityId = existingEntity.DepartmentId;
+            newEntity.DepartmentName = existingEntity.DepartmentName;
+            newEntity.IsActive = existingEntity.IsActive;
+        }
+
         public override List<OperatorEntity> GetOnlineOperator()
         {
             List<OperatorEntity> results = new List<OperatorEntity>();
@@ -83,6 +90,20 @@ namespace LiveChat.SQLProvider
                 }
             }
             return results;
+        }
+
+        public override List<DepartmentEntity> GetOnlineDepartment()
+        {
+            List<DepartmentEntity> onlineDepartment = new List<DepartmentEntity>();
+            DepartmentEntity current = null;
+            foreach (Department d in Departments.FetchOnline())
+            {
+                current = new DepartmentEntity();
+                FillDepartmentEntity(current, d);
+                onlineDepartment.Add(current);
+            }
+            return onlineDepartment;
+
         }
     }
 }
