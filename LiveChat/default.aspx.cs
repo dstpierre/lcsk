@@ -19,10 +19,15 @@ namespace LiveChat.WebSite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            ChatServiceReference.ChatServiceClient ChatService = new LiveChat.WebSite.ChatServiceReference.ChatServiceClient();
+            OperatorServiceReference.OperatorClient OperatorService = new LiveChat.WebSite.OperatorServiceReference.OperatorClient();
+            
+
             if (!IsPostBack)
             {
                 // Get the online department
-                List<DepartmentEntity> onlineDepartments = OperatorService.GetOnlineDepartment();
+                List<DepartmentEntity> onlineDepartments = new List<DepartmentEntity>(OperatorService.GetOnlineDepartment());
                 if (onlineDepartments != null && onlineDepartments.Count() > 0)
                 {
                     pnlOperator.Visible = true;
@@ -40,6 +45,8 @@ namespace LiveChat.WebSite
 
         protected void RequestChat(object sender, EventArgs e)
         {
+            ChatServiceReference.ChatServiceClient ChatService = new LiveChat.WebSite.ChatServiceReference.ChatServiceClient();
+
             ChatRequestEntity chat = new ChatRequestEntity();
             chat.DepartmentId = int.Parse(ddlDepartments.SelectedValue);
             chat.RequestedDate = DateTime.Now;
@@ -49,8 +56,8 @@ namespace LiveChat.WebSite
             chat.VisitorName = txtName.Text;
 
             // We get the channel id
+            //string channelId = ChatService.RequestChat(chat);
             string channelId = ChatService.RequestChat(chat);
-
             // TODO: Redirect to the chat session page with the channel id
         }
     }

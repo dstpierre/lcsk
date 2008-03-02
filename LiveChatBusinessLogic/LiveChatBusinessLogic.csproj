@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{033DF257-5AB9-4CE1-A6E7-D658BB3DCFE0}</ProjectGuid>
+    <ProjectGuid>{CB6D5B17-79D1-48FA-80FD-10AFFD1FC8B5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LiveChat.Entities</RootNamespace>
-    <AssemblyName>LiveChat.Entities</AssemblyName>
+    <RootNamespace>LiveChat.BusinessLogic</RootNamespace>
+    <AssemblyName>LiveChatBusinessLogic</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -36,14 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.ServiceModel">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -55,16 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChannelEntity.cs" />
-    <Compile Include="ChatInvitationEntity.cs" />
-    <Compile Include="ChatRequestEntity.cs" />
-    <Compile Include="DepartmentEntity.cs" />
-    <Compile Include="MessageEntity.cs" />
-    <Compile Include="OperatorEntity.cs" />
-    <Compile Include="PageRequestEntity.cs" />
+    <Compile Include="Chat.cs" />
+    <Compile Include="Operator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\LiveChatEntities\LiveChatEntities.csproj">
+      <Project>{033DF257-5AB9-4CE1-A6E7-D658BB3DCFE0}</Project>
+      <Name>LiveChatEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiveChatProviders\LiveChatProviders.csproj">
+      <Project>{5ECB56F2-FC25-42EC-89F7-32BDEC712736}</Project>
+      <Name>LiveChatProviders</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

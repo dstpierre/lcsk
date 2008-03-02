@@ -12,7 +12,7 @@ namespace LiveChat.Providers
         }
 
         [StringValidator(MinLength = 1)]
-        [ConfigurationProperty("defaultProvider", DefaultValue = "MemoryChatProvider")]
+        [ConfigurationProperty("defaultProvider", DefaultValue = "SqlProvider")]
         public string DefaultProvider
         {
             get { return (string)base["defaultProvider"]; }
