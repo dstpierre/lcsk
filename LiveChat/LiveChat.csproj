@@ -85,8 +85,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Services\ChatService.cs" />
-    <Compile Include="Services\OperatorService.cs" />
     <Compile Include="Services\RequestService.cs" />
     <Compile Include="testpage.aspx.cs">
       <DependentUpon>testpage.aspx</DependentUpon>
