@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="425fe779-306b-4c72-8aad-3346f6ec7d55" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:49611/Operator.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Operator.xsd" MetadataType="Schema" ID="f34eca84-e53d-46e6-9377-7e8d15fe3164" SourceId="1" SourceUrl="http://localhost:49611/Operator.svc?xsd=xsd1" />
+    <MetadataFile FileName="Operator.wsdl" MetadataType="Wsdl" ID="09976ecb-4ef6-406f-bc0c-699ee1cded33" SourceId="1" SourceUrl="http://localhost:49611/Operator.svc?wsdl" />
+    <MetadataFile FileName="Operator.disco" MetadataType="Disco" ID="518159af-1608-4ec7-8576-b27c5542a8bf" SourceId="1" SourceUrl="http://localhost:49611/Operator.svc?disco" />
+    <MetadataFile FileName="Operator1.xsd" MetadataType="Schema" ID="68ef9832-373f-421f-8a9f-74b89c685705" SourceId="1" SourceUrl="http://localhost:49611/Operator.svc?xsd=xsd2" />
+    <MetadataFile FileName="Operator2.xsd" MetadataType="Schema" ID="30bb8c3d-596b-4093-8061-34cced99d017" SourceId="1" SourceUrl="http://localhost:49611/Operator.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

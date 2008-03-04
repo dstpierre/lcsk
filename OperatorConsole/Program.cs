@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using OperatorConsole.OperatorServiceReference;
 
 namespace OperatorConsole
 {
     static class Program
     {
+        public static OperatorEntity MyOperator { get; set; }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -15,7 +18,7 @@ namespace OperatorConsole
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new Console());
         }
     }
 }
