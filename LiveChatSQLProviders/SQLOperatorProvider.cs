@@ -105,5 +105,71 @@ namespace LiveChat.SQLProvider
             return onlineDepartment;
 
         }
+
+        public override List<OperatorEntity> Fetch()
+        {
+            List<OperatorEntity> result = new List<OperatorEntity>();
+            OperatorEntity entity = null;
+            foreach (var op in Operators.Fetch())
+            {
+                entity = new OperatorEntity();
+                FillEntity(entity, op);
+                result.Add(entity);
+            }
+
+            return result;
+        }
+
+        public override bool Save(OperatorEntity updatedEntity)
+        {
+            return Operators.Save(updatedEntity.EntityId, updatedEntity.Name, updatedEntity.Password, updatedEntity.Email, updatedEntity.IsAdmin);
+        }
+
+        public override List<DepartmentEntity> FetchDepartment()
+        {
+            List<DepartmentEntity> result = new List<DepartmentEntity>();
+            DepartmentEntity entity = null;
+            foreach (var dep in Departments.Fetch())
+            {
+                entity = new DepartmentEntity();
+                FillDepartmentEntity(entity, dep);
+                result.Add(entity);
+            }
+
+            return result;
+        }
+
+        public override int CreateDepartment(string departmentName)
+        {
+            return Departments.Create(departmentName);
+        }
+
+        public override bool RemoveDepartment(int departmentId)
+        {
+            return Departments.Remove(departmentId);
+        }
+
+        public override bool AddOperatorToDepartment(int departmentId, int operatorId)
+        {
+            return Departments.AddOperator(departmentId, operatorId);
+        }
+
+        public override bool RemoveOperatorFromDepartment(int departmentId, int operatorId)
+        {
+            return Departments.RemoveOperator(departmentId, operatorId);
+        }
+
+        public override List<OperatorEntity> GetOperator(int departmentId)
+        {
+            List<OperatorEntity> result = new List<OperatorEntity>();
+            OperatorEntity entity = null;
+            foreach (var op in Departments.FetchOperator(departmentId))
+            {
+                entity = new OperatorEntity();
+                FillEntity(entity, op);
+                result.Add(entity);
+            }
+            return result;
+        }
     }
 }

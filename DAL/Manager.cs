@@ -13,7 +13,7 @@ namespace LiveChat.DAL
         {
             try
             {
-                using (LiveChatDataContext dc = new LiveChatDataContext(Properties.Settings.Default.TestDBConnectionString)) { return q(dc); }
+                using (LiveChatDataContext dc = new LiveChatDataContext(Properties.Settings.Default.DBConnectionString)) { return q(dc); }
             }
             catch (Exception e)
             {

@@ -28,5 +28,23 @@ namespace OperatorConsole
             if (shouldClose)
                 this.Close();
         }
+
+        private void createToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Operators.Create f = new OperatorConsole.Operators.Create();
+            f.ShowDialog();
+        }
+
+        private void manageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Operators.Manage f = new OperatorConsole.Operators.Manage();
+            f.ShowDialog();
+        }
+
+        private void departmentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Operators.Departments f = new OperatorConsole.Operators.Departments();
+            f.ShowDialog();
+        }
     }
 }

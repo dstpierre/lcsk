@@ -51,18 +51,18 @@ namespace LiveChat.DAL
                 }, "Create: Unable to create an operator.");
         }
 
-        public static bool Save(Operator updatedOperator)
+        public static bool Save(int operatorId, string name, string password, string email, bool isAdmin)
         {
             return ExecuteNonQuery((dc) =>
                 {
-                    var current = dc.Operators.FirstOrDefault(op => op.OperatorId == updatedOperator.OperatorId);
+                    var current = dc.Operators.FirstOrDefault(op => op.OperatorId == operatorId);
                     if( current != null )
                     {
-                        current.Name = updatedOperator.Name;
-                        current.Password = updatedOperator.Password;
-                        current.Email = updatedOperator.Email;
-                        current.IsAdmin = updatedOperator.IsAdmin;
-                        current.IsOnline = updatedOperator.IsOnline;
+                        current.Name = name;
+                        current.Password = password;
+                        current.Email = email;
+                        current.IsAdmin = isAdmin;
+                        current.IsOnline = false;
                         dc.SubmitChanges();
                         return true;
                     }

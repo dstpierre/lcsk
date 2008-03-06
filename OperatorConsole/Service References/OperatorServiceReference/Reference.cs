@@ -367,6 +367,30 @@ namespace OperatorConsole.OperatorServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/GetOnlineDepartment", ReplyAction="http://tempuri.org/IOperator/GetOnlineDepartmentResponse")]
         OperatorConsole.OperatorServiceReference.DepartmentEntity[] GetOnlineDepartment();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/Fetch", ReplyAction="http://tempuri.org/IOperator/FetchResponse")]
+        OperatorConsole.OperatorServiceReference.OperatorEntity[] Fetch();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/Save", ReplyAction="http://tempuri.org/IOperator/SaveResponse")]
+        bool Save(OperatorConsole.OperatorServiceReference.OperatorEntity updatedEntity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/FetchDepartment", ReplyAction="http://tempuri.org/IOperator/FetchDepartmentResponse")]
+        OperatorConsole.OperatorServiceReference.DepartmentEntity[] FetchDepartment();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/CreateDepartment", ReplyAction="http://tempuri.org/IOperator/CreateDepartmentResponse")]
+        int CreateDepartment(string departmentName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/RemoveDepartment", ReplyAction="http://tempuri.org/IOperator/RemoveDepartmentResponse")]
+        bool RemoveDepartment(int departmentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/AddOperatorToDepartment", ReplyAction="http://tempuri.org/IOperator/AddOperatorToDepartmentResponse")]
+        bool AddOperatorToDepartment(int departmentId, int operatorId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/RemoveOperatorFromDepartment", ReplyAction="http://tempuri.org/IOperator/RemoveOperatorFromDepartmentResponse")]
+        bool RemoveOperatorFromDepartment(int departmentId, int operatoriId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOperator/GetOperator", ReplyAction="http://tempuri.org/IOperator/GetOperatorResponse")]
+        OperatorConsole.OperatorServiceReference.OperatorEntity[] GetOperator(int departmentId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -426,6 +450,38 @@ namespace OperatorConsole.OperatorServiceReference {
         
         public OperatorConsole.OperatorServiceReference.DepartmentEntity[] GetOnlineDepartment() {
             return base.Channel.GetOnlineDepartment();
+        }
+        
+        public OperatorConsole.OperatorServiceReference.OperatorEntity[] Fetch() {
+            return base.Channel.Fetch();
+        }
+        
+        public bool Save(OperatorConsole.OperatorServiceReference.OperatorEntity updatedEntity) {
+            return base.Channel.Save(updatedEntity);
+        }
+        
+        public OperatorConsole.OperatorServiceReference.DepartmentEntity[] FetchDepartment() {
+            return base.Channel.FetchDepartment();
+        }
+        
+        public int CreateDepartment(string departmentName) {
+            return base.Channel.CreateDepartment(departmentName);
+        }
+        
+        public bool RemoveDepartment(int departmentId) {
+            return base.Channel.RemoveDepartment(departmentId);
+        }
+        
+        public bool AddOperatorToDepartment(int departmentId, int operatorId) {
+            return base.Channel.AddOperatorToDepartment(departmentId, operatorId);
+        }
+        
+        public bool RemoveOperatorFromDepartment(int departmentId, int operatoriId) {
+            return base.Channel.RemoveOperatorFromDepartment(departmentId, operatoriId);
+        }
+        
+        public OperatorConsole.OperatorServiceReference.OperatorEntity[] GetOperator(int departmentId) {
+            return base.Channel.GetOperator(departmentId);
         }
     }
 }

@@ -94,5 +94,17 @@ namespace LiveChat.DAL
                     return true;
                 }, "Unable to remove the operator from the department.");
         }
+
+        public static List<Operator> FetchOperator(int departmentId)
+        {
+            return ExecuteQuery((dc) =>
+                {
+                    var ops = from dep in dc.DepartmentOperators
+                              where dep.DepartmentId == departmentId
+                              select dep.Operator;
+
+                    return ops.ToList();
+                }, "Unable to fetch for operator in department " + departmentId);
+        }
     }
 }

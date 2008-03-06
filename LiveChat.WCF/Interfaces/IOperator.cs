@@ -28,5 +28,22 @@ namespace LiveChat.WCF
         List<ChannelEntity> GetChatChannel(int operatorId);
         [OperationContract]
         List<DepartmentEntity> GetOnlineDepartment();
+        [OperationContract]
+        List<OperatorEntity> Fetch();
+        [OperationContract]
+        bool Save(OperatorEntity updatedEntity);
+        [OperationContract]
+        List<DepartmentEntity> FetchDepartment();
+        [OperationContract]
+        int CreateDepartment(string departmentName);
+        [OperationContract]
+        bool RemoveDepartment(int departmentId);
+        [OperationContract]
+        bool AddOperatorToDepartment(int departmentId, int operatorId);
+        [OperationContract]
+        bool RemoveOperatorFromDepartment(int departmentId, int operatoriId);
+        [OperationContract]
+        List<OperatorEntity> GetOperator(int departmentId);
+            
     }
 }

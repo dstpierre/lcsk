@@ -72,5 +72,45 @@ namespace LiveChat.WCF
         {
             return LiveChat.BusinessLogic.Operator.GetOnlineDepartment();
         }
+
+        public List<OperatorEntity> Fetch()
+        {
+            return LiveChat.BusinessLogic.Operator.Fetch();
+        }
+
+        public bool Save(OperatorEntity updatedEntity)
+        {
+            return LiveChat.BusinessLogic.Operator.Save(updatedEntity);
+        }
+
+        public List<DepartmentEntity> FetchDepartment()
+        {
+            return LiveChat.BusinessLogic.Operator.FetchDepartment();
+        }
+
+        public int CreateDepartment(string departmentName)
+        {
+            return LiveChat.BusinessLogic.Operator.CreateDepartment(departmentName);
+        }
+
+        public bool RemoveDepartment(int departmentId)
+        {
+            return LiveChat.BusinessLogic.Operator.RemoveDepartment(departmentId);
+        }
+
+        public bool AddOperatorToDepartment(int departmentId, int operatorId)
+        {
+            return LiveChat.BusinessLogic.Operator.AddOperatorToDepartment(departmentId, operatorId);
+        }
+
+        public bool RemoveOperatorFromDepartment(int departmentId, int operatorId)
+        {
+            return LiveChat.BusinessLogic.Operator.RemoveOperatorFromDepartment(departmentId, operatorId);
+        }
+
+        public List<OperatorEntity> GetOperator(int departmentId)
+        {
+            return LiveChat.BusinessLogic.Operator.GetOperator(departmentId);
+        }
     }
 }

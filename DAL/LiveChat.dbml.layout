@@ -73,7 +73,7 @@
         <classShapeMoniker Id="6d0b889b-3208-4859-b794-9b9e5471d673" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 4.62677124023438); (3.1875 : 4.62677124023438); (3.1875 : 5.56604248046875); (7.125 : 5.56604248046875); (7.125 : 6.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 4.62677124023438); (3.1875 : 4.62677124023438); (3.1875 : 5.56604248046875); (7.125 : 5.56604248046875); (7.125 : 6.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LiveChatDataContext/Operator/Operator_Channel" />
       <nodes>
         <classShapeMoniker Id="26d3667e-d79a-46e6-b7bc-c2f6b71bd239" />

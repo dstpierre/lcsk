@@ -57,7 +57,7 @@ namespace LiveChat.DAL
     #endregion
 		
 		public LiveChatDataContext() : 
-				base(global::LiveChat.DAL.Properties.Settings.Default.TestDBConnectionString, mappingSource)
+				base(global::LiveChat.DAL.Properties.Settings.Default.DBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

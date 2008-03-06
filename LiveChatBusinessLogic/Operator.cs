@@ -78,5 +78,45 @@ namespace LiveChat.BusinessLogic
         {
             return _provider.GetOnlineDepartment();
         }
+
+        public static List<OperatorEntity> Fetch()
+        {
+            return _provider.Fetch();
+        }
+
+        public static bool Save(OperatorEntity updatedEntity)
+        {
+            return _provider.Save(updatedEntity);
+        }
+
+        public static List<DepartmentEntity> FetchDepartment()
+        {
+            return _provider.FetchDepartment();
+        }
+
+        public static int CreateDepartment(string departmentName)
+        {
+            return _provider.CreateDepartment(departmentName);
+        }
+
+        public static bool RemoveDepartment(int departmentId)
+        {
+            return _provider.RemoveDepartment(departmentId);
+        }
+
+        public static bool AddOperatorToDepartment(int departmentId, int operatorId)
+        {
+            return _provider.AddOperatorToDepartment(departmentId, operatorId);
+        }
+
+        public static bool RemoveOperatorFromDepartment(int departmentId, int operatorId)
+        {
+            return _provider.RemoveOperatorFromDepartment(departmentId, operatorId);
+        }
+
+        public static List<OperatorEntity> GetOperator(int departmentId)
+        {
+            return _provider.GetOperator(departmentId);
+        }
     }
 }
