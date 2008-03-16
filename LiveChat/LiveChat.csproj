@@ -85,7 +85,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Services\RequestService.cs" />
     <Compile Include="testpage.aspx.cs">
       <DependentUpon>testpage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -113,6 +112,10 @@
     <Content Include="testpage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LiveChatBusinessLogic\LiveChatBusinessLogic.csproj">
+      <Project>{CB6D5B17-79D1-48FA-80FD-10AFFD1FC8B5}</Project>
+      <Name>LiveChatBusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LiveChatEntities\LiveChatEntities.csproj">
       <Project>{033DF257-5AB9-4CE1-A6E7-D658BB3DCFE0}</Project>
       <Name>LiveChatEntities</Name>

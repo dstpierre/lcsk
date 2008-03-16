@@ -63,6 +63,7 @@
     <Content Include="Chat.svc" />
     <Content Include="Operator.svc" />
     <Content Include="Web.config" />
+    <Content Include="WebRequest.svc" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chat.svc.cs">
@@ -70,10 +71,14 @@
     </Compile>
     <Compile Include="Interfaces\IChatService.cs" />
     <Compile Include="Interfaces\IOperator.cs" />
+    <Compile Include="Interfaces\IWebRequest.cs" />
     <Compile Include="Operator.svc.cs">
       <DependentUpon>Operator.svc</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebRequest.svc.cs">
+      <DependentUpon>WebRequest.svc</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LiveChatBusinessLogic\LiveChatBusinessLogic.csproj">

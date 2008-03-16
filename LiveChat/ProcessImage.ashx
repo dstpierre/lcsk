@@ -41,7 +41,7 @@ namespace LiveChat.WebSite
 			req.UserAgent = visitorUserAgent;
 			req.RequestedDate = DateTime.Now;
 
-			RequestService.LogRequest(req);
+			LiveChat.BusinessLogic.WebRequest.LogRequest(req);
 
 			// we get the status of the operators
 			imgName = "offline.jpg";
