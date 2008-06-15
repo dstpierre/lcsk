@@ -1,7 +1,0 @@
-F:\Projects\LiveChatStarterKit\LiveChatProviders\obj\Debug\ResolveAssemblyReference.cache
-F:\Projects\LiveChatStarterKit\LiveChatProviders\bin\Debug\LiveChat.Providers.dll
-F:\Projects\LiveChatStarterKit\LiveChatProviders\bin\Debug\LiveChat.Providers.pdb
-F:\Projects\LiveChatStarterKit\LiveChatProviders\bin\Debug\LiveChat.Entities.dll
-F:\Projects\LiveChatStarterKit\LiveChatProviders\bin\Debug\LiveChat.Entities.pdb
-F:\Projects\LiveChatStarterKit\LiveChatProviders\obj\Debug\LiveChat.Providers.dll
-F:\Projects\LiveChatStarterKit\LiveChatProviders\obj\Debug\LiveChat.Providers.pdb
