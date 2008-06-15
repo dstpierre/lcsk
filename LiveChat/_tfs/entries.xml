@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChat/" id="389567" changeset="28859" shadow="a1abe1b958ef4a6587c322da7d33ca02" />
+  <entry name="Common" kind="folder" id="398038" changeset="31050" shadow="90384570db3742938254ac899c6f6292" />
+  <entry name="database" kind="folder" id="398037" changeset="29507" shadow="bce79ae4b8e8476d85efb56d1db914f8" />
+  <entry name="default.aspx" kind="file" id="389499" changeset="31050" />
+  <entry name="default.aspx.cs" kind="file" id="389500" changeset="31375" />
+  <entry name="default.aspx.designer.cs" kind="file" id="389501" changeset="31050" />
+  <entry name="Images" kind="folder" id="418697" changeset="31050" shadow="daaeba2831504fc5827409a23f74de57" />
+  <entry name="LiveChat.csproj" kind="file" id="389502" changeset="31714" />
+  <entry name="LiveChat.csproj.user" kind="file" id="389503" changeset="28859" />
+  <entry name="LiveChat.csproj.vspscc" kind="file" id="393372" changeset="29507" />
+  <entry name="obj" kind="folder" id="389504" changeset="28859" shadow="2b83cffee83042e5a4ee1b371ccd1843" />
+  <entry name="ProcessImage.ashx" kind="file" id="389505" changeset="31714" />
+  <entry name="Properties" kind="folder" id="389569" changeset="28859" shadow="9efe36c15c8b4a27946657104c340718" />
+  <entry name="Service References" kind="folder" id="421800" changeset="31375" shadow="994fb6446e3f4e5a8e7e268fc0cc07ea" />
+  <entry name="Services" kind="folder" id="389570" changeset="28859" shadow="7933edb5577b4570becff239b52e3cbc" />
+  <entry name="testpage.aspx" kind="file" id="415995" changeset="30888" />
+  <entry name="testpage.aspx.cs" kind="file" id="415993" changeset="30891" />
+  <entry name="testpage.aspx.designer.cs" kind="file" id="415994" changeset="30888" />
+  <entry name="Web.config" kind="file" id="389506" changeset="31375" />
+  <entry name="WebServices" kind="folder" id="389571" changeset="28859" shadow="0ad1d23368364be683b483ce7ecf5b53" />
+</entries>

@@ -1,0 +1,9 @@
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\bin\Debug\LiveChatBusinessLogic.dll
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\bin\Debug\LiveChatBusinessLogic.pdb
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\bin\Debug\LiveChat.Entities.dll
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\bin\Debug\LiveChat.Providers.dll
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\bin\Debug\LiveChat.Entities.pdb
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\bin\Debug\LiveChat.Providers.pdb
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\obj\Debug\LiveChatBusinessLogic.dll
+D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\obj\Debug\LiveChatBusinessLogic.pdb

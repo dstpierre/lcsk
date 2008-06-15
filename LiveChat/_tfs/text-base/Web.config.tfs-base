@@ -1,0 +1,169 @@
+﻿<?xml version="1.0"?>
+<configuration>
+	<configSections>
+		<sectionGroup name="system.web.extensions" type="System.Web.Configuration.SystemWebExtensionsSectionGroup, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
+			<sectionGroup name="scripting" type="System.Web.Configuration.ScriptingSectionGroup, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
+				<section name="scriptResourceHandler" type="System.Web.Configuration.ScriptingScriptResourceHandlerSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/>
+				<sectionGroup name="webServices" type="System.Web.Configuration.ScriptingWebServicesSectionGroup, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
+					<section name="jsonSerialization" type="System.Web.Configuration.ScriptingJsonSerializationSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="Everywhere"/>
+					<section name="profileService" type="System.Web.Configuration.ScriptingProfileServiceSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/>
+					<section name="authenticationService" type="System.Web.Configuration.ScriptingAuthenticationServiceSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/>
+					<section name="roleService" type="System.Web.Configuration.ScriptingRoleServiceSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/>
+				</sectionGroup>
+			</sectionGroup>
+		</sectionGroup>
+    <section name="ChatProvider" type="LiveChat.Providers.ChatServiceSection" />
+    <section name="OperatorProvider" type="LiveChat.Providers.OperatorServiceSection" />
+    <section name="RequestProvider" type="LiveChat.Providers.RequestServiceSection" />
+	</configSections>
+
+  <ChatProvider default="SqlProvider">
+    <providers>
+      <add name="SqlProvider" type="LiveChat.SQLProvider.SQLChatProvider, LiveChat.SQLProvider"/>
+    </providers>
+  </ChatProvider>
+
+  <OperatorProvider default="SqlProvider">
+    <providers>
+      <add name="SqlProvider" type="LiveChat.SQLProvider.SQLOperatorProvider, LiveChat.SQLProvider"/>
+    </providers>
+  </OperatorProvider>
+
+  <RequestProvider default="SqlProvider">
+    <providers>
+      <add name="SqlProvider" type="LiveChat.SQLProvider.SQLRequestProvider, LiveChat.SQLProvider"/>
+    </providers>
+  </RequestProvider>
+  
+	<appSettings/>
+    <connectionStrings>
+        <add name="LiveChat.DAL.Properties.Settings.TestDBConnectionString" connectionString="Data Source=.\sqlexpress;Initial Catalog=LiveChat;Integrated Security=True;Pooling=False"
+        providerName="System.Data.SqlClient" />
+    </connectionStrings>
+	<system.web>
+		<!-- 
+            Set compilation debug="true" to insert debugging 
+            symbols into the compiled page. Because this 
+            affects performance, set this value to true only 
+            during development.
+        -->
+		<compilation debug="true">
+			<assemblies>
+				<add assembly="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+				<add assembly="System.Data.DataSetExtensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+				<add assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+				<add assembly="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+			</assemblies>
+		</compilation>
+		<!--
+            The <authentication> section enables configuration 
+            of the security authentication mode used by 
+            ASP.NET to identify an incoming user. 
+        -->
+		<authentication mode="Windows"/>
+		<!--
+            The <customErrors> section enables configuration 
+            of what to do if/when an unhandled error occurs 
+            during the execution of a request. Specifically, 
+            it enables developers to configure html error pages 
+            to be displayed in place of a error stack trace.
+
+        <customErrors mode="RemoteOnly" defaultRedirect="GenericErrorPage.htm">
+            <error statusCode="403" redirect="NoAccess.htm" />
+            <error statusCode="404" redirect="FileNotFound.htm" />
+        </customErrors>
+        -->
+		<pages>
+			<controls>
+				<add tagPrefix="asp" namespace="System.Web.UI" assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+				<add tagPrefix="asp" namespace="System.Web.UI.WebControls" assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+			</controls>
+		</pages>
+		<httpHandlers>
+			<remove verb="*" path="*.asmx"/>
+			<add verb="*" path="*.asmx" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+			<add verb="*" path="*_AppService.axd" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+			<add verb="GET,HEAD" path="ScriptResource.axd" type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" validate="false"/>
+		</httpHandlers>
+		<httpModules>
+			<add name="ScriptModule" type="System.Web.Handlers.ScriptModule, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+		</httpModules>
+	</system.web>
+	<system.codedom>
+		<compilers>
+			<compiler language="c#;cs;csharp" extension=".cs" compilerOptions="/warnaserror-" warningLevel="4" type="Microsoft.CSharp.CSharpCodeProvider, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+				<providerOption name="CompilerVersion" value="v3.5"/>
+			</compiler>
+		</compilers>
+	</system.codedom>
+ <!-- 
+        The system.webServer section is required for running ASP.NET AJAX under Internet
+        Information Services 7.0.  It is not necessary for previous version of IIS.
+    -->
+	<system.webServer>
+		<validation validateIntegratedModeConfiguration="false"/>
+		<modules>
+			<add name="ScriptModule" preCondition="integratedMode" type="System.Web.Handlers.ScriptModule, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+		</modules>
+		<handlers>
+			<remove name="WebServiceHandlerFactory-Integrated"/>
+			<add name="ScriptHandlerFactory" verb="*" path="*.asmx" preCondition="integratedMode" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+			<add name="ScriptHandlerFactoryAppServices" verb="*" path="*_AppService.axd" preCondition="integratedMode" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+			<add name="ScriptResource" preCondition="integratedMode" verb="GET,HEAD" path="ScriptResource.axd" type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+		</handlers>
+	</system.webServer>
+ <system.serviceModel>
+  <bindings>
+   <wsHttpBinding>
+    <binding name="WSHttpBinding_IChatService" closeTimeout="00:01:00"
+     openTimeout="00:01:00" receiveTimeout="00:10:00" sendTimeout="00:01:00"
+     bypassProxyOnLocal="false" transactionFlow="false" hostNameComparisonMode="StrongWildcard"
+     maxBufferPoolSize="524288" maxReceivedMessageSize="65536" messageEncoding="Text"
+     textEncoding="utf-8" useDefaultWebProxy="true" allowCookies="false">
+     <readerQuotas maxDepth="32" maxStringContentLength="8192" maxArrayLength="16384"
+      maxBytesPerRead="4096" maxNameTableCharCount="16384" />
+     <reliableSession ordered="true" inactivityTimeout="00:10:00"
+      enabled="false" />
+     <security mode="Message">
+      <transport clientCredentialType="Windows" proxyCredentialType="None"
+       realm="" />
+      <message clientCredentialType="Windows" negotiateServiceCredential="true"
+       algorithmSuite="Default" establishSecurityContext="true" />
+     </security>
+    </binding>
+    <binding name="WSHttpBinding_IOperator" closeTimeout="00:01:00"
+     openTimeout="00:01:00" receiveTimeout="00:10:00" sendTimeout="00:01:00"
+     bypassProxyOnLocal="false" transactionFlow="false" hostNameComparisonMode="StrongWildcard"
+     maxBufferPoolSize="524288" maxReceivedMessageSize="65536" messageEncoding="Text"
+     textEncoding="utf-8" useDefaultWebProxy="true" allowCookies="false">
+     <readerQuotas maxDepth="32" maxStringContentLength="8192" maxArrayLength="16384"
+      maxBytesPerRead="4096" maxNameTableCharCount="16384" />
+     <reliableSession ordered="true" inactivityTimeout="00:10:00"
+      enabled="false" />
+     <security mode="Message">
+      <transport clientCredentialType="Windows" proxyCredentialType="None"
+       realm="" />
+      <message clientCredentialType="Windows" negotiateServiceCredential="true"
+       algorithmSuite="Default" establishSecurityContext="true" />
+     </security>
+    </binding>
+   </wsHttpBinding>
+  </bindings>
+  <client>
+   <endpoint address="http://localhost:49611/Chat.svc" binding="wsHttpBinding"
+    bindingConfiguration="WSHttpBinding_IChatService" contract="ChatServiceReference.IChatService"
+    name="WSHttpBinding_IChatService">
+    <identity>
+     <dns value="localhost" />
+    </identity>
+   </endpoint>
+   <endpoint address="http://localhost:49611/Operator.svc" binding="wsHttpBinding"
+    bindingConfiguration="WSHttpBinding_IOperator" contract="OperatorServiceReference.IOperator"
+    name="WSHttpBinding_IOperator">
+    <identity>
+     <dns value="localhost" />
+    </identity>
+   </endpoint>
+  </client>
+ </system.serviceModel>
+</configuration>

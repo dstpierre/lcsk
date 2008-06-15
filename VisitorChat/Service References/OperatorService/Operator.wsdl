@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:tns="http://tempuri.org/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="Operator" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:49812/Operator.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:49812/Operator.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:49812/Operator.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LiveChat.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IOperator_GetOnlineOperator_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineOperator" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_GetOnlineOperator_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineOperatorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_IsOperatorOnline_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsOperatorOnline" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_IsOperatorOnline_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsOperatorOnlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_UpdateStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStatus" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_UpdateStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_LogIn_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogIn" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_LogIn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogInResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_Remove_InputMessage">
+    <wsdl:part name="parameters" element="tns:Remove" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_Remove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_GetChatChannel_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetChatChannel" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_GetChatChannel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetChatChannelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_GetOnlineDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_GetOnlineDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_Fetch_InputMessage">
+    <wsdl:part name="parameters" element="tns:Fetch" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_Fetch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_Save_InputMessage">
+    <wsdl:part name="parameters" element="tns:Save" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_Save_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_FetchDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_FetchDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_CreateDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_CreateDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_RemoveDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_RemoveDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_AddOperatorToDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOperatorToDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_AddOperatorToDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOperatorToDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_RemoveOperatorFromDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveOperatorFromDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_RemoveOperatorFromDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveOperatorFromDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_GetOperator_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOperator" />
+  </wsdl:message>
+  <wsdl:message name="IOperator_GetOperator_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOperatorResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IOperator">
+    <wsdl:operation name="GetOnlineOperator">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/GetOnlineOperator" message="tns:IOperator_GetOnlineOperator_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/GetOnlineOperatorResponse" message="tns:IOperator_GetOnlineOperator_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsOperatorOnline">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/IsOperatorOnline" message="tns:IOperator_IsOperatorOnline_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/IsOperatorOnlineResponse" message="tns:IOperator_IsOperatorOnline_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/Create" message="tns:IOperator_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/CreateResponse" message="tns:IOperator_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/UpdateStatus" message="tns:IOperator_UpdateStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/UpdateStatusResponse" message="tns:IOperator_UpdateStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogIn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/LogIn" message="tns:IOperator_LogIn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/LogInResponse" message="tns:IOperator_LogIn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/Remove" message="tns:IOperator_Remove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/RemoveResponse" message="tns:IOperator_Remove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChatChannel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/GetChatChannel" message="tns:IOperator_GetChatChannel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/GetChatChannelResponse" message="tns:IOperator_GetChatChannel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlineDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/GetOnlineDepartment" message="tns:IOperator_GetOnlineDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/GetOnlineDepartmentResponse" message="tns:IOperator_GetOnlineDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Fetch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/Fetch" message="tns:IOperator_Fetch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/FetchResponse" message="tns:IOperator_Fetch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Save">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/Save" message="tns:IOperator_Save_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/SaveResponse" message="tns:IOperator_Save_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/FetchDepartment" message="tns:IOperator_FetchDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/FetchDepartmentResponse" message="tns:IOperator_FetchDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/CreateDepartment" message="tns:IOperator_CreateDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/CreateDepartmentResponse" message="tns:IOperator_CreateDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/RemoveDepartment" message="tns:IOperator_RemoveDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/RemoveDepartmentResponse" message="tns:IOperator_RemoveDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOperatorToDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/AddOperatorToDepartment" message="tns:IOperator_AddOperatorToDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/AddOperatorToDepartmentResponse" message="tns:IOperator_AddOperatorToDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveOperatorFromDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/RemoveOperatorFromDepartment" message="tns:IOperator_RemoveOperatorFromDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/RemoveOperatorFromDepartmentResponse" message="tns:IOperator_RemoveOperatorFromDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOperator">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOperator/GetOperator" message="tns:IOperator_GetOperator_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOperator/GetOperatorResponse" message="tns:IOperator_GetOperator_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IOperator" type="tns:IOperator">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOnlineOperator">
+      <soap:operation soapAction="http://tempuri.org/IOperator/GetOnlineOperator" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsOperatorOnline">
+      <soap:operation soapAction="http://tempuri.org/IOperator/IsOperatorOnline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/IOperator/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <soap:operation soapAction="http://tempuri.org/IOperator/UpdateStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogIn">
+      <soap:operation soapAction="http://tempuri.org/IOperator/LogIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap:operation soapAction="http://tempuri.org/IOperator/Remove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChatChannel">
+      <soap:operation soapAction="http://tempuri.org/IOperator/GetChatChannel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlineDepartment">
+      <soap:operation soapAction="http://tempuri.org/IOperator/GetOnlineDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Fetch">
+      <soap:operation soapAction="http://tempuri.org/IOperator/Fetch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Save">
+      <soap:operation soapAction="http://tempuri.org/IOperator/Save" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDepartment">
+      <soap:operation soapAction="http://tempuri.org/IOperator/FetchDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDepartment">
+      <soap:operation soapAction="http://tempuri.org/IOperator/CreateDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDepartment">
+      <soap:operation soapAction="http://tempuri.org/IOperator/RemoveDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOperatorToDepartment">
+      <soap:operation soapAction="http://tempuri.org/IOperator/AddOperatorToDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveOperatorFromDepartment">
+      <soap:operation soapAction="http://tempuri.org/IOperator/RemoveOperatorFromDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOperator">
+      <soap:operation soapAction="http://tempuri.org/IOperator/GetOperator" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Operator">
+    <wsdl:port name="BasicHttpBinding_IOperator" binding="tns:BasicHttpBinding_IOperator">
+      <soap:address location="http://localhost:49812/Operator.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

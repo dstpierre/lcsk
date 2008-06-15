@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChatBusinessLogic/" id="421793" changeset="31375" shadow="48dde61b2e414d3989d6202b9cfd99ef" />
+  <entry name="Chat.cs" kind="file" id="419213" changeset="31375" />
+  <entry name="LiveChatBusinessLogic.csproj" kind="file" id="419215" changeset="31714" />
+  <entry name="LiveChatBusinessLogic.csproj.vspscc" kind="file" id="419214" changeset="31375" />
+  <entry name="Operator.cs" kind="file" id="421780" changeset="31431" />
+  <entry name="Properties" kind="folder" id="421799" changeset="31375" shadow="25b203aec5e34710bb4f81383e39581b" />
+  <entry name="WebRequest.cs" kind="file" id="423598" changeset="31714" />
+</entries>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/DAL/bin/Debug/" id="389564" changeset="28859" shadow="4a54fa00d5f74ed8b1a59b8366367671" />
+  <entry name="LiveChat.DAL.dll.config" kind="file" id="389494" changeset="28859" />
+</entries>

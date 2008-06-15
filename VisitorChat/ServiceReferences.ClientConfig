@@ -1,0 +1,24 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_IOperator" maxBufferSize="65536"
+                    maxReceivedMessageSize="65536">
+                    <security mode="None" />
+                </binding>
+                <binding name="BasicHttpBinding_IChatService" maxBufferSize="65536"
+                    maxReceivedMessageSize="65536">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:3210/WebServices/Operator.svc" binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_IOperator" contract="LiveChatStarterKit.VisitorChat.OperatorService.IOperator"
+                name="BasicHttpBinding_IOperator" />
+            <endpoint address="http://localhost:3210/WebServices/Chat.svc" binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_IChatService" contract="LiveChatStarterKit.VisitorChat.ChatService.IChatService"
+                name="BasicHttpBinding_IChatService" />
+        </client>
+    </system.serviceModel>
+</configuration>

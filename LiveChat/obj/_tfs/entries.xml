@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChat/obj/" id="389504" changeset="28859" shadow="2b83cffee83042e5a4ee1b371ccd1843" />
+  <entry name="Debug" kind="folder" id="389568" changeset="28859" shadow="7859c5c1bd0b4a99a24945f6cadb1c41" />
+</entries>

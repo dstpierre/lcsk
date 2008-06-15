@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/DAL/" id="389563" changeset="28859" shadow="ad8b310b234e4bc79b01b9888a35b88b" />
+  <entry name="app.config" kind="file" id="389479" changeset="31431" />
+  <entry name="bin" kind="folder" id="389480" changeset="28859" shadow="1b39188efdaa47dfb3c05e0f866fe854" />
+  <entry name="Channels.cs" kind="file" id="389481" changeset="28859" />
+  <entry name="ChatInvitations.cs" kind="file" id="389482" changeset="28859" />
+  <entry name="ChatMessages.cs" kind="file" id="389483" changeset="28859" />
+  <entry name="ChatRequests.cs" kind="file" id="389484" changeset="28859" />
+  <entry name="DAL.csproj" kind="file" id="389485" changeset="29507" />
+  <entry name="DAL.csproj.vspscc" kind="file" id="393371" changeset="29507" />
+  <entry name="Departments.cs" kind="file" id="389486" changeset="31431" />
+  <entry name="LiveChat.dbml" kind="file" id="389487" changeset="31431" />
+  <entry name="LiveChat.dbml.layout" kind="file" id="389488" changeset="31431" />
+  <entry name="LiveChat.designer.cs" kind="file" id="389489" changeset="31431" />
+  <entry name="Manager.cs" kind="file" id="389490" changeset="31431" />
+  <entry name="obj" kind="folder" id="389491" changeset="28859" shadow="6c44822282394ca3bc16cfc977c4bf13" />
+  <entry name="Operators.cs" kind="file" id="389492" changeset="31431" />
+  <entry name="Properties" kind="folder" id="389566" changeset="28859" shadow="9e0050b096384d19ae6d40de8a1894df" />
+  <entry name="VisitorHistories.cs" kind="file" id="389493" changeset="28859" />
+</entries>

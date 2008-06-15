@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChat.WCF/Interfaces/" id="421794" changeset="31375" shadow="cdd8dd98f9f5498a9128b2f2da14e2b9" />
+  <entry name="IChatService.cs" kind="file" id="416076" changeset="31375" />
+  <entry name="IOperator.cs" kind="file" id="416083" changeset="31431" />
+  <entry name="IWebRequest.cs" kind="file" id="423599" changeset="31714" />
+</entries>

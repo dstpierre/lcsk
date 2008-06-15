@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChatEntities/obj/Debug/" id="389573" changeset="28859" shadow="d157918302c54cb0b8d456ef6234414c" />
+  <entry name="LiveChatEntities.csproj.FileListAbsolute.txt" kind="file" id="389525" changeset="28859" />
+  <entry name="TempPE" kind="folder" id="389526" changeset="28859" shadow="283e04b209b340f295ffb37b11105b54" />
+</entries>

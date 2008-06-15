@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/" id="223269" changeset="15564" shadow="5ec3651dc10a4829be3226f9985ca8f0" />
+  <entry name=".tfs-ignore" kind="file" id="0" changeset="0" status="add" />
+  <entry name="OperatorConsole" kind="folder" id="389581" changeset="28859" shadow="2d1415f900f44cf98bb81bcff9b9cab9" status="delete" />
+</entries>

@@ -1,0 +1,12 @@
+D:\Projects\LiveChatStarterKit\VisitorChat\Bin\Debug\VisitorChat.dll
+D:\Projects\LiveChatStarterKit\VisitorChat\Bin\Debug\VisitorChat.pdb
+D:\Projects\LiveChatStarterKit\VisitorChat\Bin\Debug\AppManifest.xaml
+D:\Projects\LiveChatStarterKit\VisitorChat\Bin\Debug\VisitorChat.xap
+D:\Projects\LiveChatStarterKit\VisitorChat\Bin\Debug\TestPage.html
+D:\Projects\LiveChatStarterKit\VisitorChat\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\LiveChatStarterKit\VisitorChat\obj\Debug\App.g.cs
+D:\Projects\LiveChatStarterKit\VisitorChat\obj\Debug\Chat.g.cs
+D:\Projects\LiveChatStarterKit\VisitorChat\obj\Debug\VisitorChat.g.resources
+D:\Projects\LiveChatStarterKit\VisitorChat\obj\Debug\VisitorChat.dll
+D:\Projects\LiveChatStarterKit\VisitorChat\obj\Debug\VisitorChat.pdb
+D:\Projects\LiveChatStarterKit\VisitorChat\obj\Debug\XapCacheFile.xml

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChatProviders/" id="389575" changeset="28859" shadow="f9dca5f16673498096b99935c8f3461d" />
+  <entry name="bin" kind="folder" id="389528" changeset="28859" shadow="d23dccdc547947bd822fa4a6d2ded5cf" />
+  <entry name="Chat" kind="folder" id="415996" changeset="30888" shadow="d1d849d7fadf4d3492a2b6bba188ca43" />
+  <entry name="LiveChatProviders.csproj" kind="file" id="389531" changeset="30891" />
+  <entry name="LiveChatProviders.csproj.vspscc" kind="file" id="393374" changeset="29507" />
+  <entry name="obj" kind="folder" id="389532" changeset="28859" shadow="3b92965468244afebb68469af80ef124" />
+  <entry name="Operator" kind="folder" id="415999" changeset="30889" shadow="d8ffae5d7c2e4c909a4a003e820641c0" />
+  <entry name="Properties" kind="folder" id="389577" changeset="28859" shadow="b079f1354c7941938c9bf31479d87cdf" />
+  <entry name="Request" kind="folder" id="416018" changeset="30891" shadow="31d4078161bd4ea0b0c21e0fa74c63ff" />
+</entries>
