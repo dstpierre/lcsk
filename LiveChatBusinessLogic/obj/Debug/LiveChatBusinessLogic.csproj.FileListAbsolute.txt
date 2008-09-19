@@ -7,3 +7,12 @@ D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\bin\Debug\LiveChat.Provider
 D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\obj\Debug\ResolveAssemblyReference.cache
 D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\obj\Debug\LiveChatBusinessLogic.dll
 D:\Projects\LiveChatStarterKit\LiveChatBusinessLogic\obj\Debug\LiveChatBusinessLogic.pdb
+C:\zlcsk\LiveChatBusinessLogic\bin\Debug\LiveChatBusinessLogic.dll
+C:\zlcsk\LiveChatBusinessLogic\bin\Debug\LiveChatBusinessLogic.pdb
+C:\zlcsk\LiveChatBusinessLogic\bin\Debug\LiveChat.Entities.dll
+C:\zlcsk\LiveChatBusinessLogic\bin\Debug\LiveChat.Providers.dll
+C:\zlcsk\LiveChatBusinessLogic\bin\Debug\LiveChat.Entities.pdb
+C:\zlcsk\LiveChatBusinessLogic\bin\Debug\LiveChat.Providers.pdb
+C:\zlcsk\LiveChatBusinessLogic\obj\Debug\ResolveAssemblyReference.cache
+C:\zlcsk\LiveChatBusinessLogic\obj\Debug\LiveChatBusinessLogic.dll
+C:\zlcsk\LiveChatBusinessLogic\obj\Debug\LiveChatBusinessLogic.pdb

@@ -72,7 +72,24 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chat.aspx.cs">
+      <DependentUpon>Chat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Chat.aspx.designer.cs">
+      <DependentUpon>Chat.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Common\Config.cs" />
+    <Compile Include="Demo.aspx.cs">
+      <DependentUpon>Demo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Demo.aspx.designer.cs">
+      <DependentUpon>Demo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessImage.ashx.cs">
+      <DependentUpon>ProcessImage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebServices\Chat.svc.cs">
       <DependentUpon>Chat.svc</DependentUpon>
@@ -88,10 +105,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Chat.aspx" />
+    <Content Include="Demo.aspx" />
     <Content Include="Images\livechat_logo.jpg" />
-    <Content Include="ProcessImage.ashx" />
-    <Content Include="VisitorChatTestPage.aspx" />
-    <Content Include="VisitorChatTestPage.html" />
+    <Content Include="SendMsg.js" />
     <Content Include="WebServices\Chat.svc" />
     <Content Include="WebServices\Operator.svc" />
     <Content Include="WebServices\WebRequest.svc" />
@@ -119,10 +136,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ProcessImage.ashx" />
     <None Include="Properties\DataSources\LiveChat.Entities.ChannelEntity.datasource" />
     <None Include="Properties\DataSources\LiveChat.Entities.DepartmentEntity.datasource" />
     <None Include="Properties\DataSources\LiveChat.Entities.MessageEntity.datasource" />
     <None Include="Properties\DataSources\LiveChat.Entities.OperatorEntity.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Operator\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
