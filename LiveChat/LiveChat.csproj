@@ -88,7 +88,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientBin\VisitorChat.xap" />
     <Content Include="Images\livechat_logo.jpg" />
     <Content Include="ProcessImage.ashx" />
     <Content Include="VisitorChatTestPage.aspx" />
