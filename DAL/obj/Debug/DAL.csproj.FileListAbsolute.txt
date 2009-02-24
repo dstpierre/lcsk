@@ -22,3 +22,9 @@ C:\zlcsk\DAL\bin\Debug\LiveChat.DAL.pdb
 C:\zlcsk\DAL\obj\Debug\ResolveAssemblyReference.cache
 C:\zlcsk\DAL\obj\Debug\LiveChat.DAL.dll
 C:\zlcsk\DAL\obj\Debug\LiveChat.DAL.pdb
+C:\Projects\LiveChatStarterKit\DAL\bin\Debug\LiveChat.DAL.dll.config
+C:\Projects\LiveChatStarterKit\DAL\bin\Debug\LiveChat.DAL.dll
+C:\Projects\LiveChatStarterKit\DAL\bin\Debug\LiveChat.DAL.pdb
+C:\Projects\LiveChatStarterKit\DAL\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\LiveChatStarterKit\DAL\obj\Debug\LiveChat.DAL.dll
+C:\Projects\LiveChatStarterKit\DAL\obj\Debug\LiveChat.DAL.pdb
