@@ -18,3 +18,8 @@ C:\Projects\LiveChatStarterKit\LiveChatEntities\bin\Debug\LiveChat.Entities.pdb
 C:\Projects\LiveChatStarterKit\LiveChatEntities\obj\Debug\ResolveAssemblyReference.cache
 C:\Projects\LiveChatStarterKit\LiveChatEntities\obj\Debug\LiveChat.Entities.dll
 C:\Projects\LiveChatStarterKit\LiveChatEntities\obj\Debug\LiveChat.Entities.pdb
+C:\Projects\LCSK\LiveChatEntities\bin\Debug\LiveChat.Entities.dll
+C:\Projects\LCSK\LiveChatEntities\bin\Debug\LiveChat.Entities.pdb
+C:\Projects\LCSK\LiveChatEntities\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\LCSK\LiveChatEntities\obj\Debug\LiveChat.Entities.dll
+C:\Projects\LCSK\LiveChatEntities\obj\Debug\LiveChat.Entities.pdb

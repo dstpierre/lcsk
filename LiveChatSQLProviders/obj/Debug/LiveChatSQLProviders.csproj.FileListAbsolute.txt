@@ -42,3 +42,14 @@ C:\Projects\LiveChatStarterKit\LiveChatSQLProviders\bin\Debug\LiveChat.Providers
 C:\Projects\LiveChatStarterKit\LiveChatSQLProviders\obj\Debug\ResolveAssemblyReference.cache
 C:\Projects\LiveChatStarterKit\LiveChatSQLProviders\obj\Debug\LiveChat.SQLProvider.dll
 C:\Projects\LiveChatStarterKit\LiveChatSQLProviders\obj\Debug\LiveChat.SQLProvider.pdb
+C:\Projects\LCSK\LiveChatSQLProviders\bin\Debug\LiveChat.SQLProvider.dll
+C:\Projects\LCSK\LiveChatSQLProviders\bin\Debug\LiveChat.SQLProvider.pdb
+C:\Projects\LCSK\LiveChatSQLProviders\bin\Debug\LiveChat.DAL.dll
+C:\Projects\LCSK\LiveChatSQLProviders\bin\Debug\LiveChat.Entities.dll
+C:\Projects\LCSK\LiveChatSQLProviders\bin\Debug\LiveChat.Providers.dll
+C:\Projects\LCSK\LiveChatSQLProviders\bin\Debug\LiveChat.Entities.pdb
+C:\Projects\LCSK\LiveChatSQLProviders\bin\Debug\LiveChat.DAL.pdb
+C:\Projects\LCSK\LiveChatSQLProviders\bin\Debug\LiveChat.Providers.pdb
+C:\Projects\LCSK\LiveChatSQLProviders\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\LCSK\LiveChatSQLProviders\obj\Debug\LiveChat.SQLProvider.dll
+C:\Projects\LCSK\LiveChatSQLProviders\obj\Debug\LiveChat.SQLProvider.pdb

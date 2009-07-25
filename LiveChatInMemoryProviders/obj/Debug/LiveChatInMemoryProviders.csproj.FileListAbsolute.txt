@@ -25,3 +25,12 @@ C:\Projects\LiveChatStarterKit\LiveChatInMemoryProviders\bin\Debug\LiveChat.Prov
 C:\Projects\LiveChatStarterKit\LiveChatInMemoryProviders\obj\Debug\ResolveAssemblyReference.cache
 C:\Projects\LiveChatStarterKit\LiveChatInMemoryProviders\obj\Debug\LiveChat.InMemoryProvider.dll
 C:\Projects\LiveChatStarterKit\LiveChatInMemoryProviders\obj\Debug\LiveChat.InMemoryProvider.pdb
+C:\Projects\LCSK\LiveChatInMemoryProviders\bin\Debug\LiveChat.InMemoryProvider.dll
+C:\Projects\LCSK\LiveChatInMemoryProviders\bin\Debug\LiveChat.InMemoryProvider.pdb
+C:\Projects\LCSK\LiveChatInMemoryProviders\bin\Debug\LiveChat.Entities.dll
+C:\Projects\LCSK\LiveChatInMemoryProviders\bin\Debug\LiveChat.Providers.dll
+C:\Projects\LCSK\LiveChatInMemoryProviders\bin\Debug\LiveChat.Entities.pdb
+C:\Projects\LCSK\LiveChatInMemoryProviders\bin\Debug\LiveChat.Providers.pdb
+C:\Projects\LCSK\LiveChatInMemoryProviders\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\LCSK\LiveChatInMemoryProviders\obj\Debug\LiveChat.InMemoryProvider.dll
+C:\Projects\LCSK\LiveChatInMemoryProviders\obj\Debug\LiveChat.InMemoryProvider.pdb
