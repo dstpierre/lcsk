@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OperatorConsole.OperatorServiceReference;
+using OperatorConsole.OperatorService;
 
 namespace OperatorConsole
 {
@@ -38,5 +38,10 @@ namespace OperatorConsole
 
             MessageBox.Show("Invalid operator name / password", "Login failed", MessageBoxButtons.OK);
         }
+
+		private void lnkConfig_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+
+		}
     }
 }

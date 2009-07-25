@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OperatorConsole.OperatorServiceReference;
-using OperatorConsole.ChatServiceReference;
+using OperatorConsole.OperatorService;
+using OperatorConsole.ChatService;
 
 namespace OperatorConsole
 {
@@ -42,12 +42,14 @@ namespace OperatorConsole
 
         private void Console_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Program.MyOperator.IsOnline &&
-                MessageBox.Show("Are you sure you want to close the application?\r\n\r\nYour status will be changed to off line.",
-                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                e.Cancel = true;
+			if (Program.MyOperator != null && Program.MyOperator.IsOnline &&
+				MessageBox.Show("Are you sure you want to close the application?\r\n\r\nYour status will be changed to off line.",
+				"Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+			{
+				e.Cancel = true;
 
-            opSvc.UpdateStatus(Program.MyOperator.EntityId, false);
+				opSvc.UpdateStatus(Program.MyOperator.EntityId, false);
+			}
         }
 
         private void Console_Activated(object sender, EventArgs e)

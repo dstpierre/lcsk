@@ -127,6 +127,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Chat.aspx" />
+    <Content Include="Images\offline.jpg" />
+    <Content Include="Images\online.jpg" />
     <Content Include="ProcessImage.ashx" />
     <Content Include="SendMsg.js" />
     <None Include="Properties\DataSources\LiveChat.Entities.ChannelEntity.datasource" />

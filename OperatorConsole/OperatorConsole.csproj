@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{61783926-DD78-4915-9787-0E208F80408E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -12,10 +12,14 @@
     <AssemblyName>OperatorConsole</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,19 +129,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\OperatorServiceReference\Operator.wsdl" />
-    <None Include="Service References\OperatorServiceReference\Operator.xsd" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Service References\ChatServiceReference\Reference.cs">
+    <Compile Include="Service References\ChatService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\OperatorServiceReference\Reference.cs">
+    <Compile Include="Service References\OperatorService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -147,53 +149,61 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ChatServiceReference\" />
-    <WCFMetadataStorage Include="Service References\OperatorServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\OperatorServiceReference\Operator.disco" />
-    <None Include="Service References\OperatorServiceReference\Operator1.xsd" />
-    <None Include="Service References\OperatorServiceReference\Operator2.xsd" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\OperatorServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ChatServiceReference\Chat.xsd" />
-    <None Include="Service References\ChatServiceReference\Chat1.xsd" />
-    <None Include="Service References\ChatServiceReference\Chat2.xsd" />
-    <None Include="Service References\OperatorServiceReference\OperatorConsole.OperatorServiceReference.ChannelEntity.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\OperatorServiceReference\OperatorConsole.OperatorServiceReference.DepartmentEntity.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\OperatorServiceReference\OperatorConsole.OperatorServiceReference.OperatorEntity.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\OperatorServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ChatServiceReference\Chat.disco" />
-    <None Include="Service References\ChatServiceReference\Chat.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ChatServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ChatServiceReference\OperatorConsole.ChatServiceReference.MessageEntity.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ChatServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\livechat_logo.jpg" />
+    <None Include="Service References\OperatorService\Operator.xsd" />
+    <None Include="Service References\OperatorService\Operator1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ChatService\" />
+    <WCFMetadataStorage Include="Service References\OperatorService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OperatorService\Operator.disco" />
+    <None Include="Service References\OperatorService\Operator.wsdl" />
+    <None Include="Service References\OperatorService\Operator2.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OperatorService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OperatorService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ChatService\Chat.xsd" />
+    <None Include="Service References\OperatorService\OperatorConsole.OperatorService.ChannelEntity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OperatorService\OperatorConsole.OperatorService.DepartmentEntity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OperatorService\OperatorConsole.OperatorService.OperatorEntity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\OperatorService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ChatService\Chat.disco" />
+    <None Include="Service References\ChatService\Chat.wsdl" />
+    <None Include="Service References\ChatService\Chat1.xsd" />
+    <None Include="Service References\ChatService\Chat2.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ChatService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ChatService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ChatService\OperatorConsole.ChatService.MessageEntity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ChatService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

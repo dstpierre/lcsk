@@ -30,6 +30,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InMemory", "InMemory", "{6C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChat", "LiveChat\LiveChat.csproj", "{9CE708AE-C565-4117-8C25-4A9945A9209E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperatorConsole", "OperatorConsole\OperatorConsole.csproj", "{61783926-DD78-4915-9787-0E208F80408E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9CE708AE-C565-4117-8C25-4A9945A9209E} = {9CE708AE-C565-4117-8C25-4A9945A9209E}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +69,10 @@ Global
 		{9CE708AE-C565-4117-8C25-4A9945A9209E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CE708AE-C565-4117-8C25-4A9945A9209E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CE708AE-C565-4117-8C25-4A9945A9209E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61783926-DD78-4915-9787-0E208F80408E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61783926-DD78-4915-9787-0E208F80408E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61783926-DD78-4915-9787-0E208F80408E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61783926-DD78-4915-9787-0E208F80408E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
