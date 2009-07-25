@@ -79,7 +79,24 @@
     <Compile Include="Chat.aspx.designer.cs">
       <DependentUpon>Chat.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ChatButton.ashx.cs">
+      <DependentUpon>ChatButton.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Common\Config.cs" />
+    <Compile Include="Demo.aspx.cs">
+      <DependentUpon>Demo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Demo.aspx.designer.cs">
+      <DependentUpon>Demo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Install.aspx.cs">
+      <DependentUpon>Install.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Install.aspx.designer.cs">
+      <DependentUpon>Install.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProcessImage.ashx.cs">
       <DependentUpon>ProcessImage.ashx</DependentUpon>
     </Compile>
@@ -127,10 +144,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Chat.aspx" />
+    <Content Include="Demo.aspx" />
     <Content Include="Images\offline.jpg" />
     <Content Include="Images\online.jpg" />
+    <Content Include="Install.aspx" />
     <Content Include="ProcessImage.ashx" />
     <Content Include="SendMsg.js" />
+    <Content Include="ChatButton.ashx" />
     <None Include="Properties\DataSources\LiveChat.Entities.ChannelEntity.datasource" />
     <None Include="Properties\DataSources\LiveChat.Entities.DepartmentEntity.datasource" />
     <None Include="Properties\DataSources\LiveChat.Entities.MessageEntity.datasource" />

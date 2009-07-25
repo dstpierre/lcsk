@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 
 namespace LiveChat.DAL
 {
@@ -13,7 +14,7 @@ namespace LiveChat.DAL
         {
             try
             {
-                using (LiveChatDataContext dc = new LiveChatDataContext(Properties.Settings.Default.DBConnectionString)) { return q(dc); }
+                using (LiveChatDataContext dc = new LiveChatDataContext(ConfigurationManager.ConnectionStrings["LiveChat"].ToString())) { return q(dc); }
             }
             catch (Exception e)
             {

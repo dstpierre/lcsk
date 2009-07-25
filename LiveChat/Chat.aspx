@@ -109,6 +109,9 @@
 			<span class="formField">Your Email</span><br />
 			<asp:TextBox id="txtEmail" runat="server"></asp:TextBox><br />
 			<br />
+			<span class="formField">Department</span><br />
+			<asp:DropDownList id="ddlDepartmentId" runat="server"></asp:DropDownList>
+			<br />
 			<asp:LinkButton id="lnkStartChat" text="Request Chat" runat="server" onclick="lnkStartChat_Click"></asp:LinkButton>
 		</div>
 	</asp:Panel>

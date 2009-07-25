@@ -39,7 +39,7 @@ namespace LiveChat.WebSite
 			req.VisitorIp = visitorIP;
 			req.PageRequested = pageRequested;
 			req.Referrer = referrer;
-			req.UserAgent = visitorUserAgent;
+			req.UserAgent = visitorUserAgent ?? "";
 			req.RequestedDate = DateTime.Now;
 
 			LiveChat.BusinessLogic.WebRequest.LogRequest(req);

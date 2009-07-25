@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0C23C5DB-D0F9-4E43-8E0E-D71F0B2D53CD}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -60,6 +61,7 @@
     <Compile Include="ChatInvitations.cs" />
     <Compile Include="ChatRequests.cs" />
     <Compile Include="Departments.cs" />
+    <Compile Include="Install.cs" />
     <Compile Include="LiveChat.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

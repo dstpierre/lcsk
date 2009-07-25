@@ -73,6 +73,11 @@ namespace LiveChat.WebSite
 				if (Operator.IsOperatorOnline())
 				{
 					pnlRequest.Visible = true;
+
+					ddlDepartmentId.DataSource = Operator.GetOnlineDepartment();
+					ddlDepartmentId.DataTextField = "DepartmentName";
+					ddlDepartmentId.DataValueField = "EntityId";
+					ddlDepartmentId.DataBind();
 				}
 				else
 				{
@@ -111,6 +116,13 @@ namespace LiveChat.WebSite
 			if (Request.UserHostAddress != null)
 				request.VisitorIp = Request.UserHostAddress.ToString();
 			request.VisitorName = txtName.Text;
+			int depId = 0;
+			if (int.TryParse(ddlDepartmentId.SelectedValue, out depId))
+				request.DepartmentId = depId;
+			else
+				request.DepartmentId = -1;
+
+			request.SendCopyOfChat = false;
 
 			LiveChat.BusinessLogic.Chat.RequestChat(request);
 

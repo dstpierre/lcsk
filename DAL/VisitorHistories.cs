@@ -38,7 +38,7 @@ namespace LiveChat.DAL
                 }, "Unable to get the count for visitor histories.");
         }
 
-        public static bool Create(string visitorIp, string pageRequested, string referrer)
+        public static bool Create(string visitorIp, string pageRequested, string referrer, string userAgent)
         {
             return ExecuteNonQuery((dc) =>
                 {
@@ -47,6 +47,7 @@ namespace LiveChat.DAL
                     vh.RequestedPage = pageRequested;
                     vh.RequestedTime = DateTime.Now;
                     vh.Referrer = referrer;
+					vh.UserAgent = userAgent.Length > 85 ? userAgent.Substring(0, 85) : userAgent;
                     dc.VisitorHistories.InsertOnSubmit(vh);
                     dc.SubmitChanges();
                     return true;

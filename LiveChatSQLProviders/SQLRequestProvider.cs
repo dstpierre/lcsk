@@ -12,7 +12,7 @@ namespace LiveChat.SQLProvider
     {
         public override void LogRequest(LiveChat.Entities.PageRequestEntity pageRequested)
         {
-            VisitorHistories.Create(pageRequested.VisitorIp, pageRequested.PageRequested, pageRequested.Referrer);
+            VisitorHistories.Create(pageRequested.VisitorIp, pageRequested.PageRequested, pageRequested.Referrer, pageRequested.UserAgent);
         }
 
         public override List<LiveChat.Entities.PageRequestEntity> GetRequests(DateTime since)

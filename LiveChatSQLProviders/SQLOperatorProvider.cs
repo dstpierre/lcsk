@@ -62,6 +62,8 @@ namespace LiveChat.SQLProvider
             if (op != null)
             {
                 FillEntity(o, op);
+
+				UpdateStatus(op.OperatorId, true);
             }
             return o;
         }
