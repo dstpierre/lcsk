@@ -62,6 +62,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API.cs" />
+    <Compile Include="ChatSession\LiveChat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChatSession\LiveChat.Designer.cs">
+      <DependentUpon>LiveChat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChatSession\TabInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChatSession\TabInfo.Designer.cs">
+      <DependentUpon>TabInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Console.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +107,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChatSession\LiveChat.resx">
+      <DependentUpon>LiveChat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChatSession\TabInfo.resx">
+      <DependentUpon>TabInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Console.resx">
       <DependentUpon>Console.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -144,6 +163,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\RequestService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -156,6 +180,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ChatService\" />
     <WCFMetadataStorage Include="Service References\OperatorService\" />
+    <WCFMetadataStorage Include="Service References\RequestService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\OperatorService\Operator.disco" />
@@ -201,6 +226,28 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ChatService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\RequestService\WebRequest.wsdl" />
+    <None Include="Service References\RequestService\WebRequest.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RequestService\WebRequest.disco" />
+    <None Include="Service References\RequestService\WebRequest1.xsd" />
+    <None Include="Service References\RequestService\WebRequest2.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RequestService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RequestService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RequestService\OperatorConsole.RequestService.PageRequestEntity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RequestService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -18,7 +18,6 @@ namespace OperatorConsole
         private ChatServiceClient chatSvc = new ChatServiceClient();
         private bool hasFocus = true;
 
-        
 
         public Console()
         {
@@ -135,5 +134,10 @@ namespace OperatorConsole
                 }
             }
         }
+
+		private void tsbtnAcceptChat_Click(object sender, EventArgs e)
+		{
+			//TODO: Rendu la
+		}
     }
 }

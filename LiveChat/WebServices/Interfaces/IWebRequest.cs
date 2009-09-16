@@ -12,7 +12,7 @@ namespace LiveChat.WCF
     [ServiceContract]
     public interface IWebRequest
     {
-        [OperationBehavior]
+        [OperationContract]
         void LogRequest(PageRequestEntity page);
         [OperationContract]
         List<PageRequestEntity> GetRequests(DateTime since);

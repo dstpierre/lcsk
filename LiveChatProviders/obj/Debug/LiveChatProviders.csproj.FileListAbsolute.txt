@@ -33,3 +33,10 @@ C:\Projects\LCSK\LiveChatProviders\bin\Debug\LiveChat.Entities.pdb
 C:\Projects\LCSK\LiveChatProviders\obj\Debug\ResolveAssemblyReference.cache
 C:\Projects\LCSK\LiveChatProviders\obj\Debug\LiveChat.Providers.dll
 C:\Projects\LCSK\LiveChatProviders\obj\Debug\LiveChat.Providers.pdb
+C:\projects\LiveChatStarterKit\LiveChatStarterKit\LiveChatProviders\bin\Debug\LiveChat.Providers.dll
+C:\projects\LiveChatStarterKit\LiveChatStarterKit\LiveChatProviders\bin\Debug\LiveChat.Providers.pdb
+C:\projects\LiveChatStarterKit\LiveChatStarterKit\LiveChatProviders\bin\Debug\LiveChat.Entities.dll
+C:\projects\LiveChatStarterKit\LiveChatStarterKit\LiveChatProviders\bin\Debug\LiveChat.Entities.pdb
+C:\projects\LiveChatStarterKit\LiveChatStarterKit\LiveChatProviders\obj\Debug\ResolveAssemblyReference.cache
+C:\projects\LiveChatStarterKit\LiveChatStarterKit\LiveChatProviders\obj\Debug\LiveChat.Providers.dll
+C:\projects\LiveChatStarterKit\LiveChatStarterKit\LiveChatProviders\obj\Debug\LiveChat.Providers.pdb
