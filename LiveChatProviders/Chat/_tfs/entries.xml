@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChatProviders/Chat/" id="415996" changeset="30888" shadow="d1d849d7fadf4d3492a2b6bba188ca43" />
-  <entry name="ChatManager.cs" kind="file" id="415991" changeset="30888" />
-  <entry name="ChatProvider.cs" kind="file" id="389529" changeset="30888" />
-  <entry name="ChatProviderCollection.cs" kind="file" id="415992" changeset="30888" />
-  <entry name="ChatServiceSection.cs" kind="file" id="389530" changeset="31375" />
-</entries>

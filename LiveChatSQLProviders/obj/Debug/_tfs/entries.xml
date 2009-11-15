@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChatSQLProviders/obj/Debug/" id="389579" changeset="28859" shadow="c330ccdff2c14cae918fb4a3c1c65d8d" />
-  <entry name="LiveChatSQLProviders.csproj.FileListAbsolute.txt" kind="file" id="389546" changeset="28859" />
-  <entry name="Refactor" kind="folder" id="389547" changeset="28859" shadow="53196c328b474164811c5bb176757e39" />
-  <entry name="TempPE" kind="folder" id="389548" changeset="28859" shadow="c0af3e85a9984d3f89430b889c9c975e" />
-</entries>

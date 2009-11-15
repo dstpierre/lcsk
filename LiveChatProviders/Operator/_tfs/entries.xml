@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChatProviders/Operator/" id="415999" changeset="30889" shadow="d8ffae5d7c2e4c909a4a003e820641c0" />
-  <entry name="OperatorManager.cs" kind="file" id="415997" changeset="30889" />
-  <entry name="OperatorProvider.cs" kind="file" id="389533" changeset="31431" />
-  <entry name="OperatorProviderCollection.cs" kind="file" id="415998" changeset="30889" />
-  <entry name="OperatorServiceSection.cs" kind="file" id="389534" changeset="30889" />
-</entries>

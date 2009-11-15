@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChat/Services/" id="389570" changeset="28859" shadow="7933edb5577b4570becff239b52e3cbc" />
-  <entry name="RequestService.cs" kind="file" id="389513" changeset="30923" />
-</entries>

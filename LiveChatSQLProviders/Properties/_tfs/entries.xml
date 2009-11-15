@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChatSQLProviders/Properties/" id="389580" changeset="28859" shadow="7aa13dac3fb24731b6e3485a41d914e7" />
-  <entry name="AssemblyInfo.cs" kind="file" id="389549" changeset="28859" />
-</entries>

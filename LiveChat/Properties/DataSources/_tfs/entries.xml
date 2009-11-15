@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChat/Properties/DataSources/" id="421796" changeset="31375" shadow="c28cb7c2b5e84f359becd89071d71bde" />
-  <entry name="LiveChat.Entities.ChannelEntity.datasource" kind="file" id="421781" changeset="31375" />
-  <entry name="LiveChat.Entities.DepartmentEntity.datasource" kind="file" id="421782" changeset="31375" />
-  <entry name="LiveChat.Entities.MessageEntity.datasource" kind="file" id="421779" changeset="31375" />
-  <entry name="LiveChat.Entities.OperatorEntity.datasource" kind="file" id="421783" changeset="31375" />
-</entries>

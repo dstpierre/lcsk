@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="LiveChat.WCF.Operator" CodeBehind="Operator.svc.cs" %>

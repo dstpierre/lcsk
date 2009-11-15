@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/DAL/Properties/" id="389566" changeset="28859" shadow="9e0050b096384d19ae6d40de8a1894df" />
-  <entry name="AssemblyInfo.cs" kind="file" id="389496" changeset="28859" />
-  <entry name="Settings.Designer.cs" kind="file" id="389497" changeset="31431" />
-  <entry name="Settings.settings" kind="file" id="389498" changeset="31431" />
-</entries>

@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <entry name="" kind="folder" url="https://tfs01.codeplex.com:443/" path="$/LiveChatStarterKit/LiveChat/Common/" id="398038" changeset="31050" shadow="90384570db3742938254ac899c6f6292" />
-  <entry name="Config.cs" kind="file" id="398035" changeset="31050" />
-</entries>
