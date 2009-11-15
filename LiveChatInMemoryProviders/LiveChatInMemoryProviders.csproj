@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{30A5228C-F632-4502-8642-73F72FE06B7B}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LiveChatEntities\LiveChatEntities.csproj">
-      <Project>{033DF257-5AB9-4CE1-A6E7-D658BB3DCFE0}</Project>
-      <Name>LiveChatEntities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LiveChatProviders\LiveChatProviders.csproj">
       <Project>{5ECB56F2-FC25-42EC-89F7-32BDEC712736}</Project>
       <Name>LiveChatProviders</Name>

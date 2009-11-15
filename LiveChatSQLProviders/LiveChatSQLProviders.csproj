@@ -65,10 +65,6 @@
       <Project>{0C23C5DB-D0F9-4E43-8E0E-D71F0B2D53CD}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiveChatEntities\LiveChatEntities.csproj">
-      <Project>{033DF257-5AB9-4CE1-A6E7-D658BB3DCFE0}</Project>
-      <Name>LiveChatEntities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LiveChatProviders\LiveChatProviders.csproj">
       <Project>{5ECB56F2-FC25-42EC-89F7-32BDEC712736}</Project>
       <Name>LiveChatProviders</Name>

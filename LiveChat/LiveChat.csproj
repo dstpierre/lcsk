@@ -121,28 +121,6 @@
     <Content Include="WebServices\WebRequest.svc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LiveChatBusinessLogic\LiveChatBusinessLogic.csproj">
-      <Project>{CB6D5B17-79D1-48FA-80FD-10AFFD1FC8B5}</Project>
-      <Name>LiveChatBusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LiveChatEntities\LiveChatEntities.csproj">
-      <Project>{033DF257-5AB9-4CE1-A6E7-D658BB3DCFE0}</Project>
-      <Name>LiveChatEntities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LiveChatInMemoryProviders\LiveChatInMemoryProviders.csproj">
-      <Project>{30A5228C-F632-4502-8642-73F72FE06B7B}</Project>
-      <Name>LiveChatInMemoryProviders</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LiveChatProviders\LiveChatProviders.csproj">
-      <Project>{5ECB56F2-FC25-42EC-89F7-32BDEC712736}</Project>
-      <Name>LiveChatProviders</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LiveChatSQLProviders\LiveChatSQLProviders.csproj">
-      <Project>{68E77375-C134-42C8-B40B-D8CA083CA616}</Project>
-      <Name>LiveChatSQLProviders</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Chat.aspx" />
     <Content Include="Demo.aspx" />
     <Content Include="Images\offline.jpg" />
