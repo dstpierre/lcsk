@@ -172,7 +172,7 @@ namespace LiveChatStarterKit.OperatorConsole
             string[] buffer = sender.ToString().Split('|');
             if (buffer.Length == 2)
             {
-                WriteMessage(string.Format("<a href=\"javascript:window.opener.document.location.href = '{0}';return false;\">{1}</a>", buffer[1], buffer[0]));
+                WriteMessage(string.Format("<a href=\"{0}\" target=\"_blank\">{1}</a>", buffer[1], buffer[0]));
             }
         }
     }
