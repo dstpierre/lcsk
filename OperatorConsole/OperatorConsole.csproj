@@ -199,11 +199,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\chat.jpg" />
-    <Content Include="Resources\ff.jpg" />
-    <Content Include="Resources\ie.jpg" />
-    <None Include="Resources\type.wav" />
-    <None Include="Resources\ringout.wav" />
+    <Content Include="Res\chat.jpg" />
+    <Content Include="Res\ff.jpg" />
+    <Content Include="Res\ie.jpg" />
+    <None Include="Res\type.wav" />
+    <None Include="Res\ringout.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
