@@ -102,7 +102,7 @@ namespace LiveChatStarterKit.OperatorConsole
 
                     numberOfChatWaiting++;
 
-                    if (!myChats.ContainsKey(req.ChatId) && req.AcceptByOpereratorId != Program.CurrentOperator.OperatorId)
+                    if (!myChats.ContainsKey(req.ChatId))
                     {
                         myChats.Add(req.ChatId, req);
 
