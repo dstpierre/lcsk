@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace LiveChat.Areas.LiveChat
+namespace LCSK
 {
 	public class LiveChatAreaRegistration : AreaRegistration
 	{
@@ -17,7 +17,7 @@ namespace LiveChat.Areas.LiveChat
 			context.MapRoute(
 				"LiveChat_default",
 				"LiveChat/{controller}/{action}/{id}",
-				new { action = "Index", id = UrlParameter.Optional }
+				new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
 			);
 		}
 	}

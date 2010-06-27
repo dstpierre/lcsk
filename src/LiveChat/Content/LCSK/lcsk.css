@@ -1,0 +1,52 @@
+﻿body 
+{
+	background-color: Black;
+	color: White;
+	font-size: small;
+	font-family: Verdana, Arial;
+	padding: 0;
+	margin: 0;
+}
+
+#container
+{
+	width: 900px;
+	background-color: Black;
+}
+
+#logo
+{
+	width: 900px;
+	height: 75px;
+	background-color: White;
+}
+
+#logo img
+{
+	float: left;
+}
+
+#logo h2
+{
+	float: right;
+	vertical-align: middle;
+	color: Orange;
+	padding-right: 25px;
+}
+
+fieldset legend
+{
+	color: Orange;
+}
+
+fieldset p
+{
+	padding: 10px;
+}
+
+fieldset label
+{
+	font-weight: bold;
+	display: block;
+}
+
