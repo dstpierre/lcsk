@@ -1699,7 +1699,7 @@ namespace LiveChat.Core.Data
 		
 		private System.Guid _DepartmentId;
 		
-		private System.Guid _OperatorIn;
+		private System.Guid _OperatorId;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1707,8 +1707,8 @@ namespace LiveChat.Core.Data
     partial void OnCreated();
     partial void OnDepartmentIdChanging(System.Guid value);
     partial void OnDepartmentIdChanged();
-    partial void OnOperatorInChanging(System.Guid value);
-    partial void OnOperatorInChanged();
+    partial void OnOperatorIdChanging(System.Guid value);
+    partial void OnOperatorIdChanged();
     #endregion
 		
 		public LCSK_Operators_Department()
@@ -1736,22 +1736,22 @@ namespace LiveChat.Core.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperatorIn", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid OperatorIn
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperatorId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid OperatorId
 		{
 			get
 			{
-				return this._OperatorIn;
+				return this._OperatorId;
 			}
 			set
 			{
-				if ((this._OperatorIn != value))
+				if ((this._OperatorId != value))
 				{
-					this.OnOperatorInChanging(value);
+					this.OnOperatorIdChanging(value);
 					this.SendPropertyChanging();
-					this._OperatorIn = value;
-					this.SendPropertyChanged("OperatorIn");
-					this.OnOperatorInChanged();
+					this._OperatorId = value;
+					this.SendPropertyChanged("OperatorId");
+					this.OnOperatorIdChanged();
 				}
 			}
 		}
@@ -1943,6 +1943,12 @@ namespace LiveChat.Core.Data
 		
 		private System.Guid _Id;
 		
+		private string _Name;
+		
+		private string _Email;
+		
+		private bool _TranscriptByEmail;
+		
 		private string _idAddress;
 		
 		private string _Browser;
@@ -1965,6 +1971,12 @@ namespace LiveChat.Core.Data
     partial void OnCreated();
     partial void OnIdChanging(System.Guid value);
     partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnTranscriptByEmailChanging(bool value);
+    partial void OnTranscriptByEmailChanged();
     partial void OnidAddressChanging(string value);
     partial void OnidAddressChanged();
     partial void OnBrowserChanging(string value);
@@ -2002,6 +2014,66 @@ namespace LiveChat.Core.Data
 					this._Id = value;
 					this.SendPropertyChanged("Id");
 					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(125) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TranscriptByEmail", DbType="Bit NOT NULL")]
+		public bool TranscriptByEmail
+		{
+			get
+			{
+				return this._TranscriptByEmail;
+			}
+			set
+			{
+				if ((this._TranscriptByEmail != value))
+				{
+					this.OnTranscriptByEmailChanging(value);
+					this.SendPropertyChanging();
+					this._TranscriptByEmail = value;
+					this.SendPropertyChanged("TranscriptByEmail");
+					this.OnTranscriptByEmailChanged();
 				}
 			}
 		}

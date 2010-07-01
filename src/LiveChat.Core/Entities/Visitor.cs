@@ -7,6 +7,9 @@ namespace LiveChat.Core.Entities
 {
 	public class Visitor : EntityBase
 	{
+		public string Name { get; set; }
+		public string Email { get; set; }
+		public bool WantTranscriptByEmail { get; set; }
 		public string IpAddress { get; set; }
 		public DateTime FirstRequest { get; set; }
 		public DateTime LastRequest { get; set; }
@@ -22,7 +25,7 @@ namespace LiveChat.Core.Entities
 
 		public override string ToString()
 		{
-			return IpAddress;
+			return Name;
 		}
 	}
 }

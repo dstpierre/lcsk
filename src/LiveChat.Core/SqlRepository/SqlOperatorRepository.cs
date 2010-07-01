@@ -41,5 +41,14 @@ namespace LiveChat.Core.SqlRepository
 					}
 				}, "Unable to create new operator.");
 		}
+
+		public bool ChatOnline()
+		{
+			return Execute<bool>(db =>
+				{
+					return db.LCSK_Operators.Count(x => 
+						x.IsOnline) > 0;
+				}, "Unable to fetch operators status");
+		}
 	}
 }

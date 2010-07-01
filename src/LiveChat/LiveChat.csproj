@@ -69,6 +69,7 @@
     <Compile Include="Areas\LiveChat\Controllers\AdminController.cs" />
     <Compile Include="Areas\LiveChat\Controllers\InstallController.cs" />
     <Compile Include="Areas\LiveChat\Controllers\OperatorController.cs" />
+    <Compile Include="Areas\LiveChat\Controllers\VisitorController.cs" />
     <Compile Include="Areas\LiveChat\LiveChatAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -82,8 +83,11 @@
     <Content Include="Areas\LiveChat\Views\Admin\Index.aspx" />
     <Content Include="Areas\LiveChat\Views\Install\Init.aspx" />
     <Content Include="Areas\LiveChat\Views\Install\Index.aspx" />
+    <Content Include="Areas\LiveChat\Views\Visitor\Index.aspx" />
     <Content Include="Content\LCSK\lcsk.css" />
     <Content Include="Content\LCSK\livechat_logo.jpg" />
+    <Content Include="Content\LCSK\offline.jpg" />
+    <Content Include="Content\LCSK\online.jpg" />
     <Content Include="Content\LCSK\ui-darkness\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\LCSK\ui-darkness\images\ui-bg_flat_50_5c5c5c_40x100.png" />
     <Content Include="Content\LCSK\ui-darkness\images\ui-bg_glass_20_555555_1x400.png" />

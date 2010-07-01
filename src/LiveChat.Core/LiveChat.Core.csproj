@@ -66,10 +66,10 @@
     <Compile Include="SqlRepository\Manager.cs" />
     <Compile Include="SqlRepository\SqlAdminRepository.cs" />
     <Compile Include="SqlRepository\SqlOperatorRepository.cs" />
+    <Compile Include="SqlRepository\SqlVisitorRepository.cs" />
+    <Compile Include="ViewModels\VisitorInitViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

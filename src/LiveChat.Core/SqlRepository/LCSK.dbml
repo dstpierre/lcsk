@@ -77,7 +77,7 @@
   <Table Name="dbo.LCSK_Operators_Departments" Member="LCSK_Operators_Departments">
     <Type Name="LCSK_Operators_Department">
       <Column Name="DepartmentId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="OperatorIn" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OperatorId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.LCSK_QuickLinks" Member="LCSK_QuickLinks">
@@ -92,6 +92,9 @@
   <Table Name="dbo.LCSK_Visitors" Member="LCSK_Visitors">
     <Type Name="LCSK_Visitor">
       <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(125) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="TranscriptByEmail" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="idAddress" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Browser" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="InChat" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />

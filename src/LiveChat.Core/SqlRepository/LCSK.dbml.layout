@@ -2,93 +2,93 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12, 10.25" name="LCSK">
   <DataContextMoniker Name="/LCSKDataContext" />
   <nestedChildShapes>
-    <classShape Id="9753bed7-e19d-4881-82e5-1bf0e848f48e" absoluteBounds="6.75, 7.25, 2, 1.9631982421875014">
+    <classShape Id="ec63c18c-306c-455b-bbe9-99579482da97" absoluteBounds="6.75, 7.25, 2, 1.9631982421875014">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_CannedMessage" />
       <nestedChildShapes>
-        <elementListCompartment Id="2b8bc647-57d3-46d1-b7e6-9d9b3aa2c1ee" absoluteBounds="6.765, 7.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ad7382f1-9bde-4e43-93f8-bd6ccd60a4e7" absoluteBounds="6.765, 7.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4c3f9687-5625-41a5-9898-4f461ea90f01" absoluteBounds="3.5, 3.375, 2, 1.9631982421875005">
+    <classShape Id="e67e4c05-2834-441a-9a30-0e4d98282696" absoluteBounds="3.5, 3.375, 2, 1.9631982421875005">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_WebRequest" />
       <nestedChildShapes>
-        <elementListCompartment Id="f95781c8-bfae-4b1d-aab7-2f28c7c629f7" absoluteBounds="3.515, 3.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="583f07b9-00f4-4d5c-bb89-260d2a3c2363" absoluteBounds="3.515, 3.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="78e2e799-c28d-4023-b98c-5f096aa6e8d5" absoluteBounds="9.25, 3.5, 2, 1.7708968098958327">
+    <classShape Id="1705bb5e-59a1-4608-bb92-08ca5ab57a2c" absoluteBounds="9.25, 3.5, 2, 1.7708968098958327">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_ChatMessage" />
       <nestedChildShapes>
-        <elementListCompartment Id="6a9d804e-395f-4531-ac73-b852bed4d7d9" absoluteBounds="9.265, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1462d2e7-61da-4f1c-8ff8-1e1ba57ccf3d" absoluteBounds="9.265, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="cf7c7818-ec89-4d9c-918f-363138058949" absoluteBounds="6.5, 3, 2, 2.7324039713541666">
+    <classShape Id="a7055f59-6a00-4159-865e-81a184de31e1" absoluteBounds="6.5, 3, 2, 2.7324039713541666">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_ChatRequest" />
       <nestedChildShapes>
-        <elementListCompartment Id="fd7c903a-535b-4106-824a-b8b6361916c5" absoluteBounds="6.515, 3.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3ed49b36-8071-4c5b-9975-c7c0234294a6" absoluteBounds="6.515, 3.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3ed99761-2d75-4a01-bed1-051bfbc9ca89" absoluteBounds="3.75, 0.75, 2, 1.5785953776041666">
+    <classShape Id="5cccd5bb-4ab2-4084-bbb0-4cdafd7b2606" absoluteBounds="3.75, 0.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_Department" />
       <nestedChildShapes>
-        <elementListCompartment Id="2576bf6e-0055-4882-8f42-139dfba5bff1" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9addfc70-7e64-43fb-b73a-8d8cba02f91d" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7a005c1a-c21c-40d8-8f65-5f39efb0948c" absoluteBounds="3.75, 7.125, 2, 2.9247054036458309">
+    <classShape Id="766d196f-928f-473b-971f-b90d44c407b4" absoluteBounds="3.75, 7.125, 2, 2.9247054036458309">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_Operator" />
       <nestedChildShapes>
-        <elementListCompartment Id="62161142-e9d1-4016-a085-da44b57153fa" absoluteBounds="3.765, 7.585, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f441b2f3-4783-4501-95a5-031161cb872f" absoluteBounds="3.765, 7.585, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b281d31c-5bb1-4103-9493-b24c3ed129d1" absoluteBounds="9.75, 1.25, 2, 1.1939925130208335">
+    <classShape Id="73f84bfb-278e-4225-a0d6-856fe6c11047" absoluteBounds="9.75, 1.25, 2, 1.1939925130208335">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_Operators_Department" />
       <nestedChildShapes>
-        <elementListCompartment Id="f41d8cb0-bf1a-45fc-949c-e1bf7d8b77ed" absoluteBounds="9.765, 1.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="74463c0b-ed0d-4b41-b743-81a593593bb6" absoluteBounds="9.765, 1.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="606ceed7-c654-44ae-8f35-66fbafbcfe8f" absoluteBounds="9.75, 6.25, 2, 1.7708968098958335">
+    <classShape Id="fdda26c9-c6e0-493b-8c1f-277dc56906f1" absoluteBounds="9.75, 6.25, 2, 1.7708968098958335">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_QuickLink" />
       <nestedChildShapes>
-        <elementListCompartment Id="dc63a8ad-110e-495c-83ee-4628d29681d9" absoluteBounds="9.765, 6.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ea2a84b8-5e1f-48ad-a806-5b880a6eb47d" absoluteBounds="9.765, 6.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="db929c6f-896a-45c8-bd05-2c0c99d43641" absoluteBounds="0.75, 3.25, 2, 2.155499674479167">
+    <classShape Id="d22fadd0-feed-4020-b329-fb534298c646" absoluteBounds="0.75, 3, 2, 2.732403971354167">
       <DataClassMoniker Name="/LCSKDataContext/LCSK_Visitor" />
       <nestedChildShapes>
-        <elementListCompartment Id="51707c5a-712a-4f5b-8275-2e7d035e6e0a" absoluteBounds="0.765, 3.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ed38e6f3-b1a7-4e0f-b55d-f87f3598373d" absoluteBounds="0.765, 3.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(8.5 : 4.38544840494792); (9.25 : 4.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LCSKDataContext/LCSK_ChatRequest/LCSK_ChatRequest_LCSK_ChatMessage" />
       <nodes>
-        <classShapeMoniker Id="cf7c7818-ec89-4d9c-918f-363138058949" />
-        <classShapeMoniker Id="78e2e799-c28d-4023-b98c-5f096aa6e8d5" />
+        <classShapeMoniker Id="a7055f59-6a00-4159-865e-81a184de31e1" />
+        <classShapeMoniker Id="1705bb5e-59a1-4608-bb92-08ca5ab57a2c" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.65625 : 2.32859537760417); (5.65625 : 5.56655110677083); (6.5 : 5.56655110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LCSKDataContext/LCSK_Department/LCSK_Department_LCSK_ChatRequest" />
       <nodes>
-        <classShapeMoniker Id="3ed99761-2d75-4a01-bed1-051bfbc9ca89" />
-        <classShapeMoniker Id="cf7c7818-ec89-4d9c-918f-363138058949" />
+        <classShapeMoniker Id="5cccd5bb-4ab2-4084-bbb0-4cdafd7b2606" />
+        <classShapeMoniker Id="a7055f59-6a00-4159-865e-81a184de31e1" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.703125 : 7.125); (5.703125 : 3.15625); (6.5 : 3.15625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LCSKDataContext/LCSK_Operator/LCSK_Operator_LCSK_ChatRequest" />
       <nodes>
-        <classShapeMoniker Id="7a005c1a-c21c-40d8-8f65-5f39efb0948c" />
-        <classShapeMoniker Id="cf7c7818-ec89-4d9c-918f-363138058949" />
+        <classShapeMoniker Id="766d196f-928f-473b-971f-b90d44c407b4" />
+        <classShapeMoniker Id="a7055f59-6a00-4159-865e-81a184de31e1" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 4.35659912109375); (3.5 : 4.35659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LCSKDataContext/LCSK_Visitor/LCSK_Visitor_LCSK_WebRequest" />
       <nodes>
-        <classShapeMoniker Id="db929c6f-896a-45c8-bd05-2c0c99d43641" />
-        <classShapeMoniker Id="4c3f9687-5625-41a5-9898-4f461ea90f01" />
+        <classShapeMoniker Id="d22fadd0-feed-4020-b329-fb534298c646" />
+        <classShapeMoniker Id="e67e4c05-2834-441a-9a30-0e4d98282696" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 3.28125); (5.57291666666667 : 3.28125 : JumpStart); (5.78645833333333 : 3.28125 : JumpEnd); (6.5 : 3.28125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 5.42112467447917); (5.57291666666667 : 5.42112467447917 : JumpStart); (5.78645833333333 : 5.42112467447917 : JumpEnd); (6.5 : 5.42112467447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/LCSKDataContext/LCSK_Visitor/LCSK_Visitor_LCSK_ChatRequest" />
       <nodes>
-        <classShapeMoniker Id="db929c6f-896a-45c8-bd05-2c0c99d43641" />
-        <classShapeMoniker Id="cf7c7818-ec89-4d9c-918f-363138058949" />
+        <classShapeMoniker Id="d22fadd0-feed-4020-b329-fb534298c646" />
+        <classShapeMoniker Id="a7055f59-6a00-4159-865e-81a184de31e1" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

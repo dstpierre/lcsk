@@ -21,9 +21,7 @@ namespace LiveChat.Core.SqlRepository
 						//TODO: Fix this
 						#region Sql Scripts - Most ugliest things I've done ;)
 						string sql = @"
-GO
-
-/****** Object:  Table [dbo].[LCSK_CannedMessages]    Script Date: 06/27/2010 07:04:56 ******/
+/****** Object:  Table [dbo].[LCSK_CannedMessages]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -52,7 +50,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[LCSK_ChatMessages]    Script Date: 06/27/2010 07:04:56 ******/
+/****** Object:  Table [dbo].[LCSK_ChatMessages]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -79,7 +77,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[LCSK_ChatRequests]    Script Date: 06/27/2010 07:04:56 ******/
+/****** Object:  Table [dbo].[LCSK_ChatRequests]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -105,7 +103,8 @@ CREATE TABLE [dbo].[LCSK_ChatRequests](
 
 GO
 
-/****** Object:  Table [dbo].[LCSK_Departments]    Script Date: 06/27/2010 07:04:56 ******/
+
+/****** Object:  Table [dbo].[LCSK_Departments]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -131,8 +130,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-
-/****** Object:  Table [dbo].[LCSK_Operators]    Script Date: 06/27/2010 07:04:56 ******/
+/****** Object:  Table [dbo].[LCSK_Operators]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -165,7 +163,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[LCSK_Operators_Departments]    Script Date: 06/27/2010 07:04:56 ******/
+/****** Object:  Table [dbo].[LCSK_Operators_Departments]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -174,17 +172,17 @@ GO
 
 CREATE TABLE [dbo].[LCSK_Operators_Departments](
 	[DepartmentId] [uniqueidentifier] NOT NULL,
-	[OperatorIn] [uniqueidentifier] NOT NULL,
+	[OperatorId] [uniqueidentifier] NOT NULL,
  CONSTRAINT [PK_LCSK_Operators_Departments] PRIMARY KEY CLUSTERED 
 (
 	[DepartmentId] ASC,
-	[OperatorIn] ASC
+	[OperatorId] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
 
-/****** Object:  Table [dbo].[LCSK_QuickLinks]    Script Date: 06/27/2010 07:04:56 ******/
+/****** Object:  Table [dbo].[LCSK_QuickLinks]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -212,7 +210,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[LCSK_Visitors]    Script Date: 06/27/2010 07:04:56 ******/
+/****** Object:  Table [dbo].[LCSK_Visitors]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -224,6 +222,9 @@ GO
 
 CREATE TABLE [dbo].[LCSK_Visitors](
 	[Id] [uniqueidentifier] NOT NULL,
+	[Name] [varchar](125) NOT NULL,
+	[Email] [varchar](200) NOT NULL,
+	[TranscriptByEmail] [bit] NOT NULL,
 	[idAddress] [varchar](50) NOT NULL,
 	[Browser] [varchar](255) NOT NULL,
 	[InChat] [bit] NOT NULL,
@@ -241,8 +242,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-
-/****** Object:  Table [dbo].[LCSK_WebRequests]    Script Date: 06/27/2010 07:04:56 ******/
+/****** Object:  Table [dbo].[LCSK_WebRequests]    Script Date: 07/01/2010 07:09:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -304,6 +304,8 @@ GO
 
 ALTER TABLE [dbo].[LCSK_WebRequests] CHECK CONSTRAINT [FK_LCSK_WebRequests_LCSK_Visitors]
 GO
+
+
 
 ";
 						#endregion
