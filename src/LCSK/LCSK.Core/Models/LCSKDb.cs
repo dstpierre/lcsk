@@ -16,6 +16,6 @@ namespace LCSK.Core
 		public DbSet<QuickLink> QuickLinks { get; set; }
 		public DbSet<Visitor> Visitors { get; set; }
 		public DbSet<WebRequest> WebRequests { get; set; }
-
+		public DbSet<Department_Operators> Departments_Operators { get; set; }
 	}
 }

@@ -13,6 +13,8 @@ namespace LCSK.Core
 		[Required]
 		public string Name { get; set; }
 
+		public virtual ICollection<Department_Operators> DepartmentOperators { get; set; }
+
 		public Department()
 		{
 		}

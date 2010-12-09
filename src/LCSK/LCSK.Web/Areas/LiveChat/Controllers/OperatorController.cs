@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
+using LCSK.Core;
 
-namespace LCSK.Web.Controllers
+namespace LCSK.Controllers
 {
-    public class HomeController : Controller
+    public class OperatorController : Controller
     {
+		OperatorService opService = new OperatorService();
+
         public ActionResult Index()
         {
-			return View();
+            return View();
         }
 
     }

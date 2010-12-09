@@ -70,6 +70,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppStart_SQLCEEntityFramework.cs" />
+    <Compile Include="Areas\LiveChat\Controllers\AdminController.cs" />
+    <Compile Include="Areas\LiveChat\Controllers\InstallController.cs" />
+    <Compile Include="Areas\LiveChat\Controllers\OperatorController.cs" />
+    <Compile Include="Areas\LiveChat\Controllers\VisitorController.cs" />
+    <Compile Include="Areas\LiveChat\LiveChatAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -77,6 +82,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\LiveChat\Views\Visitor\Index.aspx" />
+    <Content Include="Content\LCSK\lcsk.css" />
+    <Content Include="Content\LCSK\livechat_logo.jpg" />
+    <Content Include="Content\LCSK\offline.jpg" />
+    <Content Include="Content\LCSK\online.jpg" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_glass_20_555555_1x400.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_glass_40_0078a3_1x400.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_gloss-wave_25_333333_500x100.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_inset-soft_25_000000_1x100.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-bg_inset-soft_30_f58400_1x100.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Content\LCSK\ui-darkness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\LCSK\ui-darkness\jquery-ui-1.8.1.custom.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Web.config" />
@@ -108,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\LiveChat\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +147,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\LiveChat\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\LiveChat\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\LiveChat\Views\Install\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\LiveChat\Views\Install\Init.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\LiveChat\Views\Admin\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\LiveChat\Views\Visitor\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

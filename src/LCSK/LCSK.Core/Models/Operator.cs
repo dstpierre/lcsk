@@ -26,6 +26,7 @@ namespace LCSK.Core
 
 		public virtual ICollection<ChatRequest> ChatRequests { get; set; }
 		public virtual ICollection<CannedMessage> CannedMessages { get; set; }
+		public virtual ICollection<Department_Operators> Departments { get; set; }
 
 		public Operator()
 		{
