@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h1>Demo page for chat button</h1>
+
+		<a href="/livechat/session" target="_blank">
+			<img src="/livechat/chatimage?r=@Url.Encode(Request.UrlReferrer != null ? Request.UrlReferrer.ToString() : "")" alt="Chat button" />
+		</a>
+    </div>
+</body>
+</html>

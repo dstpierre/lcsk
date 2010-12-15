@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="LCSKDb">
+  <DataContextMoniker Name="/LCSKDbDataContext" />
+  <nestedChildShapes>
+    <classShape Id="bfc0a22b-1cd1-4712-9ec8-28587ef7fa54" absoluteBounds="0.75, 0.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/LCSKDbDataContext/LiveChat_ChatMessage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8059c295-7f8c-44d9-9363-c1e04694cb6b" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2cd74e86-b38e-4d97-94f0-58b364d92e26" absoluteBounds="3.75, 0.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/LCSKDbDataContext/LiveChat_ChatRequest" />
+      <nestedChildShapes>
+        <elementListCompartment Id="33008850-24b3-443e-a804-cd027a821df3" absoluteBounds="3.765, 1.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="647b8a13-9dbf-4b0f-9556-d682b37c2708" absoluteBounds="0.75, 4.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/LCSKDbDataContext/LiveChat_LogAccess" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aa177735-6831-4bcc-b855-633785e2b6d3" absoluteBounds="0.765, 5.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11dc75fa-1391-49cb-9a54-137cb1910515" absoluteBounds="3.75, 4.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/LCSKDbDataContext/LiveChat_Operator" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b5c923a1-43ce-443a-a0c0-a4c67575acad" absoluteBounds="3.765, 5.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
