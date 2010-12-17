@@ -1,4 +1,0 @@
-var cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(@"/");
-cfg.ConnectionStrings.ConnectionStrings.Add(new ConnectionStringSettings(params));
-
-cfg.Save();

@@ -92,13 +92,13 @@
 			<fieldset>
 				<legend>Request a chat session</legend>
 				<div class="editor-label">
-					@Html.LabelFor(x => x.NewChatRequest.VisitorName)
+					@Html.Label("Your name")
 				</div>
 				<div class="editor-field">
 					@Html.TextBoxFor(x => x.NewChatRequest.VisitorName) @Html.ValidationMessageFor(x => x.NewChatRequest.VisitorName)
 				</div>
 				<div class="editor-label">
-					@Html.LabelFor(x => x.NewChatRequest.VisitorEmail)
+					@Html.Label("Your email");
 				</div>
 				<div class="editor-field">
 					@Html.TextBoxFor(x => x.NewChatRequest.VisitorEmail) @Html.ValidationMessageFor(x => x.NewChatRequest.VisitorEmail)
@@ -118,7 +118,36 @@
  }
 else
 {
-		<b>TODO, CHAT OFFLINE ADD A FORM AND SEND BY EMAIL</b>
+		<h3>Our live chat support is offline at the moment</h3>
+	  
+	  <p>Please leave a message</p>
+	  
+	  using (Html.BeginForm("SendMail", "Chat"))
+	{
+		<fieldset>
+			<div class="editor-label">
+				@Html.Label("Your name")
+			</div>
+			<div class="editor-field">
+				@Html.TextBox("name")
+			</div>
+			<div class="editor-label">
+				@Html.Label("Your email")
+			</div>
+			<div class="editor-field">
+				@Html.TextArea("email")
+			</div>
+			<div class="editor-label">
+				@Html.Label("Message")
+			</div>
+			<div class="editor-field">
+				@Html.TextArea("message")
+			</div>
+			<div class="editor-field">
+				<input type="submit" value="Send" />
+			</div>
+		</fieldset>
+	}
  }
 	</div>
 </body>

@@ -95,5 +95,31 @@ namespace LCSK.Providers.Sql
 				return results;
 			}
 		}
+
+		public override List<WebRequest> VisitorPages(string visitorIp)
+		{
+			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+			{
+				var pages = db.LiveChat_LogAccesses.OrderBy(x => x.LogAccessID).Where(x =>
+					x.RequestedTime >= DateTime.Now.AddDays(-1)).ToList();
+
+				List<WebRequest> results = new List<WebRequest>();
+				foreach (var p in pages)
+				{
+					results.Add(new WebRequest()
+					{
+						DomainName = p.DomainRequested,
+						PageRequested = p.PageRequested,
+						Referrer = p.Referrer,
+						Requested = p.RequestedTime,
+						RequestId = p.LogAccessID,
+						VisitorIp = p.VisitorIP,
+						VisitorUserAgent = p.VisitorUserAgent
+					});
+				}
+
+				return results;
+			}
+		}
 	}
 }

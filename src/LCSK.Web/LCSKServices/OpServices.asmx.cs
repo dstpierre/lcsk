@@ -183,5 +183,11 @@ namespace LCSK.Web.LCSKServices
 				throw new Exception("The key is not authenticated");
 			return OperatorService.Delete(op);
 		}
+
+		[WebMethod]
+		public List<WebRequest> VisitorPages(string visitorIp)
+		{
+			return RequestService.VisitorPages(visitorIp);
+		}
 	}
 }

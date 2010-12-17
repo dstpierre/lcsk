@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LCSK.Core;
 using LCSK.Services;
+using System.Net.Mail;
 
 namespace LCSK.Web.Areas.LiveChat.Controllers
 {
@@ -82,6 +83,26 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 			Response.Cookies.Add(ck);
 
 			return RedirectToAction("Chat", new { id = data.NewChatRequest.ChatId });
+		}
+
+		[HttpPost]
+		public ActionResult SendMail(string name, string email, string message)
+		{
+			MailMessage mail = new MailMessage();
+			mail.To.Add("info@" + Request.Url.Host);
+			mail.From = new MailAddress("info@" + Request.Url.Host);
+			mail.Subject = "Contact from your live chat";
+			mail.Body = "name:\t" + name + "\r\nemail:\t" + email + "\r\n\r\nMessage:\r\n" + message;
+
+			SmtpClient svc = new SmtpClient();
+			svc.Send(mail);
+
+			return RedirectToAction("MailSent");
+		}
+
+		public ActionResult MailSent()
+		{
+			return View();
 		}
 
 		public ActionResult Chat(Guid id)

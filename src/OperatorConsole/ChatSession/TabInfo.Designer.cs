@@ -30,6 +30,9 @@ namespace LiveChatStarterKit.OperatorConsole
         {
 			this.tabOptions = new System.Windows.Forms.TabControl();
 			this.tabInformation = new System.Windows.Forms.TabPage();
+			this.lnkDepartment = new System.Windows.Forms.LinkLabel();
+			this.lblDepartment = new System.Windows.Forms.Label();
+			this.btnCloseChat = new System.Windows.Forms.Button();
 			this.lnkUrlReferrer = new System.Windows.Forms.LinkLabel();
 			this.lblUrlReferrer = new System.Windows.Forms.Label();
 			this.lblCurrentTime = new System.Windows.Forms.Label();
@@ -46,7 +49,6 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.btnTransfer = new System.Windows.Forms.Button();
 			this.cboOperators = new System.Windows.Forms.ComboBox();
 			this.lblTransfer = new System.Windows.Forms.Label();
-			this.btnCloseChat = new System.Windows.Forms.Button();
 			this.tabOptions.SuspendLayout();
 			this.tabInformation.SuspendLayout();
 			this.tabBrowseHistory.SuspendLayout();
@@ -67,6 +69,8 @@ namespace LiveChatStarterKit.OperatorConsole
 			// 
 			// tabInformation
 			// 
+			this.tabInformation.Controls.Add(this.lnkDepartment);
+			this.tabInformation.Controls.Add(this.lblDepartment);
 			this.tabInformation.Controls.Add(this.btnCloseChat);
 			this.tabInformation.Controls.Add(this.lnkUrlReferrer);
 			this.tabInformation.Controls.Add(this.lblUrlReferrer);
@@ -84,10 +88,40 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.tabInformation.ToolTipText = "General information";
 			this.tabInformation.UseVisualStyleBackColor = true;
 			// 
+			// lnkDepartment
+			// 
+			this.lnkDepartment.AutoSize = true;
+			this.lnkDepartment.Location = new System.Drawing.Point(14, 177);
+			this.lnkDepartment.Name = "lnkDepartment";
+			this.lnkDepartment.Size = new System.Drawing.Size(41, 13);
+			this.lnkDepartment.TabIndex = 10;
+			this.lnkDepartment.TabStop = true;
+			this.lnkDepartment.Text = "Not set";
+			// 
+			// lblDepartment
+			// 
+			this.lblDepartment.AutoSize = true;
+			this.lblDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblDepartment.Location = new System.Drawing.Point(14, 154);
+			this.lblDepartment.Name = "lblDepartment";
+			this.lblDepartment.Size = new System.Drawing.Size(72, 13);
+			this.lblDepartment.TabIndex = 9;
+			this.lblDepartment.Text = "Department";
+			// 
+			// btnCloseChat
+			// 
+			this.btnCloseChat.Location = new System.Drawing.Point(17, 212);
+			this.btnCloseChat.Name = "btnCloseChat";
+			this.btnCloseChat.Size = new System.Drawing.Size(99, 23);
+			this.btnCloseChat.TabIndex = 8;
+			this.btnCloseChat.Text = "&Close Chat";
+			this.btnCloseChat.UseVisualStyleBackColor = true;
+			this.btnCloseChat.Click += new System.EventHandler(this.btnCloseChat_Click);
+			// 
 			// lnkUrlReferrer
 			// 
 			this.lnkUrlReferrer.AutoSize = true;
-			this.lnkUrlReferrer.Location = new System.Drawing.Point(14, 153);
+			this.lnkUrlReferrer.Location = new System.Drawing.Point(13, 131);
 			this.lnkUrlReferrer.Name = "lnkUrlReferrer";
 			this.lnkUrlReferrer.Size = new System.Drawing.Size(41, 13);
 			this.lnkUrlReferrer.TabIndex = 7;
@@ -98,7 +132,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			// 
 			this.lblUrlReferrer.AutoSize = true;
 			this.lblUrlReferrer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblUrlReferrer.Location = new System.Drawing.Point(14, 130);
+			this.lblUrlReferrer.Location = new System.Drawing.Point(13, 108);
 			this.lblUrlReferrer.Name = "lblUrlReferrer";
 			this.lblUrlReferrer.Size = new System.Drawing.Size(82, 13);
 			this.lblUrlReferrer.TabIndex = 6;
@@ -116,7 +150,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			// lnkCurrentPage
 			// 
 			this.lnkCurrentPage.AutoSize = true;
-			this.lnkCurrentPage.Location = new System.Drawing.Point(14, 97);
+			this.lnkCurrentPage.Location = new System.Drawing.Point(14, 83);
 			this.lnkCurrentPage.Name = "lnkCurrentPage";
 			this.lnkCurrentPage.Size = new System.Drawing.Size(41, 13);
 			this.lnkCurrentPage.TabIndex = 4;
@@ -127,7 +161,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			// 
 			this.lblCurrentPage.AutoSize = true;
 			this.lblCurrentPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblCurrentPage.Location = new System.Drawing.Point(14, 74);
+			this.lblCurrentPage.Location = new System.Drawing.Point(14, 60);
 			this.lblCurrentPage.Name = "lblCurrentPage";
 			this.lblCurrentPage.Size = new System.Drawing.Size(81, 13);
 			this.lblCurrentPage.TabIndex = 3;
@@ -182,6 +216,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.lstVisitedUrl.Size = new System.Drawing.Size(261, 249);
 			this.lstVisitedUrl.TabIndex = 1;
 			this.lstVisitedUrl.UseCompatibleStateImageBehavior = false;
+			this.lstVisitedUrl.DoubleClick += new System.EventHandler(this.lstVisitedUrl_DoubleClick);
 			// 
 			// lblVisitedHint
 			// 
@@ -244,16 +279,6 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.lblTransfer.TabIndex = 0;
 			this.lblTransfer.Text = "Transfer this session to another operator";
 			// 
-			// btnCloseChat
-			// 
-			this.btnCloseChat.Location = new System.Drawing.Point(17, 212);
-			this.btnCloseChat.Name = "btnCloseChat";
-			this.btnCloseChat.Size = new System.Drawing.Size(99, 23);
-			this.btnCloseChat.TabIndex = 8;
-			this.btnCloseChat.Text = "&Close Chat";
-			this.btnCloseChat.UseVisualStyleBackColor = true;
-			this.btnCloseChat.Click += new System.EventHandler(this.btnCloseChat_Click);
-			// 
 			// TabInfo
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,5 +319,7 @@ namespace LiveChatStarterKit.OperatorConsole
         private System.Windows.Forms.Button btnTransfer;
         private System.Windows.Forms.ComboBox cboOperators;
 		private System.Windows.Forms.Button btnCloseChat;
+		private System.Windows.Forms.LinkLabel lnkDepartment;
+		private System.Windows.Forms.Label lblDepartment;
     }
 }

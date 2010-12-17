@@ -21,5 +21,6 @@ namespace LCSK.Providers
 	{
 		public abstract bool LogRequest(WebRequest req);
 		public abstract List<WebRequest> GetRequest(DateTime lastRequestDate);
+		public abstract List<WebRequest> VisitorPages(string visitorIp);
 	}
 }

@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using LiveChatStarterKit.OperatorConsole.LiveChatWS;
+using System.Diagnostics;
 
 namespace LiveChatStarterKit.OperatorConsole
 {
@@ -24,7 +25,12 @@ namespace LiveChatStarterKit.OperatorConsole
         public ChatRequest ChatRequest
         {
             get { return myChatRequest; }
-            set { myChatRequest = value; }
+			set
+			{
+				myChatRequest = value;
+
+				lnkDepartment.Text = myChatRequest.Department;
+			}
         }
 	
 
@@ -69,6 +75,19 @@ namespace LiveChatStarterKit.OperatorConsole
             lnkCurrentPage.Text = myRequest.PageRequested;
             lnkEntryPage.Text = entryPage;
             lnkUrlReferrer.Text = urlReferrer;
+
+			var pages = ws.VisitorPages(myRequest.VisitorIp);
+
+			lstVisitedUrl.Items.Clear();
+
+			ListViewItem item;
+			foreach (var p in pages)
+			{
+				item = new ListViewItem();
+				item.Text = p.PageRequested;
+				item.SubItems.Add(new ListViewItem.ListViewSubItem(item, p.Requested.ToString("yyyy/MM/dd")));
+				lstVisitedUrl.Items.Add(item);
+			}
         }
 
         private void btnTransfer_Click(object sender, EventArgs e)
@@ -116,6 +135,16 @@ namespace LiveChatStarterKit.OperatorConsole
 				ws.AddMessage(new Guid(Program.CurrentOperator.Password), msg);
 
 				((ControlPanel)this.ParentForm).EndChat(MyTab, myChatRequest.ChatId);
+			}
+		}
+
+		private void lstVisitedUrl_DoubleClick(object sender, EventArgs e)
+		{
+			if (lstVisitedUrl.SelectedIndices.Count > 0)
+			{
+				string page = lstVisitedUrl.SelectedItems[0].Text;
+
+				Process.Start(new ProcessStartInfo(myRequest.DomainName + page));
 			}
 		}
     }

@@ -59,6 +59,8 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         private System.Threading.SendOrPostCallback DeleteOperationCompleted;
         
+        private System.Threading.SendOrPostCallback VisitorPagesOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -141,6 +143,9 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         /// <remarks/>
         public event DeleteCompletedEventHandler DeleteCompleted;
+        
+        /// <remarks/>
+        public event VisitorPagesCompletedEventHandler VisitorPagesCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://focuscentric.com/LogIn", RequestNamespace="http://focuscentric.com/", ResponseNamespace="http://focuscentric.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -595,6 +600,35 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             if ((this.DeleteCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.DeleteCompleted(this, new DeleteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://focuscentric.com/VisitorPages", RequestNamespace="http://focuscentric.com/", ResponseNamespace="http://focuscentric.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebRequest[] VisitorPages(string visitorIp) {
+            object[] results = this.Invoke("VisitorPages", new object[] {
+                        visitorIp});
+            return ((WebRequest[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void VisitorPagesAsync(string visitorIp) {
+            this.VisitorPagesAsync(visitorIp, null);
+        }
+        
+        /// <remarks/>
+        public void VisitorPagesAsync(string visitorIp, object userState) {
+            if ((this.VisitorPagesOperationCompleted == null)) {
+                this.VisitorPagesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnVisitorPagesOperationCompleted);
+            }
+            this.InvokeAsync("VisitorPages", new object[] {
+                        visitorIp}, this.VisitorPagesOperationCompleted, userState);
+        }
+        
+        private void OnVisitorPagesOperationCompleted(object arg) {
+            if ((this.VisitorPagesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.VisitorPagesCompleted(this, new VisitorPagesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1280,6 +1314,32 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void VisitorPagesCompletedEventHandler(object sender, VisitorPagesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class VisitorPagesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal VisitorPagesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebRequest[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebRequest[])(this.results[0]));
             }
         }
     }

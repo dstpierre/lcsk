@@ -45,6 +45,14 @@ namespace LCSK.Services
 			return _provider.GetRequest(lastRequest);
 		}
 
+		public static List<WebRequest> VisitorPages(string visitorIp)
+		{
+			// Load the provider
+			LoadProvider();
+
+			return _provider.VisitorPages(visitorIp);
+		}
+
 		private static void LoadProvider()
 		{
 			// if we do not have initiated the provider

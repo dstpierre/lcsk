@@ -268,6 +268,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="VisitorPages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="visitorIp" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VisitorPagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VisitorPagesResult" type="tns:ArrayOfWebRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="guid">
@@ -367,6 +381,12 @@
   <wsdl:message name="DeleteSoapOut">
     <wsdl:part name="parameters" element="tns:DeleteResponse" />
   </wsdl:message>
+  <wsdl:message name="VisitorPagesSoapIn">
+    <wsdl:part name="parameters" element="tns:VisitorPages" />
+  </wsdl:message>
+  <wsdl:message name="VisitorPagesSoapOut">
+    <wsdl:part name="parameters" element="tns:VisitorPagesResponse" />
+  </wsdl:message>
   <wsdl:portType name="OpServicesSoap">
     <wsdl:operation name="LogIn">
       <wsdl:input message="tns:LogInSoapIn" />
@@ -427,6 +447,10 @@
     <wsdl:operation name="Delete">
       <wsdl:input message="tns:DeleteSoapIn" />
       <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VisitorPages">
+      <wsdl:input message="tns:VisitorPagesSoapIn" />
+      <wsdl:output message="tns:VisitorPagesSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OpServicesSoap" type="tns:OpServicesSoap">
@@ -566,6 +590,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="VisitorPages">
+      <soap:operation soapAction="http://focuscentric.com/VisitorPages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="OpServicesSoap12" type="tns:OpServicesSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -697,6 +730,15 @@
     </wsdl:operation>
     <wsdl:operation name="Delete">
       <soap12:operation soapAction="http://focuscentric.com/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VisitorPages">
+      <soap12:operation soapAction="http://focuscentric.com/VisitorPages" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
