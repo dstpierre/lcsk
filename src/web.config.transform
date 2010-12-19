@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<sectionGroup name="LCSK">
+			<section name="requestService" type="LCSK.Providers.RequestServiceSection" allowDefinition="MachineToApplication" restartOnExternalChanges="true"/>
+			<section name="operatorService" type="LCSK.Providers.OperatorServiceSection" allowDefinition="MachineToApplication" restartOnExternalChanges="true"/>
+			<section name="chatService" type="LCSK.Providers.ChatServiceSection" allowDefinition="MachineToApplication" restartOnExternalChanges="true"/>
+		</sectionGroup>
+	</configSections>
+
+	<LCSK>
+		<requestService defaultProvider="SqlRequestProvider">
+			<providers>
+				<add name="SqlRequestProvider" type="LCSK.Providers.Sql.SqlRequestProvider" connectionStringName="LCSK"/>
+			</providers>
+		</requestService>
+		<operatorService defaultProvider="SqlOperatorProvider">
+			<providers>
+				<add name="SqlOperatorProvider" type="LCSK.Providers.Sql.SqlOperatorProvider" connectionStringName="LCSK"/>
+			</providers>
+		</operatorService>
+		<chatService defaultProvider="SqlChatProvider">
+			<providers>
+				<add name="SqlChatProvider" type="LCSK.Providers.Sql.SqlChatProvider" connectionStringName="LCSK"/>
+			</providers>
+		</chatService>
+	</LCSK>
+</configuration>

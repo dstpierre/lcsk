@@ -15,6 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCSK.Providers.Sql", "LCSK.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperatorConsole", "OperatorConsole\OperatorConsole.csproj", "{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuPack", "NuPack", "{7D8AA739-106B-4E76-AD5A-AD420B1AB897}"
+	ProjectSection(SolutionItems) = preProject
+		lcsk.nuspec = lcsk.nuspec
+		web.config.transform = web.config.transform
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

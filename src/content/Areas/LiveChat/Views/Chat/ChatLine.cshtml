@@ -1,0 +1,6 @@
+﻿@model List<LCSK.Core.ChatMessage>
+
+@foreach (var msg in Model)
+{
+	<span style="width: 640px;padding: 3px;display: block;"><strong>@msg.Name</strong>: @msg.Message</span>
+}
