@@ -61,6 +61,8 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         private System.Threading.SendOrPostCallback VisitorPagesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback InviteOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -146,6 +148,9 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         /// <remarks/>
         public event VisitorPagesCompletedEventHandler VisitorPagesCompleted;
+        
+        /// <remarks/>
+        public event InviteCompletedEventHandler InviteCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://focuscentric.com/LogIn", RequestNamespace="http://focuscentric.com/", ResponseNamespace="http://focuscentric.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -629,6 +634,41 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             if ((this.VisitorPagesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.VisitorPagesCompleted(this, new VisitorPagesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://focuscentric.com/Invite", RequestNamespace="http://focuscentric.com/", ResponseNamespace="http://focuscentric.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ChatRequest Invite(System.Guid key, int operatorId, string visitorIp, string prompt) {
+            object[] results = this.Invoke("Invite", new object[] {
+                        key,
+                        operatorId,
+                        visitorIp,
+                        prompt});
+            return ((ChatRequest)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InviteAsync(System.Guid key, int operatorId, string visitorIp, string prompt) {
+            this.InviteAsync(key, operatorId, visitorIp, prompt, null);
+        }
+        
+        /// <remarks/>
+        public void InviteAsync(System.Guid key, int operatorId, string visitorIp, string prompt, object userState) {
+            if ((this.InviteOperationCompleted == null)) {
+                this.InviteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInviteOperationCompleted);
+            }
+            this.InvokeAsync("Invite", new object[] {
+                        key,
+                        operatorId,
+                        visitorIp,
+                        prompt}, this.InviteOperationCompleted, userState);
+        }
+        
+        private void OnInviteOperationCompleted(object arg) {
+            if ((this.InviteCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InviteCompleted(this, new InviteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1340,6 +1380,32 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((WebRequest[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void InviteCompletedEventHandler(object sender, InviteCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InviteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InviteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ChatRequest Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ChatRequest)(this.results[0]));
             }
         }
     }

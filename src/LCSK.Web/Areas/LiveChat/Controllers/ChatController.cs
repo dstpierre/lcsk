@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using LCSK.Core;
 using LCSK.Services;
 using System.Net.Mail;
+using System.Text;
 
 namespace LCSK.Web.Areas.LiveChat.Controllers
 {
@@ -28,6 +29,28 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 
 			string file = Server.MapPath("/Content/LCSK/" + (OperatorService.GetOperatorStatus() ? "online.jpg" : "offline.jpg"));
 			return new FileStreamResult(new FileStream(file, FileMode.Open), "image/jpg");
+		}
+
+		public FileResult CheckInviration()
+		{
+			string js = "";
+			var request = RequestService.CheckForInvites(Request.UserHostAddress);
+			if (request != null)
+			{
+				js = "$(document).ready(function() { " +
+					"$('#lcsk_invitation').show();" +
+					"	$('.lcsk_inviteActions').click(function() { " +
+					"		$('#lcsk_invitation').hide();" +
+					"	});" +
+					"});";
+			}
+			else
+			{
+				js = "$(document).ready(function() { " +
+					"$('#lcsk_invitation').hide();" +
+					"});";
+			}
+			return new FileStreamResult(new MemoryStream(Encoding.ASCII.GetBytes(js)), "text/javascript");
 		}
 
 		private VisitorInitViewModel InitRequest()
@@ -52,8 +75,17 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 
 			return vm;
 		}
-		public ActionResult Session()
+		public ActionResult Session(string id)
 		{
+			if (!string.IsNullOrEmpty(id))
+			{
+				var req = RequestService.CheckForInvites(Request.UserHostAddress);
+				if (req != null)
+				{
+					if (RequestService.ProcessInvite(req, id == "accept") && id == "accept")
+						return RedirectToAction("Chat", new { id = req.ChatId });
+				}
+			}
 			var vm = InitRequest();
 
 			return View(vm);

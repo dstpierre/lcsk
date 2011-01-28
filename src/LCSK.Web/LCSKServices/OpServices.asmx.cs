@@ -189,5 +189,13 @@ namespace LCSK.Web.LCSKServices
 		{
 			return RequestService.VisitorPages(visitorIp);
 		}
+
+		[WebMethod]
+		public ChatRequest Invite(Guid key, int operatorId, string visitorIp, string prompt)
+		{
+			if (!IsAuthenticated(key))
+				throw new Exception("The key is not authenticated");
+			return OperatorService.InviteVisitor(operatorId, visitorIp, prompt);
+		}
 	}
 }

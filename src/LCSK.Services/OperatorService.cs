@@ -14,6 +14,7 @@ using System.Configuration.Provider;
 using System.Web.Configuration;
 using LCSK.Core;
 using LCSK.Providers;
+using System;
 
 namespace LCSK.Services
 {
@@ -106,6 +107,14 @@ namespace LCSK.Services
 			LoadProvider();
 
 			return _provider.Delete(op);
+		}
+
+		public static ChatRequest InviteVisitor(int operatorId, string visitorIp, string prompt)
+		{
+			// Load the provider
+			LoadProvider();
+
+			return _provider.InviteVisitor(operatorId, visitorIp, prompt);
 		}
 
 		private static void LoadProvider()

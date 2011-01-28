@@ -53,6 +53,22 @@ namespace LCSK.Services
 			return _provider.VisitorPages(visitorIp);
 		}
 
+		public static ChatRequest CheckForInvites(string visitorIp)
+		{
+			LoadProvider();
+
+			return _provider.CheckForInvites(visitorIp);
+		}
+
+		public static bool ProcessInvite(ChatRequest req, bool accept)
+		{
+			LoadProvider();
+
+			return accept ?
+				_provider.AcceptInvite(req) :
+				_provider.RejectInvite(req);
+		}
+
 		private static void LoadProvider()
 		{
 			// if we do not have initiated the provider

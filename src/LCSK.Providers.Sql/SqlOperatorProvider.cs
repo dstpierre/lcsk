@@ -235,5 +235,49 @@ CREATE TABLE [dbo].[LiveChat_Operators](
 				return true;
 			}
 		}
+
+		public override ChatRequest InviteVisitor(int operatorId, string visitorIp, string prompt)
+		{
+			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+			{
+				LiveChat_ChatRequest invite = new LiveChat_ChatRequest();
+				invite.AcceptDate = null;
+				invite.ChatID = Guid.NewGuid();
+				invite.ClosedDate = null;
+				//HACK: this will serve as an indicator when visitor display chat button
+				invite.Department = "op-invite";
+				invite.OperatorID = operatorId;
+				invite.RequestDate = DateTime.Now;
+				invite.VisitorEmail = "";
+				invite.VisitorIP = visitorIp;
+				invite.VisitorName = "Me";
+				invite.VisitorUserAgent = "";
+
+				db.LiveChat_ChatRequests.InsertOnSubmit(invite);
+				try
+				{
+					db.SubmitChanges();
+
+					ChatRequest req = new ChatRequest();
+					req.Accepted = null;
+					req.ChatId = invite.ChatID;
+					req.Closed = null;
+					req.Department = invite.Department;
+					req.OperatorId = invite.OperatorID;
+					req.Requested = invite.RequestDate;
+					req.VisitorEmail = invite.VisitorEmail;
+					req.VisitorIp = invite.VisitorIP;
+					req.VisitorName = invite.VisitorName;
+					req.VisitorUserAgent = invite.VisitorUserAgent;
+					req.WasAccepted = false;
+
+					return req;
+				}
+				catch
+				{
+					throw;
+				}
+			}
+		}
 	}
 }

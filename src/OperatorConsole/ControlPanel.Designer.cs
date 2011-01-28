@@ -44,6 +44,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.playSoundOnChatMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.whenOfflineGetWebsiteRequestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.manageOperatorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlChat = new System.Windows.Forms.Panel();
 			this.btnAccept = new System.Windows.Forms.Button();
 			this.lblMyChat = new System.Windows.Forms.Label();
@@ -63,7 +64,7 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tabChats = new System.Windows.Forms.TabControl();
 			this.tmrCheckRequests = new System.Windows.Forms.Timer(this.components);
-			this.manageOperatorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnInvite = new System.Windows.Forms.Button();
 			this.mainMenu.SuspendLayout();
 			this.pnlChat.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -189,9 +190,17 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.helpToolStripMenuItem.Text = "Help";
 			// 
+			// manageOperatorsToolStripMenuItem
+			// 
+			this.manageOperatorsToolStripMenuItem.Name = "manageOperatorsToolStripMenuItem";
+			this.manageOperatorsToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+			this.manageOperatorsToolStripMenuItem.Text = "Manage Operators";
+			this.manageOperatorsToolStripMenuItem.Click += new System.EventHandler(this.manageOperatorsToolStripMenuItem_Click);
+			// 
 			// pnlChat
 			// 
 			this.pnlChat.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.pnlChat.Controls.Add(this.btnInvite);
 			this.pnlChat.Controls.Add(this.btnAccept);
 			this.pnlChat.Controls.Add(this.lblMyChat);
 			this.pnlChat.Controls.Add(this.lblVisitorOnChat);
@@ -352,12 +361,15 @@ namespace LiveChatStarterKit.OperatorConsole
 			this.tmrCheckRequests.Interval = 3500;
 			this.tmrCheckRequests.Tick += new System.EventHandler(this.tmrCheckRequests_Tick);
 			// 
-			// manageOperatorsToolStripMenuItem
+			// btnInvite
 			// 
-			this.manageOperatorsToolStripMenuItem.Name = "manageOperatorsToolStripMenuItem";
-			this.manageOperatorsToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
-			this.manageOperatorsToolStripMenuItem.Text = "Manage Operators";
-			this.manageOperatorsToolStripMenuItem.Click += new System.EventHandler(this.manageOperatorsToolStripMenuItem_Click);
+			this.btnInvite.Location = new System.Drawing.Point(358, 5);
+			this.btnInvite.Name = "btnInvite";
+			this.btnInvite.Size = new System.Drawing.Size(145, 23);
+			this.btnInvite.TabIndex = 6;
+			this.btnInvite.Text = "Invite Selected To Chat";
+			this.btnInvite.UseVisualStyleBackColor = true;
+			this.btnInvite.Click += new System.EventHandler(this.btnInvite_Click);
 			// 
 			// ControlPanel
 			// 
@@ -419,5 +431,6 @@ namespace LiveChatStarterKit.OperatorConsole
         private System.Windows.Forms.ToolStripMenuItem playSoundOnChatMessageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whenOfflineGetWebsiteRequestsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem manageOperatorsToolStripMenuItem;
+		private System.Windows.Forms.Button btnInvite;
     }
 }

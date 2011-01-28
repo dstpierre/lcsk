@@ -282,6 +282,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="Invite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="visitorIp" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="prompt" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InviteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InviteResult" type="tns:ChatRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="guid">
@@ -387,6 +404,12 @@
   <wsdl:message name="VisitorPagesSoapOut">
     <wsdl:part name="parameters" element="tns:VisitorPagesResponse" />
   </wsdl:message>
+  <wsdl:message name="InviteSoapIn">
+    <wsdl:part name="parameters" element="tns:Invite" />
+  </wsdl:message>
+  <wsdl:message name="InviteSoapOut">
+    <wsdl:part name="parameters" element="tns:InviteResponse" />
+  </wsdl:message>
   <wsdl:portType name="OpServicesSoap">
     <wsdl:operation name="LogIn">
       <wsdl:input message="tns:LogInSoapIn" />
@@ -451,6 +474,10 @@
     <wsdl:operation name="VisitorPages">
       <wsdl:input message="tns:VisitorPagesSoapIn" />
       <wsdl:output message="tns:VisitorPagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Invite">
+      <wsdl:input message="tns:InviteSoapIn" />
+      <wsdl:output message="tns:InviteSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OpServicesSoap" type="tns:OpServicesSoap">
@@ -599,6 +626,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Invite">
+      <soap:operation soapAction="http://focuscentric.com/Invite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="OpServicesSoap12" type="tns:OpServicesSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -739,6 +775,15 @@
     </wsdl:operation>
     <wsdl:operation name="VisitorPages">
       <soap12:operation soapAction="http://focuscentric.com/VisitorPages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Invite">
+      <soap12:operation soapAction="http://focuscentric.com/Invite" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

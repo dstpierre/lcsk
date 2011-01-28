@@ -331,5 +331,50 @@ namespace LiveChatStarterKit.OperatorConsole
 				f.ShowDialog();
 			}
 		}
+
+		private void btnInvite_Click(object sender, EventArgs e)
+		{
+			if (lstVisitors.SelectedIndices.Count > 0)
+			{
+				List<string> ips = new List<string>();
+				foreach(int item in lstVisitors.SelectedIndices)
+					ips.Add(lstVisitors.Items[item].SubItems[2].Text);
+
+				if (MessageBox.Show("Are you sure you want to invite " + ips.Count + " visitor(s)?", "LCSK", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+				{
+					foreach (string ip in ips)
+					{
+						ChatRequest req = ws.Invite(new Guid(Program.CurrentOperator.Password), Program.CurrentOperator.OperatorId, ip, "");
+						
+						// Add a new tab page that will contain the chat session
+						TabPage tab = new TabPage(req.VisitorIp);
+						LiveChat lc = new LiveChat();
+						lc.ChatRequest = req;
+						lc.Dock = DockStyle.Fill;
+						tab.Controls.Add(lc);
+						tabChats.TabPages.Add(tab);
+						tab.Focus();
+
+						// Add a new TabInfo control
+						TabInfo tabInfo = new TabInfo();
+						tabInfo.ChatId = req.ChatId;
+						tabInfo.ChatRequest = req;
+						tabInfo.MyTab = tab;
+						tabInfo.Dock = DockStyle.Fill;
+
+						// Get the request
+						if (currentVisitors.ContainsKey(req.VisitorIp))
+						{
+							tabInfo.RequestEntity = currentVisitors[req.VisitorIp] as WebRequest;
+						}
+
+						chatInfo.Add(tabInfo);
+						RefreshTabInfo();
+					}
+
+					
+				}
+			}
+		}
     }
 }

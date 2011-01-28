@@ -24,6 +24,7 @@ namespace LCSK.Providers
 		public abstract bool GetOperatorStatus();
 		public abstract List<ChatRequest> GetChatRequest(int operatorId, string[] departments);
 		public abstract List<Operator> GetOnlineOperator();
+		public abstract ChatRequest InviteVisitor(int operatorId, string visitorIp, string prompt);
 
 		public abstract bool CreateDatabase(string password);
 		public abstract List<Operator> List();

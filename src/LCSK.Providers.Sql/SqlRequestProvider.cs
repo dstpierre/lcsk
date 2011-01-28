@@ -121,5 +121,82 @@ namespace LCSK.Providers.Sql
 				return results;
 			}
 		}
+
+		public override ChatRequest CheckForInvites(string visitorIp)
+		{
+			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+			{
+				var invites = db.LiveChat_ChatRequests.OrderByDescending(x => x.RequestDate).Where(x =>
+					x.VisitorIP == visitorIp && x.Department == "op-invite" && x.AcceptDate == null && x.ClosedDate == null).ToList();
+
+				if(invites != null && invites.Count() > 0)
+				{
+					// do they have more than 1 invite
+					var invite = invites.First();
+					if (invites.Count() > 1)
+					{
+						invites.Remove(invite);
+
+						foreach (var inv in invites)
+						{
+							inv.ClosedDate = DateTime.Now;
+							inv.Department = "Visitor had more than 1 invite pending...";
+						}
+
+						db.SubmitChanges();
+					}
+
+					ChatRequest req = new ChatRequest();
+					req.Accepted = null;
+					req.ChatId = invite.ChatID;
+					req.Closed = null;
+					req.Department = invite.Department;
+					req.OperatorId = invite.OperatorID;
+					req.Requested = invite.RequestDate;
+					req.VisitorEmail = invite.VisitorEmail;
+					req.VisitorIp = invite.VisitorIP;
+					req.VisitorName = invite.VisitorName;
+					req.VisitorUserAgent = invite.VisitorUserAgent;
+					req.WasAccepted = false;
+
+					return req;
+				}
+				return null;
+			}
+		}
+
+		public override bool AcceptInvite(ChatRequest req)
+		{
+			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+			{
+				var entity = db.LiveChat_ChatRequests.SingleOrDefault(x => x.ChatID == req.ChatId);
+				if (entity != null)
+				{
+					entity.AcceptDate = DateTime.Now;
+					entity.Department = "visitor-accept";
+
+					db.SubmitChanges();
+					return true;
+				}
+				return false;
+			}
+		}
+
+		public override bool RejectInvite(ChatRequest req)
+		{
+			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+			{
+				var entity = db.LiveChat_ChatRequests.SingleOrDefault(x => x.ChatID == req.ChatId);
+				if (entity != null)
+				{
+					entity.ClosedDate = DateTime.Now;
+					entity.Department = "visitor-rejected";
+
+					db.SubmitChanges();
+					return true;
+				}
+				return false;
+			}
+		}
 	}
 }

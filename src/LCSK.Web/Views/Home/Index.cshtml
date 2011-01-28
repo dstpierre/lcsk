@@ -7,14 +7,39 @@
 <html>
 <head>
     <title>Index</title>
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 </head>
 <body>
     <div>
-        <h1>Demo page for chat button</h1>
+        <h1>Demo page for chat button & Invitation line</h1>
 
 		<a href="/livechat/session" target="_blank">
 			<img src="/livechat/chatimage?r=@Url.Encode(Request.UrlReferrer != null ? Request.UrlReferrer.ToString() : "")" alt="Chat button" />
 		</a>
     </div>
+
+	<div id="lcsk_invitation" style="display: none;">
+	  <div style="position: absolute; width: 100%; height: 100%; z-index: 10002; background-color: black;
+		filter: alpha(opacity=70); opacity: 0.7;top: 0px;left: 0px">
+		&nbsp;
+	  </div>
+	  <table style="position: absolute; width: 100%; height: 100%; z-index: 10003;top: 0px;left: 0px;">
+		<tr>
+		  <td align="center" valign="middle">
+			<div style="color: Black; font-weight: bolder; background-color: White; padding: 15px;
+			  width: 300px;">
+				<a href="/livechat/session/accept" class="lcsk_inviteActions" target="_blank">
+					<img src="/content/lcsk/invitation.jpg" alt="An operator invited you to chat" />
+				</a><br /><br />
+				<a href="/livechat/session/accept" class="lcsk_inviteActions" target="_blank">Start the chat session</a> | 
+				<a href="/livechat/session/reject" class="lcsk_inviteActions" target="_blank">No thank you!</a>
+			</div>
+		  </td>
+		</tr>
+	  </table>
+	</div>
+	<script src="/livechat/checkinviration" type="text/javascript"></script>
+
 </body>
 </html>
