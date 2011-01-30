@@ -16,5 +16,10 @@ namespace LCSK.Web.Controllers
             return View();
         }
 
+		public ActionResult TestingReferrer()
+		{
+			return View();
+		}
+
     }
 }
