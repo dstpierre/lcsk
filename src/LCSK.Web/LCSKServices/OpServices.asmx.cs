@@ -68,6 +68,15 @@ namespace LCSK.Web.LCSKServices
 		}
 
 		[WebMethod]
+		public bool AcceptRequest(Guid key, Guid chatId, int operatorId)
+		{
+			if (!IsAuthenticated(key))
+				throw new Exception("The key is not authenticated");
+
+			return ChatService.AcceptRequest(chatId, operatorId);
+		}
+
+		[WebMethod]
 		public void AddMessage(Guid key, ChatMessage msg)
 		{
 			if (!IsAuthenticated(key))

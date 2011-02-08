@@ -122,7 +122,6 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 		{
 			MailMessage mail = new MailMessage();
 			mail.To.Add("info@" + Request.Url.Host);
-			mail.From = new MailAddress("info@" + Request.Url.Host);
 			mail.Subject = "Contact from your live chat";
 			mail.Body = "name:\t" + name + "\r\nemail:\t" + email + "\r\n\r\nMessage:\r\n" + message;
 
@@ -191,6 +190,43 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 		{
 			LCSKServices.OpServices svc = new LCSKServices.OpServices();
 			return PartialView("Typing", svc.IsTyping(id.ToString(), true));
+		}
+
+		[HttpPost]
+		public ActionResult SendChat(Guid id)
+		{
+			var data = ChatService.GetTranscript(id);
+			if (data != null && data.Conversation.Count() > 0)
+			{
+				try
+				{
+					MailMessage mail = new MailMessage();
+					mail.To.Add(new MailAddress(data.Email));
+					mail.Subject = "Your chat session on " + Request.Url.Host;
+
+					StringBuilder sb = new StringBuilder();
+
+					sb.Append("<h4>Here is your chat transcript for the chat on " + Request.Url.Host);
+
+					sb.AppendFormat("<p>The chat was requested on {0:g} and has been accepted on {0:g}</p>", data.Requested, data.Accepted);
+
+					foreach (var msg in data.Conversation)
+						sb.AppendFormat("<p><strong>{0}:</strong> {1}</p>", msg.Name, msg.Message);
+
+					mail.Body = sb.ToString();
+
+					mail.IsBodyHtml = true;
+
+					SmtpClient svc = new SmtpClient();
+					svc.Send(mail);
+				}
+				catch (Exception ex)
+				{			
+					// Maybe the SMTP is not set on your web.config ?!?
+					throw;
+				}
+			}
+			return null;
 		}
 
 		public ActionResult Install()

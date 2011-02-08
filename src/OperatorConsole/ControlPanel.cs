@@ -105,9 +105,6 @@ namespace LiveChatStarterKit.OperatorConsole
 
                         drpChatRequest.Items.Add(req);
 
-                        // Remove the chat request to avoid multiple operator to getting the chat.
-						ws.RemoveChatRequest(new Guid(Program.CurrentOperator.Password), req);
-
                         // Should we play a sound?
                         PlayChatReqSound();
                     }
@@ -159,6 +156,9 @@ namespace LiveChatStarterKit.OperatorConsole
                 // Remove the chat request from the combo
                 drpChatRequest.Items.Remove(req);
                 drpChatRequest.Text = string.Empty;
+
+				// Accept the chat request
+				ws.AcceptRequest(new Guid(Program.CurrentOperator.Password), req.ChatId, Program.CurrentOperator.OperatorId);
 
                 // Add a new tab page that will contain the chat session
                 TabPage tab = new TabPage(req.VisitorIp);

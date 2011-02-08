@@ -105,6 +105,22 @@
           <s:element minOccurs="0" maxOccurs="1" name="Department" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="AcceptRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="chatId" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AcceptRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AcceptRequestResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="AddMessage">
         <s:complexType>
           <s:sequence>
@@ -332,6 +348,12 @@
   <wsdl:message name="GetChatRequestsSoapOut">
     <wsdl:part name="parameters" element="tns:GetChatRequestsResponse" />
   </wsdl:message>
+  <wsdl:message name="AcceptRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:AcceptRequest" />
+  </wsdl:message>
+  <wsdl:message name="AcceptRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:AcceptRequestResponse" />
+  </wsdl:message>
   <wsdl:message name="AddMessageSoapIn">
     <wsdl:part name="parameters" element="tns:AddMessage" />
   </wsdl:message>
@@ -427,6 +449,10 @@
       <wsdl:input message="tns:GetChatRequestsSoapIn" />
       <wsdl:output message="tns:GetChatRequestsSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AcceptRequest">
+      <wsdl:input message="tns:AcceptRequestSoapIn" />
+      <wsdl:output message="tns:AcceptRequestSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AddMessage">
       <wsdl:input message="tns:AddMessageSoapIn" />
       <wsdl:output message="tns:AddMessageSoapOut" />
@@ -511,6 +537,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetChatRequests">
       <soap:operation soapAction="http://focuscentric.com/GetChatRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRequest">
+      <soap:operation soapAction="http://focuscentric.com/AcceptRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -667,6 +702,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetChatRequests">
       <soap12:operation soapAction="http://focuscentric.com/GetChatRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptRequest">
+      <soap12:operation soapAction="http://focuscentric.com/AcceptRequest" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

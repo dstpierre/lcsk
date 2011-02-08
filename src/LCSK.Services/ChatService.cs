@@ -36,6 +36,14 @@ namespace LCSK.Services
 			_provider.RequestChat(request);
 		}
 
+		public static bool AcceptRequest(Guid chatId, int operatorId)
+		{
+			if (_provider == null)
+				LoadProvider();
+
+			return _provider.AcceptRequest(chatId, operatorId);
+		}
+
 		public static void AddMessage(ChatMessage msg)
 		{
 			// Load the provider
@@ -74,6 +82,14 @@ namespace LCSK.Services
 			LoadProvider();
 
 			return _provider.HasNewMessage(chatId, lastMessageId);
+		}
+
+		public static SendTranscriptViewModel GetTranscript(Guid chatId)
+		{
+			if (_provider == null)
+				LoadProvider();
+
+			return _provider.GetTranscript(chatId);
 		}
 
 		private static void LoadProvider()

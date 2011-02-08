@@ -45,6 +45,7 @@
     <Compile Include="Operator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestInfo.cs" />
+    <Compile Include="ViewModels\SendTranscriptViewModel.cs" />
     <Compile Include="ViewModels\VisitorInitViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

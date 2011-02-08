@@ -55,15 +55,20 @@ namespace LCSK.Providers.Sql
 				// Get the less busy operator
 				int operatorId = -1;
 
-				var results = from c in db.LiveChat_ChatRequests
-							  join o in db.LiveChat_Operators on c.OperatorID equals o.OperatorID into ops
-							  from op in ops.DefaultIfEmpty()
-							  where op.IsOnline && op.Department.Contains(request.Department)
-							  group op by op.OperatorID into g
+				var results = from o in db.LiveChat_Operators
+							  join c in db.LiveChat_ChatRequests on o.OperatorID equals c.OperatorID into req
+							  from r in req.DefaultIfEmpty()
+							  where o.IsOnline && o.Department.Contains(request.Department)
+							  group o by o.OperatorID into g
 							  select new { Id = g.Key, Count = g.Count() };
 
 				if (results != null && results.Count() > 0)
 					operatorId = results.OrderBy(x => x.Count).First().Id;
+				else
+				{
+					// WTH
+					operatorId = db.LiveChat_Operators.First(x => x.IsOnline).OperatorID;
+				}
 
 				LiveChat_ChatRequest entity = new LiveChat_ChatRequest();
 				entity.ChatID = request.ChatId;
@@ -78,6 +83,25 @@ namespace LCSK.Providers.Sql
 				db.LiveChat_ChatRequests.InsertOnSubmit(entity);
 				db.SubmitChanges();
 				return entity.ChatID;
+			}
+		}
+
+		public override bool AcceptRequest(Guid id, int operatorId)
+		{
+			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+			{
+				var req = db.LiveChat_ChatRequests.SingleOrDefault(x =>
+					x.ChatID == id);
+
+				if (req != null)
+				{
+					req.AcceptDate = DateTime.Now;
+
+					db.SubmitChanges();
+
+					return true;
+				}
+				return false;
 			}
 		}
 
@@ -125,7 +149,8 @@ namespace LCSK.Providers.Sql
 		{
 			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
 			{
-				var pending = db.LiveChat_ChatRequests.Where(x => x.OperatorID == -1 || x.OperatorID == operatorId).ToList();
+				var pending = db.LiveChat_ChatRequests.Where(x => x.AcceptDate == null &&
+					(x.OperatorID == -1 || x.OperatorID == operatorId)).ToList();
 
 				//TODO: Elegantly manage this in another way
 				bool found = false;
@@ -146,6 +171,7 @@ namespace LCSK.Providers.Sql
 						// if the request has been idle (not answer for more than 3 minutes
 						if (req.RequestDate > DateTime.Now.AddMinutes(-3))
 						{
+							//TODO: Swtich operator
 							toRemove.Add(req);
 						}
 					}
@@ -193,6 +219,38 @@ namespace LCSK.Providers.Sql
 			{
 				return db.LiveChat_ChatMessages.Count(x =>
 					x.ChatID == chatId && x.MessageID > lastMessageId) > 0;
+			}
+		}
+
+		public override SendTranscriptViewModel GetTranscript(Guid chatId)
+		{
+			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+			{
+				var request = db.LiveChat_ChatRequests.SingleOrDefault(x => x.ChatID == chatId);
+				if (request != null)
+				{
+					SendTranscriptViewModel vm = new SendTranscriptViewModel();
+					vm.Email = request.VisitorEmail;
+					vm.Requested = request.RequestDate;
+					vm.Accepted = request.AcceptDate ?? DateTime.MinValue;
+
+					vm.Conversation = new List<ChatMessage>();
+
+					foreach(var m in db.LiveChat_ChatMessages.OrderBy(x => x.MessageID)
+						.Where(x => x.ChatID == chatId).ToList())
+					{
+						ChatMessage msg = new ChatMessage();
+						msg.ChatId = m.ChatID;
+						msg.Message = m.Message;
+						msg.MessageId = m.MessageID;
+						msg.Name = m.FromName;
+						
+						vm.Conversation.Add(msg);
+					}
+
+					return vm;
+				}
+				return null;
 			}
 		}
 	}

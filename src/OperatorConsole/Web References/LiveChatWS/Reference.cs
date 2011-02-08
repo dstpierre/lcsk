@@ -37,6 +37,8 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         private System.Threading.SendOrPostCallback GetChatRequestsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AcceptRequestOperationCompleted;
+        
         private System.Threading.SendOrPostCallback AddMessageOperationCompleted;
         
         private System.Threading.SendOrPostCallback RemoveChatRequestOperationCompleted;
@@ -112,6 +114,9 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
         
         /// <remarks/>
         public event GetChatRequestsCompletedEventHandler GetChatRequestsCompleted;
+        
+        /// <remarks/>
+        public event AcceptRequestCompletedEventHandler AcceptRequestCompleted;
         
         /// <remarks/>
         public event AddMessageCompletedEventHandler AddMessageCompleted;
@@ -272,6 +277,39 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             if ((this.GetChatRequestsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetChatRequestsCompleted(this, new GetChatRequestsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://focuscentric.com/AcceptRequest", RequestNamespace="http://focuscentric.com/", ResponseNamespace="http://focuscentric.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool AcceptRequest(System.Guid key, System.Guid chatId, int operatorId) {
+            object[] results = this.Invoke("AcceptRequest", new object[] {
+                        key,
+                        chatId,
+                        operatorId});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AcceptRequestAsync(System.Guid key, System.Guid chatId, int operatorId) {
+            this.AcceptRequestAsync(key, chatId, operatorId, null);
+        }
+        
+        /// <remarks/>
+        public void AcceptRequestAsync(System.Guid key, System.Guid chatId, int operatorId, object userState) {
+            if ((this.AcceptRequestOperationCompleted == null)) {
+                this.AcceptRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAcceptRequestOperationCompleted);
+            }
+            this.InvokeAsync("AcceptRequest", new object[] {
+                        key,
+                        chatId,
+                        operatorId}, this.AcceptRequestOperationCompleted, userState);
+        }
+        
+        private void OnAcceptRequestOperationCompleted(object arg) {
+            if ((this.AcceptRequestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AcceptRequestCompleted(this, new AcceptRequestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1156,6 +1194,32 @@ namespace LiveChatStarterKit.OperatorConsole.LiveChatWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ChatRequest[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void AcceptRequestCompletedEventHandler(object sender, AcceptRequestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AcceptRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AcceptRequestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
             }
         }
     }

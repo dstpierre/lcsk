@@ -20,11 +20,14 @@ namespace LCSK.Providers
 	public abstract class ChatProvider : ProviderBase
 	{
 		public abstract Guid RequestChat(ChatRequest request);
+		public abstract bool AcceptRequest(Guid id, int operatorId);
 		public abstract void AddChatMessage(ChatMessage msg);
 		public abstract List<ChatMessage> GetMessages(Guid chatId, long lastCheck);
 		public abstract List<ChatRequest> GetChatRequests(int operatorId, string[] departments);
 		public abstract void RemoveChatRequest(ChatRequest req);
 		public abstract bool HasNewMessage(Guid chatId, long lastMessageId);
+
+		public abstract SendTranscriptViewModel GetTranscript(Guid chatId);
 	}
 
 }
