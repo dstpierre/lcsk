@@ -67,6 +67,9 @@ namespace LiveChatStarterKit.OperatorConsole
 				op.Email = txtEmail.Text;
 				op.Password = txtPassword.Text;
 
+				// Reset the department
+				op.Department = "";
+
 				foreach (string dep in txtDepartment.Text.Split('\n'))
 				{
 					op.Department += dep.Replace("\r", "").Trim() + ",";
