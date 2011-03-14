@@ -219,7 +219,7 @@ CREATE TABLE [dbo].[LiveChat_Operators](
 				entity.Department = op.Department;
 				entity.OperatorEmail = op.Email;
 				entity.OperatorName = op.OperatorName;
-				entity.OperatorPassword = op.Password.Length > 0 ? entity.OperatorPassword : op.Password;
+				entity.OperatorPassword = op.Password.Length == 0 ? entity.OperatorPassword : op.Password;
 
 				db.SubmitChanges();
 				return true;

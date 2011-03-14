@@ -17,40 +17,54 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
     {
 		public FileResult ChatImage()
 		{
-			RequestService.LogRequest(new WebRequest()
+			try
 			{
-				DomainName = Request.Url.Host,
-				PageRequested = Request.UrlReferrer.AbsolutePath,
-				Referrer = Request.QueryString["r"] != null ? Server.UrlDecode(Request.QueryString["r"].ToString()) : "",
-				Requested = DateTime.Now,
-				VisitorIp = Request.UserHostAddress,
-				VisitorUserAgent = Request.UserAgent
-			});
+				RequestService.LogRequest(new WebRequest()
+				{
+					DomainName = Request.Url.Host,
+					PageRequested = Request.UrlReferrer.AbsolutePath,
+					Referrer = Request.QueryString["r"] != null ? Server.UrlDecode(Request.QueryString["r"].ToString()) : "",
+					Requested = DateTime.Now,
+					VisitorIp = Request.UserHostAddress,
+					VisitorUserAgent = Request.UserAgent
+				});
 
-			string file = Server.MapPath("/Content/LCSK/" + (OperatorService.GetOperatorStatus() ? "online.jpg" : "offline.jpg"));
-			return new FileStreamResult(new FileStream(file, FileMode.Open), "image/jpg");
+				string file = Server.MapPath("/Content/LCSK/" + (OperatorService.GetOperatorStatus() ? "online.jpg" : "offline.jpg"));
+				return new FileStreamResult(new FileStream(file, FileMode.Open), "image/jpg");
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		public FileResult CheckInviration()
 		{
-			string js = "";
-			var request = RequestService.CheckForInvites(Request.UserHostAddress);
-			if (request != null)
+			try
 			{
-				js = "$(document).ready(function() { " +
-					"$('#lcsk_invitation').show();" +
-					"	$('.lcsk_inviteActions').click(function() { " +
-					"		$('#lcsk_invitation').hide();" +
-					"	});" +
-					"});";
+				string js = "";
+				var request = RequestService.CheckForInvites(Request.UserHostAddress);
+				if (request != null)
+				{
+					js = "$(document).ready(function() { " +
+						"$('#lcsk_invitation').show();" +
+						"	$('.lcsk_inviteActions').click(function() { " +
+						"		$('#lcsk_invitation').hide();" +
+						"	});" +
+						"});";
+				}
+				else
+				{
+					js = "$(document).ready(function() { " +
+						"$('#lcsk_invitation').hide();" +
+						"});";
+				}
+				return new FileStreamResult(new MemoryStream(Encoding.ASCII.GetBytes(js)), "text/javascript");
 			}
-			else
+			catch (Exception ex)
 			{
-				js = "$(document).ready(function() { " +
-					"$('#lcsk_invitation').hide();" +
-					"});";
+				throw ex;
 			}
-			return new FileStreamResult(new MemoryStream(Encoding.ASCII.GetBytes(js)), "text/javascript");
 		}
 
 		private VisitorInitViewModel InitRequest()
@@ -263,6 +277,17 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 		public ActionResult InstallCompleted()
 		{
 			return View();
+		}
+
+		public ActionResult Index()
+		{
+			var cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(@"/");
+			if (cfg.ConnectionStrings.ConnectionStrings["LCSK"] == null)
+			{
+				return RedirectToAction("Install");
+			}
+
+			throw new Exception("No index action when the application is installed");
 		}
     }
 }

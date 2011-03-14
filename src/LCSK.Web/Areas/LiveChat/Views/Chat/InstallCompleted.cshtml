@@ -24,9 +24,9 @@ Here is the code to add to your pages where you want the button to appears.
 
 
 <blockquote>
-<p>
-@("<a href=\"/livechat/session\" target=\"_blank\"><img src=\"/livechat/chatimage?r=@Url.Encode(Request.UrlReferrer != null ? Request.UrlReferrer.ToString() : \"\")\" alt=\"Chat button\" /></a>")
-</p>
+<pre>
+@("<a href=\"/livechat/session\" target=\"_blank\">\r\n\t<img id=\"lcsk_chatbutton\" src=\"\" alt=\"Chat button\" />\r\n</a>\r\n\r\n<script type=\"text/javascript\">\r\n\tdocument.getElementById('lcsk_chatbutton').src = '/livechat/chatimage?r=' + document.referrer;\r\n</script>")
+</pre>
 </blockquote>
 
 <p><strong>You might want to change the online and offline image located on /content/LCSK/online.jpg and offline.jpg</strong></p>

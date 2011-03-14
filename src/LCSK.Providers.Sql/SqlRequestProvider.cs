@@ -31,7 +31,8 @@ namespace LCSK.Providers.Sql
 				name = "SqlRequestProvider";
 
 			// Check for the connection string
-			if (config["connectionStringName"] != null && !string.IsNullOrEmpty(config["connectionStringName"].ToString()) && !string.IsNullOrEmpty(ConfigurationManager.ConnectionStrings[config["connectionStringName"].ToString()].ToString()))
+			if (config["connectionStringName"] != null && !string.IsNullOrEmpty(config["connectionStringName"].ToString()) && 
+				ConfigurationManager.ConnectionStrings[config["connectionStringName"].ToString()] != null && !string.IsNullOrEmpty(ConfigurationManager.ConnectionStrings[config["connectionStringName"].ToString()].ToString()))
 			{
 				connectionString = ConfigurationManager.ConnectionStrings[config["connectionStringName"].ToString()].ToString();
 				config.Remove("connectionStringName");
