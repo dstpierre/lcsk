@@ -47,3 +47,12 @@ fieldset label
 	display: block;
 }
 
+table
+{
+    width: 100%;
+}
+td
+{
+    padding: 3px;
+    border: 1px solid lightgray;
+}

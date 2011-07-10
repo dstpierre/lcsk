@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Chat Administration";
+    Layout = "~/Areas/LiveChat/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Administration</h2>
+
+@if(ViewBag.isadmin == null || (bool)ViewBag.isadmin == false)
+{
+<p>Please enter your admin password to access the following resources.</p>
+
+using(Html.BeginForm())
+{
+    <p>
+    <strong>Your admin password</strong>
+    @Html.Password("pass")
+    </p>
+    <p><input type="submit" value="Sign In" /></p>
+}
+}
+else
+{
+    <h3>Here is the current options available:</h3>
+    
+    <ul>
+        <li>@Html.ActionLink("Live Dashboard", "Dashboard")</li>
+    </ul>
+}

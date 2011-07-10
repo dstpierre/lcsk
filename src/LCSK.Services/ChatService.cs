@@ -92,6 +92,30 @@ namespace LCSK.Services
 			return _provider.GetTranscript(chatId);
 		}
 
+        public static List<ChatRequest> GetPendingRequests()
+        {
+            if (_provider == null)
+                LoadProvider();
+
+            return _provider.GetPendingRequests();
+        }
+
+        public static List<ChatRequest> GetCurrentSessions()
+        {
+            if (_provider == null)
+                LoadProvider();
+
+            return _provider.GetCurrentSessions();
+        }
+
+        public static List<ChatRequest> GetPendingInvitations()
+        {
+            if (_provider == null)
+                LoadProvider();
+
+            return _provider.GetPendingInvitations();
+        }
+
 		private static void LoadProvider()
 		{
 			// if we do not have initiated the provider

@@ -11,6 +11,13 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 </head>
 <body>
+@if (ViewBag.notinstalled != null && (bool)ViewBag.notinstalled == false)
+{
+    <div style="border: 1px solid red;padding: 15px;font-size: 16px;color: Red;">
+        The database is not installed.<br /><br />
+        Please <a href="/LiveChat/Install">click here to start the installation.</a>
+    </div>
+}
     <div>
         <h1>Demo page for chat button & Invitation line</h1>
 

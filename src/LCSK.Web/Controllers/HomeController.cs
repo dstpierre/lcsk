@@ -8,11 +8,10 @@ namespace LCSK.Web.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
-
         public ActionResult Index()
         {
+            var cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(@"/");
+            ViewBag.notinstalled = cfg.ConnectionStrings.ConnectionStrings["LCSK"] != null;
             return View();
         }
 

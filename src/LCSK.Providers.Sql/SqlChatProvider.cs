@@ -46,6 +46,9 @@ namespace LCSK.Providers.Sql
 		{
 			using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
 			{
+                if (request.Department == null)
+                    request.Department = "";
+
 				var existing = db.LiveChat_ChatRequests.SingleOrDefault(x =>
 					x.VisitorIP == request.VisitorIp &&
 					x.OperatorID == -1);
@@ -253,5 +256,102 @@ namespace LCSK.Providers.Sql
 				return null;
 			}
 		}
+
+        public override List<ChatRequest> GetPendingRequests()
+        {
+            using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+            {
+                var operators = db.LiveChat_Operators.ToList();
+                var requests = db.LiveChat_ChatRequests.Where(x => x.AcceptDate == null).OrderBy(x => x.RequestDate);
+
+
+                List<ChatRequest> pendingRequests = new List<ChatRequest>();
+                foreach (var r in requests)
+                {
+                    pendingRequests.Add(new ChatRequest()
+                    {
+                        Accepted = r.AcceptDate,
+                        ChatId = r.ChatID,
+                        Closed = r.ClosedDate,
+                        Department = r.Department,
+                        OperatorId = r.OperatorID,
+                        OperatorName = r.OperatorID > -1 ? 
+                            operators.Single(x => x.OperatorID == r.OperatorID).OperatorName : "n/a",
+                        Requested = r.RequestDate,
+                        VisitorEmail = r.VisitorEmail,
+                        VisitorIp = r.VisitorIP,
+                        VisitorName = r.VisitorName,
+                        VisitorUserAgent = r.VisitorUserAgent,
+                        WasAccepted = r.AcceptDate != null
+                    });
+                }
+
+                return pendingRequests;
+            }
+        }
+
+        public override List<ChatRequest> GetCurrentSessions()
+        {
+            using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+            {
+                var operators = db.LiveChat_Operators.ToList();
+                var sessions = db.LiveChat_ChatRequests.Where(x => x.AcceptDate != null && x.ClosedDate == null).OrderBy(x =>
+                    x.RequestDate);
+
+                List<ChatRequest> currentSessions = new List<ChatRequest>();
+                foreach (var r in sessions)
+                {
+                    currentSessions.Add(new ChatRequest()
+                    {
+                        Accepted = r.AcceptDate,
+                        ChatId = r.ChatID,
+                        Closed = r.ClosedDate,
+                        Department = r.Department,
+                        OperatorId = r.OperatorID,
+                        OperatorName = r.OperatorID > -1 ?
+                            operators.Single(x => x.OperatorID == r.OperatorID).OperatorName : "n/a",
+                        Requested = r.RequestDate,
+                        VisitorEmail = r.VisitorEmail,
+                        VisitorIp = r.VisitorIP,
+                        VisitorName = r.VisitorName,
+                        VisitorUserAgent = r.VisitorUserAgent,
+                        WasAccepted = r.AcceptDate != null
+                    });
+                }
+                return currentSessions;
+            }
+        }
+
+        public override List<ChatRequest> GetPendingInvitations()
+        {
+            using (LCSKDbDataContext db = new LCSKDbDataContext(connectionString))
+            {
+                var operators = db.LiveChat_Operators.ToList();
+                var invites = db.LiveChat_ChatRequests.Where(x => x.AcceptDate != null && x.Department == "op-invite").OrderBy(x =>
+                    x.RequestDate);
+
+                List<ChatRequest> pendingInvites = new List<ChatRequest>();
+                foreach (var r in invites)
+                {
+                    pendingInvites.Add(new ChatRequest()
+                    {
+                        Accepted = r.AcceptDate,
+                        ChatId = r.ChatID,
+                        Closed = r.ClosedDate,
+                        Department = r.Department,
+                        OperatorId = r.OperatorID,
+                        OperatorName = r.OperatorID > -1 ?
+                            operators.Single(x => x.OperatorID == r.OperatorID).OperatorName : "n/a",
+                        Requested = r.RequestDate,
+                        VisitorEmail = r.VisitorEmail,
+                        VisitorIp = r.VisitorIP,
+                        VisitorName = r.VisitorName,
+                        VisitorUserAgent = r.VisitorUserAgent,
+                        WasAccepted = r.AcceptDate != null
+                    });
+                }
+                return pendingInvites;
+            }
+        }
 	}
 }

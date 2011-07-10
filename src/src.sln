@@ -15,6 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCSK.Providers.Sql", "LCSK.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperatorConsole", "OperatorConsole\OperatorConsole.csproj", "{D9CDB4A6-D45C-46FA-8D61-2CE58D42005A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLScripts", "SQLScripts", "{9CF5AB26-EB98-4766-88D0-1813F936FB2B}"
+	ProjectSection(SolutionItems) = preProject
+		CreateTables-1.3.sql = CreateTables-1.3.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

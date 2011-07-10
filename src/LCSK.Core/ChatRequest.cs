@@ -48,6 +48,9 @@ namespace LCSK.Core
 		[XmlElement]
 		public int? OperatorId { get; set; }
 
+        [XmlElement]
+        public string OperatorName { get; set; }
+
 		[XmlElement]
 		public DateTime? Closed { get; set; }
 

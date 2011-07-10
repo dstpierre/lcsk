@@ -26,6 +26,9 @@ namespace LCSK.Providers
 		public abstract List<ChatRequest> GetChatRequests(int operatorId, string[] departments);
 		public abstract void RemoveChatRequest(ChatRequest req);
 		public abstract bool HasNewMessage(Guid chatId, long lastMessageId);
+        public abstract List<ChatRequest> GetPendingRequests();
+        public abstract List<ChatRequest> GetCurrentSessions();
+        public abstract List<ChatRequest> GetPendingInvitations();
 
 		public abstract SendTranscriptViewModel GetTranscript(Guid chatId);
 	}
