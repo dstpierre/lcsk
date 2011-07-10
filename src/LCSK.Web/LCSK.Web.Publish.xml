@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="e:\projects\misv\livechatstarterkit\publish" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="Areas/LiveChat/Views/Chat/Typing.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Areas/LiveChat/Views/Chat/Session.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="bin/LCSK.Web.dll" publishTime="03/13/2011 20:25:21" />
+    <file relUrl="Areas/LiveChat/Views/Chat/MailSent.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Scripts/jquery-ui.min.js" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Areas/LiveChat/Views/Shared/_Layout.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Global.asax" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Views/_ViewStart.cshtml" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="bin/LCSK.Services.dll" publishTime="03/13/2011 20:25:21" />
+    <file relUrl="Scripts/MicrosoftAjax.js" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.debug.js" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="bin/LCSK.Providers.Sql.dll" publishTime="03/13/2011 20:25:21" />
+    <file relUrl="bin/LCSK.Providers.pdb" publishTime="03/13/2011 20:25:21" />
+    <file relUrl="Content/LCSK/online.jpg" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Scripts/jquery-1.4.4-vsdoc.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Views/Shared/Error.cshtml" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Scripts/jquery.validate.min.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Scripts/jquery-1.4.4.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Areas/LiveChat/Views/Chat/Install.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="bin/LCSK.Web.pdb" publishTime="03/13/2011 20:25:21" />
+    <file relUrl="Scripts/MicrosoftMvcValidation.js" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Scripts/jquery.validate.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Scripts/jquery-1.4.4.min.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.min.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Content/LCSK/offline.jpg" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Views/Home/Index.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Content/LCSK/livechat_logo.jpg" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Views/Home/TestingReferrer.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Areas/LiveChat/Views/Web.config" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Scripts/MicrosoftMvcAjax.debug.js" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Scripts/MicrosoftMvcAjax.js" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="bin/LCSK.Providers.Sql.pdb" publishTime="03/13/2011 20:25:21" />
+    <file relUrl="Views/Shared/_Layout.cshtml" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Content/LCSK/lcsk.css" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Areas/LiveChat/Views/Chat/InstallCompleted.cshtml" publishTime="03/13/2011 19:47:11" />
+    <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Areas/LiveChat/Views/Chat/ChatLine.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="bin/LCSK.Core.dll" publishTime="03/13/2011 20:25:19" />
+    <file relUrl="bin/LCSK.Services.pdb" publishTime="03/13/2011 20:25:21" />
+    <file relUrl="Web.config" publishTime="03/13/2011 20:26:22" />
+    <file relUrl="bin/LCSK.Providers.dll" publishTime="03/13/2011 20:25:21" />
+    <file relUrl="Content/Site.css" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="Scripts/MicrosoftAjax.debug.js" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Views/Web.config" publishTime="02/12/2011 19:21:14" />
+    <file relUrl="Areas/LiveChat/Views/Chat/Chat.cshtml" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="Scripts/jquery-ui.js" publishTime="03/13/2011 19:27:30" />
+    <file relUrl="bin/LCSK.Core.pdb" publishTime="03/13/2011 20:25:19" />
+    <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="02/12/2011 19:21:13" />
+    <file relUrl="LCSKServices/OpServices.asmx" publishTime="03/13/2011 19:27:30" />
+  </publishProfile>
+</publishData>

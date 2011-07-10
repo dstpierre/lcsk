@@ -46,7 +46,7 @@ namespace LCSK.Core
 		public ChatMessage(Guid chatId, string name, string message)
 		{
 			MessageId = -1;
-			chatId = chatId;
+			ChatId = chatId;
 			Name = name;
 			Sent = DateTime.Now;
 			Message = message;

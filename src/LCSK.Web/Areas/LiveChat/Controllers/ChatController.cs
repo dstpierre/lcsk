@@ -100,9 +100,17 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 						return RedirectToAction("Chat", new { id = req.ChatId });
 				}
 			}
-			var vm = InitRequest();
-
-			return View(vm);
+		
+			try
+			{
+				var vm = InitRequest();
+				return View(vm);
+			}
+			catch (Exception ex)
+			{
+				ViewBag.error = ex.Message;
+				return View("InstallError");
+			}
 		}
 
 		[HttpPost]
