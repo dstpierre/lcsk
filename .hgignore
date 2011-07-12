@@ -7,3 +7,4 @@ glob:*.patch
 glob:*.hg
 glob:*.sln.cache
 glob:desktop.ini
+glob:publish

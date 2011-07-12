@@ -11,41 +11,22 @@ using LCSK.Services;
 using System.Net.Mail;
 using System.Text;
 
-namespace LCSK.Web.Areas.LiveChat.Controllers
+namespace LCSK.Web.Controllers
 {
-    public class ChatController : Controller
+    public class LiveChatController : BaseController
     {
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            ViewBag.isadmin = filterContext.HttpContext.Session["lcsk_isadmin"];
-            base.OnActionExecuting(filterContext);
-        }
-
-        private bool IsDatabaseCreated()
-        {
-            var cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(@"/");
-            return cfg.ConnectionStrings.ConnectionStrings["LCSK"] != null;
-        }
-
-        private bool IsAdmin
-        {
-            get { return ViewBag.isadmin != null && (bool)ViewBag.isadmin; } 
-        }
-
         public ActionResult Index()
         {
-            if (!IsDatabaseCreated())
+            if (!IsDatabaseCreated)
             {
                 return RedirectToAction("Install");
             }
             throw new Exception("No index action when the application is installed");
         }
 
-        #region Chat session related actions
-
         public FileResult ChatImage()
 		{
-            if (!IsDatabaseCreated())
+            if (!IsDatabaseCreated)
             {
                 ViewBag.notinstalled = true;
                 return null;
@@ -74,7 +55,7 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 
 		public FileResult CheckInviration()
 		{
-            if (!IsDatabaseCreated())
+            if (!IsDatabaseCreated)
                 return null;
 
 			try
@@ -287,82 +268,5 @@ namespace LCSK.Web.Areas.LiveChat.Controllers
 			}
 			return null;
 		}
-
-        #endregion
-
-        #region Installation
-
-        public ActionResult Install()
-		{
-			return View();
-		}
-
-		[HttpPost]
-		public ActionResult Install(string server, string dbname, string username, string password, string adminPassword)
-		{
-			if(!IsDatabaseCreated())
-            {
-                var cfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(@"/");
-				cfg.ConnectionStrings.ConnectionStrings.Add(new ConnectionStringSettings("LCSK",
-					string.Format("Data Source={0};Initial Catalog={1};{2}", server, dbname,
-						(!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password) ? "User id:" + username + ";password: " + password : "Integrated Security=True;")
-					), "System.Data.SqlClient"));
-
-				cfg.Save();
-			}
-
-			return RedirectToAction("InstallDatabase", new { id = adminPassword });
-		}
-
-		public ActionResult InstallDatabase(string id)
-		{
-			if (OperatorService.CreateDatabase(id))
-			{
-				return RedirectToAction("InstallCompleted");
-			}
-			return RedirectToAction("InstallError");
-		}
-
-		public ActionResult InstallCompleted()
-		{
-			return View();
-		}
-
-        #endregion
-
-        #region Admin actions
-        public ActionResult Admin()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Admin(string pass)
-        {
-            var op = OperatorService.LogIn("admin", pass);
-            if (op != null)
-            {
-                ViewBag.isadmin = HttpContext.Session["lcsk_isadmin"] = true;
-            }
-            return View();
-        }
-
-        public ActionResult Dashboard()
-        {
-            if (!IsAdmin)
-            {
-                return RedirectToAction("Admin");
-            }
-
-            var vm = new DashboardViewModel();
-
-            vm.Visitors = RequestService.GetRequest(DateTime.Now.AddMinutes(-10));
-            vm.CurrentChat = ChatService.GetCurrentSessions();
-            vm.PendingRequests = ChatService.GetPendingRequests();
-            vm.PendingInvitations = ChatService.GetPendingInvitations();
-            
-            return View(vm);
-        }
-        #endregion
     }
 }

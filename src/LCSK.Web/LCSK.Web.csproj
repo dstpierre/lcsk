@@ -58,9 +58,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\LiveChat\Controllers\ChatController.cs" />
-    <Compile Include="Areas\LiveChat\LiveChatAreaRegistration.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\LiveChatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstallController.cs" />
+    <Compile Include="Extensibility\BaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -108,14 +110,10 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutDemo.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\LiveChat\Models\" />
     <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LCSK.Core\LCSK.Core.csproj">
@@ -136,40 +134,40 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\Install.cshtml" />
+    <Content Include="Views\Install\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\Session.cshtml" />
+    <Content Include="Views\LiveChat\Session.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\InstallCompleted.cshtml" />
+    <Content Include="Views\Install\InstallCompleted.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\Chat.cshtml" />
+    <Content Include="Views\LiveChat\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\ChatLine.cshtml" />
+    <Content Include="Views\LiveChat\ChatLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\Typing.cshtml" />
+    <Content Include="Views\LiveChat\Typing.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\MailSent.cshtml" />
+    <Content Include="Views\LiveChat\MailSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\TestingReferrer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\Admin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\LiveChat\Views\Chat\Dashboard.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

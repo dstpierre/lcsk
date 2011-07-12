@@ -1,6 +1,5 @@
 ﻿@{
 	ViewBag.Title = "Installation completed";
-	Layout = "~/Areas/LiveChat/Views/Shared/_Layout.cshtml";
 }
 <h2>Installation completed</h2>
 
@@ -8,13 +7,16 @@
 
 <h4>Operator Console</h4>
 
-<p>If you are installing this via nuget, you will have to download the operator console (Windows Forms) application to answer and chat with your visitor.</p>
+<p>If you are installing this via nuget, you will have to download the operator console (Windows Forms) application to answer and chat with your visitors.</p>
 
-<p>You can download it here: <a href=" http://livechatstarterkit.codeplex.com/releases"> http://livechatstarterkit.codeplex.com/releases</a></p>
+<p>You can download it here: <a href="http://livechatstarterkit.codeplex.com/releases"> http://livechatstarterkit.codeplex.com/releases </a></p>
 
 <p>You might want to start the Operator Console and click on "Configure" to set the correct Url for the webservice communication.</p>
 
-<p>It could look similar to this: http://@Request.Url.Host/LCSKServices/OpServices.asmx</p>
+<p>It could look similar to this: http://@Request.Url.Host/LCSKServices/OpServices.asmx or 
+    http://@Request.Url.Host/VirtualDirectory/LCSKServices/OpServices.asmx if you installed it on a 
+    virtual directory, replace the /VirtualDirectory/ with you name.
+ </p>
 
 <p>Sign in with the user 'admin' and the password you supply on the last page.</p>
 
