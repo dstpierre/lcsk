@@ -1,0 +1,7 @@
+obj
+Obj
+bin
+Bin
+*.csproj.user
+*.suo
+*.cache

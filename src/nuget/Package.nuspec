@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LCSK</id>
+    <version>1.5.0</version>
+    <authors>Dominic St-Pierre</authors>
+    <owners>dstpierre</owners>
+    <licenseUrl>http://livechatstarterkit.codeplex.com/license</licenseUrl>
+    <projectUrl>http://livechatstarterkit.codeplex.com/</projectUrl>
+    <!--<iconUrl></iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Lightweight LiveChat / Live Support for ASP.NET MVC.</description>
+    <releaseNotes>5 files deployment, nice visitor chat experience.</releaseNotes>
+    <copyright>Copyright 2012 - Focus Centric inc.</copyright>
+    <tags>Chat LiveChat LiveSupport</tags>
+    <dependencies>
+      <dependency id="Dapper" version="1.8" />
+    </dependencies>
+  </metadata>
+</package>
