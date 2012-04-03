@@ -7,7 +7,7 @@ using LCSK;
 using System.Configuration;
 using System.Net.Mail;
 
-namespace $rootnamespace$.Models.Controllers
+namespace $rootnamespace$.Controllers
 {
     public class ChatController : Controller
     {

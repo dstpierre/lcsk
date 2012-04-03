@@ -1,3 +1,22 @@
+How to install
+
+1. Add a connection string named LCSK on your web.config.
+
+2. Add this to each page you want to display the chat box:
+
+  <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="@Url.Content("~/Scripts/chat.js")" type="text/javascript"></script>
+
+3. Create the following SQL tables (see SQL TABLES)
+
+4. Create an operator
+
+  insert into lcsk_operators
+  values (NEWID(), 'demo', 'pass', 'Demo', 0, GETDATE())
+
+
+SQL TABLES
+
 /****** Object:  Table [dbo].[lcsk_Chats]    Script Date: 04/03/2012 08:13:58 ******/
 SET ANSI_NULLS ON
 GO
