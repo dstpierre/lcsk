@@ -1,4 +1,4 @@
-/****** Object:  Table [dbo].[lcsk_Chats]    Script Date: 04/03/2012 08:13:58 ******/
+/****** Object:  Table [dbo].[lcsk_Chats]    Script Date: 06/03/2012 07:29:26 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[lcsk_Chats](
 	[Created] [smalldatetime] NOT NULL,
 	[Accepted] [smalldatetime] NULL,
 	[Closed] [smalldatetime] NULL,
+	[VisitorId] [uniqueidentifier] NULL,
  CONSTRAINT [PK_lcsk_Chats] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -26,7 +27,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[lcsk_Messages]    Script Date: 04/03/2012 08:13:58 ******/
+/****** Object:  Table [dbo].[lcsk_Messages]    Script Date: 06/03/2012 07:29:26 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -53,7 +54,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[lcsk_Operators]    Script Date: 04/03/2012 08:13:58 ******/
+/****** Object:  Table [dbo].[lcsk_Operators]    Script Date: 06/03/2012 07:29:26 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -81,7 +82,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[lcsk_RealTimeVisits]    Script Date: 04/03/2012 08:13:58 ******/
+/****** Object:  Table [dbo].[lcsk_RealTimeVisits]    Script Date: 06/03/2012 07:29:26 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -98,6 +99,10 @@ CREATE TABLE [dbo].[lcsk_RealTimeVisits](
 	[Referrer] [varchar](255) NOT NULL,
 	[RequestedOn] [smalldatetime] NOT NULL,
 	[Ping] [datetime] NOT NULL,
+	[CountryCode] [varchar](5) NULL,
+	[CountryName] [nvarchar](150) NULL,
+	[LocationName] [nvarchar](200) NULL,
+	[VisitorId] [uniqueidentifier] NULL,
  CONSTRAINT [PK_lcsk_RealTimeVisits] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
