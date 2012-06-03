@@ -48,7 +48,8 @@
     <Compile Include="ChatMessage.cs" />
     <Compile Include="ChatOperator.cs" />
     <Compile Include="ChatRepository.cs" />
-    <Compile Include="DateExtension.cs" />
+    <Compile Include="DateExtensions.cs" />
+    <Compile Include="GeoLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTimeVisit.cs" />
     <Compile Include="StringExtensions.cs" />

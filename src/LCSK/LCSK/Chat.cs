@@ -13,5 +13,6 @@ namespace LCSK
         public DateTime Created { get; set; }
         public DateTime? Accepted { get; set; }
         public DateTime? Closed { get; set; }
+        public Guid? VisitorId { get; set; }
     }
 }

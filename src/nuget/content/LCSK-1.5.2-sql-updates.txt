@@ -1,0 +1,67 @@
+# LiveChat Starter Kit 1.5.2
+#
+# Author: Dominic St-Pierre @dominicstpierre
+#
+# If you have v1.5.1 installed, you have to run this SQL update script against your existing table.
+#
+#
+# If you are installing a new version (with the CREATE TABLE from the LCSK-ReadMe-SQLTables.txt file)
+# you do not need to run this, since the table are already up-to-date.
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.lcsk_RealTimeVisits ADD
+	CountryCode varchar(5) NULL,
+	CountryName nvarchar(150) NULL,
+	LocationName nvarchar(200) NULL
+GO
+ALTER TABLE dbo.lcsk_RealTimeVisits SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.lcsk_RealTimeVisits ADD
+	VisitorId uniqueidentifier NULL
+GO
+ALTER TABLE dbo.lcsk_RealTimeVisits SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.lcsk_Chats ADD
+	VisitorId uniqueidentifier NULL
+GO
+ALTER TABLE dbo.lcsk_Chats SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT

@@ -18,7 +18,7 @@
     }
     foreach (var c in Model.PendingChats)
     {
-        <p>Chat request from @c.VisitorIp received @c.Created.ElapseTime() <a href="/chat/chatsession/@(c.Id)?opId=@(op.Id)&opname=@(op.DisplayName)" target="_blank">accept</a></p>
+        <p>Chat request from @c.VisitorIp received @LCSK.DateExtensions.ElapseTime(c.Created) <a href="/chat/chatsession/@(c.Id)?opId=@(op.Id)&opname=@(op.DisplayName)" target="_blank">accept</a></p>
     }
 }
 
@@ -26,7 +26,7 @@
 {
     <table cellpadding="5" cellspacing="5">
     <tr>
-        <th>Ip</th>
+        <th>From</th>
         <th>Page</th>
         <th>Referrer</th>
         <th>First visit</th>
@@ -36,12 +36,12 @@
 @foreach (var v in Model.Visits)
 {
     <tr>
-        <td>@v.VisitorIp</td>
+        <td>@v.Location</td>
         <td><a href="@v.PageRequested" target="_blank">@v.PageRequested.Replace("/", " /")</a></td>
         <td><a href="@v.Referrer" target="_blank">@(!string.IsNullOrEmpty(v.Referrer) ? v.Referrer.Replace("/", " /").Replace("&", " &") : "n/a")</a></td>
-        <td>@v.RequestedOn.ElapseTime()</td>
-        <td>@v.Ping.ElapseTime()</td>
-        <td>@(new HtmlString((v.InChatId != Guid.Empty ? "In Chat" : string.Format("<a href=\"/chat/chatsession/{0}?opname={1}&ip={2}&opId={3}\" target=\"_blank\">engage</a>", Guid.Empty, op.DisplayName, v.VisitorIp.ToBase64(), op.Id))))</td>
+        <td>@LCSK.DateExtensions.ElapseTime(v.RequestedOn)</td>
+        <td>@LCSK.DateExtensions.ElapseTime(v.Ping)</td>
+        <td>@(new HtmlString((v.InChatId != Guid.Empty ? "In Chat" : string.Format("<a href=\"/chat/chatsession/{0}?opname={1}&ip={2}&opId={3}&vid={4}\" target=\"_blank\">engage</a>", Guid.Empty, op.DisplayName, LCSK.StringExtensions.ToBase64(v.VisitorIp), op.Id, LCSK.StringExtensions.ToBase64(v.VisitorId.ToString())))))</td>
     </tr>
 }
     </table>

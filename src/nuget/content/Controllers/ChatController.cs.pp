@@ -13,6 +13,26 @@ namespace $rootnamespace$.Controllers
     {
         ChatRepository repo = new ChatRepository(ConfigurationManager.ConnectionStrings["LCSK"].ToString());
 
+        private Guid GetVisitorId
+        {
+            get
+            {
+                Guid id = Guid.NewGuid();
+                if (Request.Cookies["lcsk_visitorid"] == null)
+                {
+                    var cookie = new HttpCookie("lcsk_visitorid");
+                    cookie.Value = id.ToString();
+                    Response.Cookies.Add(cookie);
+                }
+                else
+                {
+                    if(!Guid.TryParse(Request.Cookies["lcsk_visitorid"].Value, out id))
+                        id = Guid.NewGuid();
+                }
+                return id;
+            }
+        }
+
         private string GetIp()
         {
             try
@@ -58,19 +78,19 @@ namespace $rootnamespace$.Controllers
         [HttpPost]
         public ActionResult LogVisit(string referrer, string page)
         {
-            return Json(repo.LogVisit(GetIp(), page, referrer));
+            return Json(repo.LogVisit(GetVisitorId, GetIp(), page, referrer));
         }
 
         [HttpPost]
         public ActionResult Ping(string page)
         {
-            return Json(repo.VisitorPing(GetIp(), page));
+            return Json(repo.VisitorPing(GetVisitorId, page));
         }
 
         [HttpPost]
         public ActionResult RequestChat()
         {
-            Guid chatId = repo.RequestChat(GetIp(), Guid.Empty);
+            Guid chatId = repo.RequestChat(GetVisitorId, GetIp(), Guid.Empty, false);
             return Json(new { status = chatId != Guid.Empty, chatId = chatId });
         }
 
@@ -124,7 +144,7 @@ namespace $rootnamespace$.Controllers
                         op.IsOnline = !op.IsOnline;
                     }
                     ViewBag.op = op;
-                    return View(repo.GetVisitors(op.Id));
+                    return View(repo.GetVisitors(op.Id, Request.Url.Host));
                 }
             }
             return null;
@@ -145,7 +165,7 @@ namespace $rootnamespace$.Controllers
                 if (op != null)
                 {
                     ViewBag.op = op;
-                    return View(repo.GetVisitors(op.Id));
+                    return View(repo.GetVisitors(op.Id, Request.Url.Host));
                 }
             }
             return null;
@@ -157,11 +177,14 @@ namespace $rootnamespace$.Controllers
             Guid opId = Guid.Empty;
             string opName = "";
             string ip = "";
+            Guid vid = Guid.Empty;
+
 
             if (Request.QueryString["ip"] != null)
-                ip = Request.QueryString["ip"].ToString().FromBase64();
-            else
-                ip = "";
+                ip = LCSK.StringExtensions.FromBase64(Request.QueryString["ip"].ToString());
+
+            if (Request.QueryString["vid"] != null)
+                vid = Guid.Parse(LCSK.StringExtensions.FromBase64(Request.QueryString["vid"].ToString()));
 
             if (Request.QueryString["opname"] != null)
                 opName = Request.QueryString["opname"].ToString();
@@ -176,7 +199,7 @@ namespace $rootnamespace$.Controllers
 
             if (id == Guid.Empty)
             {
-                id = repo.RequestChat(ip, opId);
+                id = repo.RequestChat(vid, ip, opId, true);
                 repo.AddMsg(id, opName, "Can I help you with something?");
             }
             else

@@ -4,13 +4,13 @@ namespace LCSK
 {
 	public static class StringExtensions
 	{
-		public static string ToBase64(this string input)
+		public static string ToBase64(string input)
 		{
 			byte[] encbuff = System.Text.Encoding.UTF8.GetBytes(input);
 			return Convert.ToBase64String(encbuff);
 		}
 
-		public static string FromBase64(this string input)
+		public static string FromBase64(string input)
 		{
 			System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
 			System.Text.Decoder utf8Decode = encoder.GetDecoder();

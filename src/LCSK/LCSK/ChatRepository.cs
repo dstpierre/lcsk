@@ -56,13 +56,24 @@ namespace LCSK
             //TODO: Implement this.
         }
 
-        public string LogVisit(string ip, string page, string referrer)
+        public string LogVisit(Guid visitorId, string ip, string page, string referrer)
         {
             string retval = "offline";
             if (OpenConnection())
             {
                 try
                 {
+                    var location = GeoLocationService.Get(ip);
+                    if (location == null)
+                    {
+                        location = new LocationInfo()
+                        {
+                            CountryCode = "CA",
+                            CountryName = "Canada",
+                            Name = "Montreal"
+                        };
+                    }
+
                     var sql = @"
 INSERT INTO [lcsk_RealTimeVisits]
            ([Id]
@@ -70,24 +81,40 @@ INSERT INTO [lcsk_RealTimeVisits]
            ,[PageRequested]
            ,[Referrer]
            ,[RequestedOn]
-           ,[Ping])
+           ,[Ping]
+           ,[CountryCode]
+           ,[CountryName]
+           ,[LocationName]
+           ,[VisitorId])
      VALUES
            (newid()
            ,@ip
            ,@page
            ,@referrer
            ,getdate()
-           ,getdate())
+           ,getdate()
+           ,@cc
+           ,@cn
+           ,@ln
+           ,@id)
 
 UPDATE lcsk_Operators SET
     IsOnline = 0
 WHERE DATEDIFF(second, Ping, GETDATE()) >= 30 AND IsOnline = 1
 ";
-                    connection.Execute(sql, new { ip = ip, page = page, referrer = referrer });
+                    connection.Execute(sql, new { 
+                        ip = ip, 
+                        page = page, 
+                        referrer = referrer, 
+                        cc = location.CountryCode,
+                        cn = location.CountryName,
+                        ln = location.Name,
+                        id = visitorId
+                    });
 
                     using (var multi = connection.QueryMultiple(
                         @"SELECT COUNT(*) FROM lcsk_Operators WHERE IsOnline = 1
-                        SELECT TOP 1 CONVERT(VARCHAR(50), Id) FROM lcsk_Chats WHERE VisitorIp = @ip AND Closed IS NULL", new { ip = ip }))
+                        SELECT TOP 1 CONVERT(VARCHAR(50), Id) FROM lcsk_Chats WHERE VisitorId = @id AND Closed IS NULL", new { id = visitorId }))
                     {
                         bool isOnline = multi.Read<int>().SingleOrDefault() > 0;
 
@@ -109,7 +136,7 @@ WHERE DATEDIFF(second, Ping, GETDATE()) >= 30 AND IsOnline = 1
             return retval;
         }
 
-        public string VisitorPing(string ip, string page)
+        public string VisitorPing(Guid visitorId, string page)
         {
             string retval = "offline";
             if (OpenConnection())
@@ -117,16 +144,16 @@ WHERE DATEDIFF(second, Ping, GETDATE()) >= 30 AND IsOnline = 1
                 try
                 {
                     connection.Execute(@"
-UPDATE lcsk_RealTimeVisits SET Ping = GETDATE() WHERE VisitorIp = @ip AND PageRequested = @page
+UPDATE lcsk_RealTimeVisits SET Ping = GETDATE() WHERE VisitorId = @id AND PageRequested = @page
 
 UPDATE lcsk_Operators SET
     IsOnline = 0
 WHERE DATEDIFF(second, Ping, GETDATE()) >= 30 AND IsOnline = 1",
-                        new { ip = ip, page = page });
+                        new { id = visitorId, page = page });
 
                     using (var multi = connection.QueryMultiple(
                         @"SELECT COUNT(*) FROM lcsk_Operators WHERE IsOnline = 1
-                        SELECT TOP 1 CONVERT(VARCHAR(50), Id) FROM lcsk_Chats WHERE VisitorIp = @ip AND Closed IS NULL", new { ip = ip }))
+                        SELECT TOP 1 CONVERT(VARCHAR(50), Id) FROM lcsk_Chats WHERE VisitorId = @id AND Closed IS NULL", new { id = visitorId }))
                     {
                         bool isOnline = multi.Read<int>().SingleOrDefault() > 0;
 
@@ -148,7 +175,7 @@ WHERE DATEDIFF(second, Ping, GETDATE()) >= 30 AND IsOnline = 1",
             return retval;
         }
 
-        public Guid RequestChat(string visitorIp, Guid opId)
+        public Guid RequestChat(Guid visitorId, string visitorIp, Guid opId, bool engage)
         {
             Guid retval = Guid.NewGuid();
             if (OpenConnection())
@@ -162,17 +189,21 @@ INSERT INTO [lcsk_Chats]
            ,[VisitorIp]
            ,[Created]
            ,[Accepted]
-           ,[Closed])
+           ,[Closed]
+           ,[VisitorId])
      VALUES
            (@id
            ,@opId
            ,@ip
            ,GETDATE()
+           ,@acc
            ,NULL
-           ,NULL)
+           ,@vid)
 
 ";
-                    connection.Execute(sql, new { id = retval, opId = opId, ip = visitorIp });
+                    DateTime? accepted = engage ? DateTime.Now : (DateTime?)null;
+
+                    connection.Execute(sql, new { id = retval, opId = opId, ip = visitorIp, acc = accepted, vid = visitorId });
                 }
                 catch (Exception ex)
                 {
@@ -278,7 +309,7 @@ INSERT INTO [lcsk_Messages]
             return retval;
         }
 
-        public ChatBoardViewModel GetVisitors(Guid opId)
+        public ChatBoardViewModel GetVisitors(Guid opId, string domainName)
         {
             ChatBoardViewModel retval = new ChatBoardViewModel();
             if (OpenConnection())
@@ -288,12 +319,12 @@ INSERT INTO [lcsk_Messages]
                     connection.Execute("UPDATE lcsk_Operators SET Ping = GETDATE() WHERE Id = @id", new { id = opId });
 
                     var sql = @"
-SELECT newid() AS Id,VisitorIp,PageRequested,
-	(SELECT TOP 1 Referrer FROM lcsk_RealTimeVisits rt WHERE rt.VisitorIp = lcsk_RealTimeVisits.VisitorIp AND Referrer NOT LIKE '%bunkerapp.com%') As Referrer,
+SELECT newid() AS Id,VisitorId,VisitorIp,PageRequested,
+	(SELECT TOP 1 Referrer FROM lcsk_RealTimeVisits rt WHERE rt.VisitorId = lcsk_RealTimeVisits.VisitorId AND Referrer NOT LIKE '%" + domainName + @"%') As Referrer,
 	MAX(RequestedOn) AS RequestedOn,MAX(Ping) AS Ping,
-    (SELECT TOP 1 Id FROM lcsk_Chats c WHERE c.VisitorIp = lcsk_RealTimeVisits.VisitorIp AND Closed IS NULL) AS InChatId
+    (SELECT TOP 1 Id FROM lcsk_Chats c WHERE c.VisitorId = lcsk_RealTimeVisits.VisitorId AND Closed IS NULL) AS InChatId
 FROM lcsk_RealTimeVisits 
-GROUP BY VisitorIp,PageRequested
+GROUP BY VisitorId,VisitorIp,PageRequested
 HAVING DATEDIFF(second, MAX(Ping), GETDATE()) < 15 
 ORDER BY 4 DESC
 

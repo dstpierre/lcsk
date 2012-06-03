@@ -5,9 +5,9 @@ using System.Web;
 
 namespace LCSK
 {
-	public static class DateExtension
+	public static class DateExtensions
 	{
-        public static string ElapseTime(this DateTime input)
+        public static string ElapseTime(DateTime input)
         {
             TimeSpan oSpan = DateTime.Now.Subtract(input);
             double TotalMinutes = oSpan.TotalMinutes;
@@ -35,7 +35,7 @@ namespace LCSK
             return aValue.First(n => TotalMinutes < n.Key).Value.Invoke() + Suffix;
         }
 
-        public static DateTime ToDateTime(this long timestamp)
+        public static DateTime ToDateTime(long timestamp)
         {
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return origin.AddSeconds(timestamp);

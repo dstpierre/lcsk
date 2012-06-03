@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LCSK</id>
-    <version>1.5.1</version>
+    <version>1.5.2</version>
     <authors>Dominic St-Pierre</authors>
     <owners>dstpierre</owners>
     <licenseUrl>http://livechatstarterkit.codeplex.com/license</licenseUrl>
@@ -10,7 +10,7 @@
     <!--<iconUrl></iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Lightweight LiveChat / Live Support for ASP.NET MVC.</description>
-    <releaseNotes>Controller namespace fixed, added readme for SQL table creation.</releaseNotes>
+    <releaseNotes>Added visitor location, not using IP address as visitor identification anymore, javascript configuration.</releaseNotes>
     <copyright>Copyright 2012 - Focus Centric inc.</copyright>
     <tags>Chat LiveChat LiveSupport</tags>
     <dependencies>

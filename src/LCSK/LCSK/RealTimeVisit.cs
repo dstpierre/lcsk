@@ -14,5 +14,11 @@ namespace LCSK
         public DateTime RequestedOn { get; set; }
         public DateTime Ping { get; set; }
         public Guid InChatId { get; set; }
+        public string CountryCode { get; set; }
+        public string CountryName { get; set; }
+        public string LocationName { get; set; }
+        public Guid? VisitorId { get; set; }
+
+        public string Location { get { return string.Format("{0} - {1}", LocationName, CountryCode); } }
     }
 }
