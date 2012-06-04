@@ -319,12 +319,12 @@ INSERT INTO [lcsk_Messages]
                     connection.Execute("UPDATE lcsk_Operators SET Ping = GETDATE() WHERE Id = @id", new { id = opId });
 
                     var sql = @"
-SELECT newid() AS Id,VisitorId,VisitorIp,PageRequested,
+SELECT newid() AS Id,VisitorId,VisitorIp,PageRequested,CountryCode,LocationName,
 	(SELECT TOP 1 Referrer FROM lcsk_RealTimeVisits rt WHERE rt.VisitorId = lcsk_RealTimeVisits.VisitorId AND Referrer NOT LIKE '%" + domainName + @"%') As Referrer,
 	MAX(RequestedOn) AS RequestedOn,MAX(Ping) AS Ping,
     (SELECT TOP 1 Id FROM lcsk_Chats c WHERE c.VisitorId = lcsk_RealTimeVisits.VisitorId AND Closed IS NULL) AS InChatId
 FROM lcsk_RealTimeVisits 
-GROUP BY VisitorId,VisitorIp,PageRequested
+GROUP BY VisitorId,VisitorIp,PageRequested,CountryCode,LocationName
 HAVING DATEDIFF(second, MAX(Ping), GETDATE()) < 15 
 ORDER BY 4 DESC
 
