@@ -142,8 +142,12 @@ var LCSKChat = function () {
 
         $('#chat-box').on({
             click: function () {
+                var email = $('#chat-box-email').val();
+                var cmt = $('#chat-box-cmt').val();
+
                 $('#chat-box').html(options.emailSent);
-                $.post('/chat/sendemail', { email: $('#chat-box-email').val(), comment: $('#chat-box-cmt').val() }, function (data) {
+
+                $.post('/chat/sendemail', { email: email, comment: cmt }, function (data) {
                     if (data == 'ok') {
                         chatEditing = false;
                     } else {
