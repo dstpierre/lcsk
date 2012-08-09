@@ -14,5 +14,8 @@ namespace LCSK
         public DateTime? Accepted { get; set; }
         public DateTime? Closed { get; set; }
         public Guid? VisitorId { get; set; }
+
+        public string OperatorName { get; set; }
+        public long LastMessageId { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using LCSK;
 using System.Configuration;
 using System.Net.Mail;
+using System.IO;
 
 namespace Demo.Controllers
 {
@@ -75,6 +76,21 @@ namespace Demo.Controllers
             }
         }
 
+        public string GetViewHtml(string viewName, object model)
+        {
+            var content = string.Empty;
+            var view = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
+            using (var writer = new StringWriter())
+            {
+                ViewData.Model = model;
+                var context = new ViewContext(ControllerContext, view.View, ViewData, TempData, writer);
+                view.View.Render(context, writer);
+                writer.Flush();
+                content = writer.ToString();
+            }
+            return content;
+        }
+
         [HttpPost]
         public ActionResult LogVisit(string referrer, string page)
         {
@@ -124,7 +140,7 @@ namespace Demo.Controllers
         [HttpPost]
         public ActionResult Index(string opname, string oppass)
         {
-            return RedirectToAction("Go", new { id = opname + "-" + oppass });
+            return RedirectToAction("Go", new { id = opname + "-" + LCSK.StringExtensions.ToBase64(oppass) });
         }
 
         public ActionResult Go(string id)
@@ -135,7 +151,7 @@ namespace Demo.Controllers
             string[] val = id.Split(new char[] { '-' });
             if (val != null && val.Length >= 2)
             {
-                var op = repo.GetOperator(val[0], val[1]);
+                var op = repo.GetOperator(val[0], LCSK.StringExtensions.FromBase64(val[1]));
                 if (op != null)
                 {
                     if (val.Length == 3)
@@ -143,69 +159,57 @@ namespace Demo.Controllers
                         repo.ChangeStatus(op.Id, !op.IsOnline);
                         op.IsOnline = !op.IsOnline;
                     }
-                    ViewBag.op = op;
-                    return View(repo.GetVisitors(op.Id, Request.Url.Host));
+                    return View(op);
                 }
             }
-            return null;
+            return RedirectToAction("Index", new { id = "unbable to sign-in" });
         }
 
         [HttpPost]
-        public ActionResult Go(string id, string action)
+        public ActionResult Go(Guid id, string data)
         {
-            repo.DeleteUnclosedChat();
-
-            if (string.IsNullOrEmpty(id) || id.IndexOf("-") == -1)
-                return null;
-
-            string[] val = id.Split(new char[] { '-' });
-            if (val != null && val.Length >= 2)
+            Dictionary<Guid, long> state = new Dictionary<Guid, long>();
+            if (!string.IsNullOrEmpty(data))
             {
-                var op = repo.GetOperator(val[0], val[1]);
-                if (op != null)
+                foreach (var item in data.Split('\n'))
                 {
-                    ViewBag.op = op;
-                    return View(repo.GetVisitors(op.Id, Request.Url.Host));
+                    var buffer = item.Split('|');
+                    if (buffer != null && buffer.Length == 3)
+                    {
+                        state.Add(Guid.Parse(buffer[0]), long.Parse(buffer[1]));
+                        if (buffer[2] == "1")
+                            ViewBag.selectedId = buffer[0];
+                    }
                 }
             }
-            return null;
+
+            ViewBag.state = state;
+            var model = repo.GetVisitors(id, Request.Url.Host);
+            return Json(new { list = GetViewHtml("ChatItem", model.PendingChats), visitors = GetViewHtml("Visitors", model.Visits) });
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus(Guid id, int status)
+        {
+            if (repo.ChangeStatus(id, status == 1))
+                return Json("ok");
+            else
+                return Json("failed");
         }
 
         //[Authorize]
-        public ActionResult ChatSession(Guid id)
+        public ActionResult ChatSession(Guid id, string ip, Guid opId, string opName, Guid visitorId)
         {
-            Guid opId = Guid.Empty;
-            string opName = "";
-            string ip = "";
-            Guid vid = Guid.Empty;
-
-
-            if (Request.QueryString["ip"] != null)
-                ip = LCSK.StringExtensions.FromBase64(Request.QueryString["ip"].ToString());
-
-            if (Request.QueryString["vid"] != null)
-                vid = Guid.Parse(LCSK.StringExtensions.FromBase64(Request.QueryString["vid"].ToString()));
-
-            if (Request.QueryString["opname"] != null)
-                opName = Request.QueryString["opname"].ToString();
-            else
-                opName = "Operator";
-
-            if (Request.QueryString["opId"] != null)
-                opId = Guid.Parse(Request.QueryString["opId"].ToString());
-            else
-                return null;
-
-
             if (id == Guid.Empty)
             {
-                id = repo.RequestChat(vid, ip, opId, true);
+                id = repo.RequestChat(visitorId, ip, opId, true);
                 repo.AddMsg(id, opName, "Can I help you with something?");
             }
             else
                 repo.Accept(id, opId);
 
             ViewBag.opname = opName;
+            ViewBag.visitorIp = ip;
             return View(id);
         }
 

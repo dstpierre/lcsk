@@ -328,8 +328,11 @@ GROUP BY VisitorId,VisitorIp,PageRequested,CountryCode,LocationName
 HAVING DATEDIFF(second, MAX(Ping), GETDATE()) < 15 
 ORDER BY 4 DESC
 
-SELECT * FROM lcsk_Chats
-WHERE Closed IS NULL AND Accepted IS NULL
+SELECT c.*, op.DisplayName AS [OperatorName],
+    (SELECT MAX(m.Id) FROM LCSK_Messages m WHERE m.ChatId = c.Id) AS [LastMessageId]
+FROM lcsk_Chats c 
+    LEFT OUTER JOIN LCSK_Operators op ON c.OperatorId = op.Id
+WHERE Closed IS NULL
 ORDER BY Created
 ";
                     using(var multi = connection.QueryMultiple(sql, new { opId = Guid.Empty }))

@@ -1,0 +1,24 @@
+﻿@model List<LCSK.Chat>
+@{
+    Layout = null;
+    Dictionary<Guid, long> state = (Dictionary<Guid, long>)ViewBag.state;
+}
+
+@foreach(var c in Model)
+{
+    long currentMessageId = 0;
+    if (state.ContainsKey(c.Id))
+    {
+        currentMessageId = state[c.Id];
+    }
+    <div class="chat-item@(c.Id.ToString() == ViewBag.selectedId ? " selected" : "")" data-id="@c.Id" data-lastid="@currentMessageId" data-ip="@c.VisitorIp" data-vid="@c.VisitorId">
+        <h4>@c.VisitorIp
+@if (currentMessageId < c.LastMessageId)
+{
+    <span>New message waiting.</span>
+}
+        </h4>
+        <p>Started: @LCSK.DateExtensions.ElapseTime(c.Created)<br />
+        Status: @(c.Accepted == null ? "pending..." : "chatting with " + c.OperatorName)</p>
+    </div>
+}

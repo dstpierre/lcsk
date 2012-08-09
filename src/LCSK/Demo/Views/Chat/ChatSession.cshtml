@@ -3,99 +3,16 @@
     Layout = null;
 }
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<title>Chatting with</title>
-	<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<style type="text/css">
-		body
-		{
-			color: Black;
-			font-size: small;
-			font-family: Verdana, Arial;
-			padding: 0;
-			margin: 0;
-		}
-		h2
-		{
-			float: right;
-			vertical-align: middle;
-			color: Orange;
-			padding-right: 25px;
-		}
-		
-		#chatBody
-		{
-			width: 650px;
-			height: 500px;
-			border: 1px solid black;
-			padding: 5px;
-			overflow: auto;
-		}
-	</style>
+<h1>@ViewBag.visitorIp</h1>
+<p>
+    <strong>Arrived on site: </strong> 39 minutes ago (10:05pm)<br />
+    <strong>Visited pages: </strong> 4 pages<br />
+    <strong>Enter page: </strong> myenterpage.html<br />
+    <strong>Chat initiated :</strong> 1 min ago (by the visitor)
+</p>
 
-	<script type="text/javascript">
-	    var intervalId;
-	    var chatId = '@(Model)';
-	    var lastMsgId = 0;
-	    var opname = '@ViewBag.opname';
-	    $(document).ready(function () {
-	        getMsgs();
-	        intervalId = window.setInterval(function () {
-	            getMsgs();
-	        }, 3210);
-
-	        $('#chatText').keyup(function (e) {
-	            if (e.keyCode == 13) {
-	                $.post('/chat/addmsg', { id: chatId, from: opname, msg: $('#chatText').val() }, function (data) { getMsgs(); });
-	                $('#chatText').val('');
-	            }
-	        });
-
-	        $("#closeChat").click(function () {
-	            if (confirm('Closing chat will end the visitor session as well, sure?')) {
-	                $.post('/chat/close', { id: chatId }, function (data) {
-	                    if (data == 'ok') {
-	                        $('#chatBody').html('You may now close the window...');
-	                    } else {
-	                        $('#chatBody').html('Closing chat return an error...');
-	                    }
-	                });
-	            }
-	        });
-
-
-	    });
-
-            function getMsgs() {
-                if (chatId != null && chatId != '') {
-	                $.post('/chat/pollmsgs', { id: chatId, lastId: lastMsgId }, function (data) {
-	                    if (data.lastId > lastMsgId) {
-                            if(data.beep) {
-                                document.getElementById('snd-newmsg').play();
-                            }
-
-	                        lastMsgId = data.lastId;
-
-	                        for (i = 0; i < data.msgs.length; i++) {
-	                            $('#chatBody').append('<p><strong>' + data.msgs[i].FromName + '</strong>: ' + data.msgs[i].Message + '</p>');
-	                        }
-
-	                        $("#chatBody").scrollTop($("#chatBody")[0].scrollHeight);
-	                    }
-	                });
-	            }
-            }
-	</script>
-</head>
-<body>
-	<div style="clear: both; padding: 10px 10px 10px 10px;">
-		<div id="chatBody"></div>
-		<input type="text" id="chatText" size="65" />
-		<input id="closeChat" type="button" value="Close chat session." />
-        <br />
-        <audio id="snd-newmsg" src="/content/sounds/newmsg.mp3" autoplay="false" controls="controls" loop="loop" preload="auto"></audio>
-	</div>
-</body>
-</html>
+<div style="clear: both; padding: 10px 10px 10px 10px;">
+	<div id="chatBody"></div>
+	<input type="text" id="chatText" size="75" />
+	<input id="closeChat" class="btn" type="button" value="Close chat session" />
+</div>
