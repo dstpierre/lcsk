@@ -17,8 +17,8 @@
                 $('#msg').val('');
             });
 
-            myHub.addMessage = function (value) {
-                $('#msgs').append('<li>' + value + '</li>');
+            myHub.addMessage = function (from, value) {
+                $('#msgs').append('<li><strong>' + from + '</strong> ' + value + '</li>');
             };
 
             $.connection.hub.start()

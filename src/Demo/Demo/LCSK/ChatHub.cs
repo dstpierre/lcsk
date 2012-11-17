@@ -51,16 +51,23 @@ namespace Demo.LCSK
             }
         }
 
-        public void AgentConnect(string name)
+        public void AgentConnect(string name, string pass)
         {
-            var agent = new Agent()
+            if (name == "test" && pass == "debug")
             {
-                Id = Context.ConnectionId,
-                Name = name,
-                IsOnline = true
-            };
+                var agent = new Agent()
+                {
+                    Id = Context.ConnectionId,
+                    Name = name,
+                    IsOnline = true
+                };
 
-            Agents.Add(agent);
+                Agents.Add(agent);
+
+                Caller.loginResult(true, agent.Id, agent.Name);
+            }
+            else
+                Caller.loginResult(false, "", "");
         }
 
         public void ChangeStatus(bool online)
@@ -74,36 +81,44 @@ namespace Demo.LCSK
 
         public void RequestChat()
         {
-            ChatSessions.Add(Context.ConnectionId, "");
+            // We assign the chat to the less buzy agent
+            var workload = from a in Agents
+                           where a.IsOnline
+                           select new
+                           {
+                               Id = a.Id,
+                               Count = ChatSessions.Count(x => x.Value == a.Id)
+                           };
 
-            Caller.addMessage("Please wait for an agent...");
-
-            foreach (var agent in Agents)
-                Clients[agent.Id].newChat(Context.ConnectionId);
-        }
-
-        public void AcceptChat(string id)
-        {
-            if (ChatSessions.ContainsKey(id))
+            if (workload == null)
             {
-                ChatSessions[id] = Context.ConnectionId;
-
-                var agent = Agents.Single(x => x.Id == Context.ConnectionId);
-
-                Clients[id].addMessage("You are now connected with " + agent.Name);
-
-                Caller.addMessage("Chat is established.");
+                Caller.addMessage("", "No agent are currently available.");
+                return;
             }
+
+            var lessBuzy = workload.OrderBy(x => x.Count).FirstOrDefault();
+
+            if (lessBuzy == null)
+            {
+                Caller.addMessage("", "No agent are currently available.");
+                return;
+            }
+            
+            ChatSessions.Add(Context.ConnectionId, lessBuzy.Id);
+
+            Caller.addMessage("", "Please wait for an agent...");
+
+            Clients[lessBuzy.Id].newChat(Context.ConnectionId);
         }
 
         public void Send(string data)
         {
-            Caller.addMessage(data);
+            Caller.addMessage("me", data);
 
             if (ChatSessions.ContainsKey(Context.ConnectionId))
             {
                 var opId = ChatSessions[Context.ConnectionId];
-                Clients[opId].addMessage(Context.ConnectionId, data);
+                Clients[opId].addMessage(Context.ConnectionId, "visitor", data);
             }
         }
 
@@ -111,15 +126,24 @@ namespace Demo.LCSK
         {
             if (ChatSessions.ContainsKey(id))
             {
-                Caller.addMessage(id, data);
-                Clients[id].addMessage(data);
+                var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
+
+                if (agent == null)
+                {
+                    Caller.addMessage(id, "system", "We were unable to send your message, please reload the page.");
+                    return;
+                }
+
+                Caller.addMessage(id, "you", data);
+                Clients[id].addMessage(agent.Name, data);
             }
         }
 
         public Task Disconnect()
         {
+            //TODO: Check how to handle disconnection properly
             // was it an agent
-            var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
+            /*var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
             if (agent != null)
             {
                 Agents.Remove(agent);
@@ -139,7 +163,7 @@ namespace Demo.LCSK
                 var agentId = ChatSessions[Context.ConnectionId];
                 Clients[agentId].addMessage("The visitor close the connection.");
             }
-
+            */
             return null;
         }
     }

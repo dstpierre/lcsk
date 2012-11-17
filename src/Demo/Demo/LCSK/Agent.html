@@ -1,82 +1,125 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <title>LiveChat Starter Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Dominic St-Pierre">
+
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
-        .chat-session {
-            border: 1px solid black;
-            width: 350px;
-            height: 350px;
-            padding: 3px 3px 3px 3px;
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
         }
 
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        .chat-session {
+            padding: 3px 3px 3px 3px;
+            height: 65px;
+            border-bottom: 1px solid #000;
+            cursor: pointer;
+        }
+
+            .chat-session.active {
+                background-color: lightgray;
+                cursor: default;
+            }
     </style>
-    <script src="../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#">LCSK - Agent Panel</a>
+                <div class="nav-collapse collapse">
+                    <p class="navbar-text pull-right">
+                        Logged in as <a href="#" id="change-status" class="navbar-link"></a>
+                    </p>
+                    <ul class="nav">
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="well sidebar-nav">
+                    <h3>Chat Sessions</h3>
+                    <div id="chat-sessions">
+                    </div>
+                </div>
+                <!--/.well -->
+            </div>
+            <!--/span-->
+            <div id="chat-content" class="span9">
+                <h2>Log In to Start Accepting Chat Requests</h2>
+                <div id="login-alerts"></div>
+                <fieldset>
+                    <legend>Enter your agent name and password</legend>
+                    <label>Agent Name</label>
+                    <input id="login-name" type="text" placeholder="agent name">
+                    
+                    <label>Agent Password</label>
+                    <input id="login-pass" type="password">
+                    <br />
+                    <button id="login-btn" type="submit" class="btn btn-primary btn-medium">Start accepting chat ></button>
+                </fieldset>
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <hr>
+
+        <footer>
+            <p>LiveChat Starter Kit - free open source live chat / live support app available here <a href="http://livechatstarterkit.codeplex.com"></a></p>
+        </footer>
+
+    </div>
+    <!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    
     <script src="../Scripts/jquery.signalR-0.5.3.min.js" type="text/javascript"></script>
     <script src="/signalr/hubs" type="text/javascript"></script>
-
-    <script type="text/javascript">
-        var status = true;
-
-        $(function () {
-            var myHub = $.connection.chatHub;
-
-            $('#change-status').click(function () {
-                status = !status;
-                myHub.changeStatus(status);
-
-                $(this).text(status ? 'Offline' : 'Online');
-            });
-
-            $('#chat-requests').on({
-                click: function() {
-                    var requestId = $(this).data('id');
-                    $('#chat-sessions').append(
-                        '<div id="chat' + requestId + '" class="chat-session" data-id="' + requestId + '">' +
-                            '<div class="msgs"></div>' +
-                            '<input type="text" class="chat-input"><button class="chat-btn">Send</button>' +
-                        '</div>'
-                    );
-
-                    myHub.acceptChat(requestId);
-
-                    $(this).remove();
-                }
-            }, '.chat-request');
-
-            $('#chat-sessions').on({
-                click: function () {
-                    var parentDiv = $(this).parent();
-                    var txt = parentDiv.find('.chat-input');
-                    var chatId = parentDiv.data('id');
-
-                    myHub.opSend(chatId, txt.val());
-
-                    txt.val('');
-                }
-            }, '.chat-btn');
-
-            myHub.newChat = function (id) {
-                $('#chat-requests').append('<a href="#" class="chat-request" data-id="' + id + '">New chat (click to accept)</a><br />');
-            };
-
-            myHub.addMessage = function (id, value) {
-                $('#chat' + id).find('.msgs').append(value);
-            };
-
-            $.connection.hub.start()
-                .done(function () {
-                    myHub.agentConnect('dominic');
-                })
-                .fail(function () { alert('unable to connect'); });
-        });
-    </script>
-</head>
-<body>
-    Change your status tp <a href="#" id="change-status">Offline</a>
-
-    <div id="chat-requests"></div>
-
-    <div id="chat-sessions"></div>
+    <script src="agent.js" type="text/javascript"></script>
 </body>
 </html>
