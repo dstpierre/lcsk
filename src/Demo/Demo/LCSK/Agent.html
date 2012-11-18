@@ -29,6 +29,13 @@
                 background-color: lightgray;
                 cursor: default;
             }
+        .chat-msgs {
+            height: 650px;
+            padding: 3px 3px 3px 3px;
+            border: 3px dashed lightgray;
+            margin-bottom: 10px;
+            overflow-y: auto;
+        }
     </style>
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -56,6 +63,7 @@
                         Logged in as <a href="#" id="change-status" class="navbar-link"></a>
                     </p>
                     <ul class="nav">
+                        <li><a href="#" id="show-real-time-visits">Show Real Time Visits</a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -75,18 +83,47 @@
             </div>
             <!--/span-->
             <div id="chat-content" class="span9">
+                <div id="login">
                 <h2>Log In to Start Accepting Chat Requests</h2>
                 <div id="login-alerts"></div>
-                <fieldset>
-                    <legend>Enter your agent name and password</legend>
-                    <label>Agent Name</label>
-                    <input id="login-name" type="text" placeholder="agent name">
+                    <fieldset>
+                        <legend>Enter your agent name and password</legend>
+                        <label>Agent Name</label>
+                        <input id="login-name" type="text" placeholder="agent name">
                     
-                    <label>Agent Password</label>
-                    <input id="login-pass" type="password">
-                    <br />
-                    <button id="login-btn" type="submit" class="btn btn-primary btn-medium">Start accepting chat ></button>
-                </fieldset>
+                        <label>Agent Password</label>
+                        <input id="login-pass" type="password">
+                        <br />
+                        <button id="login-btn" type="submit" class="btn btn-primary btn-medium">Start accepting chat ></button>
+                    </fieldset>
+                </div>
+                <div id="agent-chat">
+                    <div id="real-time-visits">
+                        <h2>Real time visits</h2>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Requested on</th>
+                                    <th>Page</th>
+                                    <th>Referrer</th>
+                                    <th>In Chat</th>
+                                    <th>Invite</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="all-chatbox">
+                    </div>
+                    <div id="chat-controls">
+                        <input id="post-msg" type="text" class="input-large" style="width: 85%;" />
+                        <button id="post-btn" class="btn btn-primary" style="width: 10%;">Send</button>
+                    </div>
+
+                    
+                </div>
             </div>
             <!--/span-->
         </div>

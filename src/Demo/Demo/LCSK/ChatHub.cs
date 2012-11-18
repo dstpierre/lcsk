@@ -106,9 +106,9 @@ namespace Demo.LCSK
             
             ChatSessions.Add(Context.ConnectionId, lessBuzy.Id);
 
-            Caller.addMessage("", "Please wait for an agent...");
-
             Clients[lessBuzy.Id].newChat(Context.ConnectionId);
+
+            Caller.addMessage("", "Please wait for an agent...");
         }
 
         public void Send(string data)
