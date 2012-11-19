@@ -53,12 +53,34 @@ $(function () {
 
             chatMessages[chatId] = [];
 
-            $(this).find('.badge').text('0');
+            var badge = $(this).find('.badge');
+            if (badge != null && badge != undefined) {
+                badge.removeClass('badge-warning');
+                badge.text('0');
+            }
         }
     }, '.chat-session');
 
+    $('#chat-sessions').on({
+        click: function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var div = $(this).parent().parent();
+            var chatId = div.data('id');
+
+            myHub.closeChat(chatId);
+
+            div.remove();
+            $('chatmsgs' + chatId).remove();
+            return false;
+        }
+    }, '.close-chat');
+
     $('#post-msg').keypress(function (e) {
         if (e.keyCode == 13) {
+            e.preventDefault();
+            e.stopPropagation();
             postMsg();
         }
     });
@@ -100,7 +122,7 @@ $(function () {
             '<div id="chat' + id + '" class="chat-session" data-id="' + id + '">' +
             '<p>Started at: ' + d.getHours() + ':' + d.getMinutes() +
             '<a class="close-chat btn btn-mini pull-right" href="#"><i class="icon-remove"></i></a></p>' +
-            '<p class="pull-right">New message(s) <span class="badge badge-warning">0</span></p>' +
+            '<p class="pull-right">New message(s) <span class="badge">0</span></p>' +
             '</div>');
 
         $('#all-chatbox').append(
@@ -119,8 +141,18 @@ $(function () {
         } else {
             chatMessages[id].push('<strong>' + from + '</strong> ' + value);
 
-            $('#chat' + id).find('.badge').text(chatMessages[id].length);
+            var badge = $('#chat' + id).find('.badge');
+            if (badge != null && badge != undefined) {
+                if (!badge.hasClass('badge-warning')) {
+                    badge.addClass('badge-warning');
+                }
+                badge.text(chatMessages[id].length);
+            }
         }
+    };
+
+    myHub.leave = function (id) {
+        myHub.leaveChat(id);
     };
 });
 
@@ -153,9 +185,10 @@ function showChat(windowToShow) {
 
 function postMsg() {
     var chatId = getCurrentChatId();
+    var msg = $('#post-msg').val();
 
-    if (chatId != '') {
-        myHub.opSend(chatId, $('#post-msg').val());
+    if (chatId != '' && msg != '') {
+        myHub.opSend(chatId, msg);
 
         $('#post-msg').val('').focus();
     }

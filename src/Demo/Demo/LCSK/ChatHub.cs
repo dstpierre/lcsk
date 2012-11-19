@@ -139,11 +139,20 @@ namespace Demo.LCSK
             }
         }
 
-        public Task Disconnect()
+        public void CloseChat(string id)
         {
-            //TODO: Check how to handle disconnection properly
+            if (ChatSessions.ContainsKey(id))
+            {
+                Clients[id].addMessage("", "The agent close the chat session.");
+
+                ChatSessions.Remove(id);
+            }
+        }
+
+        public void LeaveChat(string id)
+        {
             // was it an agent
-            /*var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
+            var agent = Agents.SingleOrDefault(x => x.Id == id);
             if (agent != null)
             {
                 Agents.Remove(agent);
@@ -152,19 +161,23 @@ namespace Demo.LCSK
                 if(sessions != null)
                 {
                     foreach(var session in sessions)
-                        Clients[session.Key].addMessage("The agent was disconnected from chat.");
+                        Clients[session.Key].addMessage("", "The agent was disconnected from chat.");
                 }
 
                 Clients.updateStatus(Agents.Count(x => x.IsOnline) > 0);
             }
 
-            if (ChatSessions.ContainsKey(Context.ConnectionId))
+            // was it a visitor
+            if (ChatSessions.ContainsKey(id))
             {
-                var agentId = ChatSessions[Context.ConnectionId];
-                Clients[agentId].addMessage("The visitor close the connection.");
+                var agentId = ChatSessions[id];
+                Clients[agentId].addMessage(id, "system", "The visitor close the connection.");
             }
-            */
-            return null;
+        }
+
+        public Task Disconnect()
+        {
+            return Clients.leave(Context.ConnectionId);
         }
     }
 }

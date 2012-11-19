@@ -21,6 +21,10 @@
                 $('#msgs').append('<li><strong>' + from + '</strong> ' + value + '</li>');
             };
 
+            myHub.leave = function (id) {
+                myHub.leaveChat(id);
+            };
+
             $.connection.hub.start()
                 .done(function () {
                     myHub.requestChat();
