@@ -230,6 +230,8 @@
     <Content Include="LCSK\assets\js\bootstrap.js" />
     <Content Include="LCSK\assets\js\bootstrap.min.js" />
     <Content Include="LCSK\assets\js\jquery.timeago.js" />
+    <Content Include="LCSK\assets\sounds\newchat.mp3" />
+    <Content Include="LCSK\assets\sounds\newmsg.mp3" />
     <Content Include="LCSK\chat.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />

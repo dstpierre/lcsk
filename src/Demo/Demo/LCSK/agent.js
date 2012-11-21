@@ -122,7 +122,9 @@ $(function () {
     };
 
     myHub.newChat = function (id) {
-        console.log('new chat start');
+        var snd = new Audio('assets/sounds/newchat.mp3');
+        snd.play();
+
         var d = new Date();
 
         var session = [];
@@ -145,8 +147,6 @@ $(function () {
         $('#chatmsgs' + id).hide();
 
         $('#chat' + id).find('abbr.timeago').timeago();
-
-        console.log('new chat end');
     };
 
     myHub.visitorSwitchPage = function (lastId, newId, newPage) {
@@ -189,6 +189,9 @@ $(function () {
 
             $('#chatmsgs' + id).attr({ scrollTop: $('#chatmsgs' + id).attr("scrollHeight") });
         } else {
+            var snd = new Audio('assets/sounds/newmsg.mp3');
+            snd.play();
+
             chatMessages[id].push('<strong>' + from + '</strong> ' + value);
 
             var badge = $('#chat' + id).find('.badge');
