@@ -109,7 +109,20 @@ $(function () {
         }
     };
 
+    myHub.newVisit = function (page, referrer, chatWith) {
+        var d = new Date();
+        $('#current-visits > tbody').prepend(
+            '<tr><td><abbr class="timeago" title="' + d.toISOString() + '">' + d.toISOString() + '</abbr></td>' +
+            '<td>' + page + '</td>' +
+            '<td>' + referrer + '</td>' +
+            '<td>' + (chatWith != null ? chatWith : 'not in chat') + '</td>' +
+            '<td><a href="#" class="engage-visitor">engage in chat</a></td></tr>');
+
+        $('#current-visits > tbody:first').find('abbr.timeago').timeago();
+    };
+
     myHub.newChat = function (id) {
+        console.log('new chat start');
         var d = new Date();
 
         var session = [];
@@ -120,9 +133,9 @@ $(function () {
 
         $('#chat-sessions').prepend(
             '<div id="chat' + id + '" class="chat-session" data-id="' + id + '">' +
-            '<p>Started at: ' + d.getHours() + ':' + d.getMinutes() +
+            '<p><abbr class="timeago" title="' + d.toISOString() + '">' + d.toISOString() + '</abbr>' +
             '<a class="close-chat btn btn-mini pull-right" href="#"><i class="icon-remove"></i></a></p>' +
-            '<p class="pull-right">New message(s) <span class="badge">0</span></p>' +
+            '<p class="pull-right">New message(s) <span class="badge badge-warning">0</span></p>' +
             '</div>');
 
         $('#all-chatbox').append(
@@ -130,6 +143,43 @@ $(function () {
         );
 
         $('#chatmsgs' + id).hide();
+
+        $('#chat' + id).find('abbr.timeago').timeago();
+
+        console.log('new chat end');
+    };
+
+    myHub.visitorSwitchPage = function (lastId, newId, newPage) {
+        chatMessages.splice(lastId);
+
+        var session = [];
+        session.push('<strong>system</strong> The visitor is now on: ' + newPage);
+
+        chatMessages.push(newId);
+        chatMessages[newId] = session;
+        
+
+        // are we currently viewing that chat session?
+        if (lastId == getCurrentChatId()) {
+            $('#chatmsgs' + lastId).append('<p><strong>system</strong> The visitor is now on: ' + newPage + '</p>');
+
+            $('#chatmsgs' + lastId).attr({ scrollTop: $('#chatmsgs' + lastId).attr("scrollHeight") });
+
+            chatMessages[newId] = [];
+        } else {
+            var badge = $('#chat' + lastId).find('.badge');
+            if (badge != null && badge != undefined) {
+                if (!badge.hasClass('badge-warning')) {
+                    badge.addClass('badge-warning');
+                }
+                badge.text(1);
+            }
+        }
+
+        $('#chat' + lastId).attr('id', 'chat' + newId);
+        $('#chatmsgs' + lastId).attr('id', 'chatmsgs' + newId);
+
+        $('#chat' + newId).data('id', newId);
     };
 
     myHub.addMessage = function (id, from, value) {

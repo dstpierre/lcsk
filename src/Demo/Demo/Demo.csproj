@@ -200,7 +200,6 @@
     <Content Include="LCSK\Agent.html" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="LCSK\agent.js" />
-    <Content Include="LCSK\Agent_old.html" />
     <Content Include="LCSK\assets\css\bootstrap-responsive.css" />
     <Content Include="LCSK\assets\css\bootstrap.css" />
     <Content Include="LCSK\assets\img\bootstrap-mdo-sfmoma-01.jpg" />
@@ -230,7 +229,8 @@
     <Content Include="LCSK\assets\js\bootstrap-typeahead.js" />
     <Content Include="LCSK\assets\js\bootstrap.js" />
     <Content Include="LCSK\assets\js\bootstrap.min.js" />
-    <Content Include="LCSK\chat.html" />
+    <Content Include="LCSK\assets\js\jquery.timeago.js" />
+    <Content Include="LCSK\chat.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -260,6 +260,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\SwitchPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

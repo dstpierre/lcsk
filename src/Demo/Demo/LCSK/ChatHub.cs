@@ -68,6 +68,8 @@ namespace Demo.LCSK
             }
             else
                 Caller.loginResult(false, "", "");
+
+            Clients.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
         }
 
         public void ChangeStatus(bool online)
@@ -77,9 +79,44 @@ namespace Demo.LCSK
             {
                 agent.IsOnline = online;
             }
+
+            // TODO: Check if the agent was in chat sessions.
+
+            Clients.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
         }
 
-        public void RequestChat()
+        public void LogVisit(string page, string referrer, string existingChatId)
+        {
+            Caller.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
+
+            if (!string.IsNullOrEmpty(existingChatId) &&
+                ChatSessions.ContainsKey(existingChatId))
+            {
+                var agentId = ChatSessions[existingChatId];
+                Clients[agentId].visitorSwitchPage(existingChatId, Context.ConnectionId, page);
+
+                var agent = Agents.SingleOrDefault(x => x.Id == agentId);
+
+                if (agent != null)
+                    Caller.setChat(Context.ConnectionId, agent.Name, true);
+
+                ChatSessions.Remove(existingChatId);
+
+                ChatSessions.Add(Context.ConnectionId, agentId);
+            }
+
+            foreach (var agent in Agents)
+            {
+                var chatWith = (from c in ChatSessions
+                               join a in Agents on c.Value equals a.Id
+                               where c.Key == Context.ConnectionId
+                               select a.Name).SingleOrDefault();
+
+                Clients[agent.Id].newVisit(page, referrer, chatWith);
+            }
+        }
+
+        public void RequestChat(string message)
         {
             // We assign the chat to the less buzy agent
             var workload = from a in Agents
@@ -87,6 +124,7 @@ namespace Demo.LCSK
                            select new
                            {
                                Id = a.Id,
+                               Name = a.Name,
                                Count = ChatSessions.Count(x => x.Value == a.Id)
                            };
 
@@ -108,7 +146,10 @@ namespace Demo.LCSK
 
             Clients[lessBuzy.Id].newChat(Context.ConnectionId);
 
-            Caller.addMessage("", "Please wait for an agent...");
+            Caller.setChat(Context.ConnectionId, lessBuzy.Name, false);
+
+            Clients[lessBuzy.Id].addMessage(Context.ConnectionId, "visitor", message);
+            Caller.addMessage("me", message);
         }
 
         public void Send(string data)
@@ -120,6 +161,8 @@ namespace Demo.LCSK
                 var opId = ChatSessions[Context.ConnectionId];
                 Clients[opId].addMessage(Context.ConnectionId, "visitor", data);
             }
+
+            // TODO: Something is going wrong here...
         }
 
         public void OpSend(string id, string data)

@@ -13,5 +13,10 @@ namespace Demo.Controllers
             return View();
         }
 
+        public ActionResult SwitchPage()
+        {
+            return View();
+        }
+
     }
 }
