@@ -78,11 +78,11 @@ namespace Demo.LCSK
             if (agent != null)
             {
                 agent.IsOnline = online;
+
+                // TODO: Check if the agent was in chat sessions.
+
+                Clients.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
             }
-
-            // TODO: Check if the agent was in chat sessions.
-
-            Clients.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
         }
 
         public void LogVisit(string page, string referrer, string existingChatId)
@@ -161,8 +161,41 @@ namespace Demo.LCSK
                 var opId = ChatSessions[Context.ConnectionId];
                 Clients[opId].addMessage(Context.ConnectionId, "visitor", data);
             }
+            else
+            {
+                // refactor this
+                var workload = from a in Agents
+                               where a.IsOnline
+                               select new
+                               {
+                                   Id = a.Id,
+                                   Name = a.Name,
+                                   Count = ChatSessions.Count(x => x.Value == a.Id)
+                               };
 
-            // TODO: Something is going wrong here...
+                if (workload == null)
+                {
+                    Caller.addMessage("", "No agent are currently available.");
+                    return;
+                }
+
+                var lessBuzy = workload.OrderBy(x => x.Count).FirstOrDefault();
+
+                if (lessBuzy == null)
+                {
+                    Caller.addMessage("", "No agent are currently available.");
+                    return;
+                }
+
+                ChatSessions.Add(Context.ConnectionId, lessBuzy.Id);
+
+                Clients[lessBuzy.Id].newChat(Context.ConnectionId);
+
+                Caller.setChat(Context.ConnectionId, lessBuzy.Name, false);
+
+                Clients[lessBuzy.Id].addMessage(Context.ConnectionId, "system", "This visitor appear to have lost their chat session.");
+                Clients[lessBuzy.Id].addMessage(Context.ConnectionId, "visitor", data);
+            }
         }
 
         public void OpSend(string id, string data)

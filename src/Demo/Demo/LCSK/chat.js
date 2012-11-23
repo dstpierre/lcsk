@@ -87,10 +87,11 @@ var LCSKChat = function () {
                     if (chatId == null || chatId == '') {
                         myHub.requestChat(msg);
                         $('#chat-box-msg').html(options.waitingForOperator);
+                    } else {
+                        myHub.send(msg);
                     }
 
                     $('#chat-box-textinput').val('');
-                    myHub.send(msg);
                 }
             }
         }, '#chat-box-textinput');
@@ -115,19 +116,21 @@ var LCSKChat = function () {
         if (state) {
             $('#chat-box-header').text(options.onlineTitle);
             if (!requestChat) {
-                $('#chat-box').html('<div id="chat-box-msg" style="height:265px;overflow:auto;">' +
-                '<p>Have a question? Let\'s chat!</p><p>Add your question on the field below and press ENTER.</p></div>' +
-                '<div id="chat-box-input" style="height:35px;"><textarea id="chat-box-textinput" style="width:100%;height: 32px;border:1px solid #0354cb;border-radius: 3px;" /></div>'
-            );
+                $('#chat-box').html(
+                    '<div id="chat-box-msg" style="height:265px;overflow:auto;">' +
+                    '<p>Have a question? Let\'s chat!</p><p>Add your question on the field below and press ENTER.</p></div>' +
+                    '<div id="chat-box-input" style="height:35px;"><textarea id="chat-box-textinput" style="width:100%;height: 32px;border:1px solid #0354cb;border-radius: 3px;" /></div>'
+                );
             }
         } else {
             if (!chatEditing) {
                 $('#chat-box-header').text(options.offlineTitle);
                 $('#chat-box-input').hide();
-                $('#chat-box').html('<p>Your email</p><input type="text" id="chat-box-email" style="border:1px solid #0354cb;border-radius: 3px;width: 100%;" class="chat-editing" />' +
-                '<p>Your message</p><textarea id="chat-box-cmt" cols="40" rows="7" class="chat-editing" style="border:1px solid #0354cb;border-radius: 3px;"></textarea>' +
-                '<p><input type="button" id="chat-box-send" value="Contact us" />'
-           );
+                $('#chat-box').html(
+                    '<p>Your email</p><input type="text" id="chat-box-email" style="border:1px solid #0354cb;border-radius: 3px;width: 100%;" class="chat-editing" />' +
+                    '<p>Your message</p><textarea id="chat-box-cmt" cols="40" rows="7" class="chat-editing" style="border:1px solid #0354cb;border-radius: 3px;"></textarea>' +
+                    '<p><input type="button" id="chat-box-send" value="Contact us" />'
+                );
             }
         }
     }

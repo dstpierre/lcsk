@@ -47,7 +47,7 @@ $(function () {
                 $('#chatmsgs' + chatId).append('<p>' + chatMessages[chatId][i] + '</p>');
             }
 
-            $('#chatmsgs' + chatId).attr({ scrollTop: $('#chatmsgs' + chatId).attr("scrollHeight") });
+            scrollDiv($('#chatmsgs' + chatId));
 
             showChat(chatId);
 
@@ -163,7 +163,7 @@ $(function () {
         if (lastId == getCurrentChatId()) {
             $('#chatmsgs' + lastId).append('<p><strong>system</strong> The visitor is now on: ' + newPage + '</p>');
 
-            $('#chatmsgs' + lastId).attr({ scrollTop: $('#chatmsgs' + lastId).attr("scrollHeight") });
+            scrollDiv($('#chatmsgs' + lastId));
 
             chatMessages[newId] = [];
         } else {
@@ -187,7 +187,7 @@ $(function () {
         if (id == getCurrentChatId()) {
             $('#chatmsgs' + id).append('<p><strong>' + from + '</strong> ' + value + '</p>');
 
-            $('#chatmsgs' + id).attr({ scrollTop: $('#chatmsgs' + id).attr("scrollHeight") });
+            scrollDiv($('#chatmsgs' + id));
         } else {
             var snd = new Audio('assets/sounds/newmsg.mp3');
             snd.play();
@@ -245,4 +245,8 @@ function postMsg() {
 
         $('#post-msg').val('').focus();
     }
+}
+
+function scrollDiv(div) {
+    div.scrollTop(div[0].scrollHeight);
 }
