@@ -103,9 +103,13 @@ $(function () {
             showChat('rt');
 
         } else {
-            $('#login-alerts').html('<div class="alert">' +
+            var msg = id == 'config' ?
+                'No configuration file found. Please configure LCSK before using it' :
+                'No agent matches those credentials.';
+
+            $('#login-alerts').html('<div class="alert alert-error">' +
                 '<button type="button" class="close" data-dismiss="alert">×</button>' + 
-                '<strong>Oops!</strong> No agent matches those credentials.</div>');
+                '<strong>Oops!</strong> ' + msg + ' </div>');
         }
     };
 

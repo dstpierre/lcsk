@@ -4,12 +4,17 @@ using System.Linq;
 using System.Web;
 using SignalR.Hubs;
 using System.Threading.Tasks;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 
 namespace Demo.LCSK
 {
     public class ChatHub : Hub, IDisconnect
     {
+        private const string CONFIG_FILE = "lcsk.dat";
+
         List<Agent> Agents
         {
             get
@@ -53,7 +58,14 @@ namespace Demo.LCSK
 
         public void AgentConnect(string name, string pass)
         {
-            if (name == "test" && pass == "debug")
+            string hashPass = ToHash(pass);
+
+            var config = GetConfig();
+            if (config == null || config.Length < 2)
+            {
+                Caller.loginResult(false, "config", "");
+            }
+            else if ((config[0] == hashPass) || (config[1] == hashPass))
             {
                 var agent = new Agent()
                 {
@@ -65,11 +77,11 @@ namespace Demo.LCSK
                 Agents.Add(agent);
 
                 Caller.loginResult(true, agent.Id, agent.Name);
+
+                Clients.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
             }
             else
-                Caller.loginResult(false, "", "");
-
-            Clients.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
+                Caller.loginResult(false, "pass", "");
         }
 
         public void ChangeStatus(bool online)
@@ -255,5 +267,79 @@ namespace Demo.LCSK
         {
             return Clients.leave(Context.ConnectionId);
         }
+
+        #region Install and config methods
+        public void getInstallState()
+        {
+            var config = GetConfig();
+
+            if (config != null && config.Length >= 2)
+                Caller.installState(true, config[0]);
+            else
+                Caller.installState(false, "lcskv2hctemptoken");
+        }
+
+        public void AdminRequest(string pass)
+        {
+            var config = GetConfig();
+
+            if (config != null && config.Length >= 2)
+            {
+                if (config[0] == ToHash(pass))
+                    Caller.adminResult(true, config[0]);
+                else
+                    Caller.adminResult(false, "");
+            }
+            else
+                Caller.adminResult(false, "");
+        }
+
+        public void SetConfig(string token, string adminPass, string agentPass)
+        {
+            bool shouldSave = false;
+            var config = GetConfig();
+
+            if (config != null && config.Length >= 2)
+            {
+                if (config[0] == token)
+                    shouldSave = true;
+            }
+            if (token == "lcskv2hctemptoken")
+                shouldSave = true;
+
+            if (shouldSave)
+            {
+                string configPath = HttpContext.Current.Server.MapPath("~/App_Data/" + CONFIG_FILE);
+
+                File.WriteAllText(
+                    configPath,
+                    ToHash(adminPass) + "\n" + ToHash(agentPass));
+
+                Caller.setConfigResult(true, "Config file updated.");
+            }
+            else
+                Caller.setConfigResult(false, "Unable to save the config file.");
+        }
+
+        private string[] GetConfig()
+        {
+            string configPath = HttpContext.Current.Server.MapPath("~/App_Data/" + CONFIG_FILE);
+            if (File.Exists(configPath))
+            {
+                return File.ReadAllLines(configPath);
+            }
+            return null;
+        }
+
+        public string ToHash(string password)
+        {
+            if (string.IsNullOrEmpty(password))
+                return "";
+
+            var provider = new SHA1CryptoServiceProvider();
+            var encoding = new UnicodeEncoding();
+            return Convert.ToBase64String(provider.ComputeHash(encoding.GetBytes(password)));
+        }
+        #endregion
     }
 }

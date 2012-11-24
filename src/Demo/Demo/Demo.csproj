@@ -233,6 +233,8 @@
     <Content Include="LCSK\assets\sounds\newchat.mp3" />
     <Content Include="LCSK\assets\sounds\newmsg.mp3" />
     <Content Include="LCSK\chat.js" />
+    <Content Include="LCSK\Install.html" />
+    <Content Include="LCSK\install.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
