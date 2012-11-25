@@ -1,0 +1,37 @@
+LiveChat Starter Kit version 2.0
+
+http://livechatstarterkit.codeplex.com
+
+By Dominic St-Pierre.
+
+-----
+
+How to add the visitor chat box
+
+LCSK depend on SignalR. SingalR include a jquery javascript file normally in the Scripts folder.
+
+On each page where you want to add the visitor chat box you will have to add the following javascript tags:
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="../Scripts/jquery.signalR-0.5rc.min.js" type="text/javascript"></script>
+<script src="/signalr/hubs" type="text/javascript"></script>
+<script src="/LCSK/chat.js" type="text/javascript"></script>
+
+-----
+
+How to log in
+
+- Navigate to the lcsk/install.html page and assign the admin and agent password.
+
+- You can now log in on lcsk/agent.html using any name and either the admin or agent password.
+
+-----
+
+Troubleshooting
+
+- Make sure you have a reference to jQuery.
+
+- Make sure the jquery-signalr-xyz.min.js matches with the version on your Scripts folder.
+
+- Make sure you have write access to the App_Data folder, since the config file "lcsk.dat" will be saved there.
+

@@ -2,19 +2,19 @@
 <package >
   <metadata>
     <id>LCSK</id>
-    <version>1.5.2.1</version>
+    <version>2.0.0</version>
     <authors>Dominic St-Pierre</authors>
     <owners>dstpierre</owners>
     <licenseUrl>http://livechatstarterkit.codeplex.com/license</licenseUrl>
     <projectUrl>http://livechatstarterkit.codeplex.com/</projectUrl>
     <!--<iconUrl></iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Lightweight LiveChat / Live Support for ASP.NET MVC.</description>
-    <releaseNotes>Added visitor location, not using IP address as visitor identification anymore, javascript configuration.</releaseNotes>
+    <description>Lightweight LiveChat / Live Support app using SignalR and no database. Single folder install.</description>
+    <releaseNotes>New communication mechanism using SignalR.</releaseNotes>
     <copyright>Copyright 2012 - Focus Centric inc.</copyright>
-    <tags>Chat LiveChat LiveSupport</tags>
+    <tags>Chat, Live Chat, Live Support</tags>
     <dependencies>
-      <dependency id="Dapper" version="1.8" />
+      <dependency id="SignalR" version="0.5.63-pre" />
     </dependencies>
   </metadata>
 </package>
