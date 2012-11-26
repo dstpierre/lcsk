@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.SignalR.Hosting.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.AspNet.SignalR.GlobalHost">
+            <summary>
+            Provides access to default host information.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.SignalR.GlobalHost.DependencyResolver">
+            <summary>
+            Gets or sets the the default <see cref="T:Microsoft.AspNet.SignalR.IDependencyResolver"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.SignalR.GlobalHost.Configuration">
+            <summary>
+            Gets the default <see cref="T:Microsoft.AspNet.SignalR.IConfigurationManager"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager">
+            <summary>
+            Gets the default <see cref="T:Microsoft.AspNet.SignalR.IConnectionManager"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.SignalR.GlobalHost.HubPipeline">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.SignalR.Hosting.Common.Host.DependencyResolver">
+            <summary>
+            Gets the <see cref="T:Microsoft.AspNet.SignalR.IDependencyResolver"/> for this host.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.SignalR.Hosting.Common.Host.ConnectionManager">
+            <summary>
+            Gets the <see cref="T:Microsoft.AspNet.SignalR.IConnectionManager"/> for this host.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.SignalR.Hosting.Common.Host.Configuration">
+            <summary>
+            Gets the <see cref="T:Microsoft.AspNet.SignalR.IConfigurationManager"/> for this host.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.SignalR.Hosting.Common.Host.HubPipeline">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNet.SignalR.Infrastructure.UriQueryUtility">
+            <summary>
+            Helpers for encoding, decoding, and parsing URI query components.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.SignalR.Hosting.Common.RoutingHost.MapHubs">
+            <summary>
+            Map the <see cref="!:HubDisptcher"/> to the default hub url (~/signalr)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.SignalR.Hosting.Common.RoutingHost.MapHubs(System.String)">
+            <summary>
+            Maps the <see cref="!:HubDisptcher"/> to the specified path.
+            </summary>
+            <param name="path">The path of the <see cref="!:HubDisptcher"/></param>
+        </member>
+        <member name="M:Microsoft.AspNet.SignalR.Hosting.Common.RoutingHost.MapConnection``1(System.String)">
+            <summary>
+            Maps the url to the specified <see cref="T:Microsoft.AspNet.SignalR.PersistentConnection"/>.
+            </summary>
+            <typeparam name="TConnection">The type of <see cref="T:Microsoft.AspNet.SignalR.PersistentConnection"/></typeparam>
+            <param name="path">The path of <see cref="T:Microsoft.AspNet.SignalR.PersistentConnection"/></param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>SignalR</id>
+    <version>0.5.63-pre</version>
+    <authors>David Fowler,  Damian Edwards</authors>
+    <owners>David Fowler,  Damian Edwards</owners>
+    <licenseUrl>https://github.com/SignalR/SignalR/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/SignalR/SignalR</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A client and server side library for .NET that provides messaging and an abstraction over a persistent connection.</description>
+    <dependencies>
+      <dependency id="SignalR.Hosting.AspNet" version="0.5.63-pre" />
+      <dependency id="SignalR.Js" version="0.5.63-pre" />
+    </dependencies>
+  </metadata>
+</package>

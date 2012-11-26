@@ -29,6 +29,19 @@ $(function () {
         showChat('rt');
     });
 
+    $('#show-internal-chat').click(function () {
+        $('.chat-session').removeClass('active');
+        showChat('internal');
+
+        var internalBadge = $('#show-internal-chat').find('.badge');
+        if (internalBadge != null && internalBadge != undefined) {
+            if (internalBadge.hasClass('badge-warning')) {
+                internalBadge.removeClass('badge-warning');
+            }
+            internalBadge.text('...');
+        }
+    });
+
     $('#change-status').click(function () {
         agent.isOnline = !agent.isOnline;
         myHub.changeStatus(agent.isOnline);
@@ -187,8 +200,22 @@ $(function () {
     };
 
     myHub.addMessage = function (id, from, value) {
-        // are we currently viewing that chat session?
-        if (id == getCurrentChatId()) {
+        if (id == 'internal') {
+            $('#chatmsgsinternal').append('<p><strong>' + from + '</strong> ' + value + '</p>');
+
+            scrollDiv($('#chatmsgsinternal'));
+
+            if ($('#chatmsgsinternal').is(':hidden')) {
+                var internalBadge = $('#show-internal-chat').find('.badge');
+                if (internalBadge != null && internalBadge != undefined) {
+                    if (!internalBadge.hasClass('badge-warning')) {
+                        internalBadge.addClass('badge-warning');
+                    }
+                    internalBadge.text('new msg(s)');
+                }
+            }
+        } else if (id == getCurrentChatId()) {
+            // are we currently viewing that chat session?
             $('#chatmsgs' + id).append('<p><strong>' + from + '</strong> ' + value + '</p>');
 
             scrollDiv($('#chatmsgs' + id));
@@ -221,7 +248,7 @@ function getCurrentChatId() {
     if ($('.chat-session.active').length > 0) {
         return $('.chat-session.active').data('id');
     } else {
-        return '';
+        return 'internal';
     }
 }
 

@@ -212,16 +212,21 @@ namespace Demo.LCSK
 
         public void OpSend(string id, string data)
         {
-            if (ChatSessions.ContainsKey(id))
+            var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
+            if (agent == null)
             {
-                var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
+                Caller.addMessage(id, "system", "We were unable to send your message, please reload the page.");
+                return;
+            }
 
-                if (agent == null)
-                {
-                    Caller.addMessage(id, "system", "We were unable to send your message, please reload the page.");
-                    return;
-                }
-
+            if (id == "internal")
+            {
+                foreach (var a in Agents.Where(x => x.IsOnline))
+                    Clients[a.Id].addMessage(id, agent.Name, data);
+                        
+            }
+            else if (ChatSessions.ContainsKey(id))
+            {
                 Caller.addMessage(id, "you", data);
                 Clients[id].addMessage(agent.Name, data);
             }

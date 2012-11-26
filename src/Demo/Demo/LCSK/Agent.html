@@ -64,6 +64,7 @@
                     </p>
                     <ul class="nav">
                         <li><a href="#" id="show-real-time-visits">Show Real Time Visits</a></li>
+                        <li><a href="#" id="show-internal-chat">Internal Agent Chat <span class="badge">...</span></a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -116,6 +117,7 @@
                         </table>
                     </div>
                     <div id="all-chatbox">
+                        <div id="chatmsgsinternal" class="chat-msgs"></div>
                     </div>
                     <div id="chat-controls">
                         <input id="post-msg" type="text" class="input-large" style="width: 85%;" />
@@ -170,7 +172,7 @@
     
     <script src="assets/js/jquery.timeago.js" type="text/javascript"></script>
 
-    <script src="../Scripts/jquery.signalR-0.5.3.min.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.signalR-0.5rc.min.js" type="text/javascript"></script>
     <script src="/signalr/hubs" type="text/javascript"></script>
     <script src="agent.js" type="text/javascript"></script>
     

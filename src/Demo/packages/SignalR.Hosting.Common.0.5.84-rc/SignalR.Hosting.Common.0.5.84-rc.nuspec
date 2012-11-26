@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>SignalR.Hosting.Common</id>
+    <version>0.5.84-rc</version>
+    <authors>David Fowler,  Damian Edwards</authors>
+    <owners>David Fowler,  Damian Edwards</owners>
+    <licenseUrl>https://github.com/SignalR/SignalR/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/SignalR/SignalR</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Assembly containing common components for implementing SignalR hosts.</description>
+    <dependencies>
+      <dependency id="SignalR.Server" version="0.5.84-rc" />
+    </dependencies>
+  </metadata>
+</package>
