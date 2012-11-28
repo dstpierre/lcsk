@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.SignalR</id>
+    <version>1.0.0-alpha2</version>
+    <title>Microsoft ASP.NET SignalR</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnet_fall_2012_update_prerelease_enu.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/signalR</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>A client and server side library for .NET that provides messaging and an abstraction over a persistent connection.</description>
+    <language>en-US</language>
+    <tags>Microsoft AspNet SignalR AspNetSignalR websockets real-time realtime comet HTTP streaming</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.SignalR.JS" version="1.0.0-alpha2" />
+      <dependency id="Microsoft.AspNet.SignalR.Hosting.AspNet" version="1.0.0-alpha2" />
+    </dependencies>
+  </metadata>
+</package>

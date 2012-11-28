@@ -67,7 +67,7 @@ var LCSKChat = function () {
         $.connection.hub.start()
             .done(function () {
                 var existingChatId = getCookie(cookieName);
-                myHub.logVisit(document.location.href, document.referrer, existingChatId);
+                myHub.server.logVisit(document.location.href, document.referrer, existingChatId);
             })
             .fail(function () { chatRefreshState(false); });
 
@@ -85,10 +85,10 @@ var LCSKChat = function () {
                     e.stopPropagation();
 
                     if (chatId == null || chatId == '') {
-                        myHub.requestChat(msg);
+                        myHub.server.requestChat(msg);
                         $('#chat-box-msg').html(options.waitingForOperator);
                     } else {
-                        myHub.send(msg);
+                        myHub.server.send(msg);
                     }
 
                     $('#chat-box-textinput').val('');
@@ -104,7 +104,7 @@ var LCSKChat = function () {
 
         $('#chat-box').on({
             click: function () {
-                myHub.sendEmail($('#chat-box-email').val(), $('#chat-box-cmt').val());
+                myHub.server.sendEmail($('#chat-box-email').val(), $('#chat-box-cmt').val());
 
                 $('#chat-box').html(options.emailSent);
                 chatEditing = false;
@@ -167,7 +167,7 @@ var LCSKChat = function () {
         }
     }
 
-    myHub.setChat = function (id, agentName, existing) {
+    myHub.client.setChat = function (id, agentName, existing) {
         chatId = id;
         requestChat = true;
 
@@ -184,7 +184,7 @@ var LCSKChat = function () {
         }
     };
 
-    myHub.addMessage = function (from, msg) {
+    myHub.client.addMessage = function (from, msg) {
         if (chatId != null && chatId != '') {
             if (!requestChat) {
                 if (!$('#chat-box').hasClass('chat-open')) {
@@ -203,13 +203,13 @@ var LCSKChat = function () {
         }
     }
 
-    myHub.emailResult = function (state) {
+    myHub.client.emailResult = function (state) {
         if (!state) {
             $('#chat-box').html(options.emailFailed);
         }
     };
 
-    myHub.onlineStatus = function (state) {
+    myHub.client.onlineStatus = function (state) {
         chatRefreshState(state);
     };
 

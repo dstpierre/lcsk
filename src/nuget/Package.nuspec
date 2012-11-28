@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LCSK</id>
-    <version>2.0.0</version>
+    <version>2.0.1-pre</version>
     <authors>Dominic St-Pierre</authors>
     <owners>dstpierre</owners>
     <licenseUrl>http://livechatstarterkit.codeplex.com/license</licenseUrl>
@@ -14,7 +14,7 @@
     <copyright>Copyright 2012 - Focus Centric inc.</copyright>
     <tags>Chat, Live Chat, Live Support</tags>
     <dependencies>
-      <dependency id="SignalR" version="0.5.63-pre" />
+      <dependency id="Microsoft.AspNet.SignalR" version="1.0.0-alpha2" />
     </dependencies>
   </metadata>
 </package>

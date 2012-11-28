@@ -19,7 +19,7 @@ $(function () {
         
         $.connection.hub.start()
             .done(function () {
-                myHub.agentConnect(agentName, agentPass);
+                myHub.server.agentConnect(agentName, agentPass);
             })
             .fail(function () { alert('unable to connect'); });
     });
@@ -44,7 +44,7 @@ $(function () {
 
     $('#change-status').click(function () {
         agent.isOnline = !agent.isOnline;
-        myHub.changeStatus(agent.isOnline);
+        myHub.server.changeStatus(agent.isOnline);
 
         showStatus();
     });
@@ -82,7 +82,7 @@ $(function () {
             var div = $(this).parent().parent();
             var chatId = div.data('id');
 
-            myHub.closeChat(chatId);
+            myHub.server.closeChat(chatId);
 
             div.remove();
             $('chatmsgs' + chatId).remove();
@@ -102,7 +102,7 @@ $(function () {
         postMsg();
     });
 
-    myHub.loginResult = function (status, id, name) {
+    myHub.client.loginResult = function (status, id, name) {
         if (status) {
             agent.id = id;
             agent.name = name;
@@ -126,7 +126,7 @@ $(function () {
         }
     };
 
-    myHub.newVisit = function (page, referrer, chatWith) {
+    myHub.client.newVisit = function (page, referrer, chatWith) {
         var d = new Date();
         $('#current-visits > tbody').prepend(
             '<tr><td><abbr class="timeago" title="' + d.toISOString() + '">' + d.toISOString() + '</abbr></td>' +
@@ -138,7 +138,7 @@ $(function () {
         $('#current-visits > tbody:first').find('abbr.timeago').timeago();
     };
 
-    myHub.newChat = function (id) {
+    myHub.client.newChat = function (id) {
         var snd = new Audio('assets/sounds/newchat.mp3');
         snd.play();
 
@@ -166,7 +166,7 @@ $(function () {
         $('#chat' + id).find('abbr.timeago').timeago();
     };
 
-    myHub.visitorSwitchPage = function (lastId, newId, newPage) {
+    myHub.client.visitorSwitchPage = function (lastId, newId, newPage) {
         chatMessages.splice(lastId);
 
         var session = [];
@@ -199,7 +199,7 @@ $(function () {
         $('#chat' + newId).data('id', newId);
     };
 
-    myHub.addMessage = function (id, from, value) {
+    myHub.client.addMessage = function (id, from, value) {
         if (id == 'internal') {
             $('#chatmsgsinternal').append('<p><strong>' + from + '</strong> ' + value + '</p>');
 
@@ -235,8 +235,8 @@ $(function () {
         }
     };
 
-    myHub.leave = function (id) {
-        myHub.leaveChat(id);
+    myHub.client.leave = function (id) {
+        myHub.server.leaveChat(id);
     };
 });
 
@@ -277,7 +277,7 @@ function postMsg() {
         commandTriggered(msg);
     } else {
         if (chatId != '' && msg != '') {
-            myHub.opSend(chatId, msg);
+            myHub.server.opSend(chatId, msg);
         }
     }
 }
@@ -348,7 +348,7 @@ function commandTriggered(cmd) {
         var command = getCommand(parts[0]);
         var chatId = getCurrentChatId();
         if (command != null && chatId != '') {
-            myHub.opSend(chatId, command.msg);
+            myHub.server.opSend(chatId, command.msg);
         }
     }
 }

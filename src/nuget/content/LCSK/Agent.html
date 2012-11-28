@@ -64,6 +64,7 @@
                     </p>
                     <ul class="nav">
                         <li><a href="#" id="show-real-time-visits">Show Real Time Visits</a></li>
+                        <li><a href="#" id="show-internal-chat">Internal Agent Chat <span class="badge">...</span></a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -116,6 +117,7 @@
                         </table>
                     </div>
                     <div id="all-chatbox">
+                        <div id="chatmsgsinternal" class="chat-msgs"></div>
                     </div>
                     <div id="chat-controls">
                         <input id="post-msg" type="text" class="input-large" style="width: 85%;" />
@@ -138,6 +140,19 @@
     </div>
     <!--/.fluid-container-->
 
+    <div id="modal-cmd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="cmdLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>Available commands</h3>
+        </div>
+        <div class="modal-body">
+            
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -157,7 +172,7 @@
     
     <script src="assets/js/jquery.timeago.js" type="text/javascript"></script>
 
-    <script src="../Scripts/jquery.signalR-0.5rc.min.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.signalR-1.0.0-alpha2.min.js" type="text/javascript"></script>
     <script src="/signalr/hubs" type="text/javascript"></script>
     <script src="agent.js" type="text/javascript"></script>
     

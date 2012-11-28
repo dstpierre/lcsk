@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using SignalR.Hubs;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
 using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
@@ -11,7 +12,7 @@ using System.Text;
 
 namespace Demo.LCSK
 {
-    public class ChatHub : Hub, IDisconnect
+    public class ChatHub : Hub
     {
         private const string CONFIG_FILE = "lcsk.dat";
 
@@ -63,7 +64,7 @@ namespace Demo.LCSK
             var config = GetConfig();
             if (config == null || config.Length < 2)
             {
-                Caller.loginResult(false, "config", "");
+                Clients.Caller.loginResult(false, "config", "");
             }
             else if ((config[0] == hashPass) || (config[1] == hashPass))
             {
@@ -76,12 +77,12 @@ namespace Demo.LCSK
 
                 Agents.Add(agent);
 
-                Caller.loginResult(true, agent.Id, agent.Name);
+                Clients.Caller.loginResult(true, agent.Id, agent.Name);
 
-                Clients.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
+                Clients.All.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
             }
             else
-                Caller.loginResult(false, "pass", "");
+                Clients.Caller.loginResult(false, "pass", "");
         }
 
         public void ChangeStatus(bool online)
@@ -93,24 +94,24 @@ namespace Demo.LCSK
 
                 // TODO: Check if the agent was in chat sessions.
 
-                Clients.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
+                Clients.All.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
             }
         }
 
         public void LogVisit(string page, string referrer, string existingChatId)
         {
-            Caller.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
+            Clients.Caller.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
 
             if (!string.IsNullOrEmpty(existingChatId) &&
                 ChatSessions.ContainsKey(existingChatId))
             {
                 var agentId = ChatSessions[existingChatId];
-                Clients[agentId].visitorSwitchPage(existingChatId, Context.ConnectionId, page);
+                Clients.Client(agentId).visitorSwitchPage(existingChatId, Context.ConnectionId, page);
 
                 var agent = Agents.SingleOrDefault(x => x.Id == agentId);
 
                 if (agent != null)
-                    Caller.setChat(Context.ConnectionId, agent.Name, true);
+                    Clients.Caller.setChat(Context.ConnectionId, agent.Name, true);
 
                 ChatSessions.Remove(existingChatId);
 
@@ -124,7 +125,7 @@ namespace Demo.LCSK
                                where c.Key == Context.ConnectionId
                                select a.Name).SingleOrDefault();
 
-                Clients[agent.Id].newVisit(page, referrer, chatWith);
+                Clients.Client(agent.Id).newVisit(page, referrer, chatWith);
             }
         }
 
@@ -142,7 +143,7 @@ namespace Demo.LCSK
 
             if (workload == null)
             {
-                Caller.addMessage("", "No agent are currently available.");
+                Clients.Caller.addMessage("", "No agent are currently available.");
                 return;
             }
 
@@ -150,28 +151,28 @@ namespace Demo.LCSK
 
             if (lessBuzy == null)
             {
-                Caller.addMessage("", "No agent are currently available.");
+                Clients.Caller.addMessage("", "No agent are currently available.");
                 return;
             }
             
             ChatSessions.Add(Context.ConnectionId, lessBuzy.Id);
 
-            Clients[lessBuzy.Id].newChat(Context.ConnectionId);
+            Clients.Client(lessBuzy.Id).newChat(Context.ConnectionId);
 
-            Caller.setChat(Context.ConnectionId, lessBuzy.Name, false);
+            Clients.Caller.setChat(Context.ConnectionId, lessBuzy.Name, false);
 
-            Clients[lessBuzy.Id].addMessage(Context.ConnectionId, "visitor", message);
-            Caller.addMessage("me", message);
+            Clients.Client(lessBuzy.Id).addMessage(Context.ConnectionId, "visitor", message);
+            Clients.Caller.addMessage("me", message);
         }
 
         public void Send(string data)
         {
-            Caller.addMessage("me", data);
+            Clients.Caller.addMessage("me", data);
 
             if (ChatSessions.ContainsKey(Context.ConnectionId))
             {
                 var opId = ChatSessions[Context.ConnectionId];
-                Clients[opId].addMessage(Context.ConnectionId, "visitor", data);
+                Clients.Client(opId).addMessage(Context.ConnectionId, "visitor", data);
             }
             else
             {
@@ -187,7 +188,7 @@ namespace Demo.LCSK
 
                 if (workload == null)
                 {
-                    Caller.addMessage("", "No agent are currently available.");
+                    Clients.Caller.addMessage("", "No agent are currently available.");
                     return;
                 }
 
@@ -195,35 +196,40 @@ namespace Demo.LCSK
 
                 if (lessBuzy == null)
                 {
-                    Caller.addMessage("", "No agent are currently available.");
+                    Clients.Caller.addMessage("", "No agent are currently available.");
                     return;
                 }
 
                 ChatSessions.Add(Context.ConnectionId, lessBuzy.Id);
 
-                Clients[lessBuzy.Id].newChat(Context.ConnectionId);
+                Clients.Client(lessBuzy.Id).newChat(Context.ConnectionId);
 
-                Caller.setChat(Context.ConnectionId, lessBuzy.Name, false);
+                Clients.Caller.setChat(Context.ConnectionId, lessBuzy.Name, false);
 
-                Clients[lessBuzy.Id].addMessage(Context.ConnectionId, "system", "This visitor appear to have lost their chat session.");
-                Clients[lessBuzy.Id].addMessage(Context.ConnectionId, "visitor", data);
+                Clients.Client(lessBuzy.Id).addMessage(Context.ConnectionId, "system", "This visitor appear to have lost their chat session.");
+                Clients.Client(lessBuzy.Id).addMessage(Context.ConnectionId, "visitor", data);
             }
         }
 
         public void OpSend(string id, string data)
         {
-            if (ChatSessions.ContainsKey(id))
+            var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
+            if (agent == null)
             {
-                var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
+                Clients.Caller.addMessage(id, "system", "We were unable to send your message, please reload the page.");
+                return;
+            }
 
-                if (agent == null)
-                {
-                    Caller.addMessage(id, "system", "We were unable to send your message, please reload the page.");
-                    return;
-                }
-
-                Caller.addMessage(id, "you", data);
-                Clients[id].addMessage(agent.Name, data);
+            if (id == "internal")
+            {
+                foreach (var a in Agents.Where(x => x.IsOnline))
+                    Clients.Client(a.Id).addMessage(id, agent.Name, data);
+                        
+            }
+            else if (ChatSessions.ContainsKey(id))
+            {
+                Clients.Caller.addMessage(id, "you", data);
+                Clients.Client(id).addMessage(agent.Name, data);
             }
         }
 
@@ -231,7 +237,7 @@ namespace Demo.LCSK
         {
             if (ChatSessions.ContainsKey(id))
             {
-                Clients[id].addMessage("", "The agent close the chat session.");
+                Clients.Client(id).addMessage("", "The agent close the chat session.");
 
                 ChatSessions.Remove(id);
             }
@@ -249,23 +255,23 @@ namespace Demo.LCSK
                 if(sessions != null)
                 {
                     foreach(var session in sessions)
-                        Clients[session.Key].addMessage("", "The agent was disconnected from chat.");
+                        Clients.Client(session.Key).addMessage("", "The agent was disconnected from chat.");
                 }
 
-                Clients.updateStatus(Agents.Count(x => x.IsOnline) > 0);
+                Clients.All.updateStatus(Agents.Count(x => x.IsOnline) > 0);
             }
 
             // was it a visitor
             if (ChatSessions.ContainsKey(id))
             {
                 var agentId = ChatSessions[id];
-                Clients[agentId].addMessage(id, "system", "The visitor close the connection.");
+                Clients.Client(agentId).addMessage(id, "system", "The visitor close the connection.");
             }
         }
 
-        public Task Disconnect()
+        public override Task OnDisconnected()
         {
-            return Clients.leave(Context.ConnectionId);
+            return Clients.All.leave(Context.ConnectionId);
         }
 
         #region Install and config methods
@@ -274,9 +280,9 @@ namespace Demo.LCSK
             var config = GetConfig();
 
             if (config != null && config.Length >= 2)
-                Caller.installState(true, config[0]);
+                Clients.Caller.installState(true, config[0]);
             else
-                Caller.installState(false, "lcskv2hctemptoken");
+                Clients.Caller.installState(false, "lcskv2hctemptoken");
         }
 
         public void AdminRequest(string pass)
@@ -286,12 +292,12 @@ namespace Demo.LCSK
             if (config != null && config.Length >= 2)
             {
                 if (config[0] == ToHash(pass))
-                    Caller.adminResult(true, config[0]);
+                    Clients.Caller.adminResult(true, config[0]);
                 else
-                    Caller.adminResult(false, "");
+                    Clients.Caller.adminResult(false, "");
             }
             else
-                Caller.adminResult(false, "");
+                Clients.Caller.adminResult(false, "");
         }
 
         public void SetConfig(string token, string adminPass, string agentPass)
@@ -315,10 +321,10 @@ namespace Demo.LCSK
                     configPath,
                     ToHash(adminPass) + "\n" + ToHash(agentPass));
 
-                Caller.setConfigResult(true, "Config file updated.");
+                Clients.Caller.setConfigResult(true, "Config file updated.");
             }
             else
-                Caller.setConfigResult(false, "Unable to save the config file.");
+                Clients.Caller.setConfigResult(false, "Unable to save the config file.");
         }
 
         private string[] GetConfig()

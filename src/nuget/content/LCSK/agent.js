@@ -19,7 +19,7 @@ $(function () {
         
         $.connection.hub.start()
             .done(function () {
-                myHub.agentConnect(agentName, agentPass);
+                myHub.server.agentConnect(agentName, agentPass);
             })
             .fail(function () { alert('unable to connect'); });
     });
@@ -29,9 +29,22 @@ $(function () {
         showChat('rt');
     });
 
+    $('#show-internal-chat').click(function () {
+        $('.chat-session').removeClass('active');
+        showChat('internal');
+
+        var internalBadge = $('#show-internal-chat').find('.badge');
+        if (internalBadge != null && internalBadge != undefined) {
+            if (internalBadge.hasClass('badge-warning')) {
+                internalBadge.removeClass('badge-warning');
+            }
+            internalBadge.text('...');
+        }
+    });
+
     $('#change-status').click(function () {
         agent.isOnline = !agent.isOnline;
-        myHub.changeStatus(agent.isOnline);
+        myHub.server.changeStatus(agent.isOnline);
 
         showStatus();
     });
@@ -69,7 +82,7 @@ $(function () {
             var div = $(this).parent().parent();
             var chatId = div.data('id');
 
-            myHub.closeChat(chatId);
+            myHub.server.closeChat(chatId);
 
             div.remove();
             $('chatmsgs' + chatId).remove();
@@ -89,7 +102,7 @@ $(function () {
         postMsg();
     });
 
-    myHub.loginResult = function (status, id, name) {
+    myHub.client.loginResult = function (status, id, name) {
         if (status) {
             agent.id = id;
             agent.name = name;
@@ -113,7 +126,7 @@ $(function () {
         }
     };
 
-    myHub.newVisit = function (page, referrer, chatWith) {
+    myHub.client.newVisit = function (page, referrer, chatWith) {
         var d = new Date();
         $('#current-visits > tbody').prepend(
             '<tr><td><abbr class="timeago" title="' + d.toISOString() + '">' + d.toISOString() + '</abbr></td>' +
@@ -125,7 +138,7 @@ $(function () {
         $('#current-visits > tbody:first').find('abbr.timeago').timeago();
     };
 
-    myHub.newChat = function (id) {
+    myHub.client.newChat = function (id) {
         var snd = new Audio('assets/sounds/newchat.mp3');
         snd.play();
 
@@ -153,7 +166,7 @@ $(function () {
         $('#chat' + id).find('abbr.timeago').timeago();
     };
 
-    myHub.visitorSwitchPage = function (lastId, newId, newPage) {
+    myHub.client.visitorSwitchPage = function (lastId, newId, newPage) {
         chatMessages.splice(lastId);
 
         var session = [];
@@ -186,9 +199,23 @@ $(function () {
         $('#chat' + newId).data('id', newId);
     };
 
-    myHub.addMessage = function (id, from, value) {
-        // are we currently viewing that chat session?
-        if (id == getCurrentChatId()) {
+    myHub.client.addMessage = function (id, from, value) {
+        if (id == 'internal') {
+            $('#chatmsgsinternal').append('<p><strong>' + from + '</strong> ' + value + '</p>');
+
+            scrollDiv($('#chatmsgsinternal'));
+
+            if ($('#chatmsgsinternal').is(':hidden')) {
+                var internalBadge = $('#show-internal-chat').find('.badge');
+                if (internalBadge != null && internalBadge != undefined) {
+                    if (!internalBadge.hasClass('badge-warning')) {
+                        internalBadge.addClass('badge-warning');
+                    }
+                    internalBadge.text('new msg(s)');
+                }
+            }
+        } else if (id == getCurrentChatId()) {
+            // are we currently viewing that chat session?
             $('#chatmsgs' + id).append('<p><strong>' + from + '</strong> ' + value + '</p>');
 
             scrollDiv($('#chatmsgs' + id));
@@ -208,8 +235,8 @@ $(function () {
         }
     };
 
-    myHub.leave = function (id) {
-        myHub.leaveChat(id);
+    myHub.client.leave = function (id) {
+        myHub.server.leaveChat(id);
     };
 });
 
@@ -221,7 +248,7 @@ function getCurrentChatId() {
     if ($('.chat-session.active').length > 0) {
         return $('.chat-session.active').data('id');
     } else {
-        return '';
+        return 'internal';
     }
 }
 
@@ -244,13 +271,131 @@ function postMsg() {
     var chatId = getCurrentChatId();
     var msg = $('#post-msg').val();
 
-    if (chatId != '' && msg != '') {
-        myHub.opSend(chatId, msg);
+    $('#post-msg').val('').focus();
 
-        $('#post-msg').val('').focus();
+    if (msg.substring(0, 1) == '/') {
+        commandTriggered(msg);
+    } else {
+        if (chatId != '' && msg != '') {
+            myHub.server.opSend(chatId, msg);
+        }
+    }
+}
+
+function commandTriggered(cmd) {
+    cmd = cmd.substring(1);
+
+    var parts = cmd.split(' ');
+
+    var msg = '';
+    if (parts.length > 2) {
+        for (var p = 2; p < parts.length; p++) {
+            msg += parts[p] + ' ';
+        }
+    }
+
+    // built-in command
+    if (parts[0] == 'list') {
+        var modalBody = $('#modal-cmd').find('.modal-body');
+        if (modalBody != null) {
+            var commands = getCommands();
+            var body =
+                '<p><strong>/list</strong> list all available commands.</p>' +
+                '<p><strong>/add command-name text to be sent</strong> add a new command.</p>' +
+                '<p><strong>/edit command-name text to be sent</strong> edit an existing command.</p>' +
+                '<p><strong>/del command-name</strong> remove an exising command.</p>';
+
+            body += '<br />';
+
+            for (var i = 0; i < commands.length; i++) {
+                body += '<p><strong>/' + commands[i].trigger + '</strong> ' + commands[i].msg + '</p>';
+            }
+
+            modalBody.html(body);
+
+            $('#modal-cmd').modal({ keyboard: true });
+        }
+    } else if (parts[0] == 'add') {
+        var exists = getCommand(parts[1]);
+        if (exists == null) {
+            exists = { trigger: parts[1], msg: msg };
+
+            var commands = getCommands();
+            commands.push(exists);
+
+            setCommands(commands);
+        }
+    } else if (parts[0] == 'edit') {
+        var commands = getCommands();
+        for (var i = 0; i < commands.length; i++) {
+            if(commands[i].trigger == parts[1]) {
+                commands[i].msg = msg;
+            }
+        }
+        setCommands(commands);
+    } else if (parts[0] == 'del') {
+        var commands = getCommands();
+        var newCommands = [];
+
+        for (var i = 0; i < commands.length; i++) {
+            if (commands[i].trigger != parts[1]) {
+                newCommands.push(commands[i]);
+            }
+        }
+
+        setCommands(newCommands);
+    } else {
+        var command = getCommand(parts[0]);
+        var chatId = getCurrentChatId();
+        if (command != null && chatId != '') {
+            myHub.server.opSend(chatId, command.msg);
+        }
     }
 }
 
 function scrollDiv(div) {
     div.scrollTop(div[0].scrollHeight);
+}
+
+function getCommands() {
+    var cookie = getCookie('lcsk-cmd');
+    if (cookie != null && cookie != '') {
+        return JSON.parse(cookie);
+    }
+    else
+        return [];
+}
+
+function getCommand(trigger) {
+    var commands = getCommands();
+    if (commands.length > 0) {
+        for (var i = 0; i < commands.length; i++) {
+            if (commands[i].trigger == trigger) {
+                return commands[i];
+            }
+        }
+    }
+}
+
+function setCommands(commands) {
+    setCookie('lcsk-cmd', JSON.stringify(commands), 365);
+}
+
+function setCookie(c_name, value, exdays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+    document.cookie = c_name + "=" + c_value;
+}
+
+function getCookie(c_name) {
+    var i, x, y, ARRcookies = document.cookie.split(";");
+    for (i = 0; i < ARRcookies.length; i++) {
+        x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+        y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+        x = x.replace(/^\s+|\s+$/g, "");
+        if (x == c_name) {
+            return unescape(y);
+        }
+    }
 }
