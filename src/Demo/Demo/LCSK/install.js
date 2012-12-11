@@ -10,7 +10,7 @@
 
         var agentPass = $('#login-pass').val();
 
-        myHub.adminRequest(agentPass);
+        myHub.server.adminRequest(agentPass);
     });
 
     $('#save-button').click(function () {
@@ -35,10 +35,10 @@
             return;
         }
 
-        myHub.setConfig($('#save-button').data('id'), adminPass, agentPass);
+        myHub.server.setConfig($('#save-button').data('id'), adminPass, agentPass);
     });
 
-    myHub.installState = function (state, data) {
+    myHub.client.installState = function (state, data) {
         if (!state) {
             $('#config').show();
             $('#login').hide();
@@ -48,7 +48,7 @@
         $('#save-button').data('id', data);
     }
 
-    myHub.adminResult = function (state, data) {
+    myHub.client.adminResult = function (state, data) {
         if (state) {
             $('#login').hide();
             $('#config').show();
@@ -61,7 +61,7 @@
         }
     };
 
-    myHub.setConfigResult = function (state, msg) {
+    myHub.client.setConfigResult = function (state, msg) {
         var boxType = state ? 'alert-success' : 'alert-error';
         var boxPrompt = state ? 'Save successful' : 'Save failed';
 
@@ -72,7 +72,7 @@
 
     $.connection.hub.start()
             .done(function () {
-                myHub.getInstallState();
+                myHub.server.getInstallState();
             })
             .fail(function () { alert('unable to connect'); });
 });
