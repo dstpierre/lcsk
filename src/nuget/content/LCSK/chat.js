@@ -1,4 +1,4 @@
-﻿var myHub = $.connection.chatHub;;
+﻿var myHub = $.connection.chatHub;
 
 $(function () {
     LCSKChat.config();

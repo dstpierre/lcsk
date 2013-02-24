@@ -10,10 +10,10 @@ How to add the visitor chat box
 
 LCSK depend on SignalR. SingalR include a jquery javascript file normally in the Scripts folder.
 
-On each page where you want to add the visitor chat box you will have to add the following javascript tags:
+On each pages where you want to add the visitor chat box you will have to add the following javascript tags:
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="../Scripts/jquery.signalR-0.5rc.min.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.signalR-1.0.0.min.js" type="text/javascript"></script>
 <script src="/signalr/hubs" type="text/javascript"></script>
 <script src="/LCSK/chat.js" type="text/javascript"></script>
 
