@@ -1,19 +1,34 @@
-LiveChat Starter Kit version 2.0
+LiveChat Starter Kit version 2.0.4
 
 http://livechatstarterkit.codeplex.com
 
-By Dominic St-Pierre.
+By Dominic St-Pierre
 
 -----
 
-How to add the visitor chat box
+How to add the visitor chat box to your pages:
 
 LCSK depend on SignalR. SingalR include a jquery javascript file normally in the Scripts folder.
 
-On each pages where you want to add the visitor chat box you will have to add the following javascript tags:
+1) SignalR needs a special route to be added *before your main routing* on your Global.asax.cs file:
+
+protected void Application_Start()
+{
+    AreaRegistration.RegisterAllAreas();
+            
+    // SignalR hubs
+    RouteTable.Routes.MapHubs();
+
+    WebApiConfig.Register(GlobalConfiguration.Configuration);
+    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+    RouteConfig.RegisterRoutes(RouteTable.Routes);
+    BundleConfig.RegisterBundles(BundleTable.Bundles);
+}
+
+2) On each pages where you want to add the visitor chat box you will have to add the following javascript tags:
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="/Scripts/jquery.signalR-1.0.0.min.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.signalR-1.0.1.min.js" type="text/javascript"></script>
 <script src="/signalr/hubs" type="text/javascript"></script>
 <script src="/LCSK/chat.js" type="text/javascript"></script>
 
@@ -21,15 +36,15 @@ On each pages where you want to add the visitor chat box you will have to add th
 
 How to log in
 
-- Navigate to the lcsk/install.html page and assign the admin and agent password.
+- Navigate to the /lcsk/install.html page and assign the admin and agent passwords.
 
-- You can now log in on lcsk/agent.html using any name and either the admin or agent password.
+- You can now log in on /lcsk/agent.html using any name and either the admin or agent password.
 
 -----
 
 Troubleshooting
 
-- Make sure you have a reference to jQuery.
+- Make sure you have a reference to jQuery *before the SignalR and LCSK's script tags.
 
 - Make sure the jquery-signalr-xyz.min.js matches with the version on your Scripts folder.
 

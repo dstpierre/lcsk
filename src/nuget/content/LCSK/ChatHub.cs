@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Net.Mail;
+using System.Collections.Concurrent;
 
 
 namespace Demo.LCSK
@@ -36,7 +38,7 @@ namespace Demo.LCSK
             }
         }
 
-        Dictionary<string, string> ChatSessions
+        /*Dictionary<string, string> ChatSessions
         {
             get
             {
@@ -55,10 +57,15 @@ namespace Demo.LCSK
                     return sessions;
                 }
             }
-        }
+        }*/
+
+        private static ConcurrentDictionary<string, string> ChatSessions;
 
         public void AgentConnect(string name, string pass)
         {
+            if (ChatSessions == null)
+                ChatSessions = new ConcurrentDictionary<string, string>();
+
             string hashPass = ToHash(pass);
 
             var config = GetConfig();
@@ -113,9 +120,10 @@ namespace Demo.LCSK
                 if (agent != null)
                     Clients.Caller.setChat(Context.ConnectionId, agent.Name, true);
 
-                ChatSessions.Remove(existingChatId);
+                string buffer = "";
+                ChatSessions.TryRemove(existingChatId, out buffer);
 
-                ChatSessions.Add(Context.ConnectionId, agentId);
+                ChatSessions.TryAdd(Context.ConnectionId, agentId);
             }
 
             foreach (var agent in Agents)
@@ -155,7 +163,7 @@ namespace Demo.LCSK
                 return;
             }
             
-            ChatSessions.Add(Context.ConnectionId, lessBuzy.Id);
+            ChatSessions.TryAdd(Context.ConnectionId, lessBuzy.Id);
 
             Clients.Client(lessBuzy.Id).newChat(Context.ConnectionId);
 
@@ -200,7 +208,7 @@ namespace Demo.LCSK
                     return;
                 }
 
-                ChatSessions.Add(Context.ConnectionId, lessBuzy.Id);
+                ChatSessions.TryAdd(Context.ConnectionId, lessBuzy.Id);
 
                 Clients.Client(lessBuzy.Id).newChat(Context.ConnectionId);
 
@@ -239,7 +247,8 @@ namespace Demo.LCSK
             {
                 Clients.Client(id).addMessage("", "The agent close the chat session.");
 
-                ChatSessions.Remove(id);
+                string buffer = "";
+                ChatSessions.TryRemove(id, out buffer);
             }
         }
 
@@ -272,6 +281,19 @@ namespace Demo.LCSK
         public override Task OnDisconnected()
         {
             return Clients.All.leave(Context.ConnectionId);
+        }
+
+        public void SendEmail(string from, string message)
+        {
+            var msg = new MailMessage();
+            msg.To.Add(new MailAddress(from));
+            msg.Subject = "LCSK - Offline Contact";
+            msg.Body = "You received an offline contact from your LCSK chat widget.\r\n\r\n" + message;
+
+            using (var client = new SmtpClient())
+            {
+                client.Send(msg);
+            }
         }
 
         #region Install and config methods
