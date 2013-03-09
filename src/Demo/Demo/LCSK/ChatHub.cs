@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Net.Mail;
 
 
 namespace Demo.LCSK
@@ -56,6 +57,7 @@ namespace Demo.LCSK
                 }
             }
         }
+        
 
         public void AgentConnect(string name, string pass)
         {
@@ -272,6 +274,19 @@ namespace Demo.LCSK
         public override Task OnDisconnected()
         {
             return Clients.All.leave(Context.ConnectionId);
+        }
+
+        public void SendEmail(string from, string message)
+        {
+            var msg = new MailMessage();
+            msg.To.Add(new MailAddress(from));
+            msg.Subject = "LCSK - Offline Contact";
+            msg.Body = "You received an offline contact from your LCSK chat widget.\r\n\r\n" + message;
+
+            using (var client = new SmtpClient())
+            {
+                client.Send(msg);
+            }
         }
 
         #region Install and config methods
