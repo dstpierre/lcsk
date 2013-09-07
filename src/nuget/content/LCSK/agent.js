@@ -85,7 +85,11 @@ $(function () {
             myHub.server.closeChat(chatId);
 
             div.remove();
-            $('chatmsgs' + chatId).remove();
+            $('#chatmsgs' + chatId).remove();
+
+            $('.chat-session').removeClass('active');
+            showChat('rt');
+
             return false;
         }
     }, '.close-chat');
