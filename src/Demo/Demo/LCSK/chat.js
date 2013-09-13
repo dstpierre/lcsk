@@ -6,7 +6,7 @@ $(function () {
 });
 
 var LCSKChat = function () {
-    var cookieName = 'lcsk-chatId';
+    var chatKey = 'lcsk-chatId';
     var requestChat = false;
     var chatId = '';
     var chatEditing = false;
@@ -68,7 +68,7 @@ var LCSKChat = function () {
 
         $.connection.hub.start()
             .done(function () {
-                var existingChatId = getCookie(cookieName);
+                var existingChatId = getExistingChatId(chatKey);
                 myHub.server.logVisit(document.location.href, document.referrer, existingChatId);
             })
             .fail(function () { chatRefreshState(false); });
@@ -150,22 +150,19 @@ var LCSKChat = function () {
         $('#chat-box').slideToggle();
     }
 
-    function setCookie(c_name, value, exdays) {
-        var exdate = new Date();
-        exdate.setDate(exdate.getDate() + exdays);
-        var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
-        document.cookie = c_name + "=" + c_value;
+    function hasStorage() {
+        return typeof(Storage) !== 'undefined';
     }
 
-    function getCookie(c_name) {
-        var i, x, y, ARRcookies = document.cookie.split(";");
-        for (i = 0; i < ARRcookies.length; i++) {
-            x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
-            y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
-            x = x.replace(/^\s+|\s+$/g, "");
-            if (x == c_name) {
-                return unescape(y);
-            }
+    function setChatId(chatId) {
+        if (hasStorage()) {
+            sessionStorage.setItem(chatKey, chatId);
+        }
+    }
+
+    function getExistingChatId() {
+        if (hasStorage()) {
+            return sessionStorage.getItem(chatKey);
         }
     }
 
@@ -173,7 +170,7 @@ var LCSKChat = function () {
         chatId = id;
         requestChat = true;
 
-        setCookie(cookieName, chatId);
+        setChatId(chatId);
 
         if (existing) {
             if (!$('#chat-box').hasClass('chat-open')) {

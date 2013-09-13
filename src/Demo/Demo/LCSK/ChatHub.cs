@@ -105,6 +105,22 @@ namespace Demo.LCSK
             }
         }
 
+        public void EngageVisitor(string connectionId)
+        {
+            var agent = Agents.SingleOrDefault(x => x.Id == Context.ConnectionId);
+            if(agent != null)
+            {
+                ChatSessions.TryAdd(connectionId, agent.Id);
+
+                Clients.Caller.newChat(connectionId);
+
+                Clients.Client(connectionId).setChat(connectionId, agent.Name, false);
+
+                Clients.Caller.addMessage(connectionId, "system", "You invited this visitor to chat...");
+                Clients.Client(connectionId).addMessage(agent.Name, "Hey there. I'm " + agent.Name + " let me know if you have any questions.");
+            }
+        }
+
         public void LogVisit(string page, string referrer, string existingChatId)
         {
             Clients.Caller.onlineStatus(Agents.Count(x => x.IsOnline) > 0);
@@ -133,7 +149,7 @@ namespace Demo.LCSK
                                where c.Key == Context.ConnectionId
                                select a.Name).SingleOrDefault();
 
-                Clients.Client(agent.Id).newVisit(page, referrer, chatWith);
+                Clients.Client(agent.Id).newVisit(page, referrer, chatWith, Context.ConnectionId);
             }
         }
 

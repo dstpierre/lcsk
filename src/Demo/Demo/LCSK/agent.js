@@ -106,6 +106,16 @@ $(function () {
         postMsg();
     });
 
+    $('#current-visits').on({
+        click: function (e) {
+            e.preventDefault();
+
+            var connectionId = $(this).data('id');
+
+            myHub.server.engageVisitor(connectionId);
+        }
+    }, '.engage-visitor');
+
     myHub.client.loginResult = function (status, id, name) {
         if (status) {
             agent.id = id;
@@ -130,14 +140,14 @@ $(function () {
         }
     };
 
-    myHub.client.newVisit = function (page, referrer, chatWith) {
+    myHub.client.newVisit = function (page, referrer, chatWith, connectionId) {
         var d = new Date();
         $('#current-visits > tbody').prepend(
             '<tr><td><abbr class="timeago" title="' + d.toISOString() + '">' + d.toISOString() + '</abbr></td>' +
             '<td>' + page + '</td>' +
             '<td>' + referrer + '</td>' +
             '<td>' + (chatWith != null ? chatWith : 'not in chat') + '</td>' +
-            '<td><a href="#" class="engage-visitor">engage in chat</a></td></tr>');
+            '<td><a href="#" class="engage-visitor" data-id="' + connectionId + '">engage in chat</a></td></tr>');
 
         $('#current-visits > tbody:first').find('abbr.timeago').timeago();
     };
@@ -362,9 +372,9 @@ function scrollDiv(div) {
 }
 
 function getCommands() {
-    var cookie = getCookie('lcsk-cmd');
-    if (cookie != null && cookie != '') {
-        return JSON.parse(cookie);
+    var cmdKey = getStoredCommands('lcsk-cmd');
+    if (cmdKey != null && cmdKey != '') {
+        return JSON.parse(cmdKey);
     }
     else
         return [];
@@ -382,24 +392,21 @@ function getCommand(trigger) {
 }
 
 function setCommands(commands) {
-    setCookie('lcsk-cmd', JSON.stringify(commands), 365);
+    setStoredCommands('lcsk-cmd', JSON.stringify(commands), 365);
 }
 
-function setCookie(c_name, value, exdays) {
-    var exdate = new Date();
-    exdate.setDate(exdate.getDate() + exdays);
-    var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
-    document.cookie = c_name + "=" + c_value;
+function hasStorage() {
+    return typeof (Storage) !== 'undefined';
 }
 
-function getCookie(c_name) {
-    var i, x, y, ARRcookies = document.cookie.split(";");
-    for (i = 0; i < ARRcookies.length; i++) {
-        x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
-        y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
-        x = x.replace(/^\s+|\s+$/g, "");
-        if (x == c_name) {
-            return unescape(y);
-        }
+function setStoredCommands(key, data) {
+    if (hasStorage()) {
+        localStorage.setItem(key, data);
+    }
+}
+
+function getStoredCommands(key) {
+    if (hasStorage()) {
+        return localStorage.getItem(key);
     }
 }
