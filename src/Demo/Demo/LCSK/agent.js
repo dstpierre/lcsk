@@ -165,10 +165,10 @@ $(function () {
         chatMessages[id] = session;
 
         $('#chat-sessions').prepend(
-            '<div id="chat' + id + '" class="chat-session" data-id="' + id + '">' +
-            '<p><abbr class="timeago" title="' + d.toISOString() + '">' + d.toISOString() + '</abbr>' +
-            '<a class="close-chat btn btn-mini pull-right" href="#"><i class="icon-remove"></i></a></p>' +
-            '<p class="pull-right">New message(s) <span class="badge badge-warning">0</span></p>' +
+            '<div id="chat' + id + '" class="row chat-session" data-id="' + id + '">' +
+            '<div class="col-md-6"><abbr class="timeago" title="' + d.toISOString() + '">' + d.toISOString() + '</abbr></div>' +
+            '<div class="col-md-6" style="text-align: right;"><a class="close-chat btn btn-mini" href="#"><span class="glyphicon glyphicon-remove"></span></a>' +
+            '<p>New message(s) <span class="badge badge-warning">0</span></p></div>' +
             '</div>');
 
         $('#all-chatbox').append(
@@ -338,6 +338,10 @@ function commandTriggered(cmd) {
             commands.push(exists);
 
             setCommands(commands);
+
+            $('#chatmsgs' + getCurrentChatId()).append('<p><strong>system</strong> ' + parts[1] + ' command added.</p>');
+        } else {
+            $('#chatmsgs' + getCurrentChatId()).append('<p><strong>system</strong> The command <em>' + parts[1] + '</em> already exists, please use /edit instead.</p>');
         }
     } else if (parts[0] == 'edit') {
         var commands = getCommands();
@@ -347,6 +351,8 @@ function commandTriggered(cmd) {
             }
         }
         setCommands(commands);
+
+        $('#chatmsgs' + getCurrentChatId()).append('<p><strong>system</strong> ' + parts[1] + ' has been changed.</p>');
     } else if (parts[0] == 'del') {
         var commands = getCommands();
         var newCommands = [];
@@ -358,11 +364,15 @@ function commandTriggered(cmd) {
         }
 
         setCommands(newCommands);
+
+        $('#chatmsgs' + getCurrentChatId()).append('<p><strong>system</strong> ' + parts[1] + ' has been removed.</p>');
     } else {
         var command = getCommand(parts[0]);
         var chatId = getCurrentChatId();
         if (command != null && chatId != '') {
             myHub.server.opSend(chatId, command.msg);
+        } else {
+            $('#chatmsgs' + chatId).append('<p><strong>system</strong> ' + parts[1] + ' is not a recongnized command, use /list to view available commands.</p>');
         }
     }
 }

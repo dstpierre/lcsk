@@ -17,9 +17,6 @@ namespace Demo
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            
-            // SignalR hubs
-            RouteTable.Routes.MapHubs();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
