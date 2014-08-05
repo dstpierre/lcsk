@@ -317,7 +317,8 @@ function commandTriggered(cmd) {
                 '<p><strong>/list</strong> list all available commands.</p>' +
                 '<p><strong>/add command-name text to be sent</strong> add a new command.</p>' +
                 '<p><strong>/edit command-name text to be sent</strong> edit an existing command.</p>' +
-                '<p><strong>/del command-name</strong> remove an exising command.</p>';
+                '<p><strong>/del command-name</strong> remove an exising command.</p>' +
+                '<p><strong>/transfer agent-name</strong> transfer the current chat to another agent.</p>';
 
             body += '<br />';
 
@@ -366,6 +367,16 @@ function commandTriggered(cmd) {
         setCommands(newCommands);
 
         $('#chatmsgs' + getCurrentChatId()).append('<p><strong>system</strong> ' + parts[1] + ' has been removed.</p>');
+    } else if (parts[0] == 'transfer') {
+        var chatId = getCurrentChatId();
+        myHub.server.transfer(chatId, parts[1], $('#chatmsgs' + chatId).html());
+
+        setTimeout(function () {
+            $("div[data-id='" + chatId + "']").remove();
+            $('#chatmsgs' + chatId).remove();
+            $('.chat-session').removeClass('active');
+            showChat('rt');
+        }, 2500);
     } else {
         var command = getCommand(parts[0]);
         var chatId = getCurrentChatId();

@@ -11,6 +11,8 @@ namespace $rootnamespace$.LCSK
     {
         public void Configuration(IAppBuilder app)
         {
+			// If you already have a Startup class, please move this to your 
+			// own Startup class and delete this file
             app.MapSignalR();
         }
     }

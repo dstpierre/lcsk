@@ -177,7 +177,7 @@ var LCSKChat = function () {
                 toggleChatBox();
             }
 
-            $('#chat-box-msg').html('<p>Continuing your chat with <strong>' + agentName + '</strong></p>');
+            $('#chat-box-msg').append('<p>Continuing your chat with <strong>' + agentName + '</strong></p>');
         } else {
             $('#chat-box-msg').append('<p>You are now chatting with <strong>' + agentName + '</strong></p>');
         }
