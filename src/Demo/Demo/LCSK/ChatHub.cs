@@ -66,7 +66,16 @@ namespace Demo.LCSK
                     IsOnline = true
                 };
 
-                if (Agents.TryAdd(name, agent))
+                // if the agent is already signed-in
+                if(Agents.Any(x => x.Key == name))
+                {
+                    agent = Agents[name];
+
+                    Clients.Caller.loginResult(true, agent.Id, agent.Name);
+
+                    Clients.All.onlineStatus(Agents.Count(x => x.Value.IsOnline) > 0);
+                }
+                else if (Agents.TryAdd(name, agent))
                 {
 
                     Clients.Caller.loginResult(true, agent.Id, agent.Name);

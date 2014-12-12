@@ -116,6 +116,14 @@ $(function () {
         }
     }, '.engage-visitor');
 
+    $(window).on('beforeunload', function (e) {
+        if (agent.isOnline) {
+            var msg = 'Please change your status to offline before closing this page. Otherwise your visitor will still be able to send chat request to you.';
+            e.returnValue = msg;
+            return msg;
+        }
+    });
+
     myHub.client.loginResult = function (status, id, name) {
         if (status) {
             agent.id = id;
