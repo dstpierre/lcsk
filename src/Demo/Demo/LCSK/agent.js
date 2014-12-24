@@ -148,12 +148,14 @@ $(function () {
         }
     };
 
-    myHub.client.newVisit = function (page, referrer, chatWith, connectionId) {
+    myHub.client.newVisit = function (page, referrer, city, country, chatWith, connectionId) {
         var d = new Date();
         $('#current-visits > tbody').prepend(
             '<tr><td><abbr class="timeago" title="' + d.toISOString() + '">' + d.toISOString() + '</abbr></td>' +
             '<td>' + page + '</td>' +
             '<td>' + referrer + '</td>' +
+            '<td>' + city + '</td>' +
+            '<td>' + country + '</td>' +
             '<td>' + (chatWith != null ? chatWith : 'not in chat') + '</td>' +
             '<td><a href="#" class="engage-visitor" data-id="' + connectionId + '">engage in chat</a></td></tr>');
 

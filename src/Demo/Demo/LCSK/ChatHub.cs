@@ -120,12 +120,15 @@ namespace Demo.LCSK
             }
         }
 
-        public void LogVisit(string page, string referrer, string existingChatId)
+        public void LogVisit(string page, string referrer, string city, string region, string country, string existingChatId)
         {
             if (Agents == null)
                 Agents = new ConcurrentDictionary<string, Agent>();
 
             Clients.Caller.onlineStatus(Agents.Count(x => x.Value.IsOnline) > 0);
+
+            var cityDisplayName = GetCityDisplayName(city, region);
+            var countryDisplayName = country ?? string.Empty;
 
             if (!string.IsNullOrEmpty(existingChatId) &&
                 ChatSessions.ContainsKey(existingChatId))
@@ -151,7 +154,7 @@ namespace Demo.LCSK
                                where c.Key == Context.ConnectionId
                                select a.Value.Name).SingleOrDefault();
 
-                Clients.Client(agent.Value.Id).newVisit(page, referrer, chatWith, Context.ConnectionId);
+                Clients.Client(agent.Value.Id).newVisit(page, referrer, cityDisplayName, countryDisplayName, chatWith, Context.ConnectionId);
             }
         }
 
@@ -408,6 +411,20 @@ namespace Demo.LCSK
             }
             else
                 Clients.Caller.setConfigResult(false, "Unable to save the config file.");
+        }
+
+        private string GetCityDisplayName(string city, string region)
+        {
+            var displayCity = string.Empty;
+            if (!string.IsNullOrEmpty(city))
+            {
+                displayCity = city;
+                if (!string.IsNullOrEmpty(region))
+                {
+                    displayCity += ", " + region;
+                }
+            }
+            return displayCity;
         }
 
         private string[] GetConfig()
