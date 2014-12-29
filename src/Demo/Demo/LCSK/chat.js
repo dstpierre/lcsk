@@ -69,7 +69,9 @@ var LCSKChat = function () {
         $.connection.hub.start()
             .done(function () {
                 var existingChatId = getExistingChatId(chatKey);
-                myHub.server.logVisit(document.location.href, document.referrer, existingChatId);
+                $.get("http://ipinfo.io", function (response) {
+                    myHub.server.logVisit(document.location.href, document.referrer,  response.city, response.region, response.country, existingChatId);
+                }, "jsonp");
             })
             .fail(function () { chatRefreshState(false); });
 
