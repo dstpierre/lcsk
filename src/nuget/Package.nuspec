@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>LCSK</id>
-    <version>2.2.1</version>
+    <version>2.3.0</version>
     <authors>Dominic St-Pierre</authors>
     <owners>dstpierre</owners>
     <licenseUrl>http://livechatstarterkit.codeplex.com/license</licenseUrl>
@@ -11,8 +11,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Lightweight Live Chat / Live Support app for supporting website visitors using SignalR and no database. Single folder install.</description>
     <summary>SignalR live help chat app.</summary>
-    <releaseNotes>Added chat transfer, updated to SignalR 2.1.1</releaseNotes>
-    <copyright>Copyright 2007-2014 - Focus Centric inc.</copyright>
+    <releaseNotes>Added visitor location, fix some bugs</releaseNotes>
+    <copyright>Copyright 2007-2015 - Focus Centric inc.</copyright>
     <tags>Live Chat Support Help SignalR Website Visitors</tags>
     <dependencies>
       <dependency id="Microsoft.AspNet.SignalR" version="2.1.1" />

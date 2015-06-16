@@ -66,7 +66,16 @@ namespace $rootnamespace$.LCSK
                     IsOnline = true
                 };
 
-                if (Agents.TryAdd(name, agent))
+                // if the agent is already signed-in
+                if(Agents.Any(x => x.Key == name))
+                {
+                    agent = Agents[name];
+
+                    Clients.Caller.loginResult(true, agent.Id, agent.Name);
+
+                    Clients.All.onlineStatus(Agents.Count(x => x.Value.IsOnline) > 0);
+                }
+                else if (Agents.TryAdd(name, agent))
                 {
 
                     Clients.Caller.loginResult(true, agent.Id, agent.Name);
@@ -111,12 +120,15 @@ namespace $rootnamespace$.LCSK
             }
         }
 
-        public void LogVisit(string page, string referrer, string existingChatId)
+        public void LogVisit(string page, string referrer, string city, string region, string country, string existingChatId)
         {
             if (Agents == null)
                 Agents = new ConcurrentDictionary<string, Agent>();
 
             Clients.Caller.onlineStatus(Agents.Count(x => x.Value.IsOnline) > 0);
+
+            var cityDisplayName = GetCityDisplayName(city, region);
+            var countryDisplayName = country ?? string.Empty;
 
             if (!string.IsNullOrEmpty(existingChatId) &&
                 ChatSessions.ContainsKey(existingChatId))
@@ -142,7 +154,7 @@ namespace $rootnamespace$.LCSK
                                where c.Key == Context.ConnectionId
                                select a.Value.Name).SingleOrDefault();
 
-                Clients.Client(agent.Value.Id).newVisit(page, referrer, chatWith, Context.ConnectionId);
+                Clients.Client(agent.Value.Id).newVisit(page, referrer, cityDisplayName, countryDisplayName, chatWith, Context.ConnectionId);
             }
         }
 
@@ -399,6 +411,20 @@ namespace $rootnamespace$.LCSK
             }
             else
                 Clients.Caller.setConfigResult(false, "Unable to save the config file.");
+        }
+
+        private string GetCityDisplayName(string city, string region)
+        {
+            var displayCity = string.Empty;
+            if (!string.IsNullOrEmpty(city))
+            {
+                displayCity = city;
+                if (!string.IsNullOrEmpty(region))
+                {
+                    displayCity += ", " + region;
+                }
+            }
+            return displayCity;
         }
 
         private string[] GetConfig()
