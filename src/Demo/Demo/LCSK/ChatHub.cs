@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Hubs;
 using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
@@ -17,7 +16,7 @@ namespace Demo.LCSK
 {
     public class ChatHub : Hub
     {
-        private const string CONFIG_FILE = "lcsk.dat";
+        private const string ConfigFile = "lcsk.dat";
         /*
         List<Agent> Agents
         {
@@ -39,16 +38,16 @@ namespace Demo.LCSK
             }
         }
         */
-        private static ConcurrentDictionary<string, Agent> Agents;
-        private static ConcurrentDictionary<string, string> ChatSessions;
+        private static ConcurrentDictionary<string, Agent> _agents;
+        private static ConcurrentDictionary<string, string> _chatSessions;
 
         public void AgentConnect(string name, string pass)
         {
-            if (Agents == null)
-                Agents = new ConcurrentDictionary<string, Agent>();
+            if (_agents == null)
+                _agents = new ConcurrentDictionary<string, Agent>();
 
-            if (ChatSessions == null)
-                ChatSessions = new ConcurrentDictionary<string, string>();
+            if (_chatSessions == null)
+                _chatSessions = new ConcurrentDictionary<string, string>();
 
             string hashPass = ToHash(pass);
 
@@ -59,7 +58,7 @@ namespace Demo.LCSK
             }
             else if ((config[0] == hashPass) || (config[1] == hashPass))
             {
-                var agent = new Agent()
+                var agent = new Agent
                 {
                     Id = Context.ConnectionId,
                     Name = name,
@@ -67,20 +66,20 @@ namespace Demo.LCSK
                 };
 
                 // if the agent is already signed-in
-                if(Agents.Any(x => x.Key == name))
+                if(_agents.Any(x => x.Key == name))
                 {
-                    agent = Agents[name];
+                    agent = _agents[name];
 
                     Clients.Caller.loginResult(true, agent.Id, agent.Name);
 
-                    Clients.All.onlineStatus(Agents.Count(x => x.Value.IsOnline) > 0);
+                    Clients.All.onlineStatus(_agents.Count(x => x.Value.IsOnline) > 0);
                 }
-                else if (Agents.TryAdd(name, agent))
+                else if (_agents.TryAdd(name, agent))
                 {
 
                     Clients.Caller.loginResult(true, agent.Id, agent.Name);
 
-                    Clients.All.onlineStatus(Agents.Count(x => x.Value.IsOnline) > 0);
+                    Clients.All.onlineStatus(_agents.Count(x => x.Value.IsOnline) > 0);
                 }
                 else
                 {
@@ -93,28 +92,23 @@ namespace Demo.LCSK
 
         public void ChangeStatus(bool online)
         {
-            var agent = Agents.SingleOrDefault(x => x.Value.Id == Context.ConnectionId).Value;
+            var agent = _agents.SingleOrDefault(x => x.Value.Id == Context.ConnectionId).Value;
             if (agent != null)
             {
                 agent.IsOnline = online;
-
                 // TODO: Check if the agent was in chat sessions.
-
-                Clients.All.onlineStatus(Agents.Count(x => x.Value.IsOnline) > 0);
+                Clients.All.onlineStatus(_agents.Count(x => x.Value.IsOnline) > 0);
             }
         }
 
         public void EngageVisitor(string connectionId)
         {
-            var agent = Agents.SingleOrDefault(x => x.Value.Id == Context.ConnectionId).Value;
+            var agent = _agents.SingleOrDefault(x => x.Value.Id == Context.ConnectionId).Value;
             if(agent != null)
             {
-                ChatSessions.TryAdd(connectionId, agent.Id);
-
+                _chatSessions.TryAdd(connectionId, agent.Id);
                 Clients.Caller.newChat(connectionId);
-
                 Clients.Client(connectionId).setChat(connectionId, agent.Name, false);
-
                 Clients.Caller.addMessage(connectionId, "system", "You invited this visitor to chat...");
                 Clients.Client(connectionId).addMessage(agent.Name, "Hey there. I'm " + agent.Name + " let me know if you have any questions.");
             }
@@ -122,35 +116,32 @@ namespace Demo.LCSK
 
         public void LogVisit(string page, string referrer, string city, string region, string country, string existingChatId)
         {
-            if (Agents == null)
-                Agents = new ConcurrentDictionary<string, Agent>();
+            if (_agents == null)
+                _agents = new ConcurrentDictionary<string, Agent>();
 
-            Clients.Caller.onlineStatus(Agents.Count(x => x.Value.IsOnline) > 0);
-
+            Clients.Caller.onlineStatus(_agents.Count(x => x.Value.IsOnline) > 0);
             var cityDisplayName = GetCityDisplayName(city, region);
             var countryDisplayName = country ?? string.Empty;
 
             if (!string.IsNullOrEmpty(existingChatId) &&
-                ChatSessions.ContainsKey(existingChatId))
+                _chatSessions.ContainsKey(existingChatId))
             {
-                var agentId = ChatSessions[existingChatId];
+                var agentId = _chatSessions[existingChatId];
                 Clients.Client(agentId).visitorSwitchPage(existingChatId, Context.ConnectionId, page);
-
-                var agent = Agents.SingleOrDefault(x => x.Value.Id == agentId).Value;
+                var agent = _agents.SingleOrDefault(x => x.Value.Id == agentId).Value;
 
                 if (agent != null)
                     Clients.Caller.setChat(Context.ConnectionId, agent.Name, true);
 
-                string buffer = "";
-                ChatSessions.TryRemove(existingChatId, out buffer);
-
-                ChatSessions.TryAdd(Context.ConnectionId, agentId);
+                string buffer;
+                _chatSessions.TryRemove(existingChatId, out buffer);
+                _chatSessions.TryAdd(Context.ConnectionId, agentId);
             }
 
-            foreach (var agent in Agents)
+            foreach (var agent in _agents)
             {
-                var chatWith = (from c in ChatSessions
-                               join a in Agents on c.Value equals a.Value.Id
+                var chatWith = (from c in _chatSessions
+                               join a in _agents on c.Value equals a.Value.Id
                                where c.Key == Context.ConnectionId
                                select a.Value.Name).SingleOrDefault();
 
@@ -161,63 +152,54 @@ namespace Demo.LCSK
         public void RequestChat(string message)
         {
             // We assign the chat to the less buzy agent
-            var workload = from a in Agents
+            var workload = from a in _agents
                            where a.Value.IsOnline
                            select new
                            {
-                               Id = a.Value.Id,
-                               Name = a.Value.Name,
-                               Count = ChatSessions.Count(x => x.Value == a.Value.Id)
+                               a.Value.Id,
+                               a.Value.Name,
+                               Count = _chatSessions.Count(x => x.Value == a.Value.Id)
                            };
 
-            if (workload == null)
-            {
-                Clients.Caller.addMessage("", "No agent are currently available.");
-                return;
-            }
-
             var lessBuzy = workload.OrderBy(x => x.Count).FirstOrDefault();
-
             if (lessBuzy == null)
             {
                 Clients.Caller.addMessage("", "No agent are currently available.");
                 return;
             }
             
-            ChatSessions.TryAdd(Context.ConnectionId, lessBuzy.Id);
-
+            _chatSessions.TryAdd(Context.ConnectionId, lessBuzy.Id);
             Clients.Client(lessBuzy.Id).newChat(Context.ConnectionId);
-
             Clients.Caller.setChat(Context.ConnectionId, lessBuzy.Name, false);
-
+            message = Regex.Replace(message, @"(\b(?:(?:(?:https?|ftp|file)://|www\.|ftp\.)[-A-Z0-9+&@#/%?=~_|$!:,.;]*[-A-Z0-9+&@#/%=~_|$]|((?:mailto:)?[A-Z0-9._%+-]+@[A-Z0-9._%-]+\.[A-Z]{2,6})\b)|""(?:(?:https?|ftp|file)://|www\.|ftp\.)[^""\r\n]+""|'(?:(?:https?|ftp|file)://|www\.|ftp\.)[^'\r\n]+')", "<a target='_blank' href='$1'>$1</a>", RegexOptions.IgnoreCase | RegexOptions.Multiline);
             Clients.Client(lessBuzy.Id).addMessage(Context.ConnectionId, "visitor", message);
             Clients.Caller.addMessage("me", message);
         }
 
         public void Transfer(string connectionId, string agentName, string messages)
         {
-            if(!Agents.ContainsKey(agentName))
+            if(!_agents.ContainsKey(agentName))
             {
                 Clients.Caller.addMessage(Context.ConnectionId, "system", "This agent does not exists: " + agentName);
                 return;
             }
 
-            var agent = Agents[agentName];
+            var agent = _agents[agentName];
             if(!agent.IsOnline)
             {
                 Clients.Caller.addMessage(Context.ConnectionId, "system", agentName + " is not online at the moment.");
                 return;
             }
 
-            if(!ChatSessions.ContainsKey(connectionId))
+            if(!_chatSessions.ContainsKey(connectionId))
             {
                 Clients.Caller.addMessage(Context.ConnectionId, "system", "This chat session does not exists anymore.");
                 return;
             }
 
-            string currentAgentId = "";
-            if (ChatSessions.TryRemove(connectionId, out currentAgentId) &&
-                ChatSessions.TryAdd(connectionId, agent.Id))
+            string currentAgentId;
+            if (_chatSessions.TryRemove(connectionId, out currentAgentId) &&
+                _chatSessions.TryAdd(connectionId, agent.Id))
             {
                 Clients.Client(agent.Id).newChat(connectionId);
                 Clients.Client(agent.Id).addMessage(connectionId, "system", "New chat transfered to you.");
@@ -234,11 +216,13 @@ namespace Demo.LCSK
 
         public void Send(string data)
         {
+            //snatch any url using regex pattern
+            data = Regex.Replace(data, @"(\b(?:(?:(?:https?|ftp|file)://|www\.|ftp\.)[-A-Z0-9+&@#/%?=~_|$!:,.;]*[-A-Z0-9+&@#/%=~_|$]|((?:mailto:)?[A-Z0-9._%+-]+@[A-Z0-9._%-]+\.[A-Z]{2,6})\b)|""(?:(?:https?|ftp|file)://|www\.|ftp\.)[^""\r\n]+""|'(?:(?:https?|ftp|file)://|www\.|ftp\.)[^'\r\n]+')", "<a target='_blank' href='$1'>$1</a>", RegexOptions.IgnoreCase | RegexOptions.Multiline);
             Clients.Caller.addMessage("me", data);
 
-            if (ChatSessions.ContainsKey(Context.ConnectionId))
+            if (_chatSessions.ContainsKey(Context.ConnectionId))
             {
-                var opId = ChatSessions[Context.ConnectionId];
+                var opId = _chatSessions[Context.ConnectionId];
                 Clients.Client(opId).addMessage(Context.ConnectionId, "visitor", data);
             }
             else
@@ -246,35 +230,25 @@ namespace Demo.LCSK
                 Debug.WriteLine("Chat Session not found.");
 
                 // refactor this
-                var workload = from a in Agents
+                var workload = from a in _agents
                                where a.Value.IsOnline
                                select new
                                {
-                                   Id = a.Value.Id,
-                                   Name = a.Value.Name,
-                                   Count = ChatSessions.Count(x => x.Value == a.Value.Id)
+                                   a.Value.Id,
+                                   a.Value.Name,
+                                   Count = _chatSessions.Count(x => x.Value == a.Value.Id)
                                };
 
-                if (workload == null)
-                {
-                    Clients.Caller.addMessage("", "No agent are currently available.");
-                    return;
-                }
-
                 var lessBuzy = workload.OrderBy(x => x.Count).FirstOrDefault();
-
                 if (lessBuzy == null)
                 {
                     Clients.Caller.addMessage("", "No agent are currently available.");
                     return;
                 }
 
-                ChatSessions.TryAdd(Context.ConnectionId, lessBuzy.Id);
-
+                _chatSessions.TryAdd(Context.ConnectionId, lessBuzy.Id);
                 Clients.Client(lessBuzy.Id).newChat(Context.ConnectionId);
-
                 Clients.Caller.setChat(Context.ConnectionId, lessBuzy.Name, false);
-
                 Clients.Client(lessBuzy.Id).addMessage(Context.ConnectionId, "system", "This visitor appear to have lost their chat session.");
                 Clients.Client(lessBuzy.Id).addMessage(Context.ConnectionId, "visitor", data);
             }
@@ -282,7 +256,7 @@ namespace Demo.LCSK
 
         public void OpSend(string id, string data)
         {
-            var agent = Agents.SingleOrDefault(x => x.Value.Id == Context.ConnectionId).Value;
+            var agent = _agents.SingleOrDefault(x => x.Value.Id == Context.ConnectionId).Value;
             if (agent == null)
             {
                 Clients.Caller.addMessage(id, "system", "We were unable to send your message, please reload the page.");
@@ -291,12 +265,13 @@ namespace Demo.LCSK
 
             if (id == "internal")
             {
-                foreach (var a in Agents.Where(x => x.Value.IsOnline))
+                foreach (var a in _agents.Where(x => x.Value.IsOnline))
                     Clients.Client(a.Value.Id).addMessage(id, agent.Name, data);
                         
             }
-            else if (ChatSessions.ContainsKey(id))
+            else if (_chatSessions.ContainsKey(id))
             {
+                data = Regex.Replace(data, @"(\b(?:(?:(?:https?|ftp|file)://|www\.|ftp\.)[-A-Z0-9+&@#/%?=~_|$!:,.;]*[-A-Z0-9+&@#/%=~_|$]|((?:mailto:)?[A-Z0-9._%+-]+@[A-Z0-9._%-]+\.[A-Z]{2,6})\b)|""(?:(?:https?|ftp|file)://|www\.|ftp\.)[^""\r\n]+""|'(?:(?:https?|ftp|file)://|www\.|ftp\.)[^'\r\n]+')", "<a target='_blank' href='$1'>$1</a>", RegexOptions.IgnoreCase | RegexOptions.Multiline);
                 Clients.Caller.addMessage(id, "you", data);
                 Clients.Client(id).addMessage(agent.Name, data);
             }
@@ -304,40 +279,35 @@ namespace Demo.LCSK
 
         public void CloseChat(string id)
         {
-            if (ChatSessions.ContainsKey(id))
+            if (_chatSessions.ContainsKey(id))
             {
                 Clients.Client(id).addMessage("", "The agent close the chat session.");
 
-                string buffer = "";
-                ChatSessions.TryRemove(id, out buffer);
+                string buffer;
+                _chatSessions.TryRemove(id, out buffer);
             }
         }
 
         public void LeaveChat(string id)
         {
             // was it an agent
-            var agent = Agents.SingleOrDefault(x => x.Value.Id == id).Value;
+            var agent = _agents.SingleOrDefault(x => x.Value.Id == id).Value;
             if (agent != null)
             {
-                Agent tmp = null;
-                if (Agents.TryRemove(agent.Name, out tmp))
+                Agent tmp;
+                if (_agents.TryRemove(agent.Name, out tmp))
                 {
-
-                    var sessions = ChatSessions.Where(x => x.Value == agent.Id);
-                    if (sessions != null)
-                    {
-                        foreach (var session in sessions)
-                            Clients.Client(session.Key).addMessage("", "The agent was disconnected from chat.");
-                    }
-
-                    Clients.All.updateStatus(Agents.Count(x => x.Value.IsOnline) > 0);
+                    var sessions = _chatSessions.Where(x => x.Value == agent.Id);
+                    foreach (var session in sessions)
+                        Clients.Client(session.Key).addMessage("", "The agent was disconnected from chat.");
+                    Clients.All.updateStatus(_agents.Count(x => x.Value.IsOnline) > 0);
                 }
             }
 
             // was it a visitor
-            if (ChatSessions.ContainsKey(id))
+            if (_chatSessions.ContainsKey(id))
             {
-                var agentId = ChatSessions[id];
+                var agentId = _chatSessions[id];
                 Clients.Client(agentId).addMessage(id, "system", "The visitor close the connection.");
             }
         }
@@ -401,7 +371,7 @@ namespace Demo.LCSK
 
             if (shouldSave)
             {
-                string configPath = HttpContext.Current.Server.MapPath("~/App_Data/" + CONFIG_FILE);
+                string configPath = HttpContext.Current.Server.MapPath("~/App_Data/" + ConfigFile);
 
                 File.WriteAllText(
                     configPath,
@@ -429,7 +399,7 @@ namespace Demo.LCSK
 
         private string[] GetConfig()
         {
-            string configPath = HttpContext.Current.Server.MapPath("~/App_Data/" + CONFIG_FILE);
+            string configPath = HttpContext.Current.Server.MapPath("~/App_Data/" + ConfigFile);
             if (File.Exists(configPath))
             {
                 return File.ReadAllLines(configPath);
