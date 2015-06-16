@@ -104,11 +104,12 @@ namespace Demo.LCSK
         public void EngageVisitor(string connectionId)
         {
             var agent = _agents.SingleOrDefault(x => x.Value.Id == Context.ConnectionId).Value;
-            if(agent != null)
+            if(agent != null && _chatSessions.Count(x => x.Key == connectionId && x.Value == agent.Id) == 0)
             {
                 _chatSessions.TryAdd(connectionId, agent.Id);
                 Clients.Caller.newChat(connectionId);
                 Clients.Client(connectionId).setChat(connectionId, agent.Name, false);
+                Clients.Client(connectionId).openChatWindow();
                 Clients.Caller.addMessage(connectionId, "system", "You invited this visitor to chat...");
                 Clients.Client(connectionId).addMessage(agent.Name, "Hey there. I'm " + agent.Name + " let me know if you have any questions.");
             }
@@ -319,14 +320,21 @@ namespace Demo.LCSK
 
         public void SendEmail(string from, string message)
         {
-            var msg = new MailMessage();
-            msg.To.Add(new MailAddress(from));
-            msg.Subject = "LCSK - Offline Contact";
-            msg.Body = "You received an offline contact from your LCSK chat widget.\r\n\r\n" + message;
-
-            using (var client = new SmtpClient())
+            var config = GetConfig();
+            if (config != null && config.Length >= 3)
             {
-                client.Send(msg);
+                message = "From: " + from + "\n\n" + message;
+
+                var msg = new MailMessage();
+                msg.From = new MailAddress(config[2]);
+                msg.To.Add(new MailAddress(config[2]));
+                msg.Subject = "LCSK - Offline Contact";
+                msg.Body = "You received an offline contact from your LCSK chat widget.\r\n\r\n" + message;
+
+                using (var client = new SmtpClient())
+                {
+                    client.Send(msg);
+                }
             }
         }
 
@@ -356,7 +364,7 @@ namespace Demo.LCSK
                 Clients.Caller.adminResult(false, "");
         }
 
-        public void SetConfig(string token, string adminPass, string agentPass)
+        public void SetConfig(string token, string adminPass, string agentPass, string email)
         {
             bool shouldSave = false;
             var config = GetConfig();
@@ -375,7 +383,7 @@ namespace Demo.LCSK
 
                 File.WriteAllText(
                     configPath,
-                    ToHash(adminPass) + "\n" + ToHash(agentPass));
+                    ToHash(adminPass) + "\n" + ToHash(agentPass) + "\n" + email);
 
                 Clients.Caller.setConfigResult(true, "Config file updated.");
             }

@@ -185,6 +185,12 @@ var LCSKChat = function () {
         }
     };
 
+    myHub.client.openChatWindow = function () {
+        if (!$('#chat-box').hasClass('chat-open')) {
+            toggleChatBox();
+        }
+    }
+
     myHub.client.addMessage = function (from, msg) {
         if (chatId != null && chatId != '') {
             if (!requestChat) {

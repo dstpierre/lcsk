@@ -18,6 +18,7 @@
 
         var adminPass = $('#main-pass').val();
         var agentPass = $('#agent-pass').val();
+        var email = $('#email').val();
 
         if (adminPass == '') {
             $('#save-alerts').html('<div class="alert alert-warning">' +
@@ -35,7 +36,15 @@
             return;
         }
 
-        myHub.server.setConfig($('#save-button').data('id'), adminPass, agentPass);
+        if (email == '') {
+            $('#save-alerts').html('<div class="alert alert-warning">' +
+                '<button type="button" class="close" data-dismiss="alert">×</button>' +
+                '<strong>Oops!</strong> You have to specify an email.</div>');
+
+            return;
+        }
+
+        myHub.server.setConfig($('#save-button').data('id'), adminPass, agentPass, email);
     });
 
     myHub.client.installState = function (state, data) {
