@@ -148,6 +148,10 @@ var LCSKChat = function () {
             var y = 301 + elm.height();
             $('#chat-box').addClass('chat-open');
             elm.css('bottom', y);
+			var $el = $("#chat-box");
+            setTimeout(function () {
+                $el.find('textarea').focus();
+            }, 0);
         }
         $('#chat-box').slideToggle();
     }
