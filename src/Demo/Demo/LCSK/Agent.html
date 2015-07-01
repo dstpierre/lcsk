@@ -170,6 +170,12 @@
     <script src="agent.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            //initially set focus to log in name - upon opening
+            setTimeout(function () {
+                $('#login-name').focus();
+            }, 0);
+            
+            //capture enter key event press
             $('#login-pass').keypress(function (e) {
                 if (e.keyCode == 13)
                     $('#login-btn').click();
