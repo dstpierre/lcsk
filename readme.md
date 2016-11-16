@@ -1,3 +1,17 @@
+#### 2016/11/16 - Please note that LCSK is not maintained anymore
+
+I've started this .NET in 2007, but since 2014 I'm not running on Windows nor doing .NET development anymore.
+
+I'm currently considering a brand new open source project, similar to what [Intercom](https://intercom.io) are doing with all the marketing automation and good stuff. I'm considering building this on livecoding.tv. This is still only a thought.
+
+But if there's interest, I would be more energized :). In any case, [read this for more detail](https://github.com/dstpierre/lcsk/issues/53)
+
+Thanks to everyone that tried LCSK.
+
+=============================================================
+original README
+=============================================================
+
 LCSK (LiveChat Starter Kit)
 =============================
 
