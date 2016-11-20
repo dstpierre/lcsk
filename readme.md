@@ -1,21 +1,17 @@
-#### 2016/11/16 - Please note that LCSK is not maintained anymore
+### This branch is the last released of Livechat Starter Kit
 
-I've started this .NET project in 2007, but since 2014 I'm not running on Windows nor doing .NET development anymore.
+As an easy reference, this branch contains the last source code for LCSK.
 
-I'm currently considering a brand new open source project, similar to what [Intercom](https://intercom.io) are doing with all the marketing automation and good stuff. I'm considering building this on livecoding.tv. This is still only a thought.
+The new development efforts will all be toward Parle a full customer communication app that I will be building live at (LiveCoding.tv)[https://www.livecoding.tv/dstpierre].
 
-But if there's interest, I would be more energized :). In any case, [read this for more detail](https://github.com/dstpierre/lcsk/issues/53)
-
-Thanks to everyone that tried LCSK.
-
-------------------------------------------------------------
+////////////////////////////////////////////////////
 original README
-------------------------------------------------------------
+////////////////////////////////////////////////////
 
 LCSK (LiveChat Starter Kit)
 =============================
 
-LCSK is a simple, lightweight live chat / live support ASP.NET C# app. It uses SignalR for the communication channel 
+LCSK is a simple, lightweight live chat / live support ASP.NET C# app. It uses SignalR for the communication channel
 between the website visitors and the agent(s). No database are required.
 
 I just moved the project over to GitHub, it was previoulsy hosted on [CodePlex](http://livechatstarterkit.codeplex.com).
@@ -33,25 +29,25 @@ Get it on NuGet
 Manual installation
 ---------------------------
 
-You will need an ASP.NET 4 web application to start. Since LCSK depend on 
+You will need an ASP.NET 4 web application to start. Since LCSK depend on
 [SignalR](http://signalr.net), you'll need to add this from Nuget.
 
 	Install-Package Microsoft.AspNet.SignalR
 
-You can copy the LCSK folder into your project. You might want to change the namespacing of the 
+You can copy the LCSK folder into your project. You might want to change the namespacing of the
 .cs file, when using NuGet this is done automatically.
 
 Startup.cs issues
 -------------------------------------------
 
-If you already have a Startup.cs file, please copy the app.MapSignalR() to your existing Startup.cs file 
+If you already have a Startup.cs file, please copy the app.MapSignalR() to your existing Startup.cs file
 and delete the one supplied in LCSK/Startup.cs.
 
 Adding the visitor chat box to your pages
 -------------------------------------------
 
-Please note that I've included the SignalR and jQuery javascript files into the LCSK/js for quick 
-references. Feel free to remove those .js files and use the one that came with the SignalR package instead or 
+Please note that I've included the SignalR and jQuery javascript files into the LCSK/js for quick
+references. Feel free to remove those .js files and use the one that came with the SignalR package instead or
 use whatever file structure you like.
 
 	*** If you do not already have jQuery referenced
@@ -64,7 +60,7 @@ use whatever file structure you like.
 Login in to the agent panel
 ----------------------------
 
-To login you'll first have to set an admin and agent password. Simply go to /lcsk/install.html to set 
+To login you'll first have to set an admin and agent password. Simply go to /lcsk/install.html to set
 both passwords.
 
 Return to /lcsk/agent.html and login with the following credentials:
@@ -77,7 +73,7 @@ You can have an unlimited number of agent, they'll all have the same password an
 View a demo
 ----------------
 
-There is a Demo project in the src folder. It's an ASP.NET MVC 4 web app. You can run LCSK in a web 
+There is a Demo project in the src folder. It's an ASP.NET MVC 4 web app. You can run LCSK in a web
 forms application as well.
 
 Videos
@@ -91,6 +87,6 @@ You can watch a video on how to add LCSK to an existing project.
 Project Status
 -----------------------
 
-I'm continuously improving this project. Contribution is very welcome. I've started the project in 
+I'm continuously improving this project. Contribution is very welcome. I've started the project in
 2007.
 
