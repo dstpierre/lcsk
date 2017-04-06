@@ -1,5 +1,16 @@
-### Parle, a customer communication app I'm building live
+Modules:
 
-This brand new app will be entirely developed live at (LiveCoding.tv)[https://www.livecoding.tv/dstpierre].
+- Live chat, in-app messaging => websocket
+  Visitor => live chat client
+  In-App messenger: signed in users (Intercom)
 
-Starting soon.
+  web admin
+
+- Marketing automation
+  Send target emails or in-app messages
+  => Campaign Onboarding:
+    User signed up date
+    If do X => Send Email A
+    otherwise => Send Email B
+
+  - Collaborative mailbox support

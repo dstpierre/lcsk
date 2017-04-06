@@ -1,0 +1,31 @@
+{
+  "name": "parle",
+  "version": "1.0.0",
+  "description": "This brand new app will be entirely developed live at (LiveCoding.tv)[https://www.livecoding.tv/dstpierre].",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parle-io/parle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parle-io/parle/issues"
+  },
+  "homepage": "https://github.com/parle-io/parle#readme",
+  "dependencies": {
+    "@types/react": "^0.14.50",
+    "@types/react-dom": "^0.14.19",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "superagent": "^3.0.0"
+  },
+  "devDependencies": {
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^1.2.2",
+    "typescript": "^2.0.10"
+  }
+}
