@@ -100,7 +100,7 @@ func (c *client) listenRead() {
 type server struct {
 	pattern string
 	clients map[string]*client
-	groups  map[string][]*client
+	convos  map[string][]*client
 	addCh   chan *client
 	evtCh   chan *RealtimeEvent
 	delCh   chan *client
@@ -110,7 +110,7 @@ type server struct {
 
 func newRealtime(pattern string) *server {
 	clients := make(map[string]*client)
-	groups := make(map[string][]*client)
+	convos := make(map[string][]*client)
 	addCh := make(chan *client)
 	evtCh := make(chan *RealtimeEvent)
 	delCh := make(chan *client)
@@ -120,7 +120,7 @@ func newRealtime(pattern string) *server {
 	return &server{
 		pattern,
 		clients,
-		groups,
+		convos,
 		addCh,
 		evtCh,
 		delCh,
@@ -153,14 +153,14 @@ func (s *server) do(e *RealtimeEvent) {
 	log.Printf("Received this: %v", e)
 
 	switch strings.ToUpper(e.Name) {
-	case "LINK":
-		s.link(e)
+	case "NEWCONV":
+		s.newConversation(e)
 	case "AUTH":
 		s.auth(e)
 	}
 }
 
-func (s *server) link(e *RealtimeEvent) {
+func (s *server) newConversation(e *RealtimeEvent) {
 	var toLink *client
 	for _, c := range s.clients {
 		if c.id == e.Data {
@@ -169,11 +169,11 @@ func (s *server) link(e *RealtimeEvent) {
 		}
 	}
 
-	if lists, ok := s.groups[e.Token]; ok {
-		s.groups[e.Token] = append(lists, toLink)
+	if lists, ok := s.convos[e.Token]; ok {
+		s.convos[e.Token] = append(lists, toLink)
 	} else {
 		var lists []*client
-		s.groups[e.Token] = append(lists, toLink)
+		s.convos[e.Token] = append(lists, toLink)
 	}
 
 	toLink.write(&RealtimeEvent{e.Token, "joined channel", "ready to read/write to channel."})
@@ -186,7 +186,7 @@ func (s *server) auth(e *RealtimeEvent) {
 		log.Println("wrong auth")
 		for _, c := range s.clients {
 			if c.id == e.Token {
-				c.done();
+				c.done()
 				break
 			}
 		}
@@ -195,7 +195,7 @@ func (s *server) auth(e *RealtimeEvent) {
 
 	msg := &RealtimeEvent{Token: e.Token, Name: "discussions"}
 	d := ""
-	for k := range s.groups {
+	for k := range s.convos {
 		d += k + ","
 	}
 	d = strings.TrimSuffix(d, ",")
@@ -239,17 +239,17 @@ func (s *server) listen() {
 			// sending the socket id to the client so they can join (link) a channel
 			c.write(&RealtimeEvent{"server", "hello", c.id})
 		case e := <-s.evtCh:
-			for k, v := range s.groups {
-				if k == e.Token {
-					for _, c := range v {
-						c.write(e)
-					}
+			if target, ok := s.clients[e.Token]; ok {
+				target.write(e)
+			} else if convo, ok := s.convos[e.Token]; ok {
+				for _, c := range convo {
+					c.write(e)
 				}
 			}
 		case c := <-s.delCh:
 			log.Println("Removing client")
 
-			for _, v := range s.groups {
+			for _, v := range s.convos {
 				for _, linked := range v {
 					if linked.id == c.id {
 						//TODO: Remove from groups
@@ -264,5 +264,4 @@ func (s *server) listen() {
 
 		}
 	}
-
 }

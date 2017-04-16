@@ -3,7 +3,7 @@
 		"outDir": "./public/dist",
 		"target": "es5",
 		"module": "commonjs",
-		"noImplicitAny": false,
+		"noImplicitAny": true,
 		"removeComments": true,
 		"sourceMap": true,
 		"jsx": "react"

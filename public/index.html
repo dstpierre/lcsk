@@ -1,23 +1,22 @@
 <html>
+
 <head>
-  <title></title>
+	<title></title>
 </head>
+
 <body>
-  <div id="app"></div>
+	<div id="app"></div>
 
-  <!-- dependencies -->
-  <script src="/dist/react.min.js"></script>
-  <script src="/dist/react-dom.min.js"></script>
+	<script src="/js/bundle.js"></script>
 
-  <script src="/dist/bundle.js"></script>
-
-  <!-- this is what external website would use toe embed the live chat widget -->
-  <script src="/js/widget/init.js"></script>
-  <script>
-    parle.init({
-      id: "user-id",
-      email: "user-email-"
-    })
-  </script>
+	<script src="/js/widget/dist/parle.js"></script>
+	<script>
+		window.onload = function() {
+			parle.init({
+				id: "testing"
+			});
+		}
+	</script>
 </body>
+
 </html>

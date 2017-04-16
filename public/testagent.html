@@ -37,6 +37,7 @@ window.onload = function () {
             appendLog(item);
         };
         conn.onmessage = function (evt) {
+					console.log(evt);
 						var re = null;
 						try {
 							if (evt.data && evt.data[0] == "{") {

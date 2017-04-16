@@ -4,6 +4,8 @@
   "description": "This brand new app will be entirely developed live at (LiveCoding.tv)[https://www.livecoding.tv/dstpierre].",
   "main": "index.js",
   "scripts": {
+		"build": "webpack && npm run build:widget",
+    "build:widget": "cd widget && tsc && cd .. && gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +26,10 @@
     "superagent": "^3.0.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "0.0.15",
+    "gulp-uglify": "^2.1.2",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^1.2.2",
     "typescript": "^2.0.10"
