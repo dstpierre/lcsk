@@ -24,4 +24,32 @@
 			return;
 		}
 	}
+
+	parle.renderDiscussions = () => {
+		let conversations = parle.state.conversations;
+
+		if (conversations == parle.state.conversations) {
+			return;
+		}
+
+		if (parle.eventHandlers && parle.eventHandlers.length > 0) {
+			parle.eventHandlers.forEach((h) => {
+				var el = document.getElementById(h.id);
+				if (el) {
+					el.removeEventListener(h.event, h.handler);
+				}
+			});
+		}
+
+		let content = document.getElementById("parle-content");
+		content.innerHTML = parle.templates["discussions"].apply(parle.state);
+
+		// register click events for all convo
+		let btn = document.getElementById("parle-newconv");
+		
+	}
+
+	parle.listConvos = (conversations: Array<IConversation>) => {
+		
+	}
 })(window["parle"]);

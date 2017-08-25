@@ -8,8 +8,13 @@
 		wc.innerHTML = parle.templates["widget"].apply(parle.state);
 
 		let dc = document.getElementById("parle-discussions");
+		dc.innerHTML = parle.templates["discussions"].apply(parle.state);
 		dc.style.height = (getHeight() - 125) + "px";
 		dc.style.display = parle.state.isOpen ? "block" : "none";
+	}
+
+	parle.events["newConvClicked"] = (e: MouseEvent) => {
+		parle.send("newconv", "");
 	}
 
 	const getHeight = (): number => {

@@ -20,5 +20,24 @@
             return;
         }
     };
+    parle.renderDiscussions = function () {
+        var conversations = parle.state.conversations;
+        if (conversations == parle.state.conversations) {
+            return;
+        }
+        if (parle.eventHandlers && parle.eventHandlers.length > 0) {
+            parle.eventHandlers.forEach(function (h) {
+                var el = document.getElementById(h.id);
+                if (el) {
+                    el.removeEventListener(h.event, h.handler);
+                }
+            });
+        }
+        var content = document.getElementById("parle-content");
+        content.innerHTML = parle.templates["discussions"].apply(parle.state);
+        var btn = document.getElementById("parle-newconv");
+    };
+    parle.listConvos = function (conversations) {
+    };
 })(window["parle"]);
 //# sourceMappingURL=load.js.map

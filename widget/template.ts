@@ -1,7 +1,8 @@
 ((parle: IParle) => {
 	const parseTemplate = (html: string) => {
-		const re = /<%([^%>]+)?%>/g;
+		const re = /<%(.+)?%>/g; // before was [^%>]
 		const reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g;
+		const subExp = /#([^#+])?#/;
 		let code = 'var r=[];\n';
 		let cursor = 0;
 		let match;
@@ -32,7 +33,23 @@
 
 	const discussions = `
 		<div class="parle-container">
-			<p>Something here</p>
+			<div class="parle-header">
+				Header <%this.isOpen%>
+			</div>
+			<div id="parle-content" class="parle-content">
+			<p><button id="parle-newconv">Start a new conversation</button></p>
+			<%if (this.conversations && this.conversations.length > 0) {%>
+				<div class="parle-conversations">
+					<%for (var i = 0; i < this.conversations.length; i++) {%>
+						<div id="parle-convo-$this.conversations[i].id$">
+							conv $this.conversations[i].id$
+						</div>
+					<%}%>
+				</div>
+			<%} else {%>
+				<p>You do not have any conversation with us so far.</p>
+			<%}%>
+			</div>
 		</div>
 	`;
 

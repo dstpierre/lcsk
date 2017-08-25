@@ -7,10 +7,19 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
+	"gopkg.in/mgo.v2/bson"
+
+	"encoding/json"
+
+	"github.com/parle-io/parle/dal"
 	"github.com/satori/go.uuid"
 	"golang.org/x/net/websocket"
 )
+
+// temporary fake conversations repository
+var tmpConversations map[bson.ObjectId]dal.Conversation
 
 // RealtimeEvent is used to pass data from browser to server via websocket
 type RealtimeEvent struct {
@@ -21,6 +30,7 @@ type RealtimeEvent struct {
 
 type client struct {
 	id     string
+	userID bson.ObjectId
 	ws     *websocket.Conn
 	s      *server
 	ch     chan *RealtimeEvent
@@ -38,7 +48,10 @@ func newClient(ws *websocket.Conn, s *server) (*client, error) {
 
 	ch := make(chan *RealtimeEvent, 100)
 	doneCh := make(chan bool)
-	return &client{uuid.NewV4().String(), ws, s, ch, doneCh}, nil
+
+	// we use an empty userID until we are able to identify this user
+	var emptyUserID bson.ObjectId
+	return &client{uuid.NewV4().String(), emptyUserID, ws, s, ch, doneCh}, nil
 }
 
 func (c *client) write(event *RealtimeEvent) {
@@ -153,6 +166,10 @@ func (s *server) do(e *RealtimeEvent) {
 	log.Printf("Received this: %v", e)
 
 	switch strings.ToUpper(e.Name) {
+	case "IDENTIFY":
+		s.identify(e)
+	case "LISTCONV":
+		s.listConversations(e)
 	case "NEWCONV":
 		s.newConversation(e)
 	case "AUTH":
@@ -160,23 +177,62 @@ func (s *server) do(e *RealtimeEvent) {
 	}
 }
 
-func (s *server) newConversation(e *RealtimeEvent) {
-	var toLink *client
-	for _, c := range s.clients {
-		if c.id == e.Data {
-			toLink = c
-			break
+func (s *server) identify(e *RealtimeEvent) {
+	// at this stage we assume everyone is public visitor
+	s.clients[e.Token].userID = bson.NewObjectId()
+}
+
+func (s *server) listConversations(e *RealtimeEvent) {
+	userID := s.clients[e.Token].userID
+
+	// this should be re-written using mongo where passing the userID
+	var convos []dal.Conversation
+	for _, v := range tmpConversations {
+		if v.UserID == userID {
+			convos = append(convos, v)
 		}
 	}
 
-	if lists, ok := s.convos[e.Token]; ok {
-		s.convos[e.Token] = append(lists, toLink)
-	} else {
-		var lists []*client
-		s.convos[e.Token] = append(lists, toLink)
+	msg := &RealtimeEvent{Token: e.Token, Name: "listconv"}
+	b, err := json.Marshal(convos)
+	if err != nil {
+		log.Println("error todo:", err)
+		return
 	}
 
-	toLink.write(&RealtimeEvent{e.Token, "joined channel", "ready to read/write to channel."})
+	msg.Data = string(b)
+	s.emit(msg)
+}
+
+func (s *server) newConversation(e *RealtimeEvent) {
+	convo := dal.Conversation{}
+	convo.ID = bson.NewObjectId()
+	convo.Created = time.Now()
+	convo.UserID = s.clients[e.Token].userID
+
+	tmpConversations[convo.ID] = convo
+
+	msg := &RealtimeEvent{Token: e.Token, Name: "newconv", Data: convo.ID.Hex()}
+	s.emit(msg)
+
+	/*
+		var toLink *client
+		for _, c := range s.clients {
+			if c.id == e.Data {
+				toLink = c
+				break
+			}
+		}
+
+		if lists, ok := s.convos[e.Token]; ok {
+			s.convos[e.Token] = append(lists, toLink)
+		} else {
+			var lists []*client
+			s.convos[e.Token] = append(lists, toLink)
+		}
+
+		toLink.write(&RealtimeEvent{e.Token, "joined channel", "ready to read/write to channel."})
+	*/
 }
 
 func (s *server) auth(e *RealtimeEvent) {
