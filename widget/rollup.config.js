@@ -1,9 +1,14 @@
 import nodeResolve from 'rollup-plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
+import typescript from 'rollup-plugin-typescript';
+import {uglify} from 'rollup-plugin-uglify';
 
 export default {
-  input: './init.js',
+  input: './init.tsx',
   plugins: [
+    typescript({
+      // So we use the local version of typescript
+      typescript: require('typescript')
+    }),
     nodeResolve({
       jsnext: true
     }),
