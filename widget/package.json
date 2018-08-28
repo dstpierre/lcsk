@@ -1,0 +1,16 @@
+{
+  "name": "widget-parle-io",
+  "version": "0.0.2",
+  "main": "init.ts",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc && ./node_modules/.bin/rollup -c"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "hyperapp": "^1.2.8",
+    "rollup": "^0.65.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^4.0.0",
+    "typescript": "^3.0.1"
+  }
+}

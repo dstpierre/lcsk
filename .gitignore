@@ -52,3 +52,10 @@ chrome-user-data
 .idea
 *.iml
 .vscode
+
+widget/dist/bundle.js
+widget/*.js.map
+widget/*.js
+widget/dist/*
+!widget/rollup.config.js
+

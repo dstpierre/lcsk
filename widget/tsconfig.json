@@ -1,13 +1,15 @@
 {
 	"compilerOptions": {
-		"outDir": "../public/js/widget",
+    "moduleResolution": "node",
 		"target": "es5",
-		"module": "commonjs",
+		"module": "es2015",
 		"noImplicitAny": false,
 		"removeComments": true,
-		"sourceMap": true
+		"sourceMap": true,
+    "jsxFactory": "h",
+    "jsx": "react"
 	},
 	"include": [
-		"*.ts"
+		"init.tsx"
 	]
 }
