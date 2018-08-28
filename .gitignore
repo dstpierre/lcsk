@@ -57,5 +57,6 @@ widget/dist/bundle.js
 widget/*.js.map
 widget/*.js
 widget/dist/*
+widget/yarn-error.log
 !widget/rollup.config.js
 
