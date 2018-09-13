@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+	<title>Main</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css" />
+</head>
+
+<body>
+	<script>
+		var s = document.createElement("script");
+		s.src = "/dist/app.js?v=" + (new Date().getTime());
+		s.async = true;
+		s.onload = function() {
+			Elm.Main.init();
+		}
+		document.body.appendChild(s);
+	</script>
+</body>
+</html>

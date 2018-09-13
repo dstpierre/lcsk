@@ -8,6 +8,10 @@ I'm currently building a completely free and open source customer communcation p
 This is ambitious, but I've built two big SaaS in the last 2 years, LeadFuze and
 [Roadmap](https://roadmap.space) so I'm confident about this one.
 
+This project is the main web application where agent talk to visitor and manage everything.
+
+
+
 ### What's the overall initial planned functionalities
 
 #### Website/in-app messenger
